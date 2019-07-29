@@ -123,13 +123,35 @@ const bodyWeight = function() {
 `;
 }
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// Blood Pressure
+///////////////////////////////////////////////////////////////////////////////
+const bloodPressure = function() {
+  document.querySelector("#container").innerHTML = `
+
+  <h2>We are at bloodPressure</h2>
+
+  `;
+}
+///////////////////////////////////////////////////////////////////////////////
+// Blood Sugar
+///////////////////////////////////////////////////////////////////////////////
+const bloodSugar = function() {
+  document.querySelector("#container").innerHTML = `
+
+  <h2>We are at blood Sugar</h2>
+
+  `;
+}
 // Instantiate PageState
 const page = new PageState();
 
 // UI vars
 const overviewUI = document.getElementById("homeState"),
       myDataUI = document.getElementById("myData"),
-      bodyWeightUI = document.getElementById("bodyWeight");
+      bodyWeightUI = document.getElementById("bodyWeight"),
+      bloodPressureUI = document.getElementById("bloodPressure"),
+      bloodSugarUI = document.getElementById("bloodSugar");
 
 // EventListeners
 overviewUI.addEventListener("click", (e) => {
@@ -144,5 +166,13 @@ bodyWeightUI.addEventListener("click", (e) => {
   page.change(new bodyWeight);
   // load the bodyWeight.js! The file will be load dinamically!!!
   loadBodyWeight();
+  e.preventDefault();
+});
+bloodPressureUI.addEventListener("click", (e) => {
+  page.change(new bloodPressure);
+  e.preventDefault();
+});
+bloodSugarUI.addEventListener("click", (e) => {
+  page.change(new bloodSugar);
   e.preventDefault();
 });
