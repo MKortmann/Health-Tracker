@@ -191,12 +191,8 @@ function loadBodyWeight() {
          let day = today.getDate();
          // we have to add one to the month because zero is january!
          month++;
-         if(month < 10) {
-           month = `0${month}`;
-         }
-         if(day < 10) {
-           day = `0${day}`;
-         }
+         month = (month < 10) ? `0${month}` : month;
+         day = (day < 10) ? `0${day}` : day;
          return `${today.getFullYear()}-${month}-${day}`;
        }
      }
