@@ -60,21 +60,25 @@ const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
     <form>
       <div class="form-row p-2 justify-content-center">
-        <div class="col-3">
+        <div class="col-2">
           <label for="height">Height</label>
-          <input type="number" class="form-control" id="height" placeholder="height (cm)">
+          <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <label for="startWeight">Start Weight</label>
-          <input type="number" class="form-control" id="startWeight" placeholder="Start (Kg)">
+          <input type="number" value="90" class="form-control" id="startWeight" placeholder="Start (Kg)">
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <label for="actualweight">Actual Weight (Kg)</label>
-          <input type="number" class="form-control" id="actualweight" placeholder="Actual (Kg)">
+          <input type="number" value="76" class="form-control" id="actualWeight" placeholder="Actual (Kg)">
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <label for="diffWeight">Diff. Weight (Kg)</label>
-          <input type="number" class="form-control" id="diffWeight" placeholder="Diff (Kg)">
+          <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (Kg)">
+        </div>
+        <div class="col-2">
+          <label for="actualBMI">Actual BMI</label>
+          <input type="number" disabled class="form-control" id="actualBMI" placeholder="Actual BMI">
         </div>
       </div>
     </form>
@@ -87,7 +91,7 @@ const bodyWeight = function() {
       <div class="form-row p-4 justify-content-center">
         <div class="col-3">
           <label for="weight">Weight</label>
-          <input type="number" class="form-control" id="weight" placeholder="Weight - Kg">
+          <input type="number" value="80" class="form-control" id="weight" placeholder="Weight - Kg">
         </div>
         <div class="col-4">
           <label for="date">Data</label>
