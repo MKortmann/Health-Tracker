@@ -145,17 +145,16 @@ function loadBodyWeight() {
 
             row.innerHTML = `
             <tr>
-              <th scope="row">${item.ID}</th>
-              <td>${item.date}</td>
-              <td>${item.weight} kg</td>
-              <td>${item.BMI} Kg/m&sup2;</td>
+              <th scope="row" class="align-middle">${item.ID}</th>
+              <td class="align-middle">${item.date}</td>
+              <td class="align-middle">${item.weight} kg</td>
+              <td class="align-middle">${item.BMI} kg/m&sup2;</td>
+              <a href="#"><span>
+              <img src="../icons/edit.svg" class="float-right" id="edit"></img>
+              </span></a>
             </tr>
             `;
           table.appendChild(row);
-        },
-        // we have here to update inputs
-        updateInputs: function(weight) {
-          document.querySelector(UISelectors.actualWeight).value = weight;
         }
      }
 
@@ -251,8 +250,8 @@ function loadBodyWeight() {
        // START: UPDATE UI
        // UpdateUI
        UICtrl.updateTable(dataToSubmit);
-       // Update inputs
-       UICtrl.updateInputs(dataToSubmit.weight);
+       // Update input: actual weight
+       UICtrl.populateInputs();
        // FINESHED: UI is updated!
      }
 

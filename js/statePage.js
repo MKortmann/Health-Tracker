@@ -68,11 +68,11 @@ const bodyWeight = function() {
           <label for="startWeight">Start Weight</label>
           <input type="number" value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <label for="actualweight">Actual Weight (kg)</label>
           <input type="number" disabled value="76" class="form-control" id="actualWeight" placeholder="Actual (kg)">
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <label for="diffWeight">Diff. Weight (kg)</label>
           <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (kg)">
         </div>
@@ -103,13 +103,14 @@ const bodyWeight = function() {
       </div>
     </form>
 
-  <table class="table table-striped table-bordered table-dark">
+  <table class="table table-striped  table-dark">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Data</th>
         <th scope="col">Weight (kg)</th>
         <th scope="col">BMI (kg/m&sup2;)</th>
+        <!-- <th scope="col">Edit</th> -->
       </tr>
     </thead>
     <tbody>
