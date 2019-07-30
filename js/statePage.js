@@ -66,15 +66,15 @@ const bodyWeight = function() {
         </div>
         <div class="col-2">
           <label for="startWeight">Start Weight</label>
-          <input type="number" value="90" class="form-control" id="startWeight" placeholder="Start (Kg)">
+          <input type="number" value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
         </div>
         <div class="col-2">
-          <label for="actualweight">Actual Weight (Kg)</label>
-          <input type="number" value="76" class="form-control" id="actualWeight" placeholder="Actual (Kg)">
+          <label for="actualweight">Actual Weight (kg)</label>
+          <input type="number" disabled value="76" class="form-control" id="actualWeight" placeholder="Actual (kg)">
         </div>
         <div class="col-2">
-          <label for="diffWeight">Diff. Weight (Kg)</label>
-          <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (Kg)">
+          <label for="diffWeight">Diff. Weight (kg)</label>
+          <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (kg)">
         </div>
         <div class="col-2">
           <label for="actualBMI">Actual BMI</label>
@@ -91,7 +91,7 @@ const bodyWeight = function() {
       <div class="form-row p-4 justify-content-center">
         <div class="col-3">
           <label for="weight">Weight</label>
-          <input type="number" value="80" class="form-control" id="weight" placeholder="Weight - Kg">
+          <input type="number" value="80" class="form-control" id="weight" placeholder="Weight - kg">
         </div>
         <div class="col-4">
           <label for="date">Data</label>
@@ -108,17 +108,17 @@ const bodyWeight = function() {
       <tr>
         <th scope="col">#</th>
         <th scope="col">Data</th>
-        <th scope="col">Weight (Kg)</th>
-        <th scope="col">BMI</th>
+        <th scope="col">Weight (kg)</th>
+        <th scope="col">BMI (kg/m&sup2;)</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <!-- <tr>
         <th scope="row">1</th>
         <td>29.07.2019</td>
         <td>83 kg</td>
         <td>20</td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 

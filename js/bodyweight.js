@@ -51,6 +51,15 @@ function loadBodyWeight() {
       },
       getLSData: function() {
         return JSON.parse(localStorage.getItem("items"));
+      },
+      // It returns the start value of the id!
+      getNextID: function() {
+        if(localStorage.getItem("items") === null) {
+          return 0;
+        } else {
+          const items = JSON.parse(localStorage.getItem("items"));
+          return items.length;
+        }
       }
     }
 
@@ -110,6 +119,13 @@ function loadBodyWeight() {
                       Math.pow(heightInMeter,2);
           document.querySelector(UISelectors.actualBMI).value = bmi.toFixed(2);
         },
+        // We will fill the complete table from the data of LocalStorage
+        populateTable: function(items) {
+          items.forEach(function(item, index) {
+            UICtrl.updateTable(item);
+          });
+
+        },
         updateTable: function(item) {
 
           const table = document.querySelector(UISelectors.tableBody);
@@ -120,12 +136,16 @@ function loadBodyWeight() {
             <tr>
               <th scope="row">${item.ID}</th>
               <td>${item.date}</td>
-              <td>${item.weight}</td>
-              <td>${item.BMI}</td>
+              <td>${item.weight} kg</td>
+              <td>${item.BMI} Kg/m&sup2;</td>
             </tr>
             `;
 
           table.appendChild(row);
+        },
+        // we have here to update inputs
+        updateInputs: function(weight) {
+          document.querySelector(UISelectors.actualWeight).value = weight;
         }
      }
 
@@ -138,16 +158,6 @@ function loadBodyWeight() {
    // ItemCtrl
    const ItemCtrl = (function() {
      // Declare private vars and functions
-     // Item Constructor: WE DO NOT THIS!
-     // const Item = function(id, date, weight, height) {
-     //   this.id = id;
-     //   this.date = date;
-     //   this.weight = weight;
-     //   this.height = height;
-     //   this.bmi = this.getBMI();
-     // }
-
-     let index = 0;
 
      return {
        // Declare public var and functions
@@ -159,8 +169,9 @@ function loadBodyWeight() {
        },
        // Generator function to generate IDs
        genIDs: function* () {
+         let index = parseInt(StorageCtrl.getNextID());
          while(true) {
-           yield index++;
+           yield ++index;
          }
        }
      }
@@ -190,18 +201,19 @@ function loadBodyWeight() {
      }
 
      // Start UI: we populate UI with the necessary information
-     const populateUI = function() {
+     const loadDataAndPopulateUI = function() {
        // Populate the inputs
        UICtrl.populateInputs();
        // Get the data from LocalStorage
        const items = StorageCtrl.getLSData();
        // Populate the table
-       // UICtrl.populateTable(items);
+       UICtrl.populateTable(items);
 
      }
 
      // Data submit
      const itemToSubmit = function() {
+       //START: GET AND PREPARE THE DATA
        // Get the data from UI
        const dataToSubmit = UICtrl.getWeightDateHeight();
        // Generate IDs
@@ -212,12 +224,15 @@ function loadBodyWeight() {
        const bmi = ItemCtrl.getBMI(dataToSubmit.weight, dataToSubmit.height);
        // Add BMI to the data
        dataToSubmit.BMI = bmi;
+       // FINISHED: THE DATA IS FORMATED AND PREPARED TO BE SAVED!
        // Save data to local Storage
        StorageCtrl.saveData(dataToSubmit);
+       // START: UPDATE UI
        // UpdateUI
-       debugger
        UICtrl.updateTable(dataToSubmit);
-
+       // Update inputs
+       UICtrl.updateInputs(dataToSubmit.weight);
+       // FINESHED: UI is updated!
      }
 
      return {
@@ -226,7 +241,7 @@ function loadBodyWeight() {
          // Load all the event listeners in the page
          loadEventListeners();
          // Load the actual data to fill the UI
-         populateUI();
+         loadDataAndPopulateUI();
        }
      }
 
