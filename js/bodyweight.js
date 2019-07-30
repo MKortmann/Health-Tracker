@@ -127,6 +127,9 @@ function loadBodyWeight() {
         // bmi = ( bodyweightIn: (Kg) ) / (height (m))^2
         const bmi = ItemCtrl.getBMI(document.querySelector(UISelectors.actualWeight).value, document.querySelector(UISelectors.height).value);
         document.querySelector(UISelectors.actualBMI).value = bmi;
+
+        // Let's populate the date input with the actual date
+        document.querySelector(UISelectors.date).value = ItemCtrl.getActualDate();
       },
         // We will fill the complete table from the data of LocalStorage
         populateTable: function(items) {
@@ -181,8 +184,20 @@ function loadBodyWeight() {
            yield ++index;
          }
        },
-       getActualDAte: function() {
-         
+       getActualDate: function() {
+         //easiest way to get the date
+         const today = new Date();
+         let month = today.getMonth();
+         let day = today.getDate();
+         // we have to add one to the month because zero is january!
+         month++;
+         if(month < 10) {
+           month = `0${month}`;
+         }
+         if(day < 10) {
+           day = `0${day}`;
+         }
+         return `${today.getFullYear()}-${month}-${day}`;
        }
      }
 
