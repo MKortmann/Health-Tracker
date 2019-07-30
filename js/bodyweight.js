@@ -60,6 +60,15 @@ function loadBodyWeight() {
           const items = JSON.parse(localStorage.getItem("items"));
           return items.length;
         }
+      },
+      getLastWeight: function() {
+        if(localStorage.getItem("items") !== null) {
+          const items = JSON.parse(localStorage.getItem("items"));
+          const weight = items[items.length-1].weight;
+          return weight;
+        } else {
+          return 0;
+        }
       }
     }
 
@@ -101,24 +110,24 @@ function loadBodyWeight() {
        },
        // populate the inputs: diffWeight and BMI
        populateInputs: function() {
-          // diffW = startWeight - actualWeight
-          const diffW = document.querySelector(UISelectors.startWeight).value -
-                        document.querySelector(UISelectors.actualWeight).value;
-          document.querySelector(UISelectors.diffWeight).value = diffW;
-          // if diffW > 0 green color if diffW < 0 red!
-          if(diffW > 0) {
-            document.querySelector(UISelectors.diffWeight).classList.add("text-info");
-            document.querySelector(UISelectors.diffWeight).classList.remove("text-danger");
-          } else {
-            document.querySelector(UISelectors.diffWeight).classList.add("text-danger");
-            document.querySelector(UISelectors.diffWeight).classList.remove("text-info");
-          }
-          // bmi = ( bodyweightIn: (Kg) ) / (height (m))^2
-          const heightInMeter = (document.querySelector(UISelectors.height).value)/100;
-          const bmi = document.querySelector(UISelectors.actualWeight).value /
-                      Math.pow(heightInMeter,2);
-          document.querySelector(UISelectors.actualBMI).value = bmi.toFixed(2);
-        },
+        // Update actual weight
+        document.querySelector(UISelectors.actualWeight).value = StorageCtrl.getLastWeight();
+        // diffW = startWeight - actualWeight
+        const diffW = document.querySelector(UISelectors.startWeight).value -
+                      document.querySelector(UISelectors.actualWeight).value;
+        document.querySelector(UISelectors.diffWeight).value = diffW;
+        // if diffW > 0 green color if diffW < 0 red!
+        if(diffW > 0) {
+          document.querySelector(UISelectors.diffWeight).classList.add("text-info");
+          document.querySelector(UISelectors.diffWeight).classList.remove("text-danger");
+        } else {
+          document.querySelector(UISelectors.diffWeight).classList.add("text-danger");
+          document.querySelector(UISelectors.diffWeight).classList.remove("text-info");
+        }
+        // bmi = ( bodyweightIn: (Kg) ) / (height (m))^2
+        const bmi = ItemCtrl.getBMI(document.querySelector(UISelectors.actualWeight).value, document.querySelector(UISelectors.height).value);
+        document.querySelector(UISelectors.actualBMI).value = bmi;
+      },
         // We will fill the complete table from the data of LocalStorage
         populateTable: function(items) {
           items.forEach(function(item, index) {
@@ -129,7 +138,6 @@ function loadBodyWeight() {
         updateTable: function(item) {
 
           const table = document.querySelector(UISelectors.tableBody);
-
           const row = document.createElement("tr");
 
             row.innerHTML = `
@@ -140,7 +148,6 @@ function loadBodyWeight() {
               <td>${item.BMI} Kg/m&sup2;</td>
             </tr>
             `;
-
           table.appendChild(row);
         },
         // we have here to update inputs
@@ -173,6 +180,9 @@ function loadBodyWeight() {
          while(true) {
            yield ++index;
          }
+       },
+       getActualDAte: function() {
+         
        }
      }
 
