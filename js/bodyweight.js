@@ -1,5 +1,10 @@
 "use strict"
-// Basic sctructure: BLUE PRINT
+/*
+ * We are using here the MVO: Model View Octopus or MVC, MVVM, MVP and so on.
+ * Additionally: we build it using the JavaScript Pattern: Module Revealing Pattern!
+ * Why? I think it is a great way to organize the code that brings a lot of benefits!
+ */
+// Basic sctructure: BLUE PRINT of Module Revealing Pattern!
 
 // (function() {
 //   // Declare private vars and functions
@@ -9,10 +14,6 @@
 //   }
 //
 // })();
-
-// window.addEventListener("load", function() {
-//   document.querySelector("#height").value = 10;
-// });
 
 // THIS IS THE MAIN MODULE: loadBodyWeight THAT WILL BE DINAMICALLY LOAD!
 // We will have tree mains object: the model object called StorageCtrl, the
@@ -30,6 +31,27 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
+      saveData: function(item) {
+        let items;
+        // Check local storage
+        if(localStorage.getItem("items") === null) {
+          items = [];
+          // add the new item
+          items.push(item);
+          // add to localStorage
+          localStorage.setItem("items", JSON.stringify(items));
+        } else {
+          // get the saved information from localStorage
+          items = JSON.parse(localStorage.getItem("items"));
+          // add the new item
+          items.push(item);
+          // add to localStorage
+          localStorage.setItem("items", JSON.stringify(items));
+        }
+      },
+      getLSData: function() {
+        return JSON.parse(localStorage.getItem("items"));
+      }
     }
 
   })();
@@ -46,7 +68,11 @@ function loadBodyWeight() {
        startWeight: "#startWeight",
        actualWeight: "#actualWeight",
        diffWeight: "#diffWeight",
-       actualBMI: "#actualBMI"
+       actualBMI: "#actualBMI",
+       btnSubmit: "#submit",
+       weight: "#weight",
+       date: "#date",
+       tableBody: "tbody"
      }
 
      return {
@@ -55,40 +81,88 @@ function loadBodyWeight() {
        getSelectors: function() {
          return UISelectors;
        },
+       // return the weight and date from the inputs
+       getWeightDateHeight: function() {
+        // return an object with the weight and date
+        return {
+          weight: document.querySelector(UISelectors.weight).value,
+          date:   document.querySelector(UISelectors.date).value,
+          height: document.querySelector(UISelectors.height).value
+        }
+       },
        // populate the inputs: diffWeight and BMI
        populateInputs: function() {
-        // diffW = startWeight - actualWeight
-        const diffW = document.querySelector(UISelectors.startWeight).value -
-                      document.querySelector(UISelectors.actualWeight).value;
-        document.querySelector(UISelectors.diffWeight).value = diffW;
-        // if diffW > 0 green color if diffW < 0 red!
-        if(diffW > 0) {
-          document.querySelector(UISelectors.diffWeight).classList.add("text-info");
-          document.querySelector(UISelectors.diffWeight).classList.remove("text-danger");
-        } else {
-          document.querySelector(UISelectors.diffWeight).classList.add("text-danger");
-          document.querySelector(UISelectors.diffWeight).classList.remove("text-info");
+          // diffW = startWeight - actualWeight
+          const diffW = document.querySelector(UISelectors.startWeight).value -
+                        document.querySelector(UISelectors.actualWeight).value;
+          document.querySelector(UISelectors.diffWeight).value = diffW;
+          // if diffW > 0 green color if diffW < 0 red!
+          if(diffW > 0) {
+            document.querySelector(UISelectors.diffWeight).classList.add("text-info");
+            document.querySelector(UISelectors.diffWeight).classList.remove("text-danger");
+          } else {
+            document.querySelector(UISelectors.diffWeight).classList.add("text-danger");
+            document.querySelector(UISelectors.diffWeight).classList.remove("text-info");
+          }
+          // bmi = ( bodyweightIn: (Kg) ) / (height (m))^2
+          const heightInMeter = (document.querySelector(UISelectors.height).value)/100;
+          const bmi = document.querySelector(UISelectors.actualWeight).value /
+                      Math.pow(heightInMeter,2);
+          document.querySelector(UISelectors.actualBMI).value = bmi.toFixed(2);
+        },
+        updateTable: function(item) {
+
+          const table = document.querySelector(UISelectors.tableBody);
+
+          const row = document.createElement("tr");
+
+            row.innerHTML = `
+            <tr>
+              <th scope="row">${item.ID}</th>
+              <td>${item.date}</td>
+              <td>${item.weight}</td>
+              <td>${item.BMI}</td>
+            </tr>
+            `;
+
+          table.appendChild(row);
         }
-        // bmi = ( bodyweightIn: (Kg) ) / (height (m))^2
-        const heightInMeter = (document.querySelector(UISelectors.height).value)/100;
-        const bmi = document.querySelector(UISelectors.actualWeight).value /
-                    Math.pow(heightInMeter,2);
-        document.querySelector(UISelectors.actualBMI).value = bmi.toFixed(2);
-       }
      }
 
    })();
 
   /*
-   * OCTOPUS MODEL: ItemCtrl And AppCtrl
+   * OCTOPUS MODEL: ItemCtrl: Control the items AND AppCtrl: control the general behaviour
    */
 
    // ItemCtrl
    const ItemCtrl = (function() {
      // Declare private vars and functions
+     // Item Constructor: WE DO NOT THIS!
+     // const Item = function(id, date, weight, height) {
+     //   this.id = id;
+     //   this.date = date;
+     //   this.weight = weight;
+     //   this.height = height;
+     //   this.bmi = this.getBMI();
+     // }
+
+     let index = 0;
 
      return {
        // Declare public var and functions
+       getBMI: function(weight, height) {
+         // bmi = ( bodyweightIn: (Kg) ) / (height (m))^2
+         const heightInMeter = height/100;
+         const bmi = weight / (Math.pow(heightInMeter,2));
+         return bmi.toFixed(2);
+       },
+       // Generator function to generate IDs
+       genIDs: function* () {
+         while(true) {
+           yield index++;
+         }
+       }
      }
 
    })();
@@ -110,18 +184,48 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.startWeight).addEventListener("change", UICtrl.populateInputs);
       // Actual Weight:
       document.querySelector(UISelectors.actualWeight).addEventListener("change", UICtrl.populateInputs);
+
+      // Submit button
+      document.querySelector(UISelectors.btnSubmit).addEventListener("click", itemToSubmit);
      }
 
      // Start UI: we populate UI with the necessary information
      const populateUI = function() {
        // Populate the inputs
        UICtrl.populateInputs();
+       // Get the data from LocalStorage
+       const items = StorageCtrl.getLSData();
+       // Populate the table
+       // UICtrl.populateTable(items);
+
+     }
+
+     // Data submit
+     const itemToSubmit = function() {
+       // Get the data from UI
+       const dataToSubmit = UICtrl.getWeightDateHeight();
+       // Generate IDs
+       const ID = ItemCtrl.genIDs().next().value;
+       // Add ID to the data
+       dataToSubmit.ID = ID;
+       // Calculate BMI
+       const bmi = ItemCtrl.getBMI(dataToSubmit.weight, dataToSubmit.height);
+       // Add BMI to the data
+       dataToSubmit.BMI = bmi;
+       // Save data to local Storage
+       StorageCtrl.saveData(dataToSubmit);
+       // UpdateUI
+       debugger
+       UICtrl.updateTable(dataToSubmit);
+
      }
 
      return {
        // Declare public var and functions
        init: function() {
+         // Load all the event listeners in the page
          loadEventListeners();
+         // Load the actual data to fill the UI
          populateUI();
        }
      }
