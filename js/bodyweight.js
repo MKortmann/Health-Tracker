@@ -28,6 +28,8 @@ function loadBodyWeight() {
   // StorageCtrl
   const StorageCtrl = (function() {
     // Declare private vars and functions
+    let currentItem = null;
+    let data = [];
 
     return {
       // Declare public var and functions
@@ -40,6 +42,8 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
+          // update LocalData
+          data = items;
         } else {
           // get the saved information from localStorage
           items = JSON.parse(localStorage.getItem("items"));
@@ -47,10 +51,14 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
+          // update LocalData
+          data = items;
         }
       },
       getLSData: function() {
-        return JSON.parse(localStorage.getItem("items"));
+        StorageCtrl.data = JSON.parse(localStorage.getItem("items"))
+        return StorageCtrl.data;
+
       },
       // It returns the start value of the id!
       getNextID: function() {
@@ -69,6 +77,10 @@ function loadBodyWeight() {
         } else {
           return 0;
         }
+      },
+      uploadDataToLS: function() {
+        // add to localStorage
+        localStorage.setItem("items", JSON.stringify(StorageCtrl.data));
       }
     }
 
@@ -87,7 +99,7 @@ function loadBodyWeight() {
        actualWeight: "#actualWeight",
        diffWeight: "#diffWeight",
        actualBMI: "#actualBMI",
-       btnSubmit: "#submit",
+       submitBtn: "#submit",
        weight: "#weight",
        date: "#date",
        tableBody: "tbody",
@@ -140,35 +152,56 @@ function loadBodyWeight() {
           });
 
         },
-        updateTable: function(item) {
+        updateTable: function(item, updateOnlyOneLine = false) {
+          // if updateOnlyOneLine of table is false it means that we will call it
+          // many times populating the table!
+          if(!updateOnlyOneLine) {
+            const table = document.querySelector(UISelectors.tableBody);
+            const row = document.createElement("tr");
 
-          const table = document.querySelector(UISelectors.tableBody);
-          const row = document.createElement("tr");
-
-            row.innerHTML = `
-            <tr>
-              <td scope="row" class="align-middle">${item.ID}</td>
-              <td class="align-middle">${item.date}</td>
-              <td class="align-middle">${item.weight} kg</td>
-              <td class="align-middle">${item.BMI} kg/m&sup2;</td>
-              <a href="#" id="${item.ID}">
-              <img src="../icons/edit.svg" class="float-right mt-2 edit"></img>
-              </a>
-            </tr>
-            `;
-          table.appendChild(row);
+              row.innerHTML = `
+              <tr>
+                <td scope="row" class="align-middle">${item.ID}</td>
+                <td class="align-middle">${item.date}</td>
+                <td class="align-middle">${item.weight} kg</td>
+                <td class="align-middle">${item.BMI} kg/m&sup2;</td>
+                <a href="#" id="${item.ID}">
+                <img src="../icons/edit.svg" class="float-right mt-2 edit"></img>
+                </a>
+              </tr>
+              `;
+            table.appendChild(row);
+          } else {
+            // Here means that you want to update only one line of the table!
+            const rowToBeReplaced = document.getElementById(item.ID).parentNode;
+              rowToBeReplaced.innerHTML = `
+              <tr>
+                <td scope="row" class="align-middle">${item.ID}</td>
+                <td class="align-middle">${item.date}</td>
+                <td class="align-middle">${item.weight} kg</td>
+                <td class="align-middle">${item.BMI} kg/m&sup2;</td>
+                <a href="#" id="${item.ID}">
+                <img src="../icons/edit.svg" class="float-right mt-2 edit"></img>
+                </a>
+              </tr>
+              `;
+          }
         },
         hideButtons: function() {
           // We will hide these buttons
           document.querySelector(UISelectors.editBtn).style.display = "none";
           document.querySelector(UISelectors.backBtn).style.display = "none";
+          // And unhide the submit button
+          if( document.querySelector(UISelectors.submitBtn).hasAttribute("style") ){
+          document.querySelector(UISelectors.submitBtn).removeAttribute("style");
+          }
         },
         reloadItem: function(item) {
           // Reload the Date and Weight Input
           document.querySelector(UISelectors.weight).value = item.weight;
           document.querySelector(UISelectors.date).value = item.date;
           // hide the submit button
-          document.querySelector(UISelectors.btnSubmit).style.display = "none";
+          document.querySelector(UISelectors.submitBtn).style.display = "none";
           // Show the edit and back buttons
           document.querySelector(UISelectors.editBtn).removeAttribute("style");
           document.querySelector(UISelectors.backBtn).removeAttribute("style");
@@ -188,6 +221,7 @@ function loadBodyWeight() {
    // ItemCtrl
    const ItemCtrl = (function() {
      // Declare private vars and functions
+
 
      return {
        // Declare public var and functions
@@ -220,6 +254,7 @@ function loadBodyWeight() {
          let found = null;
 
          if(data[id-1]) {
+           StorageCtrl.currentItem = data[id-1];
            return (data[id-1]);
          } else {
            return found;
@@ -247,12 +282,12 @@ function loadBodyWeight() {
       // Actual Weight:
       document.querySelector(UISelectors.actualWeight).addEventListener("change", UICtrl.populateInputs);
       // For the tbody
-      document.querySelector(UISelectors.tableBody).addEventListener("click", itemToEdit);
+      document.querySelector(UISelectors.tableBody).addEventListener("click", clickedToEdit);
       // For the edit button
-      document.querySelector(UISelectors.editBtn).addEventListener("click", itemToEditStep2);
+      document.querySelector(UISelectors.editBtn).addEventListener("click", btnEdit);
 
       // Submit button
-      document.querySelector(UISelectors.btnSubmit).addEventListener("click", itemToSubmit);
+      document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
 
      }
 
@@ -266,7 +301,6 @@ function loadBodyWeight() {
        const items = StorageCtrl.getLSData();
        // Populate the table
        UICtrl.populateTable(items);
-
      }
 
      // Data submit
@@ -294,7 +328,7 @@ function loadBodyWeight() {
      }
 
      // Edit the actual item
-     const itemToEdit = function(e) {
+     const clickedToEdit = function(e) {
       // check if he has click at the icon
       if(e.target.classList.contains("edit")) {
         // Get the id of the item
@@ -306,8 +340,23 @@ function loadBodyWeight() {
       }
      }
 
-     const itemToEditStep2 = function() {
-       console.log(	"edit clicked");
+     const btnEdit = function() {
+       // Get the new Date and new Weight
+       const dataToBeUpdated = UICtrl.getWeightDateHeight();
+       // Update the current Item that updates direct the data!
+       // The currentItem is kind of a pointer to the data array!
+       StorageCtrl.currentItem.weight = dataToBeUpdated.weight;
+       StorageCtrl.currentItem.date = dataToBeUpdated.date;
+       // Load Current Data Array to the localStorage
+       StorageCtrl.uploadDataToLS();
+       // Hide Edit and Back buttons
+       UICtrl.hideButtons();
+       // Update the specific line on the table
+       debugger
+       UICtrl.updateTable(StorageCtrl.currentItem, true);
+
+
+
      }
 
      return {
