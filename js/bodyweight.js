@@ -384,6 +384,8 @@ function loadBodyWeight() {
        UICtrl.hideButtons();
        // Update the specific line on the table
        UICtrl.updateTable(StorageCtrl.currentItem, true);
+       // Update input: actual weight
+       UICtrl.populateInputs();
      }
 
      const btnBack = function() {
