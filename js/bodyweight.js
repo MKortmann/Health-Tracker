@@ -90,7 +90,9 @@ function loadBodyWeight() {
        btnSubmit: "#submit",
        weight: "#weight",
        date: "#date",
-       tableBody: "tbody"
+       tableBody: "tbody",
+       editBtn: "#editBtn",
+       backBtn: "#backBtn"
      }
 
      return {
@@ -145,17 +147,36 @@ function loadBodyWeight() {
 
             row.innerHTML = `
             <tr>
-              <th scope="row" class="align-middle">${item.ID}</th>
+              <td scope="row" class="align-middle">${item.ID}</td>
               <td class="align-middle">${item.date}</td>
               <td class="align-middle">${item.weight} kg</td>
               <td class="align-middle">${item.BMI} kg/m&sup2;</td>
-              <a href="#"><span>
-              <img src="../icons/edit.svg" class="float-right" id="edit"></img>
-              </span></a>
+              <a href="#" id="${item.ID}">
+              <img src="../icons/edit.svg" class="float-right mt-2 edit"></img>
+              </a>
             </tr>
             `;
           table.appendChild(row);
+        },
+        hideButtons: function() {
+          // We will hide these buttons
+          document.querySelector(UISelectors.editBtn).style.display = "none";
+          document.querySelector(UISelectors.backBtn).style.display = "none";
+        },
+        reloadItem: function(item) {
+          // Reload the Date and Weight Input
+          document.querySelector(UISelectors.weight).value = item.weight;
+          document.querySelector(UISelectors.date).value = item.date;
+          // hide the submit button
+          document.querySelector(UISelectors.btnSubmit).style.display = "none";
+          // Show the edit and back buttons
+          document.querySelector(UISelectors.editBtn).removeAttribute("style");
+          document.querySelector(UISelectors.backBtn).removeAttribute("style");
+          // Update the pointer for the edit and back buttons
+          document.querySelector("#editBtn").style.cursor = "pointer";
+          document.querySelector("#backBtn").style.cursor = "pointer";
         }
+
      }
 
    })();
@@ -193,6 +214,16 @@ function loadBodyWeight() {
          month = (month < 10) ? `0${month}` : month;
          day = (day < 10) ? `0${day}` : day;
          return `${today.getFullYear()}-${month}-${day}`;
+       },
+       getItemById: function(id) {
+         const data = StorageCtrl.getLSData();
+         let found = null;
+
+         if(data[id-1]) {
+           return (data[id-1]);
+         } else {
+           return found;
+         }
        }
      }
 
@@ -215,13 +246,20 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.startWeight).addEventListener("change", UICtrl.populateInputs);
       // Actual Weight:
       document.querySelector(UISelectors.actualWeight).addEventListener("change", UICtrl.populateInputs);
+      // For the tbody
+      document.querySelector(UISelectors.tableBody).addEventListener("click", itemToEdit);
+      // For the edit button
+      document.querySelector(UISelectors.editBtn).addEventListener("click", itemToEditStep2);
 
       // Submit button
       document.querySelector(UISelectors.btnSubmit).addEventListener("click", itemToSubmit);
+
      }
 
      // Start UI: we populate UI with the necessary information
      const loadDataAndPopulateUI = function() {
+       // Hide the Edit and back buttons
+       UICtrl.hideButtons();
        // Populate the inputs
        UICtrl.populateInputs();
        // Get the data from LocalStorage
@@ -253,6 +291,23 @@ function loadBodyWeight() {
        // Update input: actual weight
        UICtrl.populateInputs();
        // FINESHED: UI is updated!
+     }
+
+     // Edit the actual item
+     const itemToEdit = function(e) {
+      // check if he has click at the icon
+      if(e.target.classList.contains("edit")) {
+        // Get the id of the item
+        const listID = parseInt(e.target.parentNode.id);
+        // Get the element to be edited
+        const item = ItemCtrl.getItemById(listID);
+        // Reload the UI with the values of the item to be edited
+        UICtrl.reloadItem(item);
+      }
+     }
+
+     const itemToEditStep2 = function() {
+       console.log(	"edit clicked");
      }
 
      return {

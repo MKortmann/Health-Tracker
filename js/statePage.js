@@ -91,14 +91,18 @@ const bodyWeight = function() {
       <div class="form-row p-4 justify-content-center">
         <div class="col-3">
           <label for="weight">Weight</label>
-          <input type="number" value="80" class="form-control" id="weight" placeholder="Weight - kg">
+          <input type="number" value="80" class="form-control my-1" id="weight" placeholder="Weight - kg">
+        </div>
+        <div class="col-3">
+          <label for="date">Date</label>
+          <input type="date" class="form-control my-1" id="date" placeholder="data">
         </div>
         <div class="col-4">
-          <label for="date">Date</label>
-          <input type="date" class="form-control" id="date" placeholder="data">
+          <!-- <label for="submit">Submit</label> -->
+          <submit id="submit" class="btn btn-primary btn-lg my-5 mx-0">Submit</submit>
+          <btn id="editBtn" class="btn btn-danger btn-lg my-5 mx-0 ">Edit</btn>
+          <btn id="backBtn" class="btn btn-info btn-lg my-5 mx-0">Back</btn>
         </div>
-        <div class="col-2">
-          <submit id="submit" class="btn btn-primary btn-lg my-4">Submit</submit>
         </div>
       </div>
     </form>
