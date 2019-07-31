@@ -5,7 +5,7 @@
 // fill the page with a lot of html files or code. We do all using javaScript
 
 // We will create 01 function called PageState to track the state of the Page.
-// Then for each state as (Overview, MyData, BodyWeight, Blood Pressure and Blood Sugar)
+// Then for each state as (Overview, BodyWeight, Blood Pressure and Blood Sugar)
 // we create one state for it.
 ///////////////////////////////////////////////////////////////////////////////
 // Main Function PageState: track the page state
@@ -158,10 +158,10 @@ const page = new PageState();
 
 // UI vars
 const overviewUI = document.getElementById("homeState"),
-      myDataUI = document.getElementById("myData"),
-      bodyWeightUI = document.getElementById("bodyWeight"),
-      bloodPressureUI = document.getElementById("bloodPressure"),
-      bloodSugarUI = document.getElementById("bloodSugar");
+  myDataUI = document.getElementById("myData"),
+  bodyWeightUI = document.getElementById("bodyWeight"),
+  bloodPressureUI = document.getElementById("bloodPressure"),
+  bloodSugarUI = document.getElementById("bloodSugar");
 
 // EventListeners
 overviewUI.addEventListener("click", (e) => {
