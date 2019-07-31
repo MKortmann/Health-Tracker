@@ -29,6 +29,7 @@ function loadBodyWeight() {
   const StorageCtrl = (function() {
     // Declare private vars and functions
     let currentItem = null;
+    // Start as a standard value
     let data = [];
 
     return {
@@ -53,11 +54,6 @@ function loadBodyWeight() {
         // update LocalData
         StorageCtrl.data = items;
       },
-      getLSData: function() {
-        StorageCtrl.data = JSON.parse(localStorage.getItem("items"))
-        return StorageCtrl.data;
-
-      },
       // It returns the start value of the id!
       getNextID: function() {
         if(localStorage.getItem("items") === null) {
@@ -75,6 +71,10 @@ function loadBodyWeight() {
         } else {
           return 0;
         }
+      },
+      getLSData: function() {
+        StorageCtrl.data = JSON.parse(localStorage.getItem("items"))
+        return StorageCtrl.data;
       },
       uploadDataToLS: function() {
         // add to localStorage
@@ -188,8 +188,8 @@ function loadBodyWeight() {
               `;
           }
         },
-        deleteTableLine: function(id) {
-          document.getElementById(id).parentNode.remove();
+        deleteTable: function(id) {
+          document.querySelector("tbody").innerHTML = "";
         },
         hideButtons: function() {
           // We will hide these buttons
@@ -257,7 +257,12 @@ function loadBodyWeight() {
          return `${today.getFullYear()}-${month}-${day}`;
        },
        getActualWeight: function() {
-         return StorageCtrl.data[StorageCtrl.data.length-1].weight;
+        if (StorageCtrl.data !== null) {
+          return StorageCtrl.data[StorageCtrl.data.length-1].weight;
+        } else {
+          return 80;
+        }
+
        },
        getItemById: function(id) {
          const data = StorageCtrl.getLSData();
@@ -269,6 +274,12 @@ function loadBodyWeight() {
          } else {
            return found;
          }
+       },
+       // Important after deleting an element
+       updateIds: function() {
+        StorageCtrl.data.forEach(function(item, id) {
+         item.ID = id+1;
+       });
        }
      }
 
@@ -311,10 +322,13 @@ function loadBodyWeight() {
        UICtrl.hideButtons();
        // Get the data from LocalStorage
        const items = StorageCtrl.getLSData();
-       // Populate the inputs
-       UICtrl.populateInputs();
-       // Populate the table
-       UICtrl.populateTable(items);
+       // We populate the table and input only if there is a data!
+       if(items !== null) {
+         // Populate the inputs
+         UICtrl.populateInputs();
+         // Populate the table
+         UICtrl.populateTable(items);
+      }
 
      }
 
@@ -382,15 +396,25 @@ function loadBodyWeight() {
      const btnDelete = function() {
        // Delete the item from the StorageCtrl.data
        StorageCtrl.data.splice(StorageCtrl.currentItem.ID-1,1);
+       // Update the items IDs from StorageCtrl
+       ItemCtrl.updateIds();
        // Save to local Storage
        StorageCtrl.uploadDataToLS();
        // We need to delete this line from the table UI
-       UICtrl.deleteTableLine(StorageCtrl.currentItem.ID);
+       // UICtrl.deleteTableLine(StorageCtrl.currentItem.ID);
+       // We have to repopulate the table because of the IDs!!!
+       // Before populate, let's delete the tableBody
+       UICtrl.deleteTable();
+       // Populate the table
+       UICtrl.populateTable(StorageCtrl.data);
+       // Update input: actual weight
+       UICtrl.populateInputs();
        // Now, let's comeback to the normalState
        // Hide Edit and Back buttons
        UICtrl.hideButtons();
        // Populate the inputs!
        UICtrl.populateInputs();
+
      }
 
      return {
