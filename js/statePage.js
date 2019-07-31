@@ -5,7 +5,7 @@
 // fill the page with a lot of html files or code. We do all using javaScript
 
 // We will create 01 function called PageState to track the state of the Page.
-// Then for each state as (Overview, BodyWeight, Blood Pressure and Blood Sugar)
+// Then for each state as (Overview, BodyWeight, Blood Pressure, Blood Sugar, MyData)
 // we create one state for it.
 ///////////////////////////////////////////////////////////////////////////////
 // Main Function PageState: track the page state
