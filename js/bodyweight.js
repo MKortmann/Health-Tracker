@@ -214,6 +214,7 @@ function loadBodyWeight() {
           // Update the pointer for the edit and back buttons
           document.querySelector("#editBtn").style.cursor = "pointer";
           document.querySelector("#backBtn").style.cursor = "pointer";
+          document.querySelector("#deleteBtn").style.cursor = "pointer";
         }
 
      }
