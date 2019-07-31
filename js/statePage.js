@@ -100,8 +100,8 @@ const bodyWeight = function() {
         <div class="col-4">
           <!-- <label for="submit">Submit</label> -->
           <submit id="submit" class="btn btn-primary btn-lg my-5 mx-0">Submit</submit>
-          <btn id="editBtn" class="btn btn-outline-info btn-lg my-5 mx-0 ">Edit</btn>
-          <btn id="backBtn" class="btn btn-outline-dark btn-lg my-5 mx-0">Back</btn>
+          <btn id="editBtn" class="btn btn-outline-primary btn-lg my-5 mx-0 ">Edit</btn>
+          <btn id="backBtn" class="btn btn-outline-info btn-lg my-5 mx-0">Back</btn>
           <btn id="deleteBtn" class="btn btn-outline-danger btn-lg my-5 mx-0">Delete</btn>
         </div>
         </div>

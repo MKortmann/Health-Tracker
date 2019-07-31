@@ -188,6 +188,9 @@ function loadBodyWeight() {
               `;
           }
         },
+        deleteTableLine: function(id) {
+          document.getElementById(id).parentNode.remove();
+        },
         hideButtons: function() {
           // We will hide these buttons
           document.querySelector(UISelectors.editBtn).style.display = "none";
@@ -293,6 +296,8 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.editBtn).addEventListener("click", btnEdit);
       // For the back button
       document.querySelector(UISelectors.backBtn).addEventListener("click", btnBack);
+      // For the delete button
+      document.querySelector(UISelectors.deleteBtn).addEventListener("click", btnDelete);
 
       // Submit button
       document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
@@ -342,6 +347,8 @@ function loadBodyWeight() {
       if(e.target.classList.contains("edit")) {
         // Get the id of the item
         const listID = parseInt(e.target.parentNode.id);
+        // Update the current Item (to be used in case of delete)
+        StorageCtrl.currentItem = StorageCtrl.data[listID-1];
         // Get the element to be edited
         const item = ItemCtrl.getItemById(listID);
         // Reload the UI with the values of the item to be edited
@@ -361,7 +368,6 @@ function loadBodyWeight() {
        // Hide Edit and Back buttons
        UICtrl.hideButtons();
        // Update the specific line on the table
-       debugger
        UICtrl.updateTable(StorageCtrl.currentItem, true);
      }
 
@@ -369,7 +375,20 @@ function loadBodyWeight() {
        // Hide Edit and Back buttons
        UICtrl.hideButtons();
        // Populate the inputs!
+       UICtrl.populateInputs();
+     }
 
+     const btnDelete = function() {
+       // Delete the item from the StorageCtrl.data
+       StorageCtrl.data.splice(StorageCtrl.currentItem.ID-1,1);
+       // Save to local Storage
+       StorageCtrl.uploadDataToLS();
+       // We need to delete this line from the table UI
+       UICtrl.deleteTableLine(StorageCtrl.currentItem.ID);
+       // Now, let's comeback to the normalState
+       // Hide Edit and Back buttons
+       UICtrl.hideButtons();
+       // Populate the inputs!
        UICtrl.populateInputs();
      }
 
