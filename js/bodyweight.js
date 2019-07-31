@@ -42,8 +42,6 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
-          // update LocalData
-          data = items;
         } else {
           // get the saved information from localStorage
           items = JSON.parse(localStorage.getItem("items"));
@@ -51,9 +49,9 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
-          // update LocalData
-          data = items;
         }
+        // update LocalData
+        StorageCtrl.data = items;
       },
       getLSData: function() {
         StorageCtrl.data = JSON.parse(localStorage.getItem("items"))
@@ -104,7 +102,8 @@ function loadBodyWeight() {
        date: "#date",
        tableBody: "tbody",
        editBtn: "#editBtn",
-       backBtn: "#backBtn"
+       backBtn: "#backBtn",
+       deleteBtn: "#deleteBtn"
      }
 
      return {
@@ -125,7 +124,7 @@ function loadBodyWeight() {
        // populate the inputs: diffWeight and BMI
        populateInputs: function() {
         // Update actual weight
-        document.querySelector(UISelectors.actualWeight).value = StorageCtrl.getLastWeight();
+        document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getActualWeight();
         // diffW = startWeight - actualWeight
         const diffW = document.querySelector(UISelectors.startWeight).value -
                       document.querySelector(UISelectors.actualWeight).value;
@@ -142,8 +141,10 @@ function loadBodyWeight() {
         const bmi = ItemCtrl.getBMI(document.querySelector(UISelectors.actualWeight).value, document.querySelector(UISelectors.height).value);
         document.querySelector(UISelectors.actualBMI).value = bmi;
 
-        // Let's populate the date input with the actual date
+        // Let's populate the weight input with the last weight value
         document.querySelector(UISelectors.date).value = ItemCtrl.getActualDate();
+        // Let's populate the date input with the actual date
+        document.querySelector(UISelectors.weight).value = ItemCtrl.getActualWeight();
       },
         // We will fill the complete table from the data of LocalStorage
         populateTable: function(items) {
@@ -191,6 +192,7 @@ function loadBodyWeight() {
           // We will hide these buttons
           document.querySelector(UISelectors.editBtn).style.display = "none";
           document.querySelector(UISelectors.backBtn).style.display = "none";
+          document.querySelector(UISelectors.deleteBtn).style.display = "none";
           // And unhide the submit button
           if( document.querySelector(UISelectors.submitBtn).hasAttribute("style") ){
           document.querySelector(UISelectors.submitBtn).removeAttribute("style");
@@ -205,6 +207,7 @@ function loadBodyWeight() {
           // Show the edit and back buttons
           document.querySelector(UISelectors.editBtn).removeAttribute("style");
           document.querySelector(UISelectors.backBtn).removeAttribute("style");
+          document.querySelector(UISelectors.deleteBtn).removeAttribute("style");
           // Update the pointer for the edit and back buttons
           document.querySelector("#editBtn").style.cursor = "pointer";
           document.querySelector("#backBtn").style.cursor = "pointer";
@@ -249,6 +252,9 @@ function loadBodyWeight() {
          day = (day < 10) ? `0${day}` : day;
          return `${today.getFullYear()}-${month}-${day}`;
        },
+       getActualWeight: function() {
+         return StorageCtrl.data[StorageCtrl.data.length-1].weight;
+       },
        getItemById: function(id) {
          const data = StorageCtrl.getLSData();
          let found = null;
@@ -285,6 +291,8 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.tableBody).addEventListener("click", clickedToEdit);
       // For the edit button
       document.querySelector(UISelectors.editBtn).addEventListener("click", btnEdit);
+      // For the back button
+      document.querySelector(UISelectors.backBtn).addEventListener("click", btnBack);
 
       // Submit button
       document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
@@ -295,12 +303,13 @@ function loadBodyWeight() {
      const loadDataAndPopulateUI = function() {
        // Hide the Edit and back buttons
        UICtrl.hideButtons();
-       // Populate the inputs
-       UICtrl.populateInputs();
        // Get the data from LocalStorage
        const items = StorageCtrl.getLSData();
+       // Populate the inputs
+       UICtrl.populateInputs();
        // Populate the table
        UICtrl.populateTable(items);
+
      }
 
      // Data submit
@@ -354,9 +363,14 @@ function loadBodyWeight() {
        // Update the specific line on the table
        debugger
        UICtrl.updateTable(StorageCtrl.currentItem, true);
+     }
 
+     const btnBack = function() {
+       // Hide Edit and Back buttons
+       UICtrl.hideButtons();
+       // Populate the inputs!
 
-
+       UICtrl.populateInputs();
      }
 
      return {
