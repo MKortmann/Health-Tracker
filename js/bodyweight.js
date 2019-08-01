@@ -5,6 +5,15 @@
  * Why? I think it is a great way to organize the code that brings a lot of benefits!
  */
 // Basic sctructure: BLUE PRINT of Module Revealing Pattern!
+// See, that these are immediately-invoked function expression or IIFE (pronounced iffy).
+// The syntax might seem a bit odd, but all we're doing is wrapping a function in parentheses,
+// then adding a pair of parentheses at the end of that to invoke it!
+// The Revealing Module Pattern
+// The underlying philosophy of the Revealing Module Pattern is that, while we still maintain encapsulation (as in the Module Pattern), we also reveal certain properties (and methods). The key ingredients to the Revealing Module Pattern are:
+//
+// 1) An IIFE (wrapper)
+// 2) The module content (variables, methods, objects, etc.)
+// 3) A returned object literal
 
 // (function() {
 //   // Declare private vars and functions
@@ -32,6 +41,7 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
+
       saveData: function(item) {
         let items;
         // Check local storage
@@ -77,6 +87,9 @@ function loadBodyWeight() {
       uploadDataToLS: function() {
         // add to localStorage
         localStorage.setItem("items", JSON.stringify(StorageCtrl.data));
+      },
+      getLocalData: function() {
+        return StorageCtrl.data;
       }
     }
   })();
@@ -222,7 +235,6 @@ function loadBodyWeight() {
     const UICanvasSelectors = {
       oneWeekBtn: "#oneWeekBtn",
       twoWeeksBtn: "#twoWeeksBtn",
-      actualWeight: "#actualWeight",
       oneMonthBtn: "#oneMonthBtn",
       twoMonthsBtn: "#twoMonthsBtn",
       threeMonthsBtn: "#threeMonthsBtn",
@@ -332,6 +344,9 @@ function loadBodyWeight() {
           case 180:
             return Math.floor(canvasWidth/180);
             break;
+          case 360:
+            return Math.floor(canvasWidth/180);
+            break;
           default:
             return  Math.floor(canvasWidth/data.length);
         }
@@ -401,7 +416,7 @@ function loadBodyWeight() {
   })();
 
   // AppCtrl
-  const AppCtrl = (function() {
+  const AppCtrl = (function(StorageCtrl, UICtrl, UICanvas, ItemCtrl) {
     // Declare private vars and functions
 
     // Load event listeners
@@ -429,33 +444,97 @@ function loadBodyWeight() {
 
       // EventListeners for Canvas button
       // one week
-      document.querySelector(UICanvasSelectors.oneWeekBtn).addEventListener("click", btnOneWeek);
-      // two weeks
-      document.querySelector(UICanvasSelectors.twoWeeksBtn).addEventListener("click", twoWeeksBtn);
+      // document.querySelector(UICanvasSelectors.oneWeekBtn).addEventListener("click", function(){
+      //   oneWeekBtn(7);
+      // });
+      document.querySelector(".buttonGroup").addEventListener("click", function(e){
+        // const btnClicked = e.path[0].id;
+        switch(e.target.id) {
+          case "oneWeekBtn":
+            oneWeekBtn(7);
+            break;
+          case "twoWeeksBtn":
+            oneWeekBtn(14);
+            break;
+          case "oneMonthBtn":
+            oneWeekBtn(30);
+            break;
+          case "twoMonthsBtn":
+            oneWeekBtn(60);
+            break;
+          case "threeMonthsBtn":
+            oneWeekBtn(90);
+            break;
+          case "sixMonthsBtn":
+            oneWeekBtn(180);
+            break;
+          case "oneYearBtn":
+            oneWeekBtn(360);
+            break;
+          default:
+          let dataArray = StorageCtrl.getLSData();
+          oneWeekBtn( dataArray.length );
+            break;
+        }
+      });
+      // // two weeks
+      // document.querySelector(UICanvasSelectors.twoWeeksBtn).addEventListener("click", twoWeeksBtn);
+      // // // one month
+      // document.querySelector(UICanvasSelectors.oneMonthBtn).addEventListener("click", oneMonthBtn);
+      // // two months
+      // document.querySelector(UICanvasSelectors.twoMonthsBtn).addEventListener("click", twoMonthsBtn);
+      // // three months
+      // document.querySelector(UICanvasSelectors.threeMonthsBtn).addEventListener("click", threeMonthsBtn);
+      // // six months
+      // document.querySelector(UICanvasSelectors.sixMonthsBtn).addEventListener("click", sixMonthsBtn);
+      // // one year
+      // document.querySelector(UICanvasSelectors.sixMonthsBtn).addEventListener("click", sixMonthsBtn);
+      // // six months
+      // document.querySelector(UICanvasSelectors.oneYearBtn).addEventListener("click", oneYearBtn);
+      // // All measurements
+      // document.querySelector(UICanvasSelectors.AllMeasureBtn).addEventListener("click", AllMeasureBtn);
 
       // Submit button
       document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
 
     }
     // canvas buttons
-    const btnOneWeek = function() {
-    // get the hole array
-    let data = StorageCtrl.data;
-    // we will here get the last 7 days measured!
-    let hacked = data.splice(data.length-7,7);
-    // Plot graphics
-    // let's plot the horizontal lines
-    UICanvas.plotGraph(hacked);
+    const oneWeekBtn = function(amount) {
+    // get the hole array: we need to get the data from LocalStorage!
+    // if not, if we use StorageCtrl.data. Splice will point to it and change
+    // the original array!
+    let dataArray = StorageCtrl.getLSData();
+    if(amount >= dataArray.length) {
+      UICanvas.plotGraph(dataArray);
+      alert("array is lower!");
+    } else {
+      // we will here get the last 7 days measured!
+      let hacked = dataArray.splice(dataArray.length-amount,amount);
+      // Plot graphics
+      // let's plot the horizontal lines
+      UICanvas.plotGraph(hacked);
     }
-    const twoWeeksBtn = function() {
-    // get the hole array
-    let data = StorageCtrl.data;
-    // we will here get the last 7 days measured!
-    let hacked = data.splice(data.length-14,14);
-    // Plot graphics
-    // let's plot the horizontal lines
-    UICanvas.plotGraph(hacked);
     }
+    // const twoWeeksBtn = function() {
+    // // get the hole array
+    // let data = StorageCtrl.data;
+    //
+    // // we will here get the last 7 days measured!
+    // let hacked = data.splice(data.length-14,14);
+    // // Plot graphics
+    // // let's plot the horizontal lines
+    // UICanvas.plotGraph(hacked);
+    // }
+    // const oneMonthBtn = function() {
+    //   debugger
+    // // get the hole array
+    // let data = StorageCtrl.data;
+    // // we will here get the last 7 days measured!
+    // let hacked = data.splice(data.length-30,30);
+    // // Plot graphics
+    // // let's plot the horizontal lines
+    // UICanvas.plotGraph(hacked);
+    // }
 
     // Start UI: we populate UI with the necessary information
     const loadDataAndPopulateUI = function() {
@@ -583,7 +662,7 @@ function loadBodyWeight() {
       }
     }
 
-  })();
+  })(StorageCtrl, UICtrl, UICanvas, ItemCtrl);
 
   // Initialize App
   AppCtrl.init();
