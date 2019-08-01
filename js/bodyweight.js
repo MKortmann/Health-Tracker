@@ -19,7 +19,7 @@
 // We will have five mains object: the model object is represented by the StorageCtrl, the
 // octopus divided into two: the ItemCtrl and the AppCtrl. The Item Ctrl is responsible
 // to control each item, the AppCtrl controls the App (eventlisteners and so on) and
-// the last is the view Model that will be diveded into:  UICtrl responsible to control the user interface and the CanvasCtrl responsible to control the canvas!
+// the last is the view Model that will be diveded into:  UICtrl responsible to control the user interface and the canvasUI responsible to control the canvas!
 function loadBodyWeight() {
   /*
    * MODEL DATA: StorageCtrl
@@ -82,7 +82,7 @@ function loadBodyWeight() {
   })();
 
   /*
-   * VIEW MODEL: UICtrl and CanvasCtrl
+   * VIEW MODEL: UICtrl and canvasUI
    */
   // UICtrl
   const UICtrl = (function() {
@@ -216,19 +216,72 @@ function loadBodyWeight() {
     }
 
   })();
-  // canvasCtrl TO BE DONE
-  const canvasCtrl = (function() {
+  // canvasUI TO BE DONE
+  const canvasUI = (function() {
     // Declare private vars and functions
+    // Initialize Canvas
+    let canvas = document.getElementById("canvasWeight");
+    // /*We need to specific write the kind of environment we are
+    // working: is it 2D or 3D!*/
+    let ctx = canvas.getContext("2d");
+    ctx.lineWidth = 1;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "red";
+
+    // Canvas Y: start from 0 (top) and goes to 150 (bottom)
+    // Canvas X: start from 0 (left) and goes to 300 (right)
+    // So we will plot y between (5 and 145);
+    // And we will plot x between (5 and 295);
 
     return {
       // Declare public var and functions
+      plotGraph: function(data) {
+        let startPos = [10,10];
+        let endPos = [890, 190];
+        canvasUI.drawStraightLine(startPos, endPos);
+      },
+      drawStraightLine: function(startPos, endPos) {
+
+        ctx.beginPath();       // Start a new path
+        ctx.moveTo(10, 10);    // Move the pen to (30, 50)
+        ctx.lineTo(290, 10);  // Draw a line to (150, 100)
+        ctx.stroke();          // Render the path
+        // ctx.beginPath();
+        // ctx.lineWidth = 3;
+        // ctx.lineCap = "round";
+        // ctx.strokeStyle = "black";
+        // debugger
+        // ctx.moveTo(startPos[0], startPos[1]);
+        // ctx.lineTo(endPos[0], endPos[1]);
+        // ctx.stroke();
+      },
+      drawCircleGhost: function(posX, posY) {
+          // $("#canvas").css("cursor", "nwse-resize");
+          // ctx.clearRect(0,0, innerWidth, innerHeight);
+          ctx.beginPath();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = "rgba(255, 160, 122, 0.3)";
+          console.log(posX, posY);
+          ctx.arc(posX, posY, this.radius, Math.PI * 2, false);
+          ctx.stroke();
+      }
     }
 
   })();
 
   /*
    * OCTOPUS MODEL: ItemCtrl: Control the items AND AppCtrl: control the general behaviour
+   * Added CanvasCtrl to control the graphics
    */
+
+   const canvasCtrl = (function() {
+     // Declare private vars and functions
+
+     return {
+       // Declare public var and functions
+     }
+
+   })();
   // ItemCtrl
   const ItemCtrl = (function() {
     // Declare private vars and functions
@@ -329,7 +382,17 @@ function loadBodyWeight() {
         UICtrl.populateInputs();
         // Populate the table
         UICtrl.populateTable(items);
+        // Plot graphics
+
+        plotGraph();
       }
+
+    }
+
+    const plotGraph = function() {
+      const data = StorageCtrl.data;
+
+      canvasUI.plotGraph(data);
     }
 
     // Data submit
@@ -433,5 +496,24 @@ function loadBodyWeight() {
 
   // Initialize App
   AppCtrl.init();
+
+
+  let canvas = document.getElementById("canvasWeight");
+  let ctx = canvas.getContext("2d");
+  // Mouse event click in canvas
+  document.querySelector("#canvasWeight").addEventListener("click", function(e) {
+
+    const rect = canvas.getBoundingClientRect();
+    // const x = event.pageX - rect.left;
+    // const y = event.pageY - rect.top;
+    // let scaleX = canvas[0].width / rect.width;
+    // let scaleY = canvas[0].height / rect.height;
+
+    const x = (event.pageX - rect.left);
+    const y = (event.pageY - rect.top);
+    console.log(`X position: ${x}, Y position: ${y}`);
+    console.log(e);
+  });
+
 
 }
