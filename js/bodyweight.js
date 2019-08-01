@@ -224,13 +224,12 @@ function loadBodyWeight() {
     // /*We need to specific write the kind of environment we are
     // working: is it 2D or 3D!*/
     let ctx = canvas.getContext("2d");
-
     ctx.lineWidth = 1;
     ctx.lineCap = "round";
     ctx.strokeStyle = "black";
-    let invertYAxis = 150;
+    let invertYAxis = 220;
+    let invertYAxisText = 210;
     let deltaX = 20;
-
     // Canvas Y: start from 0 (top) and goes to 150 (bottom)
     // Canvas X: start from 0 (left) and goes to 300 (right)
     // So we will plot y between (5 and 145);
@@ -239,13 +238,13 @@ function loadBodyWeight() {
     return {
       // Declare public var and functions
       plotGraph: function(data) {
+        canvasUI.eraseCanvas();
         let xPos = 5;
         let startPos, endPos, weightArray = [];
         // extract from data an weight array with only weight data
         data.forEach(function(item, index) {
           weightArray.push(parseInt(item.weight));
         });
-
 
         weightArray.forEach(function(item, index) {
           startPos = [xPos, weightArray[index]];
@@ -254,21 +253,23 @@ function loadBodyWeight() {
             canvasUI.drawStraightLine(startPos, endPos);
             canvasUI.drawCircle(startPos);
             canvasUI.drawText(startPos);
-            canvasUI.drawCircle(endPos);
-            canvasUI.drawText(endPos);
-
+            // we plot here the last point!
+            if( (index + 2) === weightArray.length ) {
+              canvasUI.drawCircle(endPos);
+              canvasUI.drawText(endPos);
+            }
+            // deltaX
             xPos = xPos + deltaX;
           }
         })
-
       },
       drawStraightLine: function(startPos, endPos) {
         // we need to invert the y-axis
         ctx.beginPath();       // Start a new path
-        ctx.moveTo(startPos[0], 150-startPos[1]);    // Move the pen to (30, 50)
+        ctx.moveTo(startPos[0], invertYAxis-startPos[1]);    // Move the pen to (30, 50)
         ctx.strokeStyle = "black";
         ctx.imageSmoothingEnabled = false;
-        ctx.lineTo(endPos[0], 150-endPos[1]);  // Draw a line to (150, 100)
+        ctx.lineTo(endPos[0], invertYAxis-endPos[1]);  // Draw a line to (150, 100)
         ctx.stroke();          // Render the path
       },
       drawCircle: function(startPos) {
@@ -276,7 +277,7 @@ function loadBodyWeight() {
           ctx.lineWidth = 1;
           ctx.strokeStyle = "red";
           ctx.imageSmoothingEnabled = false;
-          ctx.arc(startPos[0], 150-startPos[1], 3, Math.PI * 2, false);
+          ctx.arc(startPos[0], invertYAxis-startPos[1], 3, Math.PI * 2, false);
           ctx.stroke();
       },
       drawText: function(startPos) {
@@ -284,10 +285,13 @@ function loadBodyWeight() {
         ctx.imageSmoothingEnabled = false;
         ctx.font = "10px serif";
         ctx.fillStyle = "blue";
-        ctx.strokeStyle = "blue";
-        ctx.fillText(startPos[1], startPos[0], 145-startPos[1]);
-        // ctx.strokeText($(".textInput")[0].value, firstPosClickX, firstPosClickY);
-
+        ctx.fillText(startPos[1], startPos[0], invertYAxisText-startPos[1]);
+      },
+      eraseCanvas: function() {
+        ctx.beginPath();
+        ctx.strokeStyle = "white";
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, 900, 200);
       }
     }
 
@@ -397,7 +401,6 @@ function loadBodyWeight() {
         // Populate the table
         UICtrl.populateTable(items);
         // Plot graphics
-
         plotGraph();
       }
 
@@ -406,7 +409,6 @@ function loadBodyWeight() {
     const plotGraph = function() {
       // let's plot the horizontal lines
       canvasUI.plotGraph(StorageCtrl.data);
-
     }
 
     // Data submit
@@ -430,6 +432,8 @@ function loadBodyWeight() {
       UICtrl.updateTable(dataToSubmit);
       // Update input: actual weight
       UICtrl.populateInputs();
+      // Update graphic
+      plotGraph();
       // FINESHED: UI is updated!
     }
 
@@ -463,6 +467,8 @@ function loadBodyWeight() {
       UICtrl.updateTable(StorageCtrl.currentItem, true);
       // Update input: actual weight
       UICtrl.populateInputs();
+      // Update graphic
+      plotGraph();
     }
 
     const btnBack = function() {
@@ -493,6 +499,8 @@ function loadBodyWeight() {
       UICtrl.hideButtons();
       // Populate the inputs!
       UICtrl.populateInputs();
+      // Update graphic
+      plotGraph();
 
     }
 
@@ -511,23 +519,23 @@ function loadBodyWeight() {
   // Initialize App
   AppCtrl.init();
 
-
-  let canvas = document.getElementById("canvasWeight");
-  let ctx = canvas.getContext("2d");
-  // Mouse event click in canvas
-  document.querySelector("#canvasWeight").addEventListener("click", function(e) {
-
-    const rect = canvas.getBoundingClientRect();
-    // const x = event.pageX - rect.left;
-    // const y = event.pageY - rect.top;
-    // let scaleX = canvas[0].width / rect.width;
-    // let scaleY = canvas[0].height / rect.height;
-
-    const x = (event.pageX - rect.left);
-    const y = (event.pageY - rect.top);
-    console.log(`X position: ${x}, Y position: ${y}`);
-    console.log(e);
-  });
+// //The lines below was used only to check the graphic position for debugging
+//   let canvas = document.getElementById("canvasWeight");
+//   let ctx = canvas.getContext("2d");
+//   // Mouse event click in canvas
+//   document.querySelector("#canvasWeight").addEventListener("click", function(e) {
+//
+//     const rect = canvas.getBoundingClientRect();
+//     // const x = event.pageX - rect.left;
+//     // const y = event.pageY - rect.top;
+//     // let scaleX = canvas[0].width / rect.width;
+//     // let scaleY = canvas[0].height / rect.height;
+//
+//     const x = (event.pageX - rect.left);
+//     const y = (event.pageY - rect.top);
+//     console.log(`X position: ${x}, Y position: ${y}`);
+//     console.log(e);
+//   });
 
 
 }

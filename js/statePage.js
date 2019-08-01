@@ -83,7 +83,17 @@ const bodyWeight = function() {
       </div>
     </form>
 
-    <div class="container justify-content-right mt-2">
+    <div class="container mt-2 text-center">
+    <div class="btn-group mb-1" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary" id="oneWeekBtn">1 Week</button>
+      <button type="button" class="btn btn-secondary" id="twoWeeksBtn">2 Weeks</button>
+      <button type="button" class="btn btn-secondary" id="oneMonthBtn">1 Month</button>
+      <button type="button" class="btn btn-secondary" id="twoMonthsBtn">2 Months</button>
+      <button type="button" class="btn btn-secondary" id="threeMonthsBtn">3 Months</button>
+      <button type="button" class="btn btn-secondary" id="sixMonthsBtn">6 Months</button>
+      <button type="button" class="btn btn-secondary" id="oneYearBtn">1 Year</button>
+      <button type="button" class="btn btn-secondary" id="AllMeasureBtn">All</button>
+    </div>
     <!-- As soon as defined the height and width the image become sharp -->
       <canvas id="canvasWeight" height="200px" width="900px"></canvas>
     </div>
@@ -92,7 +102,7 @@ const bodyWeight = function() {
       <div class="form-row p-4 justify-content-center">
         <div class="col-3">
           <label for="weight">Weight</label>
-          <input type="number" value="80" class="form-control my-1" id="weight" placeholder="Weight - kg">
+          <input type="number" value="80" min="30" max="230" class="form-control my-1" id="weight" placeholder="Weight - kg">
         </div>
         <div class="col-3">
           <label for="date">Date</label>
