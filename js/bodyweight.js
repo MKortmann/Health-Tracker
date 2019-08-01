@@ -19,7 +19,7 @@
 // We will have five mains object: the model object is represented by the StorageCtrl, the
 // octopus divided into two: the ItemCtrl and the AppCtrl. The Item Ctrl is responsible
 // to control each item, the AppCtrl controls the App (eventlisteners and so on) and
-// the last is the view Model that will be diveded into:  UICtrl responsible to control the user interface and the canvasUI responsible to control the canvas!
+// the last is the view Model that will be diveded into:  UICtrl responsible to control the user interface and the UICanvas responsible to control the canvas!
 function loadBodyWeight() {
   /*
    * MODEL DATA: StorageCtrl
@@ -82,7 +82,7 @@ function loadBodyWeight() {
   })();
 
   /*
-   * VIEW MODEL: UICtrl and canvasUI
+   * VIEW MODEL: UICtrl and UICanvas
    */
   // UICtrl
   const UICtrl = (function() {
@@ -216,9 +216,20 @@ function loadBodyWeight() {
     }
 
   })();
-  // canvasUI TO BE DONE
-  const canvasUI = (function() {
+  // UICanvas TO BE DONE
+  const UICanvas = (function() {
     // Declare private vars and functions
+    const UICanvasSelectors = {
+      oneWeekBtn: "#oneWeekBtn",
+      twoWeeksBtn: "#twoWeeksBtn",
+      actualWeight: "#actualWeight",
+      oneMonthBtn: "#oneMonthBtn",
+      twoMonthsBtn: "#twoMonthsBtn",
+      threeMonthsBtn: "#threeMonthsBtn",
+      sixMonthsBtn: "#sixMonthsBtn",
+      oneYearBtn: "#oneYearBtn",
+      AllMeasureBtn: "AllMeasureBtn"
+    }
     // Initialize Canvas
     let canvas = document.getElementById("canvasWeight");
     // /*We need to specific write the kind of environment we are
@@ -227,9 +238,11 @@ function loadBodyWeight() {
     ctx.lineWidth = 1;
     ctx.lineCap = "round";
     ctx.strokeStyle = "black";
+    let canvasWidth = 985;
     let invertYAxis = 220;
     let invertYAxisText = 210;
     let deltaX = 20;
+    let displayAmountOfMeasurements = 45;
     // Canvas Y: start from 0 (top) and goes to 150 (bottom)
     // Canvas X: start from 0 (left) and goes to 300 (right)
     // So we will plot y between (5 and 145);
@@ -237,26 +250,32 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
+      // return the UI Selectors
+      getSelectors: function() {
+        return UICanvasSelectors;
+      },
       plotGraph: function(data) {
-        canvasUI.eraseCanvas();
+        UICanvas.eraseCanvas();
         let xPos = 5;
         let startPos, endPos, weightArray = [];
         // extract from data an weight array with only weight data
         data.forEach(function(item, index) {
           weightArray.push(parseInt(item.weight));
         });
+        
+        deltaX = UICanvas.returnStepXDelta(weightArray);
 
         weightArray.forEach(function(item, index) {
           startPos = [xPos, weightArray[index]];
           if( (index + 1) !== weightArray.length) {
             endPos = [xPos + deltaX, weightArray[index+1]];
-            canvasUI.drawStraightLine(startPos, endPos);
-            canvasUI.drawCircle(startPos);
-            canvasUI.drawText(startPos);
+            UICanvas.drawStraightLine(startPos, endPos);
+            UICanvas.drawCircle(startPos);
+            UICanvas.drawText(startPos);
             // we plot here the last point!
             if( (index + 2) === weightArray.length ) {
-              canvasUI.drawCircle(endPos);
-              canvasUI.drawText(endPos);
+              UICanvas.drawCircle(endPos);
+              UICanvas.drawText(endPos);
             }
             // deltaX
             xPos = xPos + deltaX;
@@ -292,6 +311,30 @@ function loadBodyWeight() {
         ctx.strokeStyle = "white";
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, 900, 200);
+      },
+      returnStepXDelta: function(data) {
+        switch(data.length) {
+          case 7:
+            return Math.floor(canvasWidth/7);
+            break;
+          case 14:
+            return Math.floor(canvasWidth/14);
+            break;
+          case 30:
+            return Math.floor(canvasWidth/30);
+            break;
+          case 60:
+            return Math.floor(canvasWidth/60);
+            break;
+          case 90:
+            return Math.floor(canvasWidth/90);
+            break;
+          case 180:
+            return Math.floor(canvasWidth/180);
+            break;
+          default:
+            return  Math.floor(canvasWidth/data.length);
+        }
       }
     }
 
@@ -366,6 +409,7 @@ function loadBodyWeight() {
 
       // Get UI Selectors
       const UISelectors = UICtrl.getSelectors();
+      const UICanvasSelectors = UICanvas.getSelectors();
 
       // Add Event Listener to the inputs in case of the value change
       // height:
@@ -383,9 +427,25 @@ function loadBodyWeight() {
       // For the delete button
       document.querySelector(UISelectors.deleteBtn).addEventListener("click", btnDelete);
 
+      // EventListeners for Canvas button
+      // one week
+      document.querySelector(UICanvasSelectors.oneWeekBtn).addEventListener("click", btnOneWeek);
+      // two weeks
+      document.querySelector(UICanvasSelectors.oneWeekBtn).addEventListener("click", twoWeeksBtn);
+
       // Submit button
       document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
 
+    }
+    // canvas buttons
+    const btnOneWeek = function() {
+    // get the hole array
+    let data = StorageCtrl.data;
+    // we will here get the last 7 days measured!
+    let hacked = data.splice(data.length-7,7);
+    // Plot graphics
+    // let's plot the horizontal lines
+    UICanvas.plotGraph(hacked);
     }
 
     // Start UI: we populate UI with the necessary information
@@ -408,7 +468,7 @@ function loadBodyWeight() {
 
     const plotGraph = function() {
       // let's plot the horizontal lines
-      canvasUI.plotGraph(StorageCtrl.data);
+      UICanvas.plotGraph(StorageCtrl.data);
     }
 
     // Data submit
