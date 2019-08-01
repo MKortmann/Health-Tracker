@@ -84,7 +84,8 @@ const bodyWeight = function() {
     </form>
 
     <div class="container justify-content-right mt-2">
-      <canvas id="canvasWeight"></canvas>
+    <!-- As soon as defined the height and width the image become sharp -->
+      <canvas id="canvasWeight" height="200px" width="900px"></canvas>
     </div>
 
     <form>

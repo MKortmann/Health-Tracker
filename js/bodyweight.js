@@ -224,9 +224,12 @@ function loadBodyWeight() {
     // /*We need to specific write the kind of environment we are
     // working: is it 2D or 3D!*/
     let ctx = canvas.getContext("2d");
+
     ctx.lineWidth = 1;
     ctx.lineCap = "round";
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle = "black";
+    let invertYAxis = 150;
+    let deltaX = 20;
 
     // Canvas Y: start from 0 (top) and goes to 150 (bottom)
     // Canvas X: start from 0 (left) and goes to 300 (right)
@@ -236,34 +239,55 @@ function loadBodyWeight() {
     return {
       // Declare public var and functions
       plotGraph: function(data) {
-        let startPos = [10,10];
-        let endPos = [890, 190];
-        canvasUI.drawStraightLine(startPos, endPos);
+        let xPos = 5;
+        let startPos, endPos, weightArray = [];
+        // extract from data an weight array with only weight data
+        data.forEach(function(item, index) {
+          weightArray.push(parseInt(item.weight));
+        });
+
+
+        weightArray.forEach(function(item, index) {
+          startPos = [xPos, weightArray[index]];
+          if( (index + 1) !== weightArray.length) {
+            endPos = [xPos + deltaX, weightArray[index+1]];
+            canvasUI.drawStraightLine(startPos, endPos);
+            canvasUI.drawCircle(startPos);
+            canvasUI.drawText(startPos);
+            canvasUI.drawCircle(endPos);
+            canvasUI.drawText(endPos);
+
+            xPos = xPos + deltaX;
+          }
+        })
+
       },
       drawStraightLine: function(startPos, endPos) {
-
+        // we need to invert the y-axis
         ctx.beginPath();       // Start a new path
-        ctx.moveTo(10, 10);    // Move the pen to (30, 50)
-        ctx.lineTo(290, 10);  // Draw a line to (150, 100)
+        ctx.moveTo(startPos[0], 150-startPos[1]);    // Move the pen to (30, 50)
+        ctx.strokeStyle = "black";
+        ctx.imageSmoothingEnabled = false;
+        ctx.lineTo(endPos[0], 150-endPos[1]);  // Draw a line to (150, 100)
         ctx.stroke();          // Render the path
-        // ctx.beginPath();
-        // ctx.lineWidth = 3;
-        // ctx.lineCap = "round";
-        // ctx.strokeStyle = "black";
-        // debugger
-        // ctx.moveTo(startPos[0], startPos[1]);
-        // ctx.lineTo(endPos[0], endPos[1]);
-        // ctx.stroke();
       },
-      drawCircleGhost: function(posX, posY) {
-          // $("#canvas").css("cursor", "nwse-resize");
-          // ctx.clearRect(0,0, innerWidth, innerHeight);
+      drawCircle: function(startPos) {
           ctx.beginPath();
-          ctx.lineWidth = 5;
-          ctx.strokeStyle = "rgba(255, 160, 122, 0.3)";
-          console.log(posX, posY);
-          ctx.arc(posX, posY, this.radius, Math.PI * 2, false);
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = "red";
+          ctx.imageSmoothingEnabled = false;
+          ctx.arc(startPos[0], 150-startPos[1], 3, Math.PI * 2, false);
           ctx.stroke();
+      },
+      drawText: function(startPos) {
+        // ctx.font = "64px serif";
+        ctx.imageSmoothingEnabled = false;
+        ctx.font = "10px serif";
+        ctx.fillStyle = "blue";
+        ctx.strokeStyle = "blue";
+        ctx.fillText(startPos[1], startPos[0], 145-startPos[1]);
+        // ctx.strokeText($(".textInput")[0].value, firstPosClickX, firstPosClickY);
+
       }
     }
 
@@ -278,7 +302,25 @@ function loadBodyWeight() {
      // Declare private vars and functions
 
      return {
-       // Declare public var and functions
+      plotHorizontalLines: function(data) {
+        let weightArray = [];
+        data.forEach(function(item, index) {
+          weightArray.push(parseInt(item.weight));
+        });
+        // We need to use here the spreed operator
+        let maxWeightValue = Math.max(...weightArray);
+        let minWeightValue = Math.min(...weightArray);
+
+        let delta = (maxWeightValue-minWeightValue)/weightArray.length;
+      },
+      returnWeightArray: function(data) {
+        let weightArray = [];
+        data.forEach(function(item, index) {
+          weightArray.push(parseInt(item.weight));
+        });
+
+        return weightArray;
+      }
      }
 
    })();
@@ -390,9 +432,9 @@ function loadBodyWeight() {
     }
 
     const plotGraph = function() {
-      const data = StorageCtrl.data;
+      // let's plot the horizontal lines
+      canvasUI.plotGraph(StorageCtrl.data);
 
-      canvasUI.plotGraph(data);
     }
 
     // Data submit
