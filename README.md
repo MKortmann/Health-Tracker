@@ -13,13 +13,13 @@ I used only one famous library: bootstrap.
     * You can track Body Weight, Blood Pressure and Blood Sugar.
     * The app has an incredible user-friendly interface! No ads!
     * Remove, Edit or delete item
+    * Canvas Dinamically Graphic 
  
 ## In Development/TODO: 
-
-  - Body Weight: to add the Canvas Graphic Design
+ 
   - Blood Pressure
   - Blood Sugar
-  - Responsive Design
+  - Responsive Design + Design Improvements
 
 ## How to start the App?
 
