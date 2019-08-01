@@ -295,35 +295,7 @@ function loadBodyWeight() {
 
   /*
    * OCTOPUS MODEL: ItemCtrl: Control the items AND AppCtrl: control the general behaviour
-   * Added CanvasCtrl to control the graphics
    */
-
-   const canvasCtrl = (function() {
-     // Declare private vars and functions
-
-     return {
-      plotHorizontalLines: function(data) {
-        let weightArray = [];
-        data.forEach(function(item, index) {
-          weightArray.push(parseInt(item.weight));
-        });
-        // We need to use here the spreed operator
-        let maxWeightValue = Math.max(...weightArray);
-        let minWeightValue = Math.min(...weightArray);
-
-        let delta = (maxWeightValue-minWeightValue)/weightArray.length;
-      },
-      returnWeightArray: function(data) {
-        let weightArray = [];
-        data.forEach(function(item, index) {
-          weightArray.push(parseInt(item.weight));
-        });
-
-        return weightArray;
-      }
-     }
-
-   })();
   // ItemCtrl
   const ItemCtrl = (function() {
     // Declare private vars and functions
