@@ -90,6 +90,12 @@ function loadBodyWeight() {
       },
       getLocalData: function() {
         return StorageCtrl.data;
+      },
+      clearAllItems: function() {
+        data = [];
+      },
+      clearItemsFromStorage: function() {
+        localStorage.removeItem("items");
       }
     }
   })();
@@ -112,7 +118,8 @@ function loadBodyWeight() {
       tableBody: "tbody",
       editBtn: "#editBtn",
       backBtn: "#backBtn",
-      deleteBtn: "#deleteBtn"
+      deleteBtn: "#deleteBtn",
+      deleteAllBtn: "#deleteAllBtn"
     }
 
     return {
@@ -224,6 +231,7 @@ function loadBodyWeight() {
         document.querySelector("#editBtn").style.cursor = "pointer";
         document.querySelector("#backBtn").style.cursor = "pointer";
         document.querySelector("#deleteBtn").style.cursor = "pointer";
+        document.querySelector("#deleteAllBtn").style.cursor = "pointer";
       }
 
     }
@@ -251,7 +259,7 @@ function loadBodyWeight() {
     ctx.lineCap = "round";
     ctx.strokeStyle = "black";
     let canvasWidth = 900;
-    let invertYAxis = 220;
+    let invertYAxis = 240;
     let invertYAxisText = 210;
     let deltaX = 20;
     let displayAmountOfMeasurements = 45;
@@ -441,65 +449,58 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.backBtn).addEventListener("click", btnBack);
       // For the delete button
       document.querySelector(UISelectors.deleteBtn).addEventListener("click", btnDelete);
+      // For the delete All button
+      document.querySelector(UISelectors.deleteAllBtn).addEventListener("click", btnDeleteAll);
 
-      // EventListeners for Canvas button
-      // one week
-      // document.querySelector(UICanvasSelectors.oneWeekBtn).addEventListener("click", function(){
-      //   oneWeekBtn(7);
-      // });
+      // EventListeners for Canvas buttons
       document.querySelector(".buttonGroup").addEventListener("click", function(e){
         // const btnClicked = e.path[0].id;
         switch(e.target.id) {
           case "oneWeekBtn":
-            oneWeekBtn(7);
+            groupCanvasBtn(7);
             break;
           case "twoWeeksBtn":
-            oneWeekBtn(14);
+            groupCanvasBtn(14);
             break;
           case "oneMonthBtn":
-            oneWeekBtn(30);
+            groupCanvasBtn(30);
             break;
           case "twoMonthsBtn":
-            oneWeekBtn(60);
+            groupCanvasBtn(60);
             break;
           case "threeMonthsBtn":
-            oneWeekBtn(90);
+            groupCanvasBtn(90);
             break;
           case "sixMonthsBtn":
-            oneWeekBtn(180);
+            groupCanvasBtn(180);
             break;
           case "oneYearBtn":
-            oneWeekBtn(360);
+            groupCanvasBtn(360);
             break;
           default:
           let dataArray = StorageCtrl.getLSData();
-          oneWeekBtn( dataArray.length );
+          groupCanvasBtn( dataArray.length );
             break;
         }
       });
-      // // two weeks
-      // document.querySelector(UICanvasSelectors.twoWeeksBtn).addEventListener("click", twoWeeksBtn);
-      // // // one month
-      // document.querySelector(UICanvasSelectors.oneMonthBtn).addEventListener("click", oneMonthBtn);
-      // // two months
-      // document.querySelector(UICanvasSelectors.twoMonthsBtn).addEventListener("click", twoMonthsBtn);
-      // // three months
-      // document.querySelector(UICanvasSelectors.threeMonthsBtn).addEventListener("click", threeMonthsBtn);
-      // // six months
-      // document.querySelector(UICanvasSelectors.sixMonthsBtn).addEventListener("click", sixMonthsBtn);
-      // // one year
-      // document.querySelector(UICanvasSelectors.sixMonthsBtn).addEventListener("click", sixMonthsBtn);
-      // // six months
-      // document.querySelector(UICanvasSelectors.oneYearBtn).addEventListener("click", oneYearBtn);
-      // // All measurements
-      // document.querySelector(UICanvasSelectors.AllMeasureBtn).addEventListener("click", AllMeasureBtn);
-
       // Submit button
       document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
 
     }
+    // delete All
+    const btnDeleteAll = function() {
+      console.log("btn delete all");
+      // Clear data array
+      StorageCtrl.clearAllItems();
+      // Clear LocalStorage
+      StorageCtrl.clearItemsFromStorage();
+      // Clear graphic
+      UICanvas.eraseCanvas();
+      // Clear table
+      UICtrl.deleteTable();
+    }
     // canvas buttons
-    const oneWeekBtn = function(amount) {
+    const groupCanvasBtn = function(amount) {
     // get the hole array: we need to get the data from LocalStorage!
     // if not, if we use StorageCtrl.data. Splice will point to it and change
     // the original array!
