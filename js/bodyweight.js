@@ -238,7 +238,7 @@ function loadBodyWeight() {
     ctx.lineWidth = 1;
     ctx.lineCap = "round";
     ctx.strokeStyle = "black";
-    let canvasWidth = 985;
+    let canvasWidth = 900;
     let invertYAxis = 220;
     let invertYAxisText = 210;
     let deltaX = 20;
@@ -262,7 +262,7 @@ function loadBodyWeight() {
         data.forEach(function(item, index) {
           weightArray.push(parseInt(item.weight));
         });
-        
+
         deltaX = UICanvas.returnStepXDelta(weightArray);
 
         weightArray.forEach(function(item, index) {
@@ -431,7 +431,7 @@ function loadBodyWeight() {
       // one week
       document.querySelector(UICanvasSelectors.oneWeekBtn).addEventListener("click", btnOneWeek);
       // two weeks
-      document.querySelector(UICanvasSelectors.oneWeekBtn).addEventListener("click", twoWeeksBtn);
+      document.querySelector(UICanvasSelectors.twoWeeksBtn).addEventListener("click", twoWeeksBtn);
 
       // Submit button
       document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
@@ -443,6 +443,15 @@ function loadBodyWeight() {
     let data = StorageCtrl.data;
     // we will here get the last 7 days measured!
     let hacked = data.splice(data.length-7,7);
+    // Plot graphics
+    // let's plot the horizontal lines
+    UICanvas.plotGraph(hacked);
+    }
+    const twoWeeksBtn = function() {
+    // get the hole array
+    let data = StorageCtrl.data;
+    // we will here get the last 7 days measured!
+    let hacked = data.splice(data.length-14,14);
     // Plot graphics
     // let's plot the horizontal lines
     UICanvas.plotGraph(hacked);
