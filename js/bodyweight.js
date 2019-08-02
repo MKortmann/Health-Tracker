@@ -259,10 +259,14 @@ function loadBodyWeight() {
     ctx.lineCap = "round";
     ctx.strokeStyle = "black";
     let canvasWidth = 900;
-    let invertYAxis = 240;
+    let invertYAxis = 220;
     let invertYAxisText = 210;
     let deltaX = 20;
     let displayAmountOfMeasurements = 45;
+    let StartYlines =  [[0,200],[0,160],[0,120],[0,80],[0,60]];
+    let EndYlines =  [[canvasWidth,200],[canvasWidth,160],
+                      [canvasWidth,120],[canvasWidth,80],
+                      [canvasWidth,60]];
     // Canvas Y: start from 0 (top) and goes to 150 (bottom)
     // Canvas X: start from 0 (left) and goes to 300 (right)
     // So we will plot y between (5 and 145);
@@ -274,8 +278,17 @@ function loadBodyWeight() {
       getSelectors: function() {
         return UICanvasSelectors;
       },
+      plotYLines: function() {
+        let startPos, endPos;
+        for(let i=0; i < StartYlines.length-1; i++) {
+          startPos=StartYlines[i];
+          endPos=EndYlines[i];
+          UICanvas.drawStraightLine(startPos,endPos, "gray");
+        }
+      },
       plotGraph: function(data) {
         UICanvas.eraseCanvas();
+        UICanvas.plotYLines();
         let xPos = 5;
         let startPos, endPos, weightArray = [];
         // extract from data an weight array with only weight data
@@ -289,7 +302,7 @@ function loadBodyWeight() {
           startPos = [xPos, weightArray[index]];
           if( (index + 1) !== weightArray.length) {
             endPos = [xPos + deltaX, weightArray[index+1]];
-            UICanvas.drawStraightLine(startPos, endPos);
+            UICanvas.drawStraightLine(startPos, endPos, "black");
             UICanvas.drawCircle(startPos);
             UICanvas.drawText(startPos);
             // we plot here the last point!
@@ -302,11 +315,11 @@ function loadBodyWeight() {
           }
         })
       },
-      drawStraightLine: function(startPos, endPos) {
+      drawStraightLine: function(startPos, endPos, color) {
         // we need to invert the y-axis
         ctx.beginPath();       // Start a new path
         ctx.moveTo(startPos[0], invertYAxis-startPos[1]);    // Move the pen to (30, 50)
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = color;
         ctx.imageSmoothingEnabled = false;
         ctx.lineTo(endPos[0], invertYAxis-endPos[1]);  // Draw a line to (150, 100)
         ctx.stroke();          // Render the path
@@ -516,26 +529,6 @@ function loadBodyWeight() {
       UICanvas.plotGraph(hacked);
     }
     }
-    // const twoWeeksBtn = function() {
-    // // get the hole array
-    // let data = StorageCtrl.data;
-    //
-    // // we will here get the last 7 days measured!
-    // let hacked = data.splice(data.length-14,14);
-    // // Plot graphics
-    // // let's plot the horizontal lines
-    // UICanvas.plotGraph(hacked);
-    // }
-    // const oneMonthBtn = function() {
-    //   debugger
-    // // get the hole array
-    // let data = StorageCtrl.data;
-    // // we will here get the last 7 days measured!
-    // let hacked = data.splice(data.length-30,30);
-    // // Plot graphics
-    // // let's plot the horizontal lines
-    // UICanvas.plotGraph(hacked);
-    // }
 
     // Start UI: we populate UI with the necessary information
     const loadDataAndPopulateUI = function() {
@@ -552,6 +545,8 @@ function loadBodyWeight() {
         // Plot graphics
         plotGraph();
       }
+      // Update input: display actual weight
+      UICtrl.populateInputs();
 
     }
 
@@ -669,22 +664,22 @@ function loadBodyWeight() {
   AppCtrl.init();
 
 // //The lines below was used only to check the graphic position for debugging
-//   let canvas = document.getElementById("canvasWeight");
-//   let ctx = canvas.getContext("2d");
-//   // Mouse event click in canvas
-//   document.querySelector("#canvasWeight").addEventListener("click", function(e) {
-//
-//     const rect = canvas.getBoundingClientRect();
-//     // const x = event.pageX - rect.left;
-//     // const y = event.pageY - rect.top;
-//     // let scaleX = canvas[0].width / rect.width;
-//     // let scaleY = canvas[0].height / rect.height;
-//
-//     const x = (event.pageX - rect.left);
-//     const y = (event.pageY - rect.top);
-//     console.log(`X position: ${x}, Y position: ${y}`);
-//     console.log(e);
-//   });
+  let canvas = document.getElementById("canvasWeight");
+  let ctx = canvas.getContext("2d");
+  // Mouse event click in canvas
+  document.querySelector("#canvasWeight").addEventListener("click", function(e) {
+
+    const rect = canvas.getBoundingClientRect();
+    // const x = event.pageX - rect.left;
+    // const y = event.pageY - rect.top;
+    // let scaleX = canvas[0].width / rect.width;
+    // let scaleY = canvas[0].height / rect.height;
+
+    const x = (event.pageX - rect.left);
+    const y = (event.pageY - rect.top);
+    console.log(`X position: ${x}, Y position: ${y}`);
+    console.log(e);
+  });
 
 
 }
