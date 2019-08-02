@@ -108,7 +108,7 @@ const bodyWeight = function() {
     </div>
 
     <form>
-      <div class="form-row p-4 justify-content-center">
+      <div class="form-row p-4 justify-content-center d-flex align-items-end">
         <div class="col-3">
           <label for="weight">Weight</label>
           <input type="number" value="80" min="30" max="230" class="form-control my-1" id="weight" placeholder="Weight - kg">
@@ -117,17 +117,39 @@ const bodyWeight = function() {
           <label for="date">Date</label>
           <input type="date" class="form-control my-1" id="date" placeholder="data">
         </div>
-        <div class="col-4">
+        <div class="col-4 d-flex align-items-end">
           <!-- <label for="submit">Submit</label> -->
-          <submit id="submit" class="btn btn-primary btn-lg my-5 mx-0">Submit</submit>
-          <btn id="deleteAllBtn" class="btn btn-outline-danger btn-lg my-5 mx-0 ">Delete All Items</btn>
-          <btn id="editBtn" class="btn btn-outline-primary btn-lg my-5 mx-0 ">Edit</btn>
-          <btn id="backBtn" class="btn btn-outline-info btn-lg my-5 mx-0">Back</btn>
-          <btn id="deleteBtn" class="btn btn-outline-danger btn-lg my-5 mx-0">Delete</btn>
+          <div class="btn-group d-flex align-items-end" role="group" aria-label="Button group with nested dropdown">
+            <submit id="submit" class="btn btn-primary btn-lg">Submit</submit>
+            <btn id="editBtn" class="btn btn-outline-primary btn-lg">Edit</btn>
+            <btn id="backBtn" class="btn btn-outline-info btn-lg">Back</btn>
+            <btn id="deleteBtn" class="btn btn-outline-danger btn-lg">Delete</btn>
+            <!-- Button trigger modal -->
+            <btn type="button" class="btn btn-outline-danger btn-lg" data-toggle="modal" data-target="#locModal">
+              Delete All Items
+            </btn>
+          </div>
         </div>
         </div>
       </div>
     </form>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="locModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-body">
+    <p>Are you sure that you want to delete all the items?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <btn id="deleteAllBtn" class="btn btn-outline-danger btn-lg" data-dismiss="modal">Delete All Items</btn>
+    </div>
+  </div>
+</div>
+</div>
 
   <table class="table table-striped  table-dark">
     <thead>
