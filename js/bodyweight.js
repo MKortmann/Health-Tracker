@@ -141,7 +141,7 @@ function loadBodyWeight() {
       //the message should disappear after 3 seconds
       setTimeout(function() {
         document.querySelector(".alert").remove();
-      }, 4000);
+      }, 3000);
     },
       // return the UI Selectors
       getSelectors: function() {
@@ -238,6 +238,9 @@ function loadBodyWeight() {
         if (document.querySelector(UISelectors.submitBtn).hasAttribute("style")) {
           document.querySelector(UISelectors.submitBtn).removeAttribute("style");
         }
+        if (document.querySelector(UISelectors.deleteAllBtn).hasAttribute("style")) {
+          document.querySelector(UISelectors.deleteAllBtn).removeAttribute("style");
+        }
       },
       reloadItem: function(item) {
         // Reload the Date and Weight Input
@@ -245,6 +248,7 @@ function loadBodyWeight() {
         document.querySelector(UISelectors.date).value = item.date;
         // hide the submit button
         document.querySelector(UISelectors.submitBtn).style.display = "none";
+        document.querySelector(UISelectors.deleteAllBtn).style.display = "none";
         // Show the edit and back buttons
         document.querySelector(UISelectors.editBtn).removeAttribute("style");
         document.querySelector(UISelectors.backBtn).removeAttribute("style");
