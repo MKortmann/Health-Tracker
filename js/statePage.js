@@ -121,11 +121,11 @@ const bodyWeight = function() {
           <!-- <label for="submit">Submit</label> -->
           <div class="btn-group d-flex align-items-end" role="group" aria-label="Button group with nested dropdown">
             <submit id="submit" class="btn btn-primary btn-lg">Submit</submit>
-            <btn id="editBtn" class="btn btn-outline-primary btn-lg">Edit</btn>
-            <btn id="backBtn" class="btn btn-outline-info btn-lg">Back</btn>
-            <btn id="deleteBtn" class="btn btn-outline-danger btn-lg">Delete</btn>
+            <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg">Edit</btn>
+            <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg">Back</btn>
+            <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg">Delete</btn>
             <!-- Button trigger modal -->
-            <btn type="button" class="btn btn-outline-danger btn-lg" data-toggle="modal" data-target="#locModal">
+            <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-lg" data-toggle="modal" data-target="#locModal">
               Delete All Items
             </btn>
           </div>
@@ -144,8 +144,8 @@ const bodyWeight = function() {
     <p>Are you sure that you want to delete all the items?</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <btn id="deleteAllBtn" class="btn btn-outline-danger btn-lg" data-dismiss="modal">Delete All Items</btn>
+      <button type="button" class="btn btn-secondary bt-lg" data-dismiss="modal">Close</button>
+      <btn type="button" id="deleteAllBtn" class="btn btn-outline-danger bt-lg" data-dismiss="modal">Delete All Items</btn>
     </div>
   </div>
 </div>

@@ -119,7 +119,8 @@ function loadBodyWeight() {
       editBtn: "#editBtn",
       backBtn: "#backBtn",
       deleteBtn: "#deleteBtn",
-      deleteAllBtn: "#deleteAllBtn"
+      deleteAllBtn: "#deleteAllBtn",
+      deleteAllAskBtn: "#deleteAllAskBtn"
     }
 
     return {
@@ -241,6 +242,10 @@ function loadBodyWeight() {
         if (document.querySelector(UISelectors.deleteAllBtn).hasAttribute("style")) {
           document.querySelector(UISelectors.deleteAllBtn).removeAttribute("style");
         }
+        if (document.querySelector(UISelectors.deleteAllAskBtn).hasAttribute("style")) {
+          document.querySelector(UISelectors.deleteAllAskBtn).removeAttribute("style");
+        }
+
       },
       reloadItem: function(item) {
         // Reload the Date and Weight Input
@@ -249,15 +254,16 @@ function loadBodyWeight() {
         // hide the submit button
         document.querySelector(UISelectors.submitBtn).style.display = "none";
         document.querySelector(UISelectors.deleteAllBtn).style.display = "none";
+        document.querySelector(UISelectors.deleteAllAskBtn).style.display = "none";
         // Show the edit and back buttons
         document.querySelector(UISelectors.editBtn).removeAttribute("style");
         document.querySelector(UISelectors.backBtn).removeAttribute("style");
         document.querySelector(UISelectors.deleteBtn).removeAttribute("style");
         // Update the pointer for the edit and back buttons
-        document.querySelector("#editBtn").style.cursor = "pointer";
-        document.querySelector("#backBtn").style.cursor = "pointer";
-        document.querySelector("#deleteBtn").style.cursor = "pointer";
-        document.querySelector("#deleteAllBtn").style.cursor = "pointer";
+        // document.querySelector("#editBtn").style.cursor = "pointer";
+        // document.querySelector("#backBtn").style.cursor = "pointer";
+        // document.querySelector("#deleteBtn").style.cursor = "pointer";
+        // document.querySelector("#deleteAllBtn").style.cursor = "pointer";
       }
 
     }
@@ -536,7 +542,13 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.deleteBtn).addEventListener("click", btnDelete);
       // For the delete All button
       document.querySelector(UISelectors.deleteAllBtn).addEventListener("click", btnDeleteAll);
-
+      // Disable submit on enter
+      document.addEventListener("keypress", function(e) {
+        if(e.keyCode === 13 || e.which === 13) {
+          e.preventDefault();
+          return false;
+        }
+      });
       // EventListeners for Canvas buttons
       document.querySelector(".buttonGroup").addEventListener("click", function(e){
         // const btnClicked = e.path[0].id;
