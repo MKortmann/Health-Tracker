@@ -183,7 +183,7 @@ function loadBodyWeight() {
                 <td class="align-middle">${item.weight} kg</td>
                 <td class="align-middle">${item.BMI} kg/m&sup2;</td>
                 <a href="#" id="${item.ID}">
-                <img src="../icons/edit.svg" class="float-right mt-2 edit"></img>
+                <img src="./icons/edit.svg" class="float-right mt-2 edit"></img>
                 </a>
               </tr>
               `;
