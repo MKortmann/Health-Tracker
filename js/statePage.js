@@ -92,7 +92,7 @@ const bodyWeight = function() {
       </div>
     </form>
 
-    <div class="container mt-2 text-center">
+    <div class="containerGroup mt-2 text-center">
     <div class="btn-group mb-1 buttonGroup" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-secondary" id="oneWeekBtn">1 Week</button>
       <button type="button" class="btn btn-secondary" id="twoWeeksBtn">2 Weeks</button>

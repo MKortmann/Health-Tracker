@@ -21,8 +21,21 @@ submit {
   box-shadow: 1px 2px 2px 2px gray;
 }
 
-/* #editIcon {
-  background: url("../icons/edit.svg") no-repeat ;
-  background-color: white;
-  background-position: center;
-} */
+/** Responsive Web Design: for canvas & subcontainer*/
+@media screen and (max-width: 1200px) {
+  body {
+    font-size: 14px;
+  }
+  label {
+    font-size: 12px;
+  }
+  #canvasWeight{
+    overflow-x: auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #canvasWeight, .containerGroup{
+    display: none;
+  }
+}
