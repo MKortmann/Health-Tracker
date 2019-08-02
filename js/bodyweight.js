@@ -299,7 +299,7 @@ function loadBodyWeight() {
         }
         // Pretty challenge! We want to show only 3 x-measurements in accord with
         // the x-values positions respective to the y-measurements (weight)
-        for(let i=0; i < data.length; i++) {          
+        for(let i=0; i < data.length; i++) {
           // get the start and middle position: necessary to ajust the text on canvsa
           if( (posX === 15) || (posX === 15 + deltaX*middlePos) ){
           // if(posX === 15 || mesurements === 195|| posX === 395 ||
@@ -307,7 +307,15 @@ function loadBodyWeight() {
           UICanvas.drawText(data[i].date, [posX-10,12], "gray",  invertYAxisText);
         } else if ( (posX === 15 + deltaX*measurements) ) {
           // get the end position: necessary to ajust the text on canvas
-            UICanvas.drawText(data[i].date, [posX-30,12], "gray",  invertYAxisText);
+          // the last data to plot we remove the year!
+          let newData = data[i].date;
+          newData = newData.split("-");
+          newData = newData[1]+ "-" +newData[2];
+          if(measurements <= 30) {
+            UICanvas.drawText(newData, [posX-10,12], "gray",  invertYAxisText);
+          }else {
+            UICanvas.drawText(newData, [posX-35,12], "gray",  invertYAxisText);
+          }
           }
           posX = posX + deltaX;
         }
@@ -373,7 +381,7 @@ function loadBodyWeight() {
       drawText: function(data, startPos, color, invertYAxisText) {
         // ctx.font = "64px serif";
         ctx.imageSmoothingEnabled = false;
-        ctx.font = "10px serif";
+        ctx.font = "14px serif";
         ctx.fillStyle = color;
         ctx.fillText(data, startPos[0], invertYAxisText-startPos[1]);
       },
