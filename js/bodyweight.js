@@ -603,7 +603,7 @@ function loadBodyWeight() {
     // if not, if we use StorageCtrl.data. Splice will point to it and change
     // the original array!
     let dataArray = StorageCtrl.getLSData();
-    if(amount >= dataArray.length) {
+    if(amount > dataArray.length) {
       UICanvas.plotGraph(dataArray);
       // Sending a message to the user!
       UICtrl.showAlert("Not enough data!", "alert alert-danger");
