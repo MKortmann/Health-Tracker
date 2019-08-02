@@ -164,6 +164,8 @@ function loadBodyWeight() {
       },
       // We will fill the complete table from the data of LocalStorage
       populateTable: function(items) {
+        // The first item in the table should the the last added
+        // let itemsReverse = items.reverse();
         items.forEach(function(item, index) {
           UICtrl.updateTable(item);
         });
@@ -187,7 +189,9 @@ function loadBodyWeight() {
                 </a>
               </tr>
               `;
-          table.appendChild(row);
+              debugger
+          table.insertBefore(row, document.querySelector("tbody").firstElementChild);
+          // table.appendChild(row);
         } else {
           // Here means that you want to update only one line of the table!
           const rowToBeReplaced = document.getElementById(item.ID).parentNode;
@@ -548,7 +552,6 @@ function loadBodyWeight() {
     }
     // delete All
     const btnDeleteAll = function() {
-      console.log("btn delete all");
       // Clear data array
       StorageCtrl.clearAllItems();
       // Clear LocalStorage
