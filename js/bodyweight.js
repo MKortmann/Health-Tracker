@@ -279,18 +279,38 @@ function loadBodyWeight() {
       getSelectors: function() {
         return UICanvasSelectors;
       },
-      plotYLines: function() {
+      plotXLines: function() {
         let startPos, endPos;
         for(let i=0; i < StartYlines.length; i++) {
           startPos=StartYlines[i];
           endPos=EndYlines[i];
           UICanvas.drawStraightLine(startPos,endPos, colorLines);
-          UICanvas.drawText(startPos, "gray", invertYAxisText+8);
+          UICanvas.drawText(startPos[1], startPos, "gray", invertYAxisText+8);
+        }
+      },
+      plotYDate: function(data, deltaX) {
+        let posX = 15;
+        let measurements = data.length-1;
+        let middlePos = 0;
+        if(measurements % 2 === 0) {
+          middlePos = measurements/2;
+        } else {
+          middlePos = (measurements-1)/2;
+        }
+        for(let i=0; i < data.length; i++) {
+
+          if( (posX === 15) || (posX === 15 + deltaX*measurements) ||
+              (posX === 15 + deltaX*middlePos) ){
+          // if(posX === 15 || mesurements === 195|| posX === 395 ||
+          //    posX === 595|| posX === 795 ) {
+          UICanvas.drawText(data[i].date, [posX-15,12], "gray",  invertYAxisText);
+          }
+          posX = posX + deltaX;
         }
       },
       plotGraph: function(data) {
         UICanvas.eraseCanvas();
-        UICanvas.plotYLines();
+        UICanvas.plotXLines();
         let xPos = 15;
         let startPos, endPos, weightArray = [];
         // extract from data an weight array with only weight data
@@ -305,6 +325,7 @@ function loadBodyWeight() {
         }
 
         deltaX = UICanvas.returnStepXDelta(weightArray);
+        UICanvas.plotYDate(data, deltaX);
 
         weightArray.forEach(function(item, index) {
           startPos = [xPos, weightArray[index]];
@@ -313,13 +334,13 @@ function loadBodyWeight() {
             UICanvas.drawStraightLine(startPos, endPos, "black");
             UICanvas.drawCircle(startPos);
             if(!hideText) {
-            UICanvas.drawText(startPos, "blue",invertYAxisText);
+            UICanvas.drawText(startPos[1], startPos, "blue",invertYAxisText);
             }
             // we plot here the last point!
             if( (index + 2) === weightArray.length ) {
               UICanvas.drawCircle(endPos);
               if(!hideText) {
-              UICanvas.drawText(startPos, "blue",invertYAxisText);
+              UICanvas.drawText(startPos[1], startPos, "blue",invertYAxisText);
               }
             }
             // deltaX
@@ -344,12 +365,13 @@ function loadBodyWeight() {
           ctx.arc(startPos[0], invertYAxis-startPos[1], 3, Math.PI * 2, false);
           ctx.stroke();
       },
-      drawText: function(startPos, color, invertYAxisText) {
+      // drawText inputs: data = data, startPos = the x,y position
+      drawText: function(data, startPos, color, invertYAxisText) {
         // ctx.font = "64px serif";
         ctx.imageSmoothingEnabled = false;
         ctx.font = "10px serif";
         ctx.fillStyle = color;
-        ctx.fillText(startPos[1], startPos[0], invertYAxisText-startPos[1]);
+        ctx.fillText(data, startPos[0], invertYAxisText-startPos[1]);
       },
       eraseCanvas: function() {
         ctx.beginPath();
