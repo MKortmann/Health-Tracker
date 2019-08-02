@@ -297,13 +297,17 @@ function loadBodyWeight() {
         } else {
           middlePos = (measurements-1)/2;
         }
-        for(let i=0; i < data.length; i++) {
-
-          if( (posX === 15) || (posX === 15 + deltaX*measurements) ||
-              (posX === 15 + deltaX*middlePos) ){
+        // Pretty challenge! We want to show only 3 x-measurements in accord with
+        // the x-values positions respective to the y-measurements (weight)
+        for(let i=0; i < data.length; i++) {          
+          // get the start and middle position: necessary to ajust the text on canvsa
+          if( (posX === 15) || (posX === 15 + deltaX*middlePos) ){
           // if(posX === 15 || mesurements === 195|| posX === 395 ||
           //    posX === 595|| posX === 795 ) {
-          UICanvas.drawText(data[i].date, [posX-15,12], "gray",  invertYAxisText);
+          UICanvas.drawText(data[i].date, [posX-10,12], "gray",  invertYAxisText);
+        } else if ( (posX === 15 + deltaX*measurements) ) {
+          // get the end position: necessary to ajust the text on canvas
+            UICanvas.drawText(data[i].date, [posX-30,12], "gray",  invertYAxisText);
           }
           posX = posX + deltaX;
         }
@@ -340,7 +344,7 @@ function loadBodyWeight() {
             if( (index + 2) === weightArray.length ) {
               UICanvas.drawCircle(endPos);
               if(!hideText) {
-              UICanvas.drawText(startPos[1], startPos, "blue",invertYAxisText);
+              UICanvas.drawText(endPos[1], endPos, "blue",invertYAxisText);
               }
             }
             // deltaX
