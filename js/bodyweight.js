@@ -124,6 +124,25 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
+      showAlert: function(message, className) {
+      //create div
+      const div = document.createElement("div");
+      //add classes: the class alert is used to be able to remove it afterwards!
+      div.className = `alert ${className} text-center  p-0 m-0`;
+      // Add text
+      div.appendChild(document.createTextNode(message));
+      // Get the element to be insert it
+      const container = document.querySelector("#formInputs1");
+      // get the element in which the div will be insert before it
+      const form = document.querySelector("#formInputs2");
+      // insert alert
+      container.appendChild(div, form);
+
+      //the message should disappear after 3 seconds
+      setTimeout(function() {
+        document.querySelector(".alert").remove();
+      }, 4000);
+    },
       // return the UI Selectors
       getSelectors: function() {
         return UISelectors;
@@ -189,7 +208,6 @@ function loadBodyWeight() {
                 </a>
               </tr>
               `;
-              debugger
           table.insertBefore(row, document.querySelector("tbody").firstElementChild);
           // table.appendChild(row);
         } else {
@@ -560,6 +578,8 @@ function loadBodyWeight() {
       UICanvas.eraseCanvas();
       // Clear table
       UICtrl.deleteTable();
+      // Sending a message to the user!
+      UICtrl.showAlert("All Items deleted!", "alert alert-danger");
     }
     // canvas buttons
     const groupCanvasBtn = function(amount) {
@@ -569,7 +589,8 @@ function loadBodyWeight() {
     let dataArray = StorageCtrl.getLSData();
     if(amount >= dataArray.length) {
       UICanvas.plotGraph(dataArray);
-      alert("array is lower!");
+      // Sending a message to the user!
+      UICtrl.showAlert("Not enough data!", "alert alert-danger");
     } else {
       // we will here get the last 7 days measured!
       let hacked = dataArray.splice(dataArray.length-amount,amount);
@@ -627,6 +648,8 @@ function loadBodyWeight() {
       UICtrl.populateInputs();
       // Update graphic
       plotGraph();
+      // Sending a message to the user!
+      UICtrl.showAlert("item added!", "alert alert-primary");
       // FINESHED: UI is updated!
     }
 
@@ -642,6 +665,9 @@ function loadBodyWeight() {
         const item = ItemCtrl.getItemById(listID);
         // Reload the UI with the values of the item to be edited
         UICtrl.reloadItem(item);
+        // Show ready to edit
+        // Sending a message to the user!
+        UICtrl.showAlert("Ready to Edit!", "alert alert-success");
       }
     }
 
@@ -662,6 +688,8 @@ function loadBodyWeight() {
       UICtrl.populateInputs();
       // Update graphic
       plotGraph();
+      // Sending a message to the user!
+      UICtrl.showAlert("Item Edited!", "alert alert-info");
     }
 
     const btnBack = function() {
@@ -669,6 +697,8 @@ function loadBodyWeight() {
       UICtrl.hideButtons();
       // Populate the inputs!
       UICtrl.populateInputs();
+      // Sending a message to the user!
+      UICtrl.showAlert("No changes!", "alert alert-warning");
     }
 
     const btnDelete = function() {
@@ -694,6 +724,8 @@ function loadBodyWeight() {
       UICtrl.populateInputs();
       // Update graphic
       plotGraph();
+      // Sending a message to the user!
+      UICtrl.showAlert("Item deleted!", "alert alert-danger");
 
     }
 

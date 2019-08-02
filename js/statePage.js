@@ -58,8 +58,9 @@ const myData = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
-    <form>
-      <div class="form-row p-2 justify-content-center">
+  <div class="container">
+    <form id="formInputs1">
+      <div class="form-row p-2 justify-content-center" id="formInputs2">
         <div class="col-2">
           <label for="height">Height (cm)</label>
           <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
@@ -139,6 +140,7 @@ const bodyWeight = function() {
       </tr> -->
     </tbody>
   </table>
+  </div>
 
   <!-- Add tht js file -->
   <script src="./js/bodyWeight.js"></script>
