@@ -194,6 +194,8 @@ function loadBodyWeight() {
       updateTable: function(item, updateOnlyOneLine = false) {
         // if updateOnlyOneLine of table is false it means that we will call it
         // many times populating the table!
+      const link = ItemCtrl.BMIResultLink(item.BMI);
+
         if (!updateOnlyOneLine) {
           const table = document.querySelector(UISelectors.tableBody);
           const row = document.createElement("tr");
@@ -205,6 +207,7 @@ function loadBodyWeight() {
                 <td class="align-middle">${item.weight} kg</td>
                 <td class="align-middle">${item.BMI} kg/m&sup2;</td>
                 <a href="#" id="${item.ID}">
+                <img src=${link} class="float-left mt-2 edit"></img>
                 <img src="./icons/edit.svg" class="float-right mt-2 edit"></img>
                 </a>
               </tr>
@@ -221,6 +224,7 @@ function loadBodyWeight() {
                 <td class="align-middle">${item.weight} kg</td>
                 <td class="align-middle">${item.BMI} kg/m&sup2;</td>
                 <a href="#" id="${item.ID}">
+                <img src=${link} class="float-right mt-2 edit"></img>
                 <img src="../icons/edit.svg" class="float-right mt-2 edit"></img>
                 </a>
               </tr>
@@ -467,6 +471,27 @@ function loadBodyWeight() {
         const heightInMeter = height / 100;
         const bmi = weight / (Math.pow(heightInMeter, 2));
         return bmi.toFixed(2);
+      },
+      // return the link of the
+      BMIResultLink: function(bmi) {
+        let bmiInt = parseInt(bmi);
+        let bmiValue = bmiInt.toFixed(1);
+        console.log(bmiValue);
+        // To improve this!
+        if(bmiValue >= 18.5 && bmiValue < 22) {
+          let link = "../icons/fastSmile.svg"
+          return link;
+        } else if(bmiValue >= 22 && bmiValue <= 25) {
+            let link = "../icons/smile.svg"
+            return link;
+        } else if (bmiValue > 25 && bmiValue <= 30){
+          let link = "../icons/fastSmile.svg"
+          return link;
+        } else {
+          let link = "../icons/sad.svg"
+          return link;
+        }
+
       },
       // Generator function to generate IDs
       genIDs: function*() {
