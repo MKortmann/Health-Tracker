@@ -168,7 +168,8 @@ const bodyWeight = function() {
     </figure>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary bt-lg" data-dismiss="modal">Close</button>
-      <btn onclick="window.location.href = 'https://en.wikipedia.org/wiki/Body_mass_index';" class="btn btn-secondary bt-lg" data-dismiss="modal">More Info</btn>
+      <btn onclick="window.open('https://en.wikipedia.org/wiki/Body_mass_index')" class="btn btn-secondary bt-lg" data-dismiss="modal">More Info</btn>
+      <!-- <btn onclick="window.location.href = 'https://en.wikipedia.org/wiki/Body_mass_index';" class="btn btn-secondary bt-lg" data-dismiss="modal">More Info</btn> -->
     </div>
   </div>
 </div>
