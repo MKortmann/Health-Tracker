@@ -128,6 +128,7 @@ const bodyWeight = function() {
             <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-lg" data-toggle="modal" data-target="#locModal">
               Delete All Items
             </btn>
+            <btn type="button" id="saveBtn" class="btn btn-outline-danger btn-lg">Save </btn>
           </div>
         </div>
         </div>

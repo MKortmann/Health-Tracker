@@ -96,6 +96,22 @@ function loadBodyWeight() {
       },
       clearItemsFromStorage: function() {
         localStorage.removeItem("items");
+      },
+      downloadVideosToJSON: function () {
+      // Save as JSON file
+        const weightData = StorageCtrl.getLSData();
+        const fileJSON = JSON.stringify(weightData);
+
+        // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
+        let dataUri = 'data:storage/json;charset=utf-8,' + encodeURIComponent(fileJSON);
+
+        let exportFileDefaultName = 'table.json';
+
+        let linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+        linkElement.remove();
       }
     }
   })();
@@ -120,7 +136,8 @@ function loadBodyWeight() {
       backBtn: "#backBtn",
       deleteBtn: "#deleteBtn",
       deleteAllBtn: "#deleteAllBtn",
-      deleteAllAskBtn: "#deleteAllAskBtn"
+      deleteAllAskBtn: "#deleteAllAskBtn",
+      saveBtn: "#saveBtn"
     }
 
     return {
