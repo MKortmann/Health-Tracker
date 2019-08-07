@@ -151,6 +151,29 @@ const bodyWeight = function() {
 </div>
 </div>
 
+<!-- Modal 2: BMI INFO -->
+<div class="modal fade" id="locModal2" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-body text-center">
+    <p class="display-5">Body mass index (BMI)</p>
+    </div>
+    <div class="text-center">
+    <small class="text-muted">The BMI is defined as the body mass divided by the square of the body height, and is universally expressed in units of kg/m&sup2;.</small>
+    </div>
+
+    <figure class="figure">
+      <img src="./imgs/bmi.png" class="figure-img img-fluid rounded" alt="BMI-Graph">
+      <!-- <figcaption class="figure-caption text-center">Body mass index (BMI)</figcaption> -->
+    </figure>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary bt-lg" data-dismiss="modal">Close</button>
+      <btn onclick="window.location.href = 'https://en.wikipedia.org/wiki/Body_mass_index';" class="btn btn-secondary bt-lg" data-dismiss="modal">More Info</btn>
+    </div>
+  </div>
+</div>
+</div>
+
   <table class="table table-striped  table-dark">
     <thead>
       <tr>
@@ -159,7 +182,7 @@ const bodyWeight = function() {
         <th scope="col">Weight (kg)</th>
         <th scope="col">BMI (kg/m&sup2;)
         <!-- Button trigger modal -->
-        <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#locModal2">
+        <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-lg float-right" data-toggle="modal" data-target="#locModal2">
           About BMI
         </btn>
         </th>
