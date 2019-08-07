@@ -144,7 +144,7 @@ const bodyWeight = function() {
     <p>Are you sure that you want to delete all the items?</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary bt-lg" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-secondary bt-lg" data-dismiss="modal">Back</button>
       <btn type="button" id="deleteAllBtn" class="btn btn-outline-danger bt-lg" data-dismiss="modal">Delete All Items</btn>
     </div>
   </div>
@@ -157,7 +157,12 @@ const bodyWeight = function() {
         <th scope="col">#</th>
         <th scope="col">Data</th>
         <th scope="col">Weight (kg)</th>
-        <th scope="col">BMI (kg/m&sup2;)</th>
+        <th scope="col">BMI (kg/m&sup2;)
+        <!-- Button trigger modal -->
+        <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#locModal2">
+          About BMI
+        </btn>
+        </th>
         <!-- <th scope="col">Edit</th> -->
       </tr>
     </thead>
