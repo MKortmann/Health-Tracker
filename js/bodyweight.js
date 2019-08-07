@@ -584,6 +584,8 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.deleteBtn).addEventListener("click", btnDelete);
       // For the delete All button
       document.querySelector(UISelectors.deleteAllBtn).addEventListener("click", btnDeleteAll);
+      // Add Event Listener To Save button
+      document.querySelector(UISelectors.saveBtn).addEventListener("click", StorageCtrl.downloadVideosToJSON);
       // Disable submit on enter
       document.addEventListener("keypress", function(e) {
         if(e.keyCode === 13 || e.which === 13) {
