@@ -41,8 +41,8 @@ const homeState = function() {
   <div class="container">
 
     <div class="jumbotron mt-2">
-    <h1 class=" text-info">Welcome to Health Tracker!</h1>
-    <p class="lead">This app was done specially to help you to track and improve your health!!!</p>
+    <h2 class=" text-info">Welcome to Health Tracker!</h2 >
+    <p class="lead">This app was done specially to help you to track and improve your health!</p>
     <hr class="my-4">
     <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
     <p class="text-success"> Please visit regularly your doctor! </p>
@@ -203,6 +203,8 @@ const bodyWeight = function() {
     </tbody>
   </table>
   </div>
+
+  <br>
 
   <!-- Add tht js file -->
   <script src="./js/bodyWeight.js"></script>
