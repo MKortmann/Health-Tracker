@@ -179,12 +179,12 @@ const bodyWeight = function() {
   <table class="table table-striped  table-dark">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Data</th>
-        <th scope="col">Weight (kg)</th>
-        <th scope="col">BMI (kg/m&sup2;)
+        <th scope="col" class="align-middle">#</th>
+        <th scope="col" class="align-middle">Data</th>
+        <th scope="col" class="align-middle">Weight (kg)</th>
+        <th scope="col" class="align-middle">BMI (kg/m&sup2;)
         <!-- Button trigger modal -->
-        <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-lg float-right" data-toggle="modal" data-target="#locModal2">
+        <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#locModal2">
           About BMI
         </btn>
         </th>
