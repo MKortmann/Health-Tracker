@@ -45,6 +45,8 @@ const homeState = function() {
     <p class="lead">This app was done specially to help you to track and improve your health!!!</p>
     <hr class="my-4">
     <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
+    <p class="text-success"> Please visit regularly your doctor! </p>
+    <p class= "text-info text-center">&hearts; Thanks for using our app &hearts; </p>
     <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
     </div>
   </div>
