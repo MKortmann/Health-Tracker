@@ -36,9 +36,25 @@ submit {
     overflow-x: auto;
   }
 }
-/*
-@media screen and (max-width: 800px) {
-  #canvasWeight, .containerGroup{
-    display: none;
+*/
+@media screen and (max-width: 1400px) {
+  #canvasWeight {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
-} */
+
+  .btn {
+    font-size: 14px;
+  }
+  /* buttons group canvas */
+  .btn-secondary,
+  footer {
+    font-size: 12px;
+  }
+  /* resize images */
+  img {
+    max-width: 32px;
+  }
+
+}

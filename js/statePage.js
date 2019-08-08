@@ -68,77 +68,105 @@ const myData = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
-  <div class="container">
+  <div class="container my-4">
     <form id="formInputs1">
-      <div class="form-row p-2 justify-content-center" id="formInputs2">
-
-      <div class="col-md-3">
-        <label for="startWeight" class="text-info">Start Weight (kg)</label>
-        <input type="number" disabled value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
-      </div>
-
+      <div class="form-row justify-content-center" id="formInputs2">
+        <!-- Start Weight -->
+        <div class="col-md-3">
+          <label for="startWeight" class="text-info">Start Weight (kg)</label>
+          <input type="number" disabled value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
+        </div>
+        <!-- Actual Weight -->
         <div class="col-md-3">
           <label for="actualweight" class="text-info">Actual Weight</label>
           <input type="number" disabled value="76" class="form-control" id="actualWeight" placeholder="Actual (kg)">
         </div>
+        <!-- Diff Weight -->
         <div class="col-md-3">
           <label for="diffWeight" class="text-info">Diff. Weight</label>
           <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (kg)">
         </div>
+        <!-- Actual BMI -->
         <div class="col-md-3">
           <label for="actualBMI" class="text-primary">Actual BMI</label>
           <input type="number" disabled class="form-control" id="actualBMI" placeholder="Actual BMI">
         </div>
       </div>
-      </div>
     </form>
+  </div>
 
-    <div class="containerGroup mt-2 text-center">
+<!-- Canvas buttons! -->
+  <div class="containerGroup mt-2 text-center">
     <div class="btn-group mb-1 buttonGroup" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-secondary" id="oneWeekBtn">1 Week</button>
-      <button type="button" class="btn btn-secondary" id="twoWeeksBtn">2 Weeks</button>
-      <button type="button" class="btn btn-secondary" id="oneMonthBtn">1 Month</button>
-      <button type="button" class="btn btn-secondary" id="twoMonthsBtn">2 Months</button>
-      <button type="button" class="btn btn-secondary" id="threeMonthsBtn">3 Months</button>
-      <button type="button" class="btn btn-secondary" id="sixMonthsBtn">6 Months</button>
-      <button type="button" class="btn btn-secondary" id="oneYearBtn">1 Year</button>
+      <button type="button" class="btn btn-secondary d-none d-md-block" id="twoWeeksBtn">2 Weeks</button>
+      <button type="button" class="btn btn-secondary d-none d-md-block" id="oneMonthBtn">1 Month</button>
+      <button type="button" class="btn btn-secondary d-none d-md-block" id="twoMonthsBtn">2 Months</button>
+      <button type="button" class="btn btn-secondary d-none d-md-block" id="threeMonthsBtn">3 Months</button>
+      <button type="button" class="btn btn-secondary d-none d-lg-block" id="sixMonthsBtn">6 Months</button>
+      <button type="button" class="btn btn-secondary d-none d-lg-block" id="oneYearBtn">1 Year</button>
       <button type="button" class="btn btn-secondary" id="AllMeasureBtn">All</button>
     </div>
     <!-- As soon as defined the height and width the image become sharp -->
       <canvas id="canvasWeight" height="200px" width="900px"></canvas>
-    </div>
+  </div>
 
     <form>
       <div class="form-row p-4 justify-content-center d-flex align-items-end">
-      <div class="col-3">
-        <label for="height">Height (cm)</label>
-        <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
-      </div>
-
+        <div class="col-3">
+          <label for="height">Height</label>
+          <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
+        </div>
         <div class="col-3">
           <label for="weight">Weight</label>
-          <input type="number" value="80" min="30" max="230" class="form-control my-1" id="weight" placeholder="Weight - kg">
+          <input type="number" value="80" min="30" max="230" class="form-control " id="weight" placeholder="Weight - kg">
         </div>
-        <div class="col-3">
+        <div class="col-6">
           <label for="date">Date</label>
-          <input type="date" class="form-control my-1" id="date" placeholder="data">
-        </div>
-        <div class="col-4 d-flex align-items-end">
-          <!-- <label for="submit">Submit</label> -->
-          <div class="btn-group d-flex align-items-end" role="group" aria-label="Button group with nested dropdown">
-            <submit id="submit" class="btn btn-primary btn-lg">Submit</submit>
-            <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg">Edit</btn>
-            <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg">Back</btn>
-            <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg">Delete</btn>
-            <!-- Button trigger modal -->
-            <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-lg" data-toggle="modal" data-target="#locModal">
-              Delete All Items
-            </btn>
-            <btn type="button" id="saveBtn" class="btn btn-outline-danger btn-lg">Save </btn>
-          </div>
-        </div>
+          <input type="date" class="form-control" id="date" placeholder="data">
         </div>
       </div>
+      <div class="form-row">
+        <div class="col">
+          <!-- <label for="submit">Submit</label> -->
+          <submit id="submit" class="btn btn-primary btn-lg btn-block">Submit</submit>
+        </div>
+      </div>
+      <div class="form-row">
+          <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg col-4">Edit</btn>
+          <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg col-4">Back</btn>
+          <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg col-4">Delete</btn>
+      </div>
+      <!-- Delete All - Download/Save JSON -->
+      <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+          <div class="bg-dark p-4">
+            <h5 class="text-white h4">Extra functions</h5>
+            <span class="text-light">You can delete all the items saved or download all the items to a file called table.JSON</span>
+
+            <!-- Button trigger modal -->
+            <div class="container mt-3">
+            <!-- Button trigger modal: BMI -->
+            <btn type="button" id="bmiInfoBtn" class="btn btn-outline-dange float-right d-lg-none" data-toggle="modal" data-target="#locModal2">
+              About BMI
+            </btn>
+              <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger col-3" data-toggle="modal" data-target="#locModal">
+                Delete All Items
+              </btn>
+              <btn type="button" id="saveBtn" class="btn btn-outline-danger col-3">Save </btn>
+            </div>
+            </div>
+
+          </div>
+
+
+        <nav class="navbar navbar-dark bg-dark">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+      </div>
+
     </form>
 
 
@@ -187,10 +215,10 @@ const bodyWeight = function() {
       <tr>
         <th scope="col" class="align-middle">#</th>
         <th scope="col" class="align-middle">Data</th>
-        <th scope="col" class="align-middle">Weight (kg)</th>
-        <th scope="col" class="align-middle">BMI (kg/m&sup2;)
-        <!-- Button trigger modal -->
-        <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#locModal2">
+        <th scope="col" class="align-middle">Weight</th>
+        <th scope="col" class="align-middle">BMI</th>
+        <!-- Button trigger modal: BMI -->
+        <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right d-none d-lg-block" data-toggle="modal" data-target="#locModal2">
           About BMI
         </btn>
         </th>
