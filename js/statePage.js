@@ -117,11 +117,11 @@ const bodyWeight = function() {
           <label for="height">Height</label>
           <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
         </div>
-        <div class="col-3">
-          <label for="weight">Weight</label>
+        <div class="col-2">
+          <label for="weight">Wgt.</label>
           <input type="number" value="80" min="30" max="230" class="form-control " id="weight" placeholder="Weight - kg">
         </div>
-        <div class="col-6">
+        <div class="col-7">
           <label for="date">Date</label>
           <input type="date" class="form-control" id="date" placeholder="data">
         </div>
@@ -145,15 +145,15 @@ const bodyWeight = function() {
             <span class="text-light">You can delete all the items saved or download all the items to a file called table.JSON</span>
 
             <!-- Button trigger modal -->
-            <div class="container mt-3">
             <!-- Button trigger modal: BMI -->
-            <btn type="button" id="bmiInfoBtn" class="btn btn-outline-dange float-right d-lg-none" data-toggle="modal" data-target="#locModal2">
-              About BMI
-            </btn>
-              <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger col-3" data-toggle="modal" data-target="#locModal">
+            <div class="container mt-3">
+              <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block d-lg-none" data-toggle="modal" data-target="#locModal2">
+              About BMI </btn>
+              <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#locModal">
                 Delete All Items
               </btn>
-              <btn type="button" id="saveBtn" class="btn btn-outline-danger col-3">Save </btn>
+              <btn type="button" id="saveBtn" class="btn btn-outline-info btn-block">Save </btn>
+            </div>
             </div>
             </div>
 
@@ -214,9 +214,9 @@ const bodyWeight = function() {
     <thead>
       <tr>
         <th scope="col" class="align-middle">#</th>
-        <th scope="col" class="align-middle">Data</th>
-        <th scope="col" class="align-middle">Weight</th>
-        <th scope="col" class="align-middle">BMI</th>
+        <th scope="col" class="align-middle d-none d-sm-table-cell">Data</th>
+        <th scope="col" class="align-middle"> Wgt.</th>
+        <th scope="col" class="align-middle">BMI
         <!-- Button trigger modal: BMI -->
         <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right d-none d-lg-block" data-toggle="modal" data-target="#locModal2">
           About BMI
