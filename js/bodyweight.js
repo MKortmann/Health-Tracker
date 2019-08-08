@@ -177,7 +177,9 @@ function loadBodyWeight() {
       // populate the inputs: diffWeight and BMI
       populateInputs: function() {
         // Update actual weight
-        document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getActualWeight();
+        document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
+        // Get the first start weight getFirstWeight
+        document.querySelector(UISelectors.startWeight).value = ItemCtrl.getWeight(0);
         // diffW = startWeight - actualWeight
         const diffW = document.querySelector(UISelectors.startWeight).value -
           document.querySelector(UISelectors.actualWeight).value;
@@ -197,7 +199,7 @@ function loadBodyWeight() {
         // Let's populate the weight input with the last weight value
         document.querySelector(UISelectors.date).value = ItemCtrl.getActualDate();
         // Let's populate the date input with the actual date
-        document.querySelector(UISelectors.weight).value = ItemCtrl.getActualWeight();
+        document.querySelector(UISelectors.weight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
       },
       // We will fill the complete table from the data of LocalStorage
       populateTable: function(items) {
@@ -528,13 +530,12 @@ function loadBodyWeight() {
         day = (day < 10) ? `0${day}` : day;
         return `${today.getFullYear()}-${month}-${day}`;
       },
-      getActualWeight: function() {
+      getWeight: function(index) {
         if (StorageCtrl.data !== null) {
-          return StorageCtrl.data[StorageCtrl.data.length - 1].weight;
+          return StorageCtrl.data[index].weight;
         } else {
           return 80;
         }
-
       },
       getItemById: function(id) {
         const data = StorageCtrl.getLSData();

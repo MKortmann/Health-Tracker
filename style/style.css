@@ -6,9 +6,11 @@ body {
     -moz-transform-origin: 0 0;
 }
 
-label {
-  font-size: 20px;
+label,
+input {
+  font-size: 14px;
 }
+
 
 submit {
   cursor: pointer;
@@ -25,20 +27,18 @@ submit {
 }
 
 /** Responsive Web Design: for canvas & subcontainer*/
-@media screen and (max-width: 1200px) {
-  body {
-    font-size: 14px;
-  }
+ /* @media screen and (max-width: 1200px) {
+
   label {
     font-size: 12px;
   }
-  #canvasWeight{
+  /* #canvasWeight{
     overflow-x: auto;
   }
 }
-
+/*
 @media screen and (max-width: 800px) {
   #canvasWeight, .containerGroup{
     display: none;
   }
-}
+} */
