@@ -41,7 +41,7 @@ const homeState = function() {
   <div class="container">
 
     <div class="jumbotron mt-2">
-    <h1 class="display-4 text-info">Welcome to Health Tracker!</h1>
+    <h1 class=" text-info">Welcome to Health Tracker!</h1>
     <p class="lead">This app was done specially to help you to track and improve your health!!!</p>
     <hr class="my-4">
     <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
