@@ -71,27 +71,21 @@ const bodyWeight = function() {
   <div class="container">
     <form id="formInputs1">
       <div class="form-row p-2 justify-content-center" id="formInputs2">
-        <div class="col-3">
-          <label for="height">Height (cm)</label>
-          <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
-        </div>
-      </div>
-      <div class="form-row p-2 justify-content-center" id="formInputs2">
 
-      <div class="col-3">
+      <div class="col-md-3">
         <label for="startWeight" class="text-info">Start Weight (kg)</label>
         <input type="number" disabled value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
       </div>
-      
-        <div class="col-3">
-          <label for="actualweight" class="text-info">Actual Weight (kg)</label>
+
+        <div class="col-md-3">
+          <label for="actualweight" class="text-info">Actual Weight</label>
           <input type="number" disabled value="76" class="form-control" id="actualWeight" placeholder="Actual (kg)">
         </div>
-        <div class="col-3">
-          <label for="diffWeight" class="text-info">Diff. Weight (kg)</label>
+        <div class="col-md-3">
+          <label for="diffWeight" class="text-info">Diff. Weight</label>
           <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (kg)">
         </div>
-        <div class="col-2 d-none d-md-block">
+        <div class="col-md-3">
           <label for="actualBMI" class="text-primary">Actual BMI</label>
           <input type="number" disabled class="form-control" id="actualBMI" placeholder="Actual BMI">
         </div>
@@ -116,6 +110,11 @@ const bodyWeight = function() {
 
     <form>
       <div class="form-row p-4 justify-content-center d-flex align-items-end">
+      <div class="col-3">
+        <label for="height">Height (cm)</label>
+        <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
+      </div>
+
         <div class="col-3">
           <label for="weight">Weight</label>
           <input type="number" value="80" min="30" max="230" class="form-control my-1" id="weight" placeholder="Weight - kg">
