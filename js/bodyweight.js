@@ -29,7 +29,28 @@
 // octopus divided into two: the ItemCtrl and the AppCtrl. The Item Ctrl is responsible
 // to control each item, the AppCtrl controls the App (eventlisteners and so on) and
 // the last is the view Model that will be diveded into:  UICtrl responsible to control the user interface and the UICanvas responsible to control the canvas!
+// Anonymous "self-invoking" function
+
+
 function loadBodyWeight() {
+  // trying to fix jquery problems
+  (function() {
+      var startingTime = new Date().getTime();
+      // Load the script
+      var script = document.createElement("SCRIPT");
+      script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+      script.type = 'text/javascript';
+      script.onload = function() {
+      	var $ = window.jQuery;
+        $(function() {
+              var endingTime = new Date().getTime();
+              var tookTime = endingTime - startingTime;
+              window.alert("jQuery is loaded, after " + tookTime + " milliseconds!");
+          });
+      };
+      document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+
   /*
    * MODEL DATA: StorageCtrl
    */
@@ -97,8 +118,8 @@ function loadBodyWeight() {
       clearItemsFromStorage: function() {
         localStorage.removeItem("items");
       },
-      downloadVideosToJSON: function () {
-      // Save as JSON file
+      downloadVideosToJSON: function() {
+        // Save as JSON file
         const weightData = StorageCtrl.getLSData();
         const fileJSON = JSON.stringify(weightData);
 
@@ -135,15 +156,15 @@ function loadBodyWeight() {
             localStorage.setItem("items", JSON.stringify(items));
           }
         };
-            xhttp.open("GET", "./storage/table.json", true);
-            xhttp.onerror = function() {
-              console.log("Request error in XMLHttpRequest...");
-              return false;
-            }
-            xhttp.send();
-            // if works, returns true. The true flag, tells that we are reloading
-            // data, and the table should be cleared!
-            return true;
+        xhttp.open("GET", "./storage/table.json", true);
+        xhttp.onerror = function() {
+          console.log("Request error in XMLHttpRequest...");
+          return false;
+        }
+        xhttp.send();
+        // if works, returns true. The true flag, tells that we are reloading
+        // data, and the table should be cleared!
+        return true;
       }
     }
   })();
@@ -176,24 +197,24 @@ function loadBodyWeight() {
     return {
       // Declare public var and functions
       showAlert: function(message, className) {
-      //create div
-      const div = document.createElement("div");
-      //add classes: the class alert is used to be able to remove it afterwards!
-      div.className = `alert ${className} text-center  p-0 m-0`;
-      // Add text
-      div.appendChild(document.createTextNode(message));
-      // Get the element to be insert it
-      const container = document.querySelector("#formInputs1");
-      // get the element in which the div will be insert before it
-      const form = document.querySelector("#formInputs2");
-      // insert alert
-      container.appendChild(div, form);
+        //create div
+        const div = document.createElement("div");
+        //add classes: the class alert is used to be able to remove it afterwards!
+        div.className = `alert ${className} text-center  p-0 m-0`;
+        // Add text
+        div.appendChild(document.createTextNode(message));
+        // Get the element to be insert it
+        const container = document.querySelector("#formInputs1");
+        // get the element in which the div will be insert before it
+        const form = document.querySelector("#formInputs2");
+        // insert alert
+        container.appendChild(div, form);
 
-      //the message should disappear after 3 seconds
-      setTimeout(function() {
-        document.querySelector(".alert").remove();
-      }, 3000);
-    },
+        //the message should disappear after 3 seconds
+        setTimeout(function() {
+          document.querySelector(".alert").remove();
+        }, 3000);
+      },
       // return the UI Selectors
       getSelectors: function() {
         return UISelectors;
@@ -210,9 +231,8 @@ function loadBodyWeight() {
       // populate the inputs: diffWeight and BMI
       populateInputs: function() {
         // Update actual weight
-        debugger
         // In case that we do not have any data!
-        if(StorageCtrl.data === null) {
+        if (StorageCtrl.data === null) {
           document.querySelector(UISelectors.actualWeight).value = 80;
         } else {
           document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
@@ -221,7 +241,7 @@ function loadBodyWeight() {
         document.querySelector(UISelectors.startWeight).value = ItemCtrl.getWeight(0);
         // diffW = startWeight - actualWeight
         const diffW = document.querySelector(UISelectors.startWeight).value -
-        document.querySelector(UISelectors.actualWeight).value;
+          document.querySelector(UISelectors.actualWeight).value;
         document.querySelector(UISelectors.diffWeight).value = diffW;
         // if diffW > 0 green color if diffW < 0 red!
         if (diffW > 0) {
@@ -238,7 +258,7 @@ function loadBodyWeight() {
         // Let's populate the weight input with the last weight value
         document.querySelector(UISelectors.date).value = ItemCtrl.getActualDate();
         // Let's populate the date input with the actual date
-        if(StorageCtrl.data !== null) {
+        if (StorageCtrl.data !== null) {
           document.querySelector(UISelectors.weight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
         }
       },
@@ -254,7 +274,7 @@ function loadBodyWeight() {
       updateTable: function(item, updateOnlyOneLine = false) {
         // if updateOnlyOneLine of table is false it means that we will call it
         // many times populating the table!
-      const link = ItemCtrl.BMIResultLink(item.BMI);
+        const link = ItemCtrl.BMIResultLink(item.BMI);
 
         if (!updateOnlyOneLine) {
           const table = document.querySelector(UISelectors.tableBody);
@@ -359,10 +379,20 @@ function loadBodyWeight() {
     let invertYAxisText = 210;
     let deltaX = 20;
     let displayAmountOfMeasurements = 45;
-    let StartYlines =  [[0,190],[0,150],[0,110],[0,70],[0,40]];
-    let EndYlines =  [[canvasWidth,190],[canvasWidth,150],
-                      [canvasWidth,110],[canvasWidth,70],
-                      [canvasWidth,40]];
+    let StartYlines = [
+      [0, 190],
+      [0, 150],
+      [0, 110],
+      [0, 70],
+      [0, 40]
+    ];
+    let EndYlines = [
+      [canvasWidth, 190],
+      [canvasWidth, 150],
+      [canvasWidth, 110],
+      [canvasWidth, 70],
+      [canvasWidth, 40]
+    ];
     let colorLines = ["gray"]
     // Canvas Y: start from 0 (top) and goes to 150 (bottom)
     // Canvas X: start from 0 (left) and goes to 300 (right)
@@ -377,41 +407,41 @@ function loadBodyWeight() {
       },
       plotXLines: function() {
         let startPos, endPos;
-        for(let i=0; i < StartYlines.length; i++) {
-          startPos=StartYlines[i];
-          endPos=EndYlines[i];
-          UICanvas.drawStraightLine(startPos,endPos, colorLines);
-          UICanvas.drawText(startPos[1], startPos, "gray", invertYAxisText+8);
+        for (let i = 0; i < StartYlines.length; i++) {
+          startPos = StartYlines[i];
+          endPos = EndYlines[i];
+          UICanvas.drawStraightLine(startPos, endPos, colorLines);
+          UICanvas.drawText(startPos[1], startPos, "gray", invertYAxisText + 8);
         }
       },
       plotYDate: function(data, deltaX) {
         let posX = 15;
-        let measurements = data.length-1;
+        let measurements = data.length - 1;
         let middlePos = 0;
-        if(measurements % 2 === 0) {
-          middlePos = measurements/2;
+        if (measurements % 2 === 0) {
+          middlePos = measurements / 2;
         } else {
-          middlePos = (measurements-1)/2;
+          middlePos = (measurements - 1) / 2;
         }
         // Pretty challenge! We want to show only 3 x-measurements in accord with
         // the x-values positions respective to the y-measurements (weight)
-        for(let i=0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
           // get the start and middle position: necessary to ajust the text on canvsa
-          if( (posX === 15) || (posX === 15 + deltaX*middlePos) ){
-          // if(posX === 15 || mesurements === 195|| posX === 395 ||
-          //    posX === 595|| posX === 795 ) {
-          UICanvas.drawText(data[i].date, [posX-10,12], "gray",  invertYAxisText);
-        } else if ( (posX === 15 + deltaX*measurements) ) {
-          // get the end position: necessary to ajust the text on canvas
-          // the last data to plot we remove the year!
-          let newData = data[i].date;
-          newData = newData.split("-");
-          newData = newData[1]+ "-" +newData[2];
-          if(measurements <= 30) {
-            UICanvas.drawText(newData, [posX-10,12], "gray",  invertYAxisText);
-          }else {
-            UICanvas.drawText(newData, [posX-35,12], "gray",  invertYAxisText);
-          }
+          if ((posX === 15) || (posX === 15 + deltaX * middlePos)) {
+            // if(posX === 15 || mesurements === 195|| posX === 395 ||
+            //    posX === 595|| posX === 795 ) {
+            UICanvas.drawText(data[i].date, [posX - 10, 12], "gray", invertYAxisText);
+          } else if ((posX === 15 + deltaX * measurements)) {
+            // get the end position: necessary to ajust the text on canvas
+            // the last data to plot we remove the year!
+            let newData = data[i].date;
+            newData = newData.split("-");
+            newData = newData[1] + "-" + newData[2];
+            if (measurements <= 30) {
+              UICanvas.drawText(newData, [posX - 10, 12], "gray", invertYAxisText);
+            } else {
+              UICanvas.drawText(newData, [posX - 35, 12], "gray", invertYAxisText);
+            }
           }
           posX = posX + deltaX;
         }
@@ -428,7 +458,7 @@ function loadBodyWeight() {
 
         // if there a lot of data, we will hide the text!
         let hideText = false;
-        if(data.length > 60) {
+        if (data.length > 60) {
           hideText = true;
         }
 
@@ -437,18 +467,18 @@ function loadBodyWeight() {
 
         weightArray.forEach(function(item, index) {
           startPos = [xPos, weightArray[index]];
-          if( (index + 1) !== weightArray.length) {
-            endPos = [xPos + deltaX, weightArray[index+1]];
+          if ((index + 1) !== weightArray.length) {
+            endPos = [xPos + deltaX, weightArray[index + 1]];
             UICanvas.drawStraightLine(startPos, endPos, "black");
             UICanvas.drawCircle(startPos);
-            if(!hideText) {
-            UICanvas.drawText(startPos[1], startPos, "blue",invertYAxisText);
+            if (!hideText) {
+              UICanvas.drawText(startPos[1], startPos, "blue", invertYAxisText);
             }
             // we plot here the last point!
-            if( (index + 2) === weightArray.length ) {
+            if ((index + 2) === weightArray.length) {
               UICanvas.drawCircle(endPos);
-              if(!hideText) {
-              UICanvas.drawText(endPos[1], endPos, "blue",invertYAxisText);
+              if (!hideText) {
+                UICanvas.drawText(endPos[1], endPos, "blue", invertYAxisText);
               }
             }
             // deltaX
@@ -458,20 +488,20 @@ function loadBodyWeight() {
       },
       drawStraightLine: function(startPos, endPos, color) {
         // we need to invert the y-axis
-        ctx.beginPath();       // Start a new path
-        ctx.moveTo(startPos[0], invertYAxis-startPos[1]);    // Move the pen to (30, 50)
+        ctx.beginPath(); // Start a new path
+        ctx.moveTo(startPos[0], invertYAxis - startPos[1]); // Move the pen to (30, 50)
         ctx.strokeStyle = color;
         ctx.imageSmoothingEnabled = false;
-        ctx.lineTo(endPos[0], invertYAxis-endPos[1]);  // Draw a line to (150, 100)
-        ctx.stroke();          // Render the path
+        ctx.lineTo(endPos[0], invertYAxis - endPos[1]); // Draw a line to (150, 100)
+        ctx.stroke(); // Render the path
       },
       drawCircle: function(startPos) {
-          ctx.beginPath();
-          ctx.lineWidth = 1;
-          ctx.strokeStyle = "red";
-          ctx.imageSmoothingEnabled = false;
-          ctx.arc(startPos[0], invertYAxis-startPos[1], 3, Math.PI * 2, false);
-          ctx.stroke();
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "red";
+        ctx.imageSmoothingEnabled = false;
+        ctx.arc(startPos[0], invertYAxis - startPos[1], 3, Math.PI * 2, false);
+        ctx.stroke();
       },
       // drawText inputs: data = data, startPos = the x,y position
       drawText: function(data, startPos, color, invertYAxisText) {
@@ -479,7 +509,7 @@ function loadBodyWeight() {
         ctx.imageSmoothingEnabled = false;
         ctx.font = "14px serif";
         ctx.fillStyle = color;
-        ctx.fillText(data, startPos[0], invertYAxisText-startPos[1]);
+        ctx.fillText(data, startPos[0], invertYAxisText - startPos[1]);
       },
       eraseCanvas: function() {
         ctx.beginPath();
@@ -488,30 +518,30 @@ function loadBodyWeight() {
         ctx.fillRect(0, 0, 900, 200);
       },
       returnStepXDelta: function(data) {
-        switch(data.length) {
+        switch (data.length) {
           case 7:
-            return Math.floor(canvasWidth/7);
+            return Math.floor(canvasWidth / 7);
             break;
           case 14:
-            return Math.floor(canvasWidth/14);
+            return Math.floor(canvasWidth / 14);
             break;
           case 30:
-            return Math.floor(canvasWidth/30);
+            return Math.floor(canvasWidth / 30);
             break;
           case 60:
-            return Math.floor(canvasWidth/60);
+            return Math.floor(canvasWidth / 60);
             break;
           case 90:
-            return Math.floor(canvasWidth/90);
+            return Math.floor(canvasWidth / 90);
             break;
           case 180:
-            return Math.floor(canvasWidth/180);
+            return Math.floor(canvasWidth / 180);
             break;
           case 360:
-            return Math.floor(canvasWidth/180);
+            return Math.floor(canvasWidth / 180);
             break;
           default:
-            return  Math.floor(canvasWidth/data.length);
+            return Math.floor(canvasWidth / data.length);
         }
       }
     }
@@ -538,13 +568,13 @@ function loadBodyWeight() {
         let bmiValue = bmiInt.toFixed(1);
         console.log(bmiValue);
         // To improve this!
-        if(bmiValue >= 18.5 && bmiValue < 22) {
+        if (bmiValue >= 18.5 && bmiValue < 22) {
           let link = "./icons/fastSmile.svg"
           return link;
-        } else if(bmiValue >= 22 && bmiValue <= 25) {
-            let link = "./icons/smile.svg"
-            return link;
-        } else if (bmiValue > 25 && bmiValue <= 30){
+        } else if (bmiValue >= 22 && bmiValue <= 25) {
+          let link = "./icons/smile.svg"
+          return link;
+        } else if (bmiValue > 25 && bmiValue <= 30) {
           let link = "./icons/fastSmile.svg"
           return link;
         } else {
@@ -632,15 +662,15 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.loadJSONBtn).addEventListener("click", loadDataAndPopulateUI);
       // Disable submit on enter
       document.addEventListener("keypress", function(e) {
-        if(e.keyCode === 13 || e.which === 13) {
+        if (e.keyCode === 13 || e.which === 13) {
           e.preventDefault();
           return false;
         }
       });
       // EventListeners for Canvas buttons
-      document.querySelector(".buttonGroup").addEventListener("click", function(e){
+      document.querySelector(".buttonGroup").addEventListener("click", function(e) {
         // const btnClicked = e.path[0].id;
-        switch(e.target.id) {
+        switch (e.target.id) {
           case "oneWeekBtn":
             groupCanvasBtn(7);
             break;
@@ -663,8 +693,8 @@ function loadBodyWeight() {
             groupCanvasBtn(360);
             break;
           default:
-          let dataArray = StorageCtrl.getLSData();
-          groupCanvasBtn( dataArray.length );
+            let dataArray = StorageCtrl.getLSData();
+            groupCanvasBtn(dataArray.length);
             break;
         }
       });
@@ -687,28 +717,28 @@ function loadBodyWeight() {
     }
     // canvas buttons
     const groupCanvasBtn = function(amount) {
-    // get the hole array: we need to get the data from LocalStorage!
-    // if not, if we use StorageCtrl.data. Splice will point to it and change
-    // the original array!
-    let dataArray = StorageCtrl.getLSData();
-    if(amount > dataArray.length) {
-      UICanvas.plotGraph(dataArray);
-      // Sending a message to the user!
-      UICtrl.showAlert("Not enough data!", "alert alert-danger");
-    } else {
-      // we will here get the last 7 days measured!
-      let hacked = dataArray.splice(dataArray.length-amount,amount);
-      // Plot graphics
-      // let's plot the horizontal lines
-      UICanvas.plotGraph(hacked);
-    }
+      // get the hole array: we need to get the data from LocalStorage!
+      // if not, if we use StorageCtrl.data. Splice will point to it and change
+      // the original array!
+      let dataArray = StorageCtrl.getLSData();
+      if (amount > dataArray.length) {
+        UICanvas.plotGraph(dataArray);
+        // Sending a message to the user!
+        UICtrl.showAlert("Not enough data!", "alert alert-danger");
+      } else {
+        // we will here get the last 7 days measured!
+        let hacked = dataArray.splice(dataArray.length - amount, amount);
+        // Plot graphics
+        // let's plot the horizontal lines
+        UICanvas.plotGraph(hacked);
+      }
     }
 
     // Start UI: we populate UI with the necessary information
     const loadDataAndPopulateUI = function() {
       // if true, means that we will get the JSON file and write in LS
       // we will deactived here for now because it does not work in github
-      if(StorageCtrl.loadJSONFile()) {
+      if (StorageCtrl.loadJSONFile()) {
         // Clear table
         UICtrl.deleteTable();
       }
@@ -855,7 +885,7 @@ function loadBodyWeight() {
   // Initialize App
   AppCtrl.init();
 
-// //The lines below was used only to check the graphic position for debugging
+  // //The lines below was used only to check the graphic position for debugging
   let canvas = document.getElementById("canvasWeight");
   let ctx = canvas.getContext("2d");
   // Mouse event click in canvas
@@ -872,6 +902,4 @@ function loadBodyWeight() {
     console.log(`X position: ${x}, Y position: ${y}`);
     console.log(e);
   });
-
-
 }
