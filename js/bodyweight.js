@@ -47,7 +47,7 @@ function loadBodyWeight() {
         $(function() {
               var endingTime = new Date().getTime();
               var tookTime = endingTime - startingTime;
-              window.alert("jQuery is loaded, after " + tookTime + " milliseconds!");
+              window.alert("jQuery & Bootstrap is loaded dinamically, after " + tookTime + " milliseconds!" + "Test function only to try to solve github load problem.");
           });
       };
       document.getElementsByTagName("head")[0].appendChild(script);
