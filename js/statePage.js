@@ -151,16 +151,15 @@ const bodyWeight = function() {
               <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block d-lg-none" data-toggle="modal" data-target="#locModal2">
               About BMI </btn>
               <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#locModal">
-                Delete All Items
+              Delete All Items
               </btn>
               <btn type="button" id="saveBtn" class="btn btn-outline-info btn-block">Save </btn>
               <btn type="button" id="loadJSONBtn" class="btn btn-outline-info btn-block">Load File </btn>
             </div>
-            </div>
-            </div>
-
           </div>
-
+        </div>
+        
+    </div>
 
         <nav class="navbar navbar-dark bg-dark">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,8 +171,7 @@ const bodyWeight = function() {
     </form>
 
 
-
-<!-- Modal -->
+<!-- Modal Dialog: confirm DELETE -->
 <div class="modal fade" id="locModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
@@ -212,6 +210,7 @@ const bodyWeight = function() {
 </div>
 </div>
 
+<!-- TABLE -->
   <table class="table table-striped  table-dark">
     <thead>
       <tr>

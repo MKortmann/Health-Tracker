@@ -698,8 +698,7 @@ function loadBodyWeight() {
 
     // Start UI: we populate UI with the necessary information
     const loadDataAndPopulateUI = function() {
-      // if true, means that we will get the JSON file and write in LS
-      debugger
+      // if true, means that we will get the JSON file and write in LS      
       if(StorageCtrl.loadJSONFile()) {
         // Clear table
         UICtrl.deleteTable();
