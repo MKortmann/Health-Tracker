@@ -98,14 +98,14 @@ const bodyWeight = function() {
 <!-- Canvas buttons! -->
   <div class="containerGroup mt-2 text-center">
     <div class="btn-group mb-1 buttonGroup" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-secondary" id="oneWeekBtn">1 Week</button>
-      <button type="button" class="btn btn-secondary d-none d-md-block" id="twoWeeksBtn">2 Weeks</button>
-      <button type="button" class="btn btn-secondary d-none d-md-block" id="oneMonthBtn">1 Month</button>
-      <button type="button" class="btn btn-secondary d-none d-md-block" id="twoMonthsBtn">2 Months</button>
-      <button type="button" class="btn btn-secondary d-none d-md-block" id="threeMonthsBtn">3 Months</button>
-      <button type="button" class="btn btn-secondary d-none d-lg-block" id="sixMonthsBtn">6 Months</button>
-      <button type="button" class="btn btn-secondary d-none d-lg-block" id="oneYearBtn">1 Year</button>
-      <button type="button" class="btn btn-secondary" id="AllMeasureBtn">All</button>
+      <button type="button" class="btn btn-info" id="oneWeekBtn">1 Week</button>
+      <button type="button" class="btn btn-info d-none d-md-block" id="twoWeeksBtn">2 Weeks</button>
+      <button type="button" class="btn btn-info d-none d-md-block" id="oneMonthBtn">1 Month</button>
+      <button type="button" class="btn btn-info d-none d-md-block" id="twoMonthsBtn">2 Months</button>
+      <button type="button" class="btn btn-info d-none d-md-block" id="threeMonthsBtn">3 Months</button>
+      <button type="button" class="btn btn-info d-none d-lg-block" id="sixMonthsBtn">6 Months</button>
+      <button type="button" class="btn btn-info d-none d-lg-block" id="oneYearBtn">1 Year</button>
+      <button type="button" class="btn btn-info" id="AllMeasureBtn">All</button>
     </div>
     <!-- As soon as defined the height and width the image become sharp -->
       <canvas id="canvasWeight" height="200px" width="900px"></canvas>
