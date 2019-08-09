@@ -112,6 +112,38 @@ function loadBodyWeight() {
         linkElement.setAttribute('download', exportFileDefaultName);
         linkElement.click();
         linkElement.remove();
+      },
+      // The method XMLhttpRequest works only if you have a server installed.
+      // easier way: go to your project file throught prompt command and type:
+      // npm install -g live-server
+      // run it typing: live-server
+      loadJSONFile: function() {
+        var xhttp = new XMLHttpRequest();
+        // we will use now onload instead of onreadystatechange. So we do not need
+        // to check for this.readyState
+        xhttp.onload = function() {
+          // xhttp.onreadystatechange = function() {
+          // readyState 4: the response has been capture and can be used
+          // status: http status of 200 means that everything is ok
+          var itemList = "";
+          // if (this.readyState == 4 && this.status == 200) {
+          if (this.status == 200) {
+            // Convert the json to and object
+            let items = JSON.parse(xhttp.responseText);
+
+            // Storing the table in the Local Storage
+            localStorage.setItem("items", JSON.stringify(items));
+          }
+        };
+            xhttp.open("GET", "./storage/table.json", true);
+            xhttp.onerror = function() {
+              console.log("Request error in XMLHttpRequest...");
+              return false;
+            }
+            xhttp.send();
+            // if works, returns true. The true flag, tells that we are reloading
+            // data, and the table should be cleared!
+            return true;
       }
     }
   })();
@@ -137,7 +169,8 @@ function loadBodyWeight() {
       deleteBtn: "#deleteBtn",
       deleteAllBtn: "#deleteAllBtn",
       deleteAllAskBtn: "#deleteAllAskBtn",
-      saveBtn: "#saveBtn"
+      saveBtn: "#saveBtn",
+      loadJSONBtn: "#loadJSONBtn"
     }
 
     return {
@@ -587,6 +620,8 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.deleteAllBtn).addEventListener("click", btnDeleteAll);
       // Add Event Listener To Save button
       document.querySelector(UISelectors.saveBtn).addEventListener("click", StorageCtrl.downloadVideosToJSON);
+      // Add Event Listener To Load JSON file
+      document.querySelector(UISelectors.loadJSONBtn).addEventListener("click", loadDataAndPopulateUI);
       // Disable submit on enter
       document.addEventListener("keypress", function(e) {
         if(e.keyCode === 13 || e.which === 13) {
@@ -663,6 +698,12 @@ function loadBodyWeight() {
 
     // Start UI: we populate UI with the necessary information
     const loadDataAndPopulateUI = function() {
+      // if true, means that we will get the JSON file and write in LS
+      debugger
+      if(StorageCtrl.loadJSONFile()) {
+        // Clear table
+        UICtrl.deleteTable();
+      }
       // Hide the Edit and back buttons
       UICtrl.hideButtons();
       // Get the data from LocalStorage
