@@ -703,10 +703,11 @@ function loadBodyWeight() {
     // Start UI: we populate UI with the necessary information
     const loadDataAndPopulateUI = function() {
       // if true, means that we will get the JSON file and write in LS
-      if(StorageCtrl.loadJSONFile()) {
-        // Clear table
-        UICtrl.deleteTable();
-      }
+      // we will deactived here for now because it does not work in github
+      // if(StorageCtrl.loadJSONFile()) {
+      //   // Clear table
+      //   UICtrl.deleteTable();
+      // }
       // Hide the Edit and back buttons
       UICtrl.hideButtons();
       // Get the data from LocalStorage
