@@ -210,12 +210,16 @@ function loadBodyWeight() {
       // populate the inputs: diffWeight and BMI
       populateInputs: function() {
         // Update actual weight
-        document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
+        if(StorageCtrl.data.length > 0) {
+          document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
+        } else {
+          document.querySelector(UISelectors.actualWeight).value = 80;
+        }
         // Get the first start weight getFirstWeight
         document.querySelector(UISelectors.startWeight).value = ItemCtrl.getWeight(0);
         // diffW = startWeight - actualWeight
         const diffW = document.querySelector(UISelectors.startWeight).value -
-          document.querySelector(UISelectors.actualWeight).value;
+        document.querySelector(UISelectors.actualWeight).value;
         document.querySelector(UISelectors.diffWeight).value = diffW;
         // if diffW > 0 green color if diffW < 0 red!
         if (diffW > 0) {
@@ -698,7 +702,7 @@ function loadBodyWeight() {
 
     // Start UI: we populate UI with the necessary information
     const loadDataAndPopulateUI = function() {
-      // if true, means that we will get the JSON file and write in LS      
+      // if true, means that we will get the JSON file and write in LS
       if(StorageCtrl.loadJSONFile()) {
         // Clear table
         UICtrl.deleteTable();
