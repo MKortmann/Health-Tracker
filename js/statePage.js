@@ -158,7 +158,7 @@ const bodyWeight = function() {
             </div>
           </div>
         </div>
-        
+
     </div>
 
         <nav class="navbar navbar-dark bg-dark">

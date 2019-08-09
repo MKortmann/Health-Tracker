@@ -210,10 +210,12 @@ function loadBodyWeight() {
       // populate the inputs: diffWeight and BMI
       populateInputs: function() {
         // Update actual weight
-        if(StorageCtrl.data.length > 0) {
-          document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
-        } else {
+        debugger
+        // In case that we do not have any data!
+        if(StorageCtrl.data === null) {
           document.querySelector(UISelectors.actualWeight).value = 80;
+        } else {
+          document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
         }
         // Get the first start weight getFirstWeight
         document.querySelector(UISelectors.startWeight).value = ItemCtrl.getWeight(0);
@@ -235,8 +237,10 @@ function loadBodyWeight() {
 
         // Let's populate the weight input with the last weight value
         document.querySelector(UISelectors.date).value = ItemCtrl.getActualDate();
-        // Let's populate the date input with the actual date
-        document.querySelector(UISelectors.weight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
+        // Let's populate the date input with the actual date    
+        if(StorageCtrl.data !== null) {
+          document.querySelector(UISelectors.weight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
+        }
       },
       // We will fill the complete table from the data of LocalStorage
       populateTable: function(items) {
@@ -704,10 +708,10 @@ function loadBodyWeight() {
     const loadDataAndPopulateUI = function() {
       // if true, means that we will get the JSON file and write in LS
       // we will deactived here for now because it does not work in github
-      // if(StorageCtrl.loadJSONFile()) {
-      //   // Clear table
-      //   UICtrl.deleteTable();
-      // }
+      if(StorageCtrl.loadJSONFile()) {
+        // Clear table
+        UICtrl.deleteTable();
+      }
       // Hide the Edit and back buttons
       UICtrl.hideButtons();
       // Get the data from LocalStorage
