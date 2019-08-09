@@ -237,7 +237,7 @@ function loadBodyWeight() {
 
         // Let's populate the weight input with the last weight value
         document.querySelector(UISelectors.date).value = ItemCtrl.getActualDate();
-        // Let's populate the date input with the actual date    
+        // Let's populate the date input with the actual date
         if(StorageCtrl.data !== null) {
           document.querySelector(UISelectors.weight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
         }
@@ -850,6 +850,7 @@ function loadBodyWeight() {
     }
 
   })(StorageCtrl, UICtrl, UICanvas, ItemCtrl);
+
 
   // Initialize App
   AppCtrl.init();
