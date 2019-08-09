@@ -241,6 +241,10 @@ const bodyWeight = function() {
 
   <!-- Add tht js file -->
   <script src="./js/bodyWeight.js"></script>
+  <script src="./lib/jquery/jquery-3.3.1.js"></script>
+  <script src="./lib/bootstrap/bootstrap.js"></script>
+  <script src="./js/bodyweight.js"></script>
+  <script src="./js/statepage.js"></script>
 `;
 }
 ///////////////////////////////////////////////////////////////////////////////
