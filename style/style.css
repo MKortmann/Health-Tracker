@@ -2,12 +2,12 @@ label,
 input {
   font-size: 14px;
 }
+/* #tableContainer {
+  height: 500px;
+  overflow-y: scroll;
+} */
 submit {
   cursor: pointer;
-}
-/* necessary because of the y-scroll bar to fit in it */
-#blockContainer {
-  padding-right: 0;
 }
 #canvasWeight {
   /* At100% the canvas will have 900px */

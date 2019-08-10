@@ -112,7 +112,7 @@ const bodyWeight = function() {
   </div>
 
 <!-- BIG CONTAINER ENCLOSES SUBMIT AND POP-UP DRAWER -->
-<div class="container" id="blockContainer">
+<div class="container p-0">
   <form>
     <!-- first row -->
     <div class="form-row p-4 justify-content-center d-flex align-items-end">
@@ -220,7 +220,8 @@ const bodyWeight = function() {
   </div>
 
   <!-- TABLE -->
-  <div class="container" id="blockContainer"  style="overflow-y: scroll; height: 500px">
+  <!-- style="overflow-y: scroll; height: 200px" -->
+  <div class="container p-0" style="overflow-y: scroll; height: 500px">
     <table class="table table-striped  table-dark">
       <thead>
         <tr>
