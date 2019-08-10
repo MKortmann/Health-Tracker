@@ -38,14 +38,19 @@ const PageState = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const homeState = function() {
   document.querySelector("#container").innerHTML = `
-  <div class="container">
-    <div class="jumbotron mt-5">
-      <h2 class=" text-info">Welcome to Health Tracker!</h2 >
-      <p class="lead">This app was done specially to help you to track and improve your health!</p>
-      <hr class="my-4">
-      <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
-      <p class="text-success"> Please visit regularly your doctor! </p>
-      <p class= "text-info text-center">&hearts; Thanks for using our app &hearts; </p>
+  <div class="card bg-dark mt-2">
+    <!-- <img src="imgs/background6.png" id="background" class="img-fluid" alt="Responsive image"> -->
+    <img src="imgs/background.jpg" id="background" class="img-fluid" alt="Responsive image">
+    <!-- <img src="imgs/background10.jpg" id="background" class="img-fluid" alt="Responsive image"> -->
+    <div class="card-img-overlay">
+      <div class="jumbotron mt-5">
+        <h2 class=" text-info">Welcome to Health Tracker!</h2 >
+        <p class="lead">This app was done specially to help you to track and improve your health!</p>
+        <hr class="my-4">
+        <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
+        <p class="text-success"> Please visit regularly your doctor! </p>
+        <p class= "text-info text-center">&hearts; Thanks for using our app &hearts; </p>
+      </div>
     </div>
   </div>
   `;
@@ -106,6 +111,8 @@ const bodyWeight = function() {
     <canvas id="canvasWeight" height="200px" width="900px"></canvas>
   </div>
 
+<!-- BIG CONTAINER ENCLOSES SUBMIT AND POP-UP DRAWER -->
+<div class="container">
   <form>
     <!-- first row -->
     <div class="form-row p-4 justify-content-center d-flex align-items-end">
@@ -141,6 +148,7 @@ const bodyWeight = function() {
       </div>
   </form>
 
+
   <!-- CONTENT OF THE HAMBURGER: this content will be pop-up DOWN -->
   <!-- Delete All - Download/Save JSON -->
   <div class="pos-f-t">
@@ -167,7 +175,8 @@ const bodyWeight = function() {
       <span class="navbar-toggler-icon"></span>
     </button>
   </nav>
-
+<!-- CLOSE BIG CONTAINER -->
+</div>
   <!-- Modal Dialog: TO CONFIR DELETE -->
   <div class="modal fade" id="locModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -211,31 +220,33 @@ const bodyWeight = function() {
   </div>
 
   <!-- TABLE -->
-  <table class="table table-striped  table-dark">
-    <thead>
-      <tr>
-        <th scope="col" class="align-middle">#</th>
-        <th scope="col" class="align-middle d-none d-sm-table-cell">Data</th>
-        <th scope="col" class="align-middle"> Wgt.</th>
-        <th scope="col" class="align-middle">BMI
-          <!-- Button trigger modal: BMI -->
-          <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right d-none d-lg-block" data-toggle="modal" data-target="#locModal2">
-            About BMI
-          </btn>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- <tr>
-        <th scope="row">1</th>
-        <td>29.07.2019</td>
-        <td>83 kg</td>
-        <td>20</td>
-      </tr> -->
-    </tbody>
-  </table>
+  <div class="container"  style="overflow-y: scroll; height: 500px">
+    <table class="table table-striped  table-dark">
+      <thead>
+        <tr>
+          <th scope="col" class="align-middle">#</th>
+          <th scope="col" class="align-middle d-none d-sm-table-cell">Data</th>
+          <th scope="col" class="align-middle"> Wgt.</th>
+          <th scope="col" class="align-middle">BMI
+            <!-- Button trigger modal: BMI -->
+            <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right d-none d-lg-block" data-toggle="modal" data-target="#locModal2">
+              About BMI
+            </btn>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr>
+          <th scope="row">1</th>
+          <td>29.07.2019</td>
+          <td>83 kg</td>
+          <td>20</td>
+        </tr> -->
+      </tbody>
+    </table>
   </div>
-  <br>
+</div>
+<br>
   <!-- Add the js files -->
   <script src="./js/bodyweight.js"></script>
   `;

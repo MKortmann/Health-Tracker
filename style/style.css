@@ -5,6 +5,10 @@ input {
 submit {
   cursor: pointer;
 }
+/* necessary because of the y-scroll bar to fit in it */
+.container {
+  padding-right: 0;
+}
 #canvasWeight {
   /* At100% the canvas will have 900px */
   /* width: 100%; */
@@ -14,6 +18,16 @@ submit {
   background-color: white;
   box-shadow: 1px 2px 2px 2px gray;
 }
+.jumbotron {
+   background: rgb(255, 255, 255); /* This is for ie8 and below */
+   background: rgba(255, 255, 255, 0.8);
+   text-shadow: white 0px 0px 10px;
+}
+/* #background {
+  display: block;
+  max-width: 50%;
+  height: 900px;
+}*/
 @media screen and (max-width: 1400px) {
   #canvasWeight {
     max-width: 100%;
