@@ -109,15 +109,15 @@ const bodyWeight = function() {
   <form>
     <!-- first row -->
     <div class="form-row p-4 justify-content-center d-flex align-items-end">
-      <div class="col-3">
+      <div class="col-sm-3">
         <label for="height">Height</label>
         <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
       </div>
-      <div class="col-2">
+      <div class="col-sm-3">
         <label for="weight">Wgt.</label>
         <input type="number" value="80" min="30" max="230" class="form-control " id="weight" placeholder="Weight - kg">
       </div>
-      <div class="col-7">
+      <div class="col-sm-6">
         <label for="date">Date</label>
         <input type="date" class="form-control" id="date" placeholder="data">
       </div>
@@ -130,11 +130,15 @@ const bodyWeight = function() {
       </div>
     </div>
     <!-- third row -->
-    <div class="form-row">
-        <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg col-4">Edit</btn>
-        <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg col-4">Back</btn>
-        <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg col-4">Delete</btn>
-    </div>
+
+      <div class="form-row">
+        <div class="col">
+          <btn type="button" id="editBtn" class="btn btn-outline-primary col-sm">Edit</btn>
+          <btn type="button" id="backBtn" class="btn btn-outline-info col-sm">Back</btn>
+          <btn type="button" id="deleteBtn" class="btn btn-outline-danger col-sm">Delete
+          </btn>
+        </div>
+      </div>
   </form>
 
   <!-- CONTENT OF THE HAMBURGER: this content will be pop-up DOWN -->
