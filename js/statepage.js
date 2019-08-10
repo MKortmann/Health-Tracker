@@ -137,13 +137,6 @@ const bodyWeight = function() {
     </div>
   </form>
 
-  <!-- HAMBURGER TO OPEN THE NAVBAR DOWN -->
-  <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </nav>
-
   <!-- CONTENT OF THE HAMBURGER: this content will be pop-up DOWN -->
   <!-- Delete All - Download/Save JSON -->
   <div class="pos-f-t">
@@ -163,6 +156,13 @@ const bodyWeight = function() {
       </div>
     </div>
   </div>
+
+  <!-- HAMBURGER TO OPEN THE NAVBAR DOWN -->
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
 
   <!-- Modal Dialog: TO CONFIR DELETE -->
   <div class="modal fade" id="locModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">

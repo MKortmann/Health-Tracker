@@ -39,7 +39,7 @@ function loadBodyWeight() {
       // Load the script
       let script = document.createElement("SCRIPT");
       let script2 = document.createElement("SCRIPT");
-      script.src = "./lib/jquery/jquerymin.js";
+      script.src = "./lib/jquery/jquery-3.3.1.js";
       script2.src = "./lib/bootstrap/bootstrap.js";
       // script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
       // script2.src = '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>';
@@ -51,8 +51,9 @@ function loadBodyWeight() {
               console.log("jQuery & Bootstrap is loaded dinamically, after " + tookTime + " milliseconds!" + "Test function only to try to solve github load problem.");
           });
       };
-      document.getElementsByTagName("head")[0].appendChild(script);
       document.getElementsByTagName("head")[0].appendChild(script2);
+      document.getElementsByTagName("head")[0].appendChild(script);
+
   })();
 
   /*
