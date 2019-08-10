@@ -2,10 +2,10 @@ label,
 input {
   font-size: 14px;
 }
-/* #tableContainer {
+#tableContainer {
   height: 500px;
   overflow-y: scroll;
-} */
+}
 submit {
   cursor: pointer;
 }

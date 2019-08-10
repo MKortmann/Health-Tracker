@@ -221,7 +221,7 @@ const bodyWeight = function() {
 
   <!-- TABLE -->
   <!-- style="overflow-y: scroll; height: 200px" -->
-  <div class="container p-0" style="overflow-y: scroll; height: 500px">
+  <div class="container p-0" id="tableContainer" style="overflow-y: scroll; height: 500px">
     <table class="table table-striped  table-dark">
       <thead>
         <tr>
