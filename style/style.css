@@ -6,7 +6,7 @@ submit {
   cursor: pointer;
 }
 /* necessary because of the y-scroll bar to fit in it */
-.container {
+#blockContainer {
   padding-right: 0;
 }
 #canvasWeight {
@@ -23,11 +23,6 @@ submit {
    background: rgba(255, 255, 255, 0.8);
    text-shadow: white 0px 0px 10px;
 }
-/* #background {
-  display: block;
-  max-width: 50%;
-  height: 900px;
-}*/
 @media screen and (max-width: 1400px) {
   #canvasWeight {
     max-width: 100%;

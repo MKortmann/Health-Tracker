@@ -38,12 +38,12 @@ const PageState = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const homeState = function() {
   document.querySelector("#container").innerHTML = `
-  <div class="card bg-dark mt-2">
+  <div class="card bg-dark mt-2" id="cardBackground">
     <!-- <img src="imgs/background6.png" id="background" class="img-fluid" alt="Responsive image"> -->
-    <img src="imgs/background.jpg" id="background" class="img-fluid" alt="Responsive image">
+    <img src="imgs/background.jpg" class="img-fluid" alt="Background image">
     <!-- <img src="imgs/background10.jpg" id="background" class="img-fluid" alt="Responsive image"> -->
     <div class="card-img-overlay">
-      <div class="jumbotron mt-5">
+      <div class="jumbotron mt-sm-5">
         <h2 class=" text-info">Welcome to Health Tracker!</h2 >
         <p class="lead">This app was done specially to help you to track and improve your health!</p>
         <hr class="my-4">
@@ -112,7 +112,7 @@ const bodyWeight = function() {
   </div>
 
 <!-- BIG CONTAINER ENCLOSES SUBMIT AND POP-UP DRAWER -->
-<div class="container">
+<div class="container" id="blockContainer">
   <form>
     <!-- first row -->
     <div class="form-row p-4 justify-content-center d-flex align-items-end">
@@ -220,7 +220,7 @@ const bodyWeight = function() {
   </div>
 
   <!-- TABLE -->
-  <div class="container"  style="overflow-y: scroll; height: 500px">
+  <div class="container" id="blockContainer"  style="overflow-y: scroll; height: 500px">
     <table class="table table-striped  table-dark">
       <thead>
         <tr>
