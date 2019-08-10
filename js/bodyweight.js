@@ -574,13 +574,13 @@ function loadBodyWeight() {
         console.log(bmiValue);
         // To improve this!
         if (bmiValue >= 18.5 && bmiValue < 22) {
-          let link = "./icons/fastSmile.svg"
+          let link = "./icons/fastsmile.svg"
           return link;
         } else if (bmiValue >= 22 && bmiValue <= 25) {
           let link = "./icons/smile.svg"
           return link;
         } else if (bmiValue > 25 && bmiValue <= 30) {
-          let link = "./icons/fastSmile.svg"
+          let link = "./icons/fastsmile.svg"
           return link;
         } else {
           let link = "./icons/sad.svg"
