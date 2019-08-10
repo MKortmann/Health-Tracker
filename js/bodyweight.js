@@ -35,19 +35,20 @@
 function loadBodyWeight() {
   // trying to fix jquery problems
   (function() {
-      var startingTime = new Date().getTime();
+      let startingTime = new Date().getTime();
       // Load the script
-      var script = document.createElement("SCRIPT");
-      var script2 = document.createElement("SCRIPT");
-      script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
-      script2.src = '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>';
-      script.type = 'text/javascript';
+      let script = document.createElement("SCRIPT");
+      let script2 = document.createElement("SCRIPT");
+      script.src = "./lib/jquery/jquerymin.js";
+      script2.src = "./lib/bootstrap/bootstrap.js";
+      // script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+      // script2.src = '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>';
       script.onload = function() {
-      	var $ = window.jQuery;
+      	let $ = window.jQuery;
         $(function() {
-              var endingTime = new Date().getTime();
-              var tookTime = endingTime - startingTime;
-              window.alert("jQuery & Bootstrap is loaded dinamically, after " + tookTime + " milliseconds!" + "Test function only to try to solve github load problem.");
+              let endingTime = new Date().getTime();
+              let tookTime = endingTime - startingTime;
+              console.log("jQuery & Bootstrap is loaded dinamically, after " + tookTime + " milliseconds!" + "Test function only to try to solve github load problem.");
           });
       };
       document.getElementsByTagName("head")[0].appendChild(script);
