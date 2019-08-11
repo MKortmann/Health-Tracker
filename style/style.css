@@ -23,6 +23,15 @@ submit {
    background: rgba(255, 255, 255, 0.8);
    text-shadow: white 0px 0px 10px;
 }
+/* nice border transition below */
+.nav-link:hover {
+    transition: border 0.2s;
+    border-bottom: 1px solid white;
+}
+.nav-item {
+  font-size: 1.3rem;
+}
+
 @media screen and (max-width: 1400px) {
   #canvasWeight {
     max-width: 100%;
@@ -40,5 +49,9 @@ submit {
   /* resize images */
   img {
     max-width: 32px;
+  }
+
+  .nav-link:hover {
+  border-bottom: none;
   }
 }
