@@ -37,6 +37,7 @@ const PageState = function() {
 // Home State
 ///////////////////////////////////////////////////////////////////////////////
 const homeState = function() {
+  document.querySelector("body").classList.add("backgroundBodyWeight");
   document.querySelector("#container").innerHTML = `
   <div class="card bg-dark mt-2" id="cardBackground">
     <!-- <img src="imgs/background6.png" id="background" class="img-fluid" alt="Responsive image"> -->

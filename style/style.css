@@ -32,6 +32,12 @@ submit {
   font-size: 1.3rem;
 }
 
+body {
+  /* adding a little of overlay */
+  background: rgba(0,0,0,0.05);
+  /* background: url("../imgs/background2.jpg") top center / cover no-repeat; */
+}
+
 @media screen and (max-width: 1400px) {
   #canvasWeight {
     max-width: 100%;
