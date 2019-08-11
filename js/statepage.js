@@ -121,7 +121,7 @@ const bodyWeight = function() {
         <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
       </div>
       <div class="col-sm-3">
-        <label for="weight">Wgt.</label>
+        <label for="weight">Weight</label>
         <input type="number" value="80" min="30" max="230" class="form-control " id="weight" placeholder="Weight - kg">
       </div>
       <div class="col-sm-6">
