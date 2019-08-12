@@ -69,7 +69,7 @@ const myData = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
-  <div class="container my-4">
+  <div class="container-fluid my-4">
     <form id="formInputs1">
       <div class="form-row justify-content-center" id="formInputs2">
         <!-- Start Weight -->
@@ -97,7 +97,7 @@ const bodyWeight = function() {
   </div>
 
   <!-- Canvas buttons! -->
-  <div class="containerGroup mt-2 text-center">
+  <div class="container containerGroup mt-2 text-center">
     <div class="btn-group mb-1 buttonGroup" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-info" id="oneWeekBtn">1 Week</button>
       <button type="button" class="btn btn-info d-none d-md-block" id="twoWeeksBtn">2 Weeks</button>
@@ -113,7 +113,7 @@ const bodyWeight = function() {
   </div>
 
 <!-- BIG CONTAINER ENCLOSES SUBMIT AND POP-UP DRAWER -->
-<div class="container p-0">
+<div class="container-fluid p-0">
   <form>
     <!-- first row -->
     <div class="form-row p-4 justify-content-center d-flex align-items-end">
@@ -222,7 +222,7 @@ const bodyWeight = function() {
 
   <!-- TABLE -->
   <!-- style="overflow-y: scroll; height: 200px" -->
-  <div class="container p-0" id="tableContainer" style="overflow-y: scroll; height: 500px">
+  <div class="container-fluid p-0" id="tableContainer" style="overflow-y: scroll; height: 500px">
     <table class="table table-striped  table-dark">
       <thead>
         <tr>
