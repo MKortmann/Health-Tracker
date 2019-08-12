@@ -156,23 +156,22 @@ const bodyWeight = function() {
 
   <!-- CONTENT OF THE HAMBURGER: this content will be pop-up DOWN -->
   <!-- Delete All - Download/Save JSON -->
-  <div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-      <div class="bg-dark p-4">
-        <h5 class="text-white h4">Extra functions</h5>
-        <span class="text-light">You can delete all the items or download all the items to a file called table.JSON.
-        About BMI: short explanation</span>
-        <!-- Button trigger modal: BMI -->
-        <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block d-lg-none" data-toggle="modal" data-target="#locModal2">
-        About BMI </btn>
-        <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#locModal">
-        Delete All Items
-        </btn>
-        <btn type="button" id="saveBtn" class="btn btn-outline-info btn-block">Save </btn>
-        <btn type="button" id="loadJSONBtn" class="btn btn-outline-info btn-block">Load File </btn>
-      </div>
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <h5 class="text-white h4">Extra functions</h5>
+      <span class="text-light">You can delete all the items or download all the items to a file called table.JSON.
+      About BMI: short explanation</span>
+      <!-- Button trigger modal: BMI -->
+      <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block d-lg-none" data-toggle="modal" data-target="#locModal2">
+      About BMI </btn>
+      <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#locModal">
+      Delete All Items
+      </btn>
+      <btn type="button" id="saveBtn" class="btn btn-outline-info btn-block">Save </btn>
+      <btn type="button" id="loadJSONBtn" class="btn btn-outline-info btn-block">Load File </btn>
     </div>
   </div>
+
 
   <!-- HAMBURGER TO OPEN THE NAVBAR DOWN -->
   <nav class="navbar navbar-dark bg-dark">

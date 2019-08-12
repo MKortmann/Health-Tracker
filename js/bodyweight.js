@@ -524,7 +524,6 @@ function loadBodyWeight() {
         ctx.beginPath(); // Start a new path
         ctx.moveTo(startPos[0], invertYAxis - startPos[1]*factor); // Move the pen to (30, 50)
         ctx.strokeStyle = color;
-        ctx.imageSmoothingEnabled = false;
         ctx.lineTo(endPos[0], invertYAxis - endPos[1]*factor); // Draw a line to (150, 100)
         ctx.stroke(); // Render the path
       },
@@ -577,9 +576,7 @@ function loadBodyWeight() {
         }
       }
     }
-
   })();
-
   /*
    * OCTOPUS MODEL: ItemCtrl: Control the items AND AppCtrl: control the general behaviour
    */
