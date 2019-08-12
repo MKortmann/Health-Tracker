@@ -215,6 +215,9 @@ function loadBodyWeight() {
         // document.querySelector("#containerInputToHighlight").style.backgroundColor = "#ffc107";
         // insert alert
         element.appendChild(div);
+        // to put the element to edit in the middle of the page
+        // containerInputToHighlight.scrollIntoView({behavior: "smooth", block: "top", inline: "nearest"});
+        containerInputToHighlight.scrollIntoView();
 
         //the message should disappear after 3 seconds
         setTimeout(function() {
