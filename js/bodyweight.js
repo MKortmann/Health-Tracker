@@ -205,20 +205,22 @@ function loadBodyWeight() {
         //create div
         const div = document.createElement("div");
         //add classes: the class alert is used to be able to remove it afterwards!
-        div.className = `alert ${className} text-center  p-0 m-0`;
+        div.className = `alert ${className} text-center  p-2 m-0`;
         // Add text
         div.appendChild(document.createTextNode(message));
         // Get the element to be insert it
-        const container = document.querySelector("#formInputs1");
-        // get the element in which the div will be insert before it
-        const form = document.querySelector("#formInputs2");
+        const element = document.querySelector("#containerToAddAlertMsg");
+        // Highlight the container
+        document.querySelector("#containerInputToHighlight").style.backgroundColor = "#20c997";
+        // document.querySelector("#containerInputToHighlight").style.backgroundColor = "#ffc107";
         // insert alert
-        container.appendChild(div, form);
+        element.appendChild(div);
 
         //the message should disappear after 3 seconds
         setTimeout(function() {
           document.querySelector(".alert").remove();
-        }, 3000);
+          document.querySelector("#containerInputToHighlight").style.backgroundColor = "";
+        }, 4000);
       },
       // return the UI Selectors
       getSelectors: function() {

@@ -117,12 +117,13 @@ const bodyWeight = function() {
     <!-- As soon as defined the height and width the image become sharp -->
       <canvas id="canvasWeight" height="400px" width="1880px"></canvas>
   </div>
+  <span id="containerToAddAlertMsg"></span>
 
 <!-- BIG CONTAINER ENCLOSES SUBMIT AND POP-UP DRAWER -->
-<div class="container-fluid p-0">
+<div class="container-fluid p-0" >
   <form>
     <!-- first row -->
-    <div class="form-row p-4 justify-content-center d-flex align-items-end">
+    <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
       <div class="col-sm-3">
         <label for="height">Height</label>
         <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
@@ -147,9 +148,9 @@ const bodyWeight = function() {
 
       <div class="form-row">
         <div class="col">
-          <btn type="button" id="editBtn" class="btn btn-outline-primary col-sm">Edit</btn>
-          <btn type="button" id="backBtn" class="btn btn-outline-info col-sm">Back</btn>
-          <btn type="button" id="deleteBtn" class="btn btn-outline-danger col-sm">Delete
+          <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg col-sm">Edit</btn>
+          <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg col-sm">Back</btn>
+          <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg col-sm">Delete
           </btn>
         </div>
       </div>
@@ -232,7 +233,7 @@ const bodyWeight = function() {
         <tr>
           <th scope="col" class="align-middle">#</th>
           <th scope="col" class="align-middle d-none d-sm-table-cell">Data</th>
-          <th scope="col" class="align-middle"> Wgt.</th>
+          <th scope="col" class="align-middle"> Weight </th>
           <th scope="col" class="align-middle">BMI
             <!-- Button trigger modal: BMI -->
             <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right d-none d-lg-block" data-toggle="modal" data-target="#locModal2">
