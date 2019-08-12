@@ -379,32 +379,43 @@ function loadBodyWeight() {
     ctx.lineWidth = 1;
     ctx.lineCap = "round";
     ctx.strokeStyle = "black";
-    let canvasWidth = 900;
-    let invertYAxis = 220;
-    let invertYAxisText = 210;
-    let deltaX = 20;
+    let canvasWidth = canvas.width;
+    let canvasHeight = canvas.height;
+    let invertYAxis = 420;
+    let invertYAxisText = 410;
     let displayAmountOfMeasurements = 45;
+    // the factor uses to maximixe canvas in the y-axis
+    let factor = canvasHeight/200;
+    let deltaX = canvas.width/47;
+    let colorBackLines = "gray";
     let StartYlines = [
       [0, 190],
       [0, 150],
       [0, 110],
       [0, 70],
-      [0, 40]
+      [0, 30]
     ];
     let EndYlines = [
       [canvasWidth, 190],
       [canvasWidth, 150],
       [canvasWidth, 110],
       [canvasWidth, 70],
-      [canvasWidth, 40]
+      [canvasWidth, 30]
     ];
-    let colorLines = ["gray"]
+    let colorLines = ["gray"];
+    let colorText = ["gray"];
+    let textFont = "22px serif";
     // Canvas Y: start from 0 (top) and goes to 150 (bottom)
     // Canvas X: start from 0 (left) and goes to 300 (right)
     // So we will plot y between (5 and 145);
     // And we will plot x between (5 and 295);
 
     return {
+      // check the canvas.Width and recorrect data and replot data
+      checkCanvas: function() {
+        console.log(canvas.Width);
+        console.log(canvas.Height);
+      },
       // Declare public var and functions
       // return the UI Selectors
       getSelectors: function() {
@@ -416,7 +427,8 @@ function loadBodyWeight() {
           startPos = StartYlines[i];
           endPos = EndYlines[i];
           UICanvas.drawStraightLine(startPos, endPos, colorLines);
-          UICanvas.drawText(startPos[1], startPos, "gray", invertYAxisText + 8);
+          UICanvas.drawText(startPos[1], startPos, colorText, invertYAxisText + 8);
+          // UICanvas.drawText(startPos[1], startPos, colorText, invertYAxisText + 8);
         }
       },
       plotYDate: function(data, deltaX) {
@@ -453,6 +465,13 @@ function loadBodyWeight() {
       },
       plotGraph: function(data) {
         UICanvas.eraseCanvas();
+        // very important to make the app responsive! It fits all the draws in accord to the screen size.
+        ctx.scale(canvasWidth/window.innerWidth,1);
+        // check the window size and if it is smaller than 1880px, it plots only the last week
+        debugger
+        if(window.innerWidth < 1880) {
+          data = data.splice(data.length-7, 7);
+        }
         UICanvas.plotXLines();
         let xPos = 15;
         let startPos, endPos, weightArray = [];
@@ -494,10 +513,10 @@ function loadBodyWeight() {
       drawStraightLine: function(startPos, endPos, color) {
         // we need to invert the y-axis
         ctx.beginPath(); // Start a new path
-        ctx.moveTo(startPos[0], invertYAxis - startPos[1]); // Move the pen to (30, 50)
+        ctx.moveTo(startPos[0], invertYAxis - startPos[1]*factor); // Move the pen to (30, 50)
         ctx.strokeStyle = color;
         ctx.imageSmoothingEnabled = false;
-        ctx.lineTo(endPos[0], invertYAxis - endPos[1]); // Draw a line to (150, 100)
+        ctx.lineTo(endPos[0], invertYAxis - endPos[1]*factor); // Draw a line to (150, 100)
         ctx.stroke(); // Render the path
       },
       drawCircle: function(startPos) {
@@ -505,48 +524,56 @@ function loadBodyWeight() {
         ctx.lineWidth = 1;
         ctx.strokeStyle = "red";
         ctx.imageSmoothingEnabled = false;
-        ctx.arc(startPos[0], invertYAxis - startPos[1], 3, Math.PI * 2, false);
+        ctx.arc(startPos[0], invertYAxis - startPos[1]*factor, 3*factor, Math.PI * 2, false);
         ctx.stroke();
       },
       // drawText inputs: data = data, startPos = the x,y position
       drawText: function(data, startPos, color, invertYAxisText) {
-        // ctx.font = "64px serif";
+        // debugger
+        // // Initialize Canvas
+        // let canvas2 = document.getElementById("canvasWeight");
+        // // /*We need to specific write the kind of environment we are
+        // // working: is it 2D or 3D!*/
+        // let ctx = canvas2.getContext("2d");
+
+        // ctx.scale(canvasWidth/window.innerWidth,1);
         ctx.imageSmoothingEnabled = false;
-        ctx.font = "14px serif";
+        ctx.font = textFont;
         ctx.fillStyle = color;
-        ctx.fillText(data, startPos[0], invertYAxisText - startPos[1]);
+        ctx.fillText(data, startPos[0], invertYAxisText - startPos[1]*factor);
+        // ctx.restore();
       },
       eraseCanvas: function() {
         ctx.beginPath();
         ctx.strokeStyle = "white";
         ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, 900, 200);
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
       },
       returnStepXDelta: function(data) {
         switch (data.length) {
           case 7:
-            return Math.floor(canvasWidth / 7);
+            return Math.floor(window.innerWidth / 7);
             break;
           case 14:
-            return Math.floor(canvasWidth / 14);
+            return Math.floor(window.innerWidth / 14);
             break;
           case 30:
-            return Math.floor(canvasWidth / 30);
+            return Math.floor(window.innerWidth / 30);
             break;
           case 60:
-            return Math.floor(canvasWidth / 60);
+            return Math.floor(window.innerWidth / 60);
             break;
           case 90:
-            return Math.floor(canvasWidth / 90);
+            return Math.floor(window.innerWidth / 90);
             break;
           case 180:
-            return Math.floor(canvasWidth / 180);
+            return Math.floor(window.innerWidth / 180);
             break;
           case 360:
-            return Math.floor(canvasWidth / 180);
+            return Math.floor(window.innerWidth / 180);
             break;
           default:
-            return Math.floor(canvasWidth / data.length);
+            return Math.floor(window.width / data.length);
         }
       }
     }
@@ -881,6 +908,7 @@ function loadBodyWeight() {
         loadEventListeners();
         // Load the actual data to fill the UI
         loadDataAndPopulateUI();
+        debugger
       }
     }
 
@@ -907,4 +935,9 @@ function loadBodyWeight() {
     console.log(`X position: ${x}, Y position: ${y}`);
     console.log(e);
   });
+
+  // check if the window has been resize
+  document.getElementsByTagName("body")[0].onresize = function () {
+    UICanvas.checkCanvas();
+  };
 }

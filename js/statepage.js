@@ -39,18 +39,20 @@ const PageState = function() {
 const homeState = function() {
   document.querySelector("body").classList.add("backgroundBodyWeight");
   document.querySelector("#container").innerHTML = `
-  <div class="card bg-dark mt-2" id="cardBackground">
-    <!-- <img src="imgs/background6.png" id="background" class="img-fluid" alt="Responsive image"> -->
-    <img src="imgs/background.jpg" class="img-fluid" alt="Background image">
-    <!-- <img src="imgs/background10.jpg" id="background" class="img-fluid" alt="Responsive image"> -->
-    <div class="card-img-overlay">
-      <div class="jumbotron mt-sm-5">
-        <h2 class=" text-info">Welcome to Health Tracker!</h2 >
-        <p class="lead">This app was done specially to help you to track and improve your health!</p>
-        <hr class="my-4">
-        <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
-        <p class="text-success"> Please visit regularly your doctor! </p>
-        <p class= "text-info text-center">&hearts; Thanks for using our app &hearts; </p>
+  <div class="container">
+    <div class="card bg-dark mt-2" id="cardBackground">
+      <!-- <img src="imgs/background6.png" id="background" class="img-fluid" alt="Responsive image"> -->
+      <img src="imgs/background.jpg" class="img-fluid" id="backgroundOverview" alt="Background image">
+      <!-- <img src="imgs/background10.jpg" id="background" class="img-fluid" alt="Responsive image"> -->
+      <div class="card-img-overlay">
+        <div class="jumbotron mt-sm-5">
+          <h2 class=" text-info">Welcome to Health Tracker!</h2 >
+          <p class="lead">This app was done specially to help you to track and improve your health!</p>
+          <hr class="my-4">
+          <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
+          <p class="text-success"> Please visit regularly your doctor! </p>
+          <p class= "text-info text-center">&hearts; Thanks for using our app &hearts; </p>
+        </div>
       </div>
     </div>
   </div>
@@ -108,8 +110,10 @@ const bodyWeight = function() {
       <button type="button" class="btn btn-info d-none d-lg-block" id="oneYearBtn">1 Year</button>
       <button type="button" class="btn btn-info" id="AllMeasureBtn">All</button>
     </div>
+  </div>
+    <div class="d-flex justify-content-center">
     <!-- As soon as defined the height and width the image become sharp -->
-    <canvas id="canvasWeight" height="200px" width="900px"></canvas>
+      <canvas id="canvasWeight" height="400px" width="1880px"></canvas>
   </div>
 
 <!-- BIG CONTAINER ENCLOSES SUBMIT AND POP-UP DRAWER -->
