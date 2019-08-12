@@ -159,16 +159,15 @@ const bodyWeight = function() {
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
       <h5 class="text-white h4">Extra functions</h5>
-      <span class="text-light">You can delete all the items or download all the items to a file called table.JSON.
-      About BMI: short explanation</span>
-      <!-- Button trigger modal: BMI -->
-      <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block d-lg-none" data-toggle="modal" data-target="#locModal2">
+      <span class="text-light lead">You can delete all files or export the saved data (download) and also to inform more about BMI.</span>
+        <!-- Button trigger modal: BMI -->
+      <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block btn-lg d-lg-none my-2" data-toggle="modal" data-target="#locModal2">
       About BMI </btn>
-      <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#locModal">
+      <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-block my-2 btn-lg " data-toggle="modal" data-target="#locModal">
       Delete All Items
       </btn>
-      <btn type="button" id="saveBtn" class="btn btn-outline-info btn-block">Save </btn>
-      <btn type="button" id="loadJSONBtn" class="btn btn-outline-info btn-block">Load File </btn>
+      <btn type="button" id="saveBtn" class="btn btn-outline-info btn-block my-2 btn-lg">Save </btn>
+      <btn type="button" id="loadJSONBtn" class="btn btn-outline-info btn-block my-2 btn-lg">Load File </btn>
     </div>
   </div>
 
