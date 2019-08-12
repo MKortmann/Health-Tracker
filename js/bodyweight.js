@@ -376,18 +376,20 @@ function loadBodyWeight() {
     // /*We need to specific write the kind of environment we are
     // working: is it 2D or 3D!*/
     let ctx = canvas.getContext("2d");
-    ctx.lineWidth = 1;
-    ctx.lineCap = "round";
-    ctx.strokeStyle = "black";
+    // very important to make the app responsive! It fits all the draws in accord to the screen width size.
+    // the y size is not necessary. For that, we use the variable factor declared below.
+    ctx.scale(canvas.width/window.innerWidth,1);
+    ctx.lineWidth = 2;
+
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
-    let invertYAxis = 420;
-    let invertYAxisText = 410;
-    let displayAmountOfMeasurements = 45;
-    // the factor uses to maximixe canvas in the y-axis
+    let invertYAxis = canvas.height+20;
+    let invertYAxisText = canvas.height+10;
+    // the factor uses to maximixe canvas in the y-axis! The basic unit of the
+    // canvas in the y-axis is 200. We have calculated everything using this number!
     let factor = canvasHeight/200;
-    let deltaX = canvas.width/47;
-    let colorBackLines = "gray";
+    // the deltaX determines the step between two measures in the x-axis
+    let deltaX;
     let StartYlines = [
       [0, 190],
       [0, 150],
@@ -402,11 +404,15 @@ function loadBodyWeight() {
       [canvasWidth, 70],
       [canvasWidth, 30]
     ];
-    let colorLines = ["gray"];
-    let colorText = ["gray"];
+    let colorBackgroundLine = "#6c757d";
+    let colorLine = "#17a2b8";
+    let colorText = "#007bff";
+    let colorCircle = "#dc3545";
+    let colorBackgroundText = "#6c757d";
     let textFont = "22px serif";
-    // Canvas Y: start from 0 (top) and goes to 150 (bottom)
-    // Canvas X: start from 0 (left) and goes to 300 (right)
+    // Canvas Y: start from 0 (top) and goes to 200 (bottom) [times factor]
+    // Canvas X: start from 0 (left) and goes to 1880 (right) [dinamically readjusted]
+    // Basic units (these are the basic values!):
     // So we will plot y between (5 and 145);
     // And we will plot x between (5 and 295);
 
@@ -426,15 +432,16 @@ function loadBodyWeight() {
         for (let i = 0; i < StartYlines.length; i++) {
           startPos = StartYlines[i];
           endPos = EndYlines[i];
-          UICanvas.drawStraightLine(startPos, endPos, colorLines);
-          UICanvas.drawText(startPos[1], startPos, colorText, invertYAxisText + 8);
-          // UICanvas.drawText(startPos[1], startPos, colorText, invertYAxisText + 8);
+          UICanvas.drawStraightLine(startPos, endPos, colorBackgroundLine);
+          // the number 8 only let the text a little higher! Used only here!
+          UICanvas.drawText(startPos[1], startPos, colorBackgroundText, invertYAxisText + 8);
         }
       },
       plotYDate: function(data, deltaX) {
         let posX = 15;
         let measurements = data.length - 1;
         let middlePos = 0;
+        // Calc the middle position of the canvas
         if (measurements % 2 === 0) {
           middlePos = measurements / 2;
         } else {
@@ -447,17 +454,22 @@ function loadBodyWeight() {
           if ((posX === 15) || (posX === 15 + deltaX * middlePos)) {
             // if(posX === 15 || mesurements === 195|| posX === 395 ||
             //    posX === 595|| posX === 795 ) {
-            UICanvas.drawText(data[i].date, [posX - 10, 12], "gray", invertYAxisText);
+            UICanvas.drawText(data[i].date, [posX - 10, 12], colorBackgroundText, invertYAxisText);
+            // for the last position!
           } else if ((posX === 15 + deltaX * measurements)) {
             // get the end position: necessary to ajust the text on canvas
             // the last data to plot we remove the year!
             let newData = data[i].date;
             newData = newData.split("-");
             newData = newData[1] + "-" + newData[2];
-            if (measurements <= 30) {
-              UICanvas.drawText(newData, [posX - 10, 12], "gray", invertYAxisText);
+            // repositioning the text in case we have a smaller screen
+            if ( window.innerWidth <= 800 ) {
+              UICanvas.drawText(newData, [posX - 50, 12], colorBackgroundText, invertYAxisText);
+            // in case we have less than 30 measurements
+            } else if ( measurements <= 30 ) {
+              UICanvas.drawText(newData, [posX - 10, 12], colorBackgroundText, invertYAxisText);
             } else {
-              UICanvas.drawText(newData, [posX - 35, 12], "gray", invertYAxisText);
+              UICanvas.drawText(newData, [posX - 35, 12], colorBackgroundText, invertYAxisText);
             }
           }
           posX = posX + deltaX;
@@ -465,13 +477,10 @@ function loadBodyWeight() {
       },
       plotGraph: function(data) {
         UICanvas.eraseCanvas();
-        // very important to make the app responsive! It fits all the draws in accord to the screen size.
-        ctx.scale(canvasWidth/window.innerWidth,1);
         // check the window size and if it is smaller than 1880px, it plots only the last week
-        debugger
-        if(window.innerWidth < 1880) {
-          data = data.splice(data.length-7, 7);
-        }
+        // if(window.innerWidth < 1880) {
+        //   data = data.splice(data.length-7, 7);
+        // }
         UICanvas.plotXLines();
         let xPos = 15;
         let startPos, endPos, weightArray = [];
@@ -482,7 +491,7 @@ function loadBodyWeight() {
 
         // if there a lot of data, we will hide the text!
         let hideText = false;
-        if (data.length > 60) {
+        if (data.length > 60 || (data.length > 7 && window.innerWidth < 800) ) {
           hideText = true;
         }
 
@@ -493,16 +502,16 @@ function loadBodyWeight() {
           startPos = [xPos, weightArray[index]];
           if ((index + 1) !== weightArray.length) {
             endPos = [xPos + deltaX, weightArray[index + 1]];
-            UICanvas.drawStraightLine(startPos, endPos, "black");
+            UICanvas.drawStraightLine(startPos, endPos, colorLine);
             UICanvas.drawCircle(startPos);
             if (!hideText) {
-              UICanvas.drawText(startPos[1], startPos, "blue", invertYAxisText);
+              UICanvas.drawText(startPos[1], startPos, colorText, invertYAxisText);
             }
             // we plot here the last point!
             if ((index + 2) === weightArray.length) {
               UICanvas.drawCircle(endPos);
               if (!hideText) {
-                UICanvas.drawText(endPos[1], endPos, "blue", invertYAxisText);
+                UICanvas.drawText(endPos[1], endPos, colorText, invertYAxisText);
               }
             }
             // deltaX
@@ -521,34 +530,25 @@ function loadBodyWeight() {
       },
       drawCircle: function(startPos) {
         ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = "red";
-        ctx.imageSmoothingEnabled = false;
+        ctx.strokeStyle = colorCircle;
         ctx.arc(startPos[0], invertYAxis - startPos[1]*factor, 3*factor, Math.PI * 2, false);
         ctx.stroke();
       },
       // drawText inputs: data = data, startPos = the x,y position
       drawText: function(data, startPos, color, invertYAxisText) {
-        // debugger
-        // // Initialize Canvas
-        // let canvas2 = document.getElementById("canvasWeight");
-        // // /*We need to specific write the kind of environment we are
-        // // working: is it 2D or 3D!*/
-        // let ctx = canvas2.getContext("2d");
-
-        // ctx.scale(canvasWidth/window.innerWidth,1);
-        ctx.imageSmoothingEnabled = false;
         ctx.font = textFont;
         ctx.fillStyle = color;
         ctx.fillText(data, startPos[0], invertYAxisText - startPos[1]*factor);
-        // ctx.restore();
       },
+      // erase the canvas drawing a white rectangles
       eraseCanvas: function() {
         ctx.beginPath();
         ctx.strokeStyle = "white";
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
       },
+      // calculate the gap in the x-axis! The distance between two measures in the x-axis.
+      // To make it dynamically, it get the width of the window!
       returnStepXDelta: function(data) {
         switch (data.length) {
           case 7:
@@ -573,7 +573,7 @@ function loadBodyWeight() {
             return Math.floor(window.innerWidth / 180);
             break;
           default:
-            return Math.floor(window.width / data.length);
+            return Math.floor(window.innerWidth / data.length);
         }
       }
     }
@@ -908,7 +908,7 @@ function loadBodyWeight() {
         loadEventListeners();
         // Load the actual data to fill the UI
         loadDataAndPopulateUI();
-        debugger
+
       }
     }
 
