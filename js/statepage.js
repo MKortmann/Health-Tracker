@@ -63,7 +63,9 @@ const homeState = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const myData = function() {
   document.querySelector("#container").innerHTML = `
-  <h2>We are at myData</h2>
+    <div class="container text-center mt-5">
+      <h2 class="display-1">In development!</h2>
+    </div>
   `;
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -261,7 +263,9 @@ const bodyWeight = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const bloodPressure = function() {
   document.querySelector("#container").innerHTML = `
-  <h2>We are at bloodPressure</h2>
+  <div class="container text-center mt-5">
+    <h2 class="display-1">In development!</h2>
+  </div>
   `;
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -269,7 +273,9 @@ const bloodPressure = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const bloodSugar = function() {
   document.querySelector("#container").innerHTML = `
-  <h2>We are at blood Sugar</h2>
+  <div class="container text-center mt-5">
+    <h2 class="display-1">In development!</h2>
+  </div>
   `;
 }
 // Instantiate PageState
