@@ -374,7 +374,8 @@ function loadBodyWeight() {
       threeMonthsBtn: "#threeMonthsBtn",
       sixMonthsBtn: "#sixMonthsBtn",
       oneYearBtn: "#oneYearBtn",
-      AllMeasureBtn: "AllMeasureBtn"
+      AllMeasureBtn: "AllMeasureBtn",
+      zoomInBtn: "#zoomInBtn"
     }
     // Initialize Canvas
     let canvas = document.getElementById("canvasWeight");
@@ -409,12 +410,31 @@ function loadBodyWeight() {
       [canvasWidth, 70],
       [canvasWidth, 30]
     ];
+    // Text to write
+    let TextYlines = [
+      [0, 190],
+      [0, 150],
+      [0, 110],
+      [0, 70],
+      [0, 30]
+    ];
+    // Offset to correct
+    let OffsetYlines = [
+      [0, 190],
+      [0, 150],
+      [0, 110],
+      [0, 70],
+      [0, 30]
+    ];
+    // flag to show that we have done the zoom
+    let flag = false;
     let colorBackgroundLine = "#6c757d";
     let colorLine = "#17a2b8";
     let colorText = "#007bff";
     let colorCircle = "#dc3545";
     let colorBackgroundText = "#6c757d";
     let textFont = "22px serif";
+
     // Canvas Y: start from 0 (top) and goes to 200 (bottom) [times factor]
     // Canvas X: start from 0 (left) and goes to 1880 (right) [dinamically readjusted]
     // Basic units (these are the basic values!):
@@ -422,6 +442,96 @@ function loadBodyWeight() {
     // And we will plot x between (5 and 295);
 
     return {
+      zoomCanvas: function(maxValue, minValue, data) {
+        let startPos, endPos;
+
+        for (let i = 0; i < StartYlines.length; i++) {
+          if (maxValue > StartYlines[i][1]) {
+            // to be sure that we do not reach more the 190 weight
+            if(i-1 >= 0) {
+              endPos = StartYlines[i-1][1];
+              break;
+            } else {
+              endPos = StartYlines[i][1];
+              break;
+            }
+          }
+        }
+        for (let i = 0; i < StartYlines.length; i++) {
+          if (minValue > StartYlines[i][1]) {
+            // to case that the weight is between 30 and 70, the startPos should receive 30 but not lower
+            // if(i+1 <= 4) {
+            //   startPos = StartYlines[i+1][1];
+            //   break;
+            // } else {
+              startPos = StartYlines[i][1];
+              break;
+            //   break;
+            // }
+          }
+        }
+
+        UICanvas.readjustYValues(startPos, endPos);
+          // startPos = StartYlines[i];
+          // endPos = EndYlines[i];
+          // UICanvas.drawStraightLine(startPos, endPos, colorBackgroundLine);
+          // // the number 8 only let the text a little higher! Used only here!
+          // UICanvas.drawText(startPos[1], startPos, colorBackgroundText, invertYAxisText + 8);
+        // }
+        debugger
+        UICanvas.plotGraph(data);
+      },
+      readjustYValues: function(startPos, endPos) {
+        let deltaY = (endPos-startPos)/4;
+        for (let i = 0; i < StartYlines.length; i++) {
+          // StartYlines[i][1] = endPos-deltaY*i;
+          // EndYlines[i][1] = StartYlines[i][1];
+          TextYlines[i][1] = endPos-deltaY*i;
+          OffsetYlines[i][1] = OffsetYlines[i][1] - TextYlines[i][1];
+        }
+        flag = true;
+      },
+      readjustWeightValues: function(weightValue) {
+        // flag means that we have done the zoom
+        weightValue = parseInt(weightValue);
+        if(flag) {
+          if ( weightValue < 30) {
+            return weightValue;
+          } else if (weightValue < 40) {
+            return weightValue + 5;
+          } else if (weightValue < 70) {
+            return weightValue + 35;
+          } else if (weightValue < 80) {
+            return weightValue + 45;
+          } else if (weightValue < 90) {
+            return weightValue + 55;
+          } else if (weightValue < 100) {
+            return weightValue + 65;
+          } else if (weightValue < 110) {
+            return weightValue + 5;
+          } else if (weightValue < 120) {
+            return weightValue + 5;
+          } else if (weightValue < 130) {
+            return weightValue + 45;
+          } else if (weightValue < 140) {
+            return weightValue + 55;
+          } else if (weightValue < 150) {
+            return weightValue + 65;
+          } else if (weightValue < 160) {
+            return weightValue + 5;
+          } else if (weightValue < 170) {
+            return weightValue + 35;
+          } else if (weightValue < 180) {
+            return weightValue + 45;
+          } else if (weightValue < 190) {
+            return weightValue + 55;
+          } else {
+            return weightValue;
+          }
+        } else {
+          return weightValue;
+        }
+      },
       // check the canvas.Width and recorrect data and replot data
       checkCanvas: function() {
         console.log(canvas.Width);
@@ -439,7 +549,7 @@ function loadBodyWeight() {
           endPos = EndYlines[i];
           UICanvas.drawStraightLine(startPos, endPos, colorBackgroundLine);
           // the number 8 only let the text a little higher! Used only here!
-          UICanvas.drawText(startPos[1], startPos, colorBackgroundText, invertYAxisText + 8);
+          UICanvas.drawText(TextYlines[i][1], startPos, colorBackgroundText, invertYAxisText + 8);
         }
       },
       plotYDate: function(data, deltaX) {
@@ -488,10 +598,12 @@ function loadBodyWeight() {
         // }
         UICanvas.plotXLines();
         let xPos = 15;
-        let startPos, endPos, weightArray = [];
+        let startPos, endPos, weightArray = [], weightArrayOriginal = [];
         // extract from data an weight array with only weight data
         data.forEach(function(item, index) {
-          weightArray.push(parseInt(item.weight));
+          weightArrayOriginal.push(parseInt(item.weight));
+          const value = UICanvas.readjustWeightValues(item.weight);
+          weightArray.push(value);
         });
 
         // if there a lot of data, we will hide the text!
@@ -510,13 +622,14 @@ function loadBodyWeight() {
             UICanvas.drawStraightLine(startPos, endPos, colorLine);
             UICanvas.drawCircle(startPos);
             if (!hideText) {
-              UICanvas.drawText(startPos[1], startPos, colorText, invertYAxisText);
+              UICanvas.drawText(weightArrayOriginal[index], startPos, colorText, invertYAxisText);
             }
             // we plot here the last point!
             if ((index + 2) === weightArray.length) {
               UICanvas.drawCircle(endPos);
               if (!hideText) {
-                UICanvas.drawText(endPos[1], endPos, colorText, invertYAxisText);
+                // UICanvas.drawText(endPos[1], endPos, colorText, invertYAxisText);
+                UICanvas.drawText(weightArrayOriginal[index+1], endPos, colorText, invertYAxisText);
               }
             }
             // deltaX
@@ -726,6 +839,8 @@ function loadBodyWeight() {
           case "oneYearBtn":
             groupCanvasBtn(360);
             break;
+          case "zoomInBtn":
+            zoomInBtn();
           default:
             let dataArray = StorageCtrl.getLSData();
             groupCanvasBtn(dataArray.length);
@@ -734,6 +849,23 @@ function loadBodyWeight() {
       });
       // Submit button
       document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
+
+    }
+    // zoomInBtn
+    const zoomInBtn = function() {
+      console.log("Hello World Zoom IN: " + UICanvas.StartYlines);
+      let data = StorageCtrl.getLSData();
+      let weightArray = [];
+
+      // extract from data an weight array with only weight data
+      data.forEach(function(item, index) {
+        weightArray.push(parseInt(item.weight));
+      });
+
+      const maxValue = Math.ceil(Math.max(...weightArray));
+      const minValue = Math.floor(Math.min(...weightArray));
+      // pass the max and min values of the weight measured and the data!
+      UICanvas.zoomCanvas(maxValue, minValue, data);
 
     }
     // delete All
