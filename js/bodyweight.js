@@ -478,7 +478,7 @@ function loadBodyWeight() {
           // // the number 8 only let the text a little higher! Used only here!
           // UICanvas.drawText(startPos[1], startPos, colorBackgroundText, invertYAxisText + 8);
         // }
-        debugger
+
         UICanvas.plotGraph(data);
       },
       readjustYValues: function(startPos, endPos) {
@@ -494,40 +494,21 @@ function loadBodyWeight() {
       readjustWeightValues: function(weightValue) {
         // flag means that we have done the zoom
         weightValue = parseInt(weightValue);
+        console.log(TextYlines);
+        console.log(OffsetYlines);
+
         if(flag) {
-          if ( weightValue < 30) {
-            return weightValue;
-          } else if (weightValue < 40) {
-            return weightValue + 5;
-          } else if (weightValue < 70) {
-            return weightValue + 35;
-          } else if (weightValue < 80) {
-            return weightValue + 45;
-          } else if (weightValue < 90) {
-            return weightValue + 55;
-          } else if (weightValue < 100) {
-            return weightValue + 65;
-          } else if (weightValue < 110) {
-            return weightValue + 5;
-          } else if (weightValue < 120) {
-            return weightValue + 5;
-          } else if (weightValue < 130) {
-            return weightValue + 45;
-          } else if (weightValue < 140) {
-            return weightValue + 55;
-          } else if (weightValue < 150) {
-            return weightValue + 65;
-          } else if (weightValue < 160) {
-            return weightValue + 5;
-          } else if (weightValue < 170) {
-            return weightValue + 35;
-          } else if (weightValue < 180) {
-            return weightValue + 45;
-          } else if (weightValue < 190) {
-            return weightValue + 55;
+          if(weightValue < TextYlines[3][1]) {
+            return (weightValue + parseInt(OffsetYlines[4][1]) + (weightValue-parseInt(TextYlines[4][1]))*2 );
+          } else if (weightValue < TextYlines[2][1]) {
+            return (weightValue + parseInt(OffsetYlines[3][1]) + (weightValue-parseInt(TextYlines[3][1]))*2);
+          } else if (weightValue < TextYlines[1][1]) {
+            return (weightValue + parseInt(OffsetYlines[2][1]) + (weightValue-parseInt(TextYlines[2][1]))*2);
+          } else if (weightValue < TextYlines[0][1]) {
+            return (weightValue + parseInt(OffsetYlines[1][1]) + (weightValue-parseInt(TextYlines[1][1]))*2);
           } else {
-            return weightValue;
-          }
+            return (weightValue + parseInt(OffsetYlines[0][1]) + (weightValue-parseInt(TextYlines[0][1]))*2);
+          } 
         } else {
           return weightValue;
         }
