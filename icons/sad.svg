@@ -48,7 +48,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="15.839192"
-     inkscape:cx="4.8767994"
+     inkscape:cx="14.788921"
      inkscape:cy="22.957771"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -98,19 +98,19 @@
        rx="6.2018862"
        ry="6.1768293" />
     <circle
-       style="opacity:1;fill:#ff8080;fill-opacity:1;stroke:#000000;stroke-width:0.27700001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
+       style="opacity:1;fill:#17a2b8;fill-opacity:1;stroke:#20c997;stroke-width:0.27700001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05490196;paint-order:markers fill stroke"
        id="path4801"
        cx="6.3513427"
        cy="290.53427"
        r="5.953125" />
     <circle
-       style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#ff5555;stroke-width:0.27699998;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff5555;stroke-width:0.27699998;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
        id="path4803"
        cx="4.1010418"
        cy="287.60715"
        r="0.92604166" />
     <circle
-       style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#ff5555;stroke-width:0.27700001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff5555;stroke-width:0.27700001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
        id="path4803-5"
        cx="8.3752546"
        cy="287.60565"
@@ -120,9 +120,9 @@
        cy="290.41199"
        cx="6.303916"
        id="circle4824"
-       style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#ff5555;stroke-width:0.27700001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke" />
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff5555;stroke-width:0.27700001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke" />
     <path
-       style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#ff5555;stroke-width:0.27699998;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff5555;stroke-width:0.27699998;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
        id="path4828"
        sodipodi:type="arc"
        sodipodi:cx="-6.3482876"
@@ -134,5 +134,19 @@
        sodipodi:open="true"
        d="m -2.9104168,-294.88319 a 3.4395833,2.6458333 0 0 1 -3.4442664,2.56234 3.4395833,2.6458333 0 0 1 -3.431855,-2.57218"
        transform="scale(-1)" />
+    <ellipse
+       ry="0.44543999"
+       rx="0.46214435"
+       style="opacity:1;fill:#000000;fill-opacity:0.6901961;stroke:#ff5555;stroke-width:0.13571651;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
+       id="ellipse4783"
+       cx="4.0999079"
+       cy="287.57224" />
+    <ellipse
+       cy="287.60565"
+       cx="8.3929243"
+       id="ellipse4785"
+       style="opacity:1;fill:#000000;fill-opacity:0.69019608;stroke:#ff5555;stroke-width:0.13571651;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.05327801;paint-order:markers fill stroke"
+       rx="0.46214435"
+       ry="0.44543999" />
   </g>
 </svg>

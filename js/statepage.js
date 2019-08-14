@@ -188,7 +188,7 @@ const bodyWeight = function() {
       <h5 class="text-white h4">Extra functions</h5>
       <span class="text-light lead">You can delete all files or export the saved data (download) and also to inform more about BMI.</span>
         <!-- Button trigger modal: BMI -->
-      <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block btn-lg d-lg-none my-2" data-toggle="modal" data-target="#locModal2">
+      <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block btn-lg my-2" data-toggle="modal" data-target="#locModal2">
       About BMI </btn>
       <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-block my-2 btn-lg " data-toggle="modal" data-target="#locModal">
       Delete All Items
@@ -217,13 +217,8 @@ const bodyWeight = function() {
           <tr>
             <th scope="col" class="align-middle">#</th>
             <th scope="col" class="align-middle d-none d-sm-table-cell">Data</th>
-            <th scope="col" class="align-middle"> Weight </th>
-            <th scope="col" class="align-middle">BMI
-              <!-- Button trigger modal: BMI -->
-              <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right d-none d-lg-block" data-toggle="modal" data-target="#locModal2">
-                About BMI
-              </btn>
-            </th>
+            <th scope="col" class="align-middle">Weight</th>
+            <th scope="col" class="align-middle">BMI</th>
           </tr>
         </thead>
         <tbody>
