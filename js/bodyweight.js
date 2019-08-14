@@ -375,7 +375,8 @@ function loadBodyWeight() {
       sixMonthsBtn: "#sixMonthsBtn",
       oneYearBtn: "#oneYearBtn",
       AllMeasureBtn: "AllMeasureBtn",
-      zoomInBtn: "#zoomInBtn"
+      zoomInBtn: "#zoomInBtn",
+      zoomOutBtn: "#zoomOutBtn"
     }
     // Initialize Canvas
     let canvas = document.getElementById("canvasWeight");
@@ -396,13 +397,8 @@ function loadBodyWeight() {
     let factor = canvasHeight/200;
     // the deltaX determines the step between two measures in the x-axis
     let deltaX;
-    let StartYlines = [
-      [0, 190],
-      [0, 150],
-      [0, 110],
-      [0, 70],
-      [0, 30]
-    ];
+    // To plot the graph lines!
+    let StartYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
     let EndYlines = [
       [canvasWidth, 190],
       [canvasWidth, 150],
@@ -411,21 +407,9 @@ function loadBodyWeight() {
       [canvasWidth, 30]
     ];
     // Text to write
-    let TextYlines = [
-      [0, 190],
-      [0, 150],
-      [0, 110],
-      [0, 70],
-      [0, 30]
-    ];
+    let TextYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
     // Offset to correct
-    let OffsetYlines = [
-      [0, 190],
-      [0, 150],
-      [0, 110],
-      [0, 70],
-      [0, 30]
-    ];
+    let OffsetYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
     // flag to show that we have done the zoom
     let flag = false;
     let colorBackgroundLine = "#6c757d";
@@ -442,7 +426,7 @@ function loadBodyWeight() {
     // And we will plot x between (5 and 295);
 
     return {
-      zoomCanvas: function(maxValue, minValue, data) {
+      zoomInCanvas: function(maxValue, minValue, data) {
         let startPos, endPos;
 
         for (let i = 0; i < StartYlines.length; i++) {
@@ -481,6 +465,14 @@ function loadBodyWeight() {
 
         UICanvas.plotGraph(data);
       },
+      zoomOutCanvas: function(data) {
+        flag = false;
+        // important to reset in this way because JS sometimes save the reference and the values
+        // do not match anymore
+        TextYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
+        OffsetYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
+        UICanvas.plotGraph(data);
+      },
       readjustYValues: function(startPos, endPos) {
         let deltaY = (endPos-startPos)/4;
         for (let i = 0; i < StartYlines.length; i++) {
@@ -508,7 +500,7 @@ function loadBodyWeight() {
             return (weightValue + parseInt(OffsetYlines[1][1]) + (weightValue-parseInt(TextYlines[1][1]))*2);
           } else {
             return (weightValue + parseInt(OffsetYlines[0][1]) + (weightValue-parseInt(TextYlines[0][1]))*2);
-          } 
+          }
         } else {
           return weightValue;
         }
@@ -582,7 +574,7 @@ function loadBodyWeight() {
         let startPos, endPos, weightArray = [], weightArrayOriginal = [];
         // extract from data an weight array with only weight data
         data.forEach(function(item, index) {
-          weightArrayOriginal.push(parseInt(item.weight));
+          weightArrayOriginal.push(item.weight);
           const value = UICanvas.readjustWeightValues(item.weight);
           weightArray.push(value);
         });
@@ -822,6 +814,10 @@ function loadBodyWeight() {
             break;
           case "zoomInBtn":
             zoomInBtn();
+            break;
+          case "zoomOutBtn":
+            zoomOutBtn();
+            break;
           default:
             let dataArray = StorageCtrl.getLSData();
             groupCanvasBtn(dataArray.length);
@@ -834,19 +830,34 @@ function loadBodyWeight() {
     }
     // zoomInBtn
     const zoomInBtn = function() {
-      console.log("Hello World Zoom IN: " + UICanvas.StartYlines);
       let data = StorageCtrl.getLSData();
       let weightArray = [];
 
       // extract from data an weight array with only weight data
       data.forEach(function(item, index) {
-        weightArray.push(parseInt(item.weight));
+        weightArray.push(item.weight);
       });
+      console.log(`Logging weightArray: ${weightArray}`);
 
       const maxValue = Math.ceil(Math.max(...weightArray));
       const minValue = Math.floor(Math.min(...weightArray));
       // pass the max and min values of the weight measured and the data!
-      UICanvas.zoomCanvas(maxValue, minValue, data);
+      UICanvas.zoomInCanvas(maxValue, minValue, data);
+
+    }
+    const zoomOutBtn = function() {
+      console.log("zoom out clicked");
+
+      let data = StorageCtrl.getLSData();
+      let weightArray = [];
+
+      // extract from data an weight array with only weight data
+      data.forEach(function(item, index) {
+        weightArray.push(item.weight);
+      });
+
+      // pass the max and min values of the weight measured and the data!
+      UICanvas.zoomOutCanvas(data);
 
     }
     // delete All

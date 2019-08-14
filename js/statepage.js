@@ -111,7 +111,12 @@ const bodyWeight = function() {
       <button type="button" class="btn btn-info d-none d-lg-block" id="sixMonthsBtn">6 Months</button>
       <button type="button" class="btn btn-info d-none d-lg-block" id="oneYearBtn">1 Year</button>
       <button type="button" class="btn btn-info" id="AllMeasureBtn">All</button>
-      <button type="button" class="btn btn-secondary" id="zoomInBtn">Zoom</button>
+      <button type="button" class="btn btn-secondary p-0">
+        <img src="./icons/zoomIn.svg" class="img-fluid" id="zoomInBtn"></img>
+      </button>
+      <button type="button" class="btn btn-secondary p-0">
+        <img src="./icons/zoomOut.svg" class="img-fluid" id="zoomOutBtn"></img>
+      </button>
     </div>
   </div>
     <div class="d-flex justify-content-center">
@@ -131,7 +136,7 @@ const bodyWeight = function() {
       </div>
       <div class="col-sm-3">
         <label for="weight">Weight</label>
-        <input type="number" value="80" min="30" max="190" class="form-control " id="weight" placeholder="Weight - kg">
+        <input type="number" value="80" min="30" max="190" step="0.1" class="form-control " id="weight" placeholder="Weight - kg">
       </div>
       <div class="col-sm-6">
         <label for="date">Date</label>
