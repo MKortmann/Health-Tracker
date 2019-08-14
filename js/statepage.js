@@ -147,15 +147,15 @@ const bodyWeight = function() {
       <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
         <div class="col-sm-3">
           <label for="height">Height</label>
-          <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
+          <input id="height" type="number" value="178" class="form-control" placeholder="height (cm)">
         </div>
         <div class="col-sm-3">
           <label for="weight">Weight</label>
-          <input type="number" value="80" min="30" max="190" step="0.1" class="form-control " id="weight" placeholder="Weight - kg">
+          <input id="weight" type="number" value="80" min="30" max="190" step="0.1" class="form-control" placeholder="Weight - kg">
         </div>
         <div class="col-sm-6">
           <label for="date">Date</label>
-          <input type="date" class="form-control" id="date" placeholder="data">
+          <input id="date" type="date" class="form-control"  placeholder="data">
         </div>
       </div>
       <!-- second row -->
@@ -166,13 +166,13 @@ const bodyWeight = function() {
         </div>
       </div>
       <!-- third row -->
-        <div class="form-row">
+        <!-- <div class="form-row">
           <div class="col">
             <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg col-sm">Edit</btn>
             <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg col-sm">Back</btn>
             <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg col-sm">Delete
             </btn>
-          </div>
+          </div> -->
         </div>
     </form>
   </div>
@@ -284,7 +284,7 @@ const bodyWeight = function() {
 
   <!-- Modal Dialog 3: TO EDIT, DELETE OR BACK -->
     <div class="modal fade" id="locModal3" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Edit Dialog</h5>
@@ -298,15 +298,15 @@ const bodyWeight = function() {
             <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
               <div class="col-sm-3">
                 <label for="height">Height</label>
-                <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
+                <input id="heightEdit" type="number" value="178" class="form-control" placeholder="height (cm)">
               </div>
               <div class="col-sm-3">
                 <label for="weight">Weight</label>
-                <input type="number" value="80" min="30" max="190" step="0.1" class="form-control " id="weight" placeholder="Weight - kg">
+                <input id="weightEdit" type="number" value="80" min="30" max="190" step="0.1" class="form-control" placeholder="Weight - kg">
               </div>
               <div class="col-sm-6">
                 <label for="date">Date</label>
-                <input type="date" class="form-control" id="date" placeholder="data">
+                <input type="date" class="form-control" placeholder="data" id="dateEdit">
               </div>
             </div>
           </div>

@@ -182,13 +182,16 @@ function loadBodyWeight() {
     // Declare private vars and functions
     const UISelectors = {
       height: "#height",
+      heightEdit: "#heightEdit",
       startWeight: "#startWeight",
       actualWeight: "#actualWeight",
       diffWeight: "#diffWeight",
       actualBMI: "#actualBMI",
       submitBtn: "#submit",
       weight: "#weight",
+      weightEdit: "#weightEdit",
       date: "#date",
+      dateEdit: "#dateEdit",
       tableBody: "tbody",
       editBtn: "#editBtn",
       backBtn: "#backBtn",
@@ -210,15 +213,8 @@ function loadBodyWeight() {
         div.appendChild(document.createTextNode(message));
         // Get the element to be insert it
         const element = document.querySelector("#containerToAddAlertMsg");
-        // Highlight the container
-        document.querySelector("#containerInputToHighlight").style.backgroundColor = "#20c997";
-        // document.querySelector("#containerInputToHighlight").style.backgroundColor = "#ffc107";
         // insert alert
         element.appendChild(div);
-        // to put the element to edit in the middle of the page
-        // containerInputToHighlight.scrollIntoView({behavior: "smooth", block: "top", inline: "nearest"});
-        containerInputToHighlight.scrollIntoView(true);
-
         //the message should disappear after 3 seconds
         setTimeout(function() {
           document.querySelector(".alert").remove();
@@ -235,7 +231,10 @@ function loadBodyWeight() {
         return {
           weight: document.querySelector(UISelectors.weight).value,
           date: document.querySelector(UISelectors.date).value,
-          height: document.querySelector(UISelectors.height).value
+          height: document.querySelector(UISelectors.height).value,
+          weightEdit: document.querySelector(UISelectors.weightEdit).value,
+          dateEdit: document.querySelector(UISelectors.dateEdit).value,
+          heightEdit: document.querySelector(UISelectors.heightEdit).value,
         }
       },
       // populate the inputs: diffWeight and BMI
@@ -324,40 +323,10 @@ function loadBodyWeight() {
       deleteTable: function(id) {
         document.querySelector("tbody").innerHTML = "";
       },
-      hideButtons: function() {
-        // We will hide these buttons
-        document.querySelector(UISelectors.editBtn).style.display = "none";
-        document.querySelector(UISelectors.backBtn).style.display = "none";
-        document.querySelector(UISelectors.deleteBtn).style.display = "none";
-        // And unhide the submit button
-        if (document.querySelector(UISelectors.submitBtn).hasAttribute("style")) {
-          document.querySelector(UISelectors.submitBtn).removeAttribute("style");
-        }
-        if (document.querySelector(UISelectors.deleteAllBtn).hasAttribute("style")) {
-          document.querySelector(UISelectors.deleteAllBtn).removeAttribute("style");
-        }
-        if (document.querySelector(UISelectors.deleteAllAskBtn).hasAttribute("style")) {
-          document.querySelector(UISelectors.deleteAllAskBtn).removeAttribute("style");
-        }
-
-      },
       reloadItem: function(item) {
         // Reload the Date and Weight Input
-        document.querySelector(UISelectors.weight).value = item.weight;
-        document.querySelector(UISelectors.date).value = item.date;
-        // hide the submit button
-        document.querySelector(UISelectors.submitBtn).style.display = "none";
-        document.querySelector(UISelectors.deleteAllBtn).style.display = "none";
-        document.querySelector(UISelectors.deleteAllAskBtn).style.display = "none";
-        // Show the edit and back buttons
-        document.querySelector(UISelectors.editBtn).removeAttribute("style");
-        document.querySelector(UISelectors.backBtn).removeAttribute("style");
-        document.querySelector(UISelectors.deleteBtn).removeAttribute("style");
-        // Update the pointer for the edit and back buttons
-        // document.querySelector("#editBtn").style.cursor = "pointer";
-        // document.querySelector("#backBtn").style.cursor = "pointer";
-        // document.querySelector("#deleteBtn").style.cursor = "pointer";
-        // document.querySelector("#deleteAllBtn").style.cursor = "pointer";
+        document.querySelector(UISelectors.weightEdit).value = item.weight;
+        document.querySelector(UISelectors.dateEdit).value = item.date;
       }
 
     }
@@ -946,7 +915,7 @@ function loadBodyWeight() {
         UICtrl.deleteTable();
       }
       // Hide the Edit and back buttons
-      UICtrl.hideButtons();
+      // UICtrl.hideButtons();
       // Get the data from LocalStorage
       const items = StorageCtrl.getLSData();
       // We populate the table and input only if there is a data!
@@ -1019,12 +988,10 @@ function loadBodyWeight() {
       const dataToBeUpdated = UICtrl.getWeightDateHeight();
       // Update the current Item that updates direct the data!
       // The currentItem is kind of a pointer to the data array!
-      StorageCtrl.currentItem.weight = dataToBeUpdated.weight;
-      StorageCtrl.currentItem.date = dataToBeUpdated.date;
+      StorageCtrl.currentItem.weight = dataToBeUpdated.weightEdit;
+      StorageCtrl.currentItem.date = dataToBeUpdated.dateEdit;
       // Load Current Data Array to the localStorage
       StorageCtrl.uploadDataToLS();
-      // Hide Edit and Back buttons
-      UICtrl.hideButtons();
       // Update the specific line on the table
       UICtrl.updateTable(StorageCtrl.currentItem, true);
       // Update input: actual weight
@@ -1036,8 +1003,6 @@ function loadBodyWeight() {
     }
 
     const btnBack = function() {
-      // Hide Edit and Back buttons
-      UICtrl.hideButtons();
       // Populate the inputs!
       UICtrl.populateInputs();
       // Sending a message to the user!
@@ -1061,8 +1026,6 @@ function loadBodyWeight() {
       // Update input: actual weight
       UICtrl.populateInputs();
       // Now, let's comeback to the normalState
-      // Hide Edit and Back buttons
-      UICtrl.hideButtons();
       // Populate the inputs!
       UICtrl.populateInputs();
       // Update graphic
