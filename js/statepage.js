@@ -39,23 +39,26 @@ const PageState = function() {
 const homeState = function() {
   document.querySelector("body").classList.add("backgroundBodyWeight");
   document.querySelector("#container").innerHTML = `
-  <div class="container p-0 ">
-    <div class="card bg-dark mt-2" id="cardBackground">
-      <!-- <img src="imgs/background6.png" id="background" class="img-fluid" alt="Responsive image"> -->
-      <img src="imgs/background.jpg" class="img-fluid" id="backgroundOverview" alt="Background image">
-      <!-- <img src="imgs/background10.jpg" id="background" class="img-fluid" alt="Responsive image"> -->
-      <div class="card-img-overlay">
-        <div class="jumbotron mt-sm-5">
-          <h2 class=" text-info">Welcome to Health Tracker!</h2 >
-          <p class="lead">This app was done specially to help you to track and improve your health!</p>
-          <hr class="my-4">
-          <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
-          <p class="text-success"> Please visit regularly your doctor! </p>
-          <p class= "text-info text-center">&hearts; Thanks for using our app &hearts; </p>
+    <!-- sectionA first section -->
+    <section class="sectionA">
+      <div class="container p-0 ">
+        <div class="card bg-dark mt-2" id="cardBackground">
+          <!-- <img src="imgs/background6.png" id="background" class="img-fluid" alt="Responsive image"> -->
+          <img src="imgs/background.jpg" class="img-fluid" id="backgroundOverview" alt="Background image">
+          <!-- <img src="imgs/background10.jpg" id="background" class="img-fluid" alt="Responsive image"> -->
+          <div class="card-img-overlay">
+            <div class="jumbotron mt-sm-5">
+              <h2 class=" text-info">Welcome to Health Tracker!</h2 >
+              <p class="lead">This app was done specially to help you to track and improve your health!</p>
+              <hr class="my-4">
+              <p>It is very important to check constantly our healthy. In this way, it is easier to detect any problem helping the doctors to make the correct diagnostic!  </p>
+              <p class="text-success"> Please visit regularly your doctor! </p>
+              <p class= "text-info text-center">&hearts; Thanks for using our app &hearts; </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
   `;
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -63,9 +66,12 @@ const homeState = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const myData = function() {
   document.querySelector("#container").innerHTML = `
-    <div class="container text-center mt-5">
-      <h2 class="display-1">In development!</h2>
-    </div>
+    <!-- sectionA: first section -->
+    <section class="sectionA">
+      <div class="container text-center mt-5">
+        <h2 class="display-1">In development!</h2>
+      </div>
+    </section>
   `;
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -73,98 +79,110 @@ const myData = function() {
 ///////////////////////////////////////////////////////////////////////////////
 const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
-  <div class="container-fluid my-4">
-    <form id="formInputs1">
-      <div class="form-row justify-content-center" id="formInputs2">
-        <!-- Start Weight -->
-        <div class="col-md-3">
-          <label for="startWeight" class="text-info">Start Weight (kg)</label>
-          <input type="number" disabled value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
-        </div>
-        <!-- Actual Weight -->
-        <div class="col-md-3">
-          <label for="actualweight" class="text-info">Actual Weight</label>
-          <input type="number" disabled value="76" class="form-control" id="actualWeight" placeholder="Actual (kg)">
-        </div>
-        <!-- Diff Weight -->
-        <div class="col-md-3">
-          <label for="diffWeight" class="text-info">Diff. Weight</label>
-          <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (kg)">
-        </div>
-        <!-- Actual BMI -->
-        <div class="col-md-3">
-          <label for="actualBMI" class="text-primary">Actual BMI</label>
-          <input type="number" disabled class="form-control" id="actualBMI" placeholder="Actual BMI">
-        </div>
+    <!-- SectionA: first display input data as start weight, actual weight... -->
+    <section class="sectionA">
+      <div class="container-fluid my-4">
+        <form id="formInputs1">
+          <div class="form-row justify-content-center" id="formInputs2">
+            <!-- Start Weight -->
+            <div class="col-md-3">
+              <label for="startWeight" class="text-info">Start Weight (kg)</label>
+              <input type="number" disabled value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
+            </div>
+            <!-- Actual Weight -->
+            <div class="col-md-3">
+              <label for="actualweight" class="text-info">Actual Weight</label>
+              <input type="number" disabled value="76" class="form-control" id="actualWeight" placeholder="Actual (kg)">
+            </div>
+            <!-- Diff Weight -->
+            <div class="col-md-3">
+              <label for="diffWeight" class="text-info">Diff. Weight</label>
+              <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (kg)">
+            </div>
+            <!-- Actual BMI -->
+            <div class="col-md-3">
+              <label for="actualBMI" class="text-primary">Actual BMI</label>
+              <input type="number" disabled class="form-control" id="actualBMI" placeholder="Actual BMI">
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
+    </section>
 
-  <!-- Canvas buttons! -->
-  <div class="container containerGroup mt-2 text-center">
-    <div class="btn-group mb-1 buttonGroup" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-info" id="oneWeekBtn">1 Week</button>
-      <button type="button" class="btn btn-info d-none d-md-block" id="twoWeeksBtn">2 Weeks</button>
-      <button type="button" class="btn btn-info d-none d-md-block" id="oneMonthBtn">1 Month</button>
-      <button type="button" class="btn btn-info d-none d-md-block" id="twoMonthsBtn">2 Months</button>
-      <button type="button" class="btn btn-info d-none d-md-block" id="threeMonthsBtn">3 Months</button>
-      <button type="button" class="btn btn-info d-none d-lg-block" id="sixMonthsBtn">6 Months</button>
-      <button type="button" class="btn btn-info d-none d-lg-block" id="oneYearBtn">1 Year</button>
-      <button type="button" class="btn btn-info" id="AllMeasureBtn">All</button>
-      <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomIn">
-        <img src="./icons/zoomIn.svg" class="img-fluid" id="zoomInBtn"  ></img>
-      </button>
-      <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomOut" disabled>
-        <img src="./icons/zoomOut.svg" class="img-fluid" id="zoomOutBtn" ></img>
-      </button>
+  <!-- Section B: Canvas buttons! -->
+  <section class="sectionBCanvasButtons">
+    <div class="container containerGroup mt-2 text-center">
+      <div class="btn-group mb-1 buttonGroup" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-info" id="oneWeekBtn">1 Week</button>
+        <button type="button" class="btn btn-info d-none d-md-block" id="twoWeeksBtn">2 Weeks</button>
+        <button type="button" class="btn btn-info d-none d-md-block" id="oneMonthBtn">1 Month</button>
+        <button type="button" class="btn btn-info d-none d-md-block" id="twoMonthsBtn">2 Months</button>
+        <button type="button" class="btn btn-info d-none d-md-block" id="threeMonthsBtn">3 Months</button>
+        <button type="button" class="btn btn-info d-none d-lg-block" id="sixMonthsBtn">6 Months</button>
+        <button type="button" class="btn btn-info d-none d-lg-block" id="oneYearBtn">1 Year</button>
+        <button type="button" class="btn btn-info" id="AllMeasureBtn">All</button>
+        <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomIn">
+          <img src="./icons/zoomIn.svg" class="img-fluid" id="zoomInBtn"  ></img>
+        </button>
+        <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomOut" disabled>
+          <img src="./icons/zoomOut.svg" class="img-fluid" id="zoomOutBtn" ></img>
+        </button>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section class="sectionCCanvas">
     <div class="d-flex justify-content-center">
     <!-- As soon as defined the height and width the image become sharp -->
       <canvas id="canvasWeight" height="400px" width="1880px"></canvas>
-  </div>
-  <span id="containerToAddAlertMsg"></span>
-
-<!-- BIG CONTAINER ENCLOSES SUBMIT AND POP-UP DRAWER -->
-<div class="container-fluid p-0" >
-  <form>
-    <!-- first row -->
-    <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
-      <div class="col-sm-3">
-        <label for="height">Height</label>
-        <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
-      </div>
-      <div class="col-sm-3">
-        <label for="weight">Weight</label>
-        <input type="number" value="80" min="30" max="190" step="0.1" class="form-control " id="weight" placeholder="Weight - kg">
-      </div>
-      <div class="col-sm-6">
-        <label for="date">Date</label>
-        <input type="date" class="form-control" id="date" placeholder="data">
-      </div>
     </div>
-    <!-- second row -->
-    <div class="form-row">
-      <div class="col">
-        <!-- <label for="submit">Submit</label> -->
-        <submit id="submit" class="btn btn-primary btn-lg btn-block">Submit</submit>
-      </div>
-    </div>
-    <!-- third row -->
+    <span id="containerToAddAlertMsg"></span>
+  </section>
 
-      <div class="form-row">
-        <div class="col">
-          <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg col-sm">Edit</btn>
-          <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg col-sm">Back</btn>
-          <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg col-sm">Delete
-          </btn>
+<!-- SECTION D encloses the input and button forms -->
+<section class="sectionDInputFormButtons">
+  <div class="container-fluid p-0" >
+    <form>
+      <!-- first row -->
+      <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
+        <div class="col-sm-3">
+          <label for="height">Height</label>
+          <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
+        </div>
+        <div class="col-sm-3">
+          <label for="weight">Weight</label>
+          <input type="number" value="80" min="30" max="190" step="0.1" class="form-control " id="weight" placeholder="Weight - kg">
+        </div>
+        <div class="col-sm-6">
+          <label for="date">Date</label>
+          <input type="date" class="form-control" id="date" placeholder="data">
         </div>
       </div>
-  </form>
+      <!-- second row -->
+      <div class="form-row">
+        <div class="col">
+          <!-- <label for="submit">Submit</label> -->
+          <submit id="submit" class="btn btn-primary btn-lg btn-block">Submit</submit>
+        </div>
+      </div>
+      <!-- third row -->
+        <div class="form-row">
+          <div class="col">
+            <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg col-sm">Edit</btn>
+            <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg col-sm">Back</btn>
+            <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg col-sm">Delete
+            </btn>
+          </div>
+        </div>
+    </form>
+  </div>
+</section>
 
-
+<!-- It encloses the drawer below submit and above the table -->
+<section class="sectionEDrawer">
   <!-- CONTENT OF THE HAMBURGER: this content will be pop-up DOWN -->
   <!-- Delete All - Download/Save JSON -->
+  <!-- UNCOLLAPSED STATE ENCLOSES BUTTONS AS DELETE ALL; ABOUT BMI; SAVE; LOAD -->
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
       <h5 class="text-white h4">Extra functions</h5>
@@ -180,16 +198,49 @@ const bodyWeight = function() {
     </div>
   </div>
 
-
-  <!-- HAMBURGER TO OPEN THE NAVBAR DOWN -->
+  <!-- HAMBURGER TO OPEN THE NAVBAR DOWN (COLLAPSED STATE) -->
   <nav class="navbar navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   </nav>
-<!-- CLOSE BIG CONTAINER -->
-</div>
-  <!-- Modal Dialog: TO CONFIR DELETE -->
+<!-- CLOSE THE DRAWER -->
+</section>
+
+<!-- Section F represents the table! -->
+  <section class="sectionFTable">
+    <!-- TABLE -->
+    <!-- style="overflow-y: scroll; height: 200px" -->
+    <div class="container-fluid p-0" id="tableContainer" style="overflow-y: scroll; height: 500px">
+      <table class="table table-striped  table-dark">
+        <thead>
+          <tr>
+            <th scope="col" class="align-middle">#</th>
+            <th scope="col" class="align-middle d-none d-sm-table-cell">Data</th>
+            <th scope="col" class="align-middle"> Weight </th>
+            <th scope="col" class="align-middle">BMI
+              <!-- Button trigger modal: BMI -->
+              <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right d-none d-lg-block" data-toggle="modal" data-target="#locModal2">
+                About BMI
+              </btn>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr>
+            <th scope="row">1</th>
+            <td>29.07.2019</td>
+            <td>83 kg</td>
+            <td>20</td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <br>
+
+<!-- HERE ARE THE MODALS AND FUNCTIONS USED IN THIS PAGE: THEY ARE PLACED AT THE END BECAUSE THEY DO NOT BELONGS TO THE DOCUMENT FLOW READING! -->
+<!-- Modal Dialog: TO CONFIRM DELETE -->
   <div class="modal fade" id="locModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -231,35 +282,51 @@ const bodyWeight = function() {
     </div>
   </div>
 
-  <!-- TABLE -->
-  <!-- style="overflow-y: scroll; height: 200px" -->
-  <div class="container-fluid p-0" id="tableContainer" style="overflow-y: scroll; height: 500px">
-    <table class="table table-striped  table-dark">
-      <thead>
-        <tr>
-          <th scope="col" class="align-middle">#</th>
-          <th scope="col" class="align-middle d-none d-sm-table-cell">Data</th>
-          <th scope="col" class="align-middle"> Weight </th>
-          <th scope="col" class="align-middle">BMI
-            <!-- Button trigger modal: BMI -->
-            <btn type="button" id="bmiInfoBtn" class="btn btn-outline-danger btn-sm float-right d-none d-lg-block" data-toggle="modal" data-target="#locModal2">
-              About BMI
-            </btn>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- <tr>
-          <th scope="row">1</th>
-          <td>29.07.2019</td>
-          <td>83 kg</td>
-          <td>20</td>
-        </tr> -->
-      </tbody>
-    </table>
-  </div>
-</div>
-<br>
+  <!-- Modal Dialog 3: TO EDIT, DELETE OR BACK -->
+    <div class="modal fade" id="locModal3" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Dialog</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="lead">You can edit, delete or return!</p>
+            <!-- first row -->
+            <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
+              <div class="col-sm-3">
+                <label for="height">Height</label>
+                <input type="number" value="178" class="form-control" id="height" placeholder="height (cm)">
+              </div>
+              <div class="col-sm-3">
+                <label for="weight">Weight</label>
+                <input type="number" value="80" min="30" max="190" step="0.1" class="form-control " id="weight" placeholder="Weight - kg">
+              </div>
+              <div class="col-sm-6">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" placeholder="data">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- third row -->
+              <div class="form-row">
+                <div class="col">
+                  <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg" data-dismiss="modal">Edit</btn>
+                  <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg" data-dismiss="modal">Back</btn>
+                  <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg" data-dismiss="modal">Delete
+                  </btn>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   <!-- Add the js files -->
   <script src="./js/bodyweight.js"></script>
   `;

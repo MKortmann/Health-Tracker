@@ -217,7 +217,7 @@ function loadBodyWeight() {
         element.appendChild(div);
         // to put the element to edit in the middle of the page
         // containerInputToHighlight.scrollIntoView({behavior: "smooth", block: "top", inline: "nearest"});
-        containerInputToHighlight.scrollIntoView();
+        containerInputToHighlight.scrollIntoView(true);
 
         //the message should disappear after 3 seconds
         setTimeout(function() {
@@ -298,7 +298,7 @@ function loadBodyWeight() {
                 <td class="align-middle">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
                 <a href="#" id="${item.ID}">
                 <img src=${link} class="float-left img-fluid mt-2 edit d-none d-md-block align-middle"></img>
-                <img src="./icons/edit.svg" class="float-right img-fluid mt-2 edit"></img>
+                <img src="./icons/edit.svg" class="float-right img-fluid mt-2 edit" data-toggle="modal" data-target="#locModal3"></img>
                 </a>
               </tr>
               `;
@@ -315,7 +315,7 @@ function loadBodyWeight() {
                 <td class="align-middle">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
                 <a href="#" id="${item.ID}">
                 <img src=${link} class="float-left img-fluid mt-2 edit d-none d-md-block align-middle"></img>
-                <img src="./icons/edit.svg" class="float-right img-fluid mt-2 edit"></img>
+                <img src="./icons/edit.svg" class="float-right img-fluid mt-2 edit" data-toggle="modal" data-target="#locModal3"></img>
                 </a>
               </tr>
               `;
@@ -480,23 +480,21 @@ function loadBodyWeight() {
           // }
 
           UICanvas.plotGraph(data);
-        } else {
-          alert("No possible to zoom anymore!");
         }
       },
       zoomOutCanvas: function(data) {
         flag = false;
-        // important to reset in this way because JS sometimes save the reference and the values
-        // do not match anymore
+        // important to reset in this way because JS sometimes save/pass the reference and the values
+        // do not match anymore! Why? BECAUSE THESE OBJECTS/ARRAYS ARE REFERENCE TYPE! NOT PRIMITIVES TYPES AS NUMBER, STRING AND SO ON.
         TextYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
+        // We can also use the spread operator. The spread operator create a new object! Spread the proprieties, it will pull out from the object. HOWEVER IT DID NOT WORK IN THIS CASE!
+        // OffsetYlines = {...TextYlines};
         OffsetYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
         UICanvas.plotGraph(data);
       },
       readjustYValues: function(startPos, endPos) {
         deltaY = (endPos-startPos)/4;
         for (let i = 0; i < StartYlines.length; i++) {
-          // StartYlines[i][1] = endPos-deltaY*i;
-          // EndYlines[i][1] = StartYlines[i][1];
           TextYlines[i][1] = endPos-deltaY*i;
           OffsetYlines[i][1] = OffsetYlines[i][1] - TextYlines[i][1];
         }

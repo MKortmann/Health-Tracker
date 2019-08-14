@@ -13,50 +13,52 @@
 </head>
 
 <body>
-
+  <!-- Title -->
   <h1 class="display-4 text-center d-none d-md-block">Health Tracker</h1>
-
+  <!-- navbar part-1: collapsed -->
   <nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
     <a class="navbar-brand" href="#"><img src="./icons/mk.svg" alt=""> Health Tracker</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link nav-item active" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="homeState">Overview</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="bodyWeight">Body Weight</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="bloodPressure">Blood Pressure</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="bloodSugar">Blood Sugar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="myData">My Data</a>
-        </li>
-      </ul>
+  <!-- collapsed navbar part-2: uncollapsed-->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link nav-item active" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="homeState">Overview</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="bodyWeight">Body Weight</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="bloodPressure">Blood Pressure</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="bloodSugar">Blood Sugar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" id="myData">My Data</a>
+      </li>
+    </ul>
   </nav>
 
-  <div class="container-fluid" id="container">
-    <!-- Here will be filled with the statePage.js -->
-  </div>
+  <!-- SECTION MAIN PAGE IS THE MAIN SECTION WHERE THE CONTENT WILL BE DISPLAYED -->
+  <section class="sectionMainPage">
+    <div class="container-fluid" id="container">
+      <!-- Here will be filled with the statePage.js -->
+    </div>
+  </section>
 
-
-  <footer class="p-1 text-center bg-dark text-light fixed-bottom">
-    Health Tracker - Developed by Marcelo Kortmann - 2019
-  </footer>
+  <!-- FOOTER -->
+  <section class="sectionFooter">
+    <footer class="p-1 text-center bg-dark text-light fixed-bottom">
+      Health Tracker - Developed by Marcelo Kortmann - 2019
+    </footer>
+  </section>
   <!-- JQUERY version 3.3.1 -->
   <script src="./lib/jquery/jquerymin.js"></script>
   <script src="./lib/bootstrap/bootstrap.js"></script>
   <script src="./js/bodyweight.js"></script>
   <script src="./js/statepage.js"></script>
-
-
 </body>
-
 </html>
