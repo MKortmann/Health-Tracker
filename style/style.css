@@ -64,6 +64,12 @@ body {
     max-width: 32px;
   }
 
+  /* trying to let it visible in smartphones! */
+  button,
+  btn {
+    min-height: 42px;
+  }
+
   .nav-link:hover {
   border-bottom: none;
   }
