@@ -296,8 +296,8 @@ function loadBodyWeight() {
                 <td class="align-middle">${item.weight}  kg</td>
                 <td class="align-middle">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
                 <a href="#" id="${item.ID}">
-                <img src=${link} class="float-left img-fluid mt-2 edit d-none d-md-block align-middle"></img>
-                <img src="./icons/edit.svg" class="float-right img-fluid mt-2 edit" data-toggle="modal" data-target="#locModal3"></img>
+                <img src=${link} class="float-left img-fluid edit d-none d-md-block align-middle"></img>
+                <img src="./icons/edit.svg" class="float-right img-fluid edit" data-toggle="modal" data-target="#locModal3"></img>
                 </a>
               </tr>
               `;
@@ -313,8 +313,8 @@ function loadBodyWeight() {
                 <td class="align-middle">${item.weight}  kg</td>
                 <td class="align-middle">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
                 <a href="#" id="${item.ID}">
-                <img src=${link} class="float-left img-fluid mt-2 edit d-none d-md-block align-middle"></img>
-                <img src="./icons/edit.svg" class="float-right img-fluid mt-2 edit" data-toggle="modal" data-target="#locModal3"></img>
+                <img src=${link} class="float-left img-fluid edit d-none d-md-block align-middle"></img>
+                <img src="./icons/edit.svg" class="float-right img-fluid edit" data-toggle="modal" data-target="#locModal3"></img>
                 </a>
               </tr>
               `;
