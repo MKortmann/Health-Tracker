@@ -114,8 +114,8 @@ const bodyWeight = function() {
       <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomIn">
         <img src="./icons/zoomIn.svg" class="img-fluid" id="zoomInBtn"  ></img>
       </button>
-      <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomOut">
-        <img src="./icons/zoomOut.svg" class="img-fluid" id="zoomOutBtn"  ></img>
+      <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomOut" disabled>
+        <img src="./icons/zoomOut.svg" class="img-fluid" id="zoomOutBtn" ></img>
       </button>
     </div>
   </div>

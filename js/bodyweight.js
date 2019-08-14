@@ -434,41 +434,55 @@ function loadBodyWeight() {
       zoomInCanvas: function(maxValue, minValue, data) {
         let startPos, endPos;
 
+        let stopOrGo = true;
+
         for (let i = 0; i < StartYlines.length; i++) {
-          if (maxValue > StartYlines[i][1]) {
-            // to be sure that we do not reach more the 190 weight
-            if(i-1 >= 0) {
-              endPos = StartYlines[i-1][1];
-              break;
-            } else {
-              endPos = StartYlines[i][1];
-              break;
+          if( TextYlines[i][1] !== StartYlines[i][1] ) {
+            stopOrGo = false;
+            break;
+          }
+        }
+
+        if(stopOrGo) {
+
+          for (let i = 0; i < StartYlines.length; i++) {
+            if (maxValue > StartYlines[i][1]) {
+              // to be sure that we do not reach more the 190 weight
+              if(i-1 >= 0) {
+                endPos = StartYlines[i-1][1];
+                break;
+              } else {
+                endPos = StartYlines[i][1];
+                break;
+              }
             }
           }
-        }
-        for (let i = 0; i < StartYlines.length; i++) {
-          if (minValue >= StartYlines[i][1]) {
-            // to case that the weight is between 30 and 70, the startPos should receive 30 but not lower
-            // if(i+1 <= 4) {
-            //   startPos = StartYlines[i+1][1];
-            //   break;
-            // } else {
-              startPos = StartYlines[i][1];
-              break;
-            //   break;
-            // }
+          for (let i = 0; i < StartYlines.length; i++) {
+            if (minValue >= StartYlines[i][1]) {
+              // to case that the weight is between 30 and 70, the startPos should receive 30 but not lower
+              // if(i+1 <= 4) {
+              //   startPos = StartYlines[i+1][1];
+              //   break;
+              // } else {
+                startPos = StartYlines[i][1];
+                break;
+              //   break;
+              // }
+            }
           }
+
+          UICanvas.readjustYValues(startPos, endPos);
+            // startPos = StartYlines[i];
+            // endPos = EndYlines[i];
+            // UICanvas.drawStraightLine(startPos, endPos, colorBackgroundLine);
+            // // the number 8 only let the text a little higher! Used only here!
+            // UICanvas.drawText(startPos[1], startPos, colorBackgroundText, invertYAxisText + 8);
+          // }
+
+          UICanvas.plotGraph(data);
+        } else {
+          alert("No possible to zoom anymore!");
         }
-
-        UICanvas.readjustYValues(startPos, endPos);
-          // startPos = StartYlines[i];
-          // endPos = EndYlines[i];
-          // UICanvas.drawStraightLine(startPos, endPos, colorBackgroundLine);
-          // // the number 8 only let the text a little higher! Used only here!
-          // UICanvas.drawText(startPos[1], startPos, colorBackgroundText, invertYAxisText + 8);
-        // }
-
-        UICanvas.plotGraph(data);
       },
       zoomOutCanvas: function(data) {
         flag = false;
@@ -506,6 +520,8 @@ function loadBodyWeight() {
 
         // flag = true (means that we clicked at zooom)
         // deltaY === 40 means that we can not zoom in anymore
+        // to make sure that we do not do more than one zoom
+
 
         if( flag && deltaY !== 40 ) {
           if(weightValue < TextYlines[3][1]) {
@@ -833,9 +849,18 @@ function loadBodyWeight() {
           case "zoomInBtn":
             // disable the zoomInbutton
             document.querySelector(UICanvasSelectors.btnFlagZoomIn).setAttribute("disabled", "");
+            if(document.querySelector(UICanvasSelectors.btnFlagZoomOut).hasAttribute("disabled")) {
+              document.querySelector(UICanvasSelectors.btnFlagZoomOut).removeAttribute("disabled");
+            }
             zoomInBtn();
             break;
           case "zoomOutBtn":
+            // disable the zoomInbutton
+            document.querySelector(UICanvasSelectors.btnFlagZoomOut).setAttribute("disabled", "");
+            // debugger
+            if(document.querySelector(UICanvasSelectors.btnFlagZoomIn).hasAttribute("disabled")) {
+              document.querySelector(UICanvasSelectors.btnFlagZoomIn).removeAttribute("disabled");
+            }
             zoomOutBtn();
             break;
           default:
