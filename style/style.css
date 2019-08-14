@@ -65,10 +65,9 @@ body {
   }
 
   /* trying to let it visible in smartphones! */
-  button,
-  btn {
+  /* button {
     min-height: 42px;
-  }
+  } */
 
   .nav-link:hover {
   border-bottom: none;

@@ -162,7 +162,7 @@ const bodyWeight = function() {
       <div class="form-row">
         <div class="col">
           <!-- <label for="submit">Submit</label> -->
-          <submit id="submit" class="btn btn-primary btn-lg btn-block">Submit</submit>
+          <button id="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
         </div>
       </div>
       <!-- third row -->
@@ -188,13 +188,13 @@ const bodyWeight = function() {
       <h5 class="text-white h4">Extra functions</h5>
       <span class="text-light lead">You can delete all files or export the saved data (download) and also to inform more about BMI.</span>
         <!-- Button trigger modal: BMI -->
-      <btn type="button" id="bmiInfoBtn" class="btn btn-outline-primary btn-block btn-lg my-2" data-toggle="modal" data-target="#locModal2">
-      About BMI </btn>
-      <btn type="button" id="deleteAllAskBtn" class="btn btn-outline-danger btn-block my-2 btn-lg " data-toggle="modal" data-target="#locModal">
+      <button type="button" id="bmiInfoBtn" class="btn btn-primary btn-block btn-lg my-2" data-toggle="modal" data-target="#locModal2">
+      About BMI </button>
+      <button type="button" id="deleteAllAskBtn" class="btn btn-danger btn-block my-2 btn-lg " data-toggle="modal" data-target="#locModal">
       Delete All Items
-      </btn>
-      <btn type="button" id="saveBtn" class="btn btn-outline-info btn-block my-2 btn-lg">Save </btn>
-      <btn type="button" id="loadJSONBtn" class="btn btn-outline-info btn-block my-2 btn-lg">Load File </btn>
+      </button>
+      <button type="button" id="saveBtn" class="btn btn-info btn-block my-2 btn-lg">Save </btn>
+      <button type="button" id="loadJSONBtn" class="btn btn-warning btn-block my-2 btn-lg">Load File </button>
     </div>
   </div>
 
@@ -250,7 +250,7 @@ const bodyWeight = function() {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary bt-lg" data-dismiss="modal">Back</button>
-          <btn type="button" id="deleteAllBtn" class="btn btn-outline-danger bt-lg" data-dismiss="modal">Delete All Items</btn>
+          <button type="button" id="deleteAllBtn" class="btn btn-danger bt-lg" data-dismiss="modal">Delete All Items</button>
         </div>
       </div>
     </div>
@@ -309,10 +309,10 @@ const bodyWeight = function() {
             <!-- third row -->
               <div class="form-row">
                 <div class="col">
-                  <btn type="button" id="editBtn" class="btn btn-outline-primary btn-lg" data-dismiss="modal">Edit</btn>
-                  <btn type="button" id="backBtn" class="btn btn-outline-info btn-lg" data-dismiss="modal">Back</btn>
-                  <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg" data-dismiss="modal">Delete
-                  </btn>
+                  <button type="button" id="editBtn" class="btn btn-primary btn-lg" data-dismiss="modal">Edit</button>
+                  <button type="button" id="backBtn" class="btn btn-info btn-lg mx-2" data-dismiss="modal">Back</btn>
+                  <button type="button" id="deleteBtn" class="btn btn-danger btn-lg mx-1" data-dismiss="modal">Delete
+                  </button>
                 </div>
               </div>
           </div>

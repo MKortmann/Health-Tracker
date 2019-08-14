@@ -938,7 +938,9 @@ function loadBodyWeight() {
     }
 
     // Data submit
-    const itemToSubmit = function() {
+    const itemToSubmit = function(event) {
+      // to prevent to send the form (reload)
+      event.preventDefault();
       //START: GET AND PREPARE THE DATA
       // Get the data from UI
       const dataToSubmit = UICtrl.getWeightDateHeight();
