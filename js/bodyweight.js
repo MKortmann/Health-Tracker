@@ -376,7 +376,10 @@ function loadBodyWeight() {
       oneYearBtn: "#oneYearBtn",
       AllMeasureBtn: "AllMeasureBtn",
       zoomInBtn: "#zoomInBtn",
-      zoomOutBtn: "#zoomOutBtn"
+      btnFlagZoomIn: "#btnFlagZoomIn",
+      zoomOutBtn: "#zoomOutBtn",
+      btnFlagZoomOut: "#btnFlagZoomOut"
+
     }
     // Initialize Canvas
     let canvas = document.getElementById("canvasWeight");
@@ -397,6 +400,8 @@ function loadBodyWeight() {
     let factor = canvasHeight/200;
     // the deltaX determines the step between two measures in the x-axis
     let deltaX;
+    // deltaY: used to see the factor zoom
+    let deltaY;
     // To plot the graph lines!
     let StartYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
     let EndYlines = [
@@ -442,7 +447,7 @@ function loadBodyWeight() {
           }
         }
         for (let i = 0; i < StartYlines.length; i++) {
-          if (minValue > StartYlines[i][1]) {
+          if (minValue >= StartYlines[i][1]) {
             // to case that the weight is between 30 and 70, the startPos should receive 30 but not lower
             // if(i+1 <= 4) {
             //   startPos = StartYlines[i+1][1];
@@ -474,7 +479,7 @@ function loadBodyWeight() {
         UICanvas.plotGraph(data);
       },
       readjustYValues: function(startPos, endPos) {
-        let deltaY = (endPos-startPos)/4;
+        deltaY = (endPos-startPos)/4;
         for (let i = 0; i < StartYlines.length; i++) {
           // StartYlines[i][1] = endPos-deltaY*i;
           // EndYlines[i][1] = StartYlines[i][1];
@@ -486,18 +491,31 @@ function loadBodyWeight() {
       readjustWeightValues: function(weightValue) {
         // flag means that we have done the zoom
         weightValue = parseInt(weightValue);
-        console.log(TextYlines);
-        console.log(OffsetYlines);
+        // console.log(TextYlines);
+        // console.log(OffsetYlines);
 
-        if(flag) {
+        let localAdjustFactor;
+        console.log(`DeltaY: ${deltaY}`);
+        if( deltaY === 30) {
+          localAdjustFactor = 0.5;
+        } else if (deltaY === 20) {
+          localAdjustFactor = 1;
+        } else {
+          localAdjustFactor = 2;
+        }
+
+        // flag = true (means that we clicked at zooom)
+        // deltaY === 40 means that we can not zoom in anymore
+
+        if( flag && deltaY !== 40 ) {
           if(weightValue < TextYlines[3][1]) {
-            return (weightValue + parseInt(OffsetYlines[4][1]) + (weightValue-parseInt(TextYlines[4][1]))*2 );
+            return (weightValue + parseInt(OffsetYlines[4][1]) + (weightValue-parseInt(TextYlines[4][1]))*localAdjustFactor );
           } else if (weightValue < TextYlines[2][1]) {
-            return (weightValue + parseInt(OffsetYlines[3][1]) + (weightValue-parseInt(TextYlines[3][1]))*2);
+            return (weightValue + parseInt(OffsetYlines[3][1]) + (weightValue-parseInt(TextYlines[3][1]))*localAdjustFactor);
           } else if (weightValue < TextYlines[1][1]) {
-            return (weightValue + parseInt(OffsetYlines[2][1]) + (weightValue-parseInt(TextYlines[2][1]))*2);
+            return (weightValue + parseInt(OffsetYlines[2][1]) + (weightValue-parseInt(TextYlines[2][1]))*localAdjustFactor);
           } else if (weightValue < TextYlines[0][1]) {
-            return (weightValue + parseInt(OffsetYlines[1][1]) + (weightValue-parseInt(TextYlines[1][1]))*2);
+            return (weightValue + parseInt(OffsetYlines[1][1]) + (weightValue-parseInt(TextYlines[1][1]))*localAdjustFactor);
           } else {
             return (weightValue + parseInt(OffsetYlines[0][1]) + (weightValue-parseInt(TextYlines[0][1]))*2);
           }
@@ -813,6 +831,8 @@ function loadBodyWeight() {
             groupCanvasBtn(360);
             break;
           case "zoomInBtn":
+            // disable the zoomInbutton
+            document.querySelector(UICanvasSelectors.btnFlagZoomIn).setAttribute("disabled", "");
             zoomInBtn();
             break;
           case "zoomOutBtn":
@@ -843,6 +863,8 @@ function loadBodyWeight() {
       const minValue = Math.floor(Math.min(...weightArray));
       // pass the max and min values of the weight measured and the data!
       UICanvas.zoomInCanvas(maxValue, minValue, data);
+
+
 
     }
     const zoomOutBtn = function() {

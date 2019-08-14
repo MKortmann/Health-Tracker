@@ -111,11 +111,11 @@ const bodyWeight = function() {
       <button type="button" class="btn btn-info d-none d-lg-block" id="sixMonthsBtn">6 Months</button>
       <button type="button" class="btn btn-info d-none d-lg-block" id="oneYearBtn">1 Year</button>
       <button type="button" class="btn btn-info" id="AllMeasureBtn">All</button>
-      <button type="button" class="btn btn-secondary p-0">
-        <img src="./icons/zoomIn.svg" class="img-fluid" id="zoomInBtn"></img>
+      <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomIn">
+        <img src="./icons/zoomIn.svg" class="img-fluid" id="zoomInBtn"  ></img>
       </button>
-      <button type="button" class="btn btn-secondary p-0">
-        <img src="./icons/zoomOut.svg" class="img-fluid" id="zoomOutBtn"></img>
+      <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomOut">
+        <img src="./icons/zoomOut.svg" class="img-fluid" id="zoomOutBtn"  ></img>
       </button>
     </div>
   </div>
