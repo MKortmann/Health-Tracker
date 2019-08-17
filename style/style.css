@@ -73,6 +73,10 @@ body {
     font-size: 12px;
   }
 
+  button {
+    cursor: pointer;
+  }
+
   .btn-secondary {
     font-weight: 750;
   }

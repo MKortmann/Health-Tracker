@@ -404,12 +404,17 @@ function loadBodyWeight() {
     let OffsetYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
     // flag to show that we have done the zoom
     let flag = false;
-    let colorBackgroundLine = "#6c757d";
-    let colorLine = "#17a2b8";
-    let colorText = "#007bff";
-    let colorCircle = "#dc3545";
-    let colorBackgroundText = "#6c757d";
-    let textFont = "22px serif";
+    // let colorBackgroundLine = "#6c757d";
+    const colorBackgroundLine = "black";
+    const colorLine = "#17a2b8";
+    const colorText = "#007bff";
+    const colorCircle = "#dc3545";
+    const colorBackgroundText = "black";
+    const textFont = "22px serif";
+    // const colorDashedLine = "#17a2b8";
+    const colorDashedLine = "#007bff";
+    // const colorDashedLine = "#dc3545";
+    const setDash = [5,20];
 
     // Canvas Y: start from 0 (top) and goes to 200 (bottom) [times factor]
     // Canvas X: start from 0 (left) and goes to 1880 (right) [dinamically readjusted]
@@ -446,26 +451,12 @@ function loadBodyWeight() {
           }
           for (let i = 0; i < StartYlines.length; i++) {
             if (minValue >= StartYlines[i][1]) {
-              // to case that the weight is between 30 and 70, the startPos should receive 30 but not lower
-              // if(i+1 <= 4) {
-              //   startPos = StartYlines[i+1][1];
-              //   break;
-              // } else {
                 startPos = StartYlines[i][1];
                 break;
-              //   break;
-              // }
             }
           }
 
           UICanvas.readjustYValues(startPos, endPos);
-            // startPos = StartYlines[i];
-            // endPos = EndYlines[i];
-            // UICanvas.drawStraightLine(startPos, endPos, colorBackgroundLine);
-            // // the number 8 only let the text a little higher! Used only here!
-            // UICanvas.drawText(startPos[1], startPos, colorBackgroundText, invertYAxisText + 8);
-          // }
-
           UICanvas.plotGraph(data);
         }
       },
@@ -502,11 +493,6 @@ function loadBodyWeight() {
         } else {
           localAdjustFactor = 2;
         }
-
-        // flag = true (means that we clicked at zooom)
-        // deltaY === 40 means that we can not zoom in anymore
-        // to make sure that we do not do more than one zoom
-
 
         if( flag && deltaY !== 40 ) {
           if(weightValue < TextYlines[3][1]) {
@@ -545,7 +531,7 @@ function loadBodyWeight() {
         }
       },
       plotYDate: function(data, deltaX) {
-        let posX = 15;
+        let posX = 30;
         let measurements = data.length - 1;
         let middlePos = 0;
         // Calc the middle position of the canvas
@@ -558,12 +544,16 @@ function loadBodyWeight() {
         // the x-values positions respective to the y-measurements (weight)
         for (let i = 0; i < data.length; i++) {
           // get the start and middle position: necessary to ajust the text on canvsa
-          if ((posX === 15) || (posX === 15 + deltaX * middlePos)) {
+          if ((posX === 30) || (posX === 30 + deltaX * middlePos)) {
             // if(posX === 15 || mesurements === 195|| posX === 395 ||
             //    posX === 595|| posX === 795 ) {
+
             UICanvas.drawText(data[i].date, [posX - 10, 12], colorBackgroundText, invertYAxisText);
+            if(posX !== 30) {
+              UICanvas.drawStraightLine([posX, 35],[posX, 390], colorDashedLine, setDash);
+            }
             // for the last position!
-          } else if ((posX === 15 + deltaX * measurements)) {
+          } else if ((posX === 30 + deltaX * measurements)) {
             // get the end position: necessary to ajust the text on canvas
             // the last data to plot we remove the year!
             let newData = data[i].date;
@@ -572,11 +562,14 @@ function loadBodyWeight() {
             // repositioning the text in case we have a smaller screen
             if ( window.innerWidth <= 800 ) {
               UICanvas.drawText(newData, [posX - 50, 12], colorBackgroundText, invertYAxisText);
+              UICanvas.drawStraightLine([posX, 35],[posX,390], colorDashedLine, setDash);
             // in case we have less than 30 measurements
             } else if ( measurements <= 30 ) {
               UICanvas.drawText(newData, [posX - 10, 12], colorBackgroundText, invertYAxisText);
+              UICanvas.drawStraightLine([posX, 35],[posX, 390], colorDashedLine, setDash);
             } else {
               UICanvas.drawText(newData, [posX - 35, 12], colorBackgroundText, invertYAxisText);
+              UICanvas.drawStraightLine([posX, 35],[posX, 390], colorDashedLine, setDash);
             }
           }
           posX = posX + deltaX;
@@ -589,7 +582,7 @@ function loadBodyWeight() {
         //   data = data.splice(data.length-7, 7);
         // }
         UICanvas.plotXLines();
-        let xPos = 15;
+        let posX = 30;
         let startPos, endPos, weightArray = [], weightArrayOriginal = [];
         // extract from data an weight array with only weight data
         data.forEach(function(item, index) {
@@ -608,9 +601,9 @@ function loadBodyWeight() {
         UICanvas.plotYDate(data, deltaX);
 
         weightArray.forEach(function(item, index) {
-          startPos = [xPos, weightArray[index]];
+          startPos = [posX, weightArray[index]];
           if ((index + 1) !== weightArray.length) {
-            endPos = [xPos + deltaX, weightArray[index + 1]];
+            endPos = [posX + deltaX, weightArray[index + 1]];
             UICanvas.drawStraightLine(startPos, endPos, colorLine);
             UICanvas.drawCircle(startPos);
             if (!hideText) {
@@ -625,14 +618,15 @@ function loadBodyWeight() {
               }
             }
             // deltaX
-            xPos = xPos + deltaX;
+            posX = posX + deltaX;
           }
         })
       },
-      drawStraightLine: function(startPos, endPos, color) {
+      drawStraightLine: function(startPos, endPos, color, dashed = []) {
         // Add 0.5 factor to see if it the image will be sharper!
         // we need to invert the y-axis
         ctx.beginPath(); // Start a new path
+        ctx.setLineDash(dashed);
         ctx.moveTo(startPos[0]+0.5, invertYAxis - startPos[1]*factor +0.5); // Move the pen to (30, 50)
         ctx.strokeStyle = color;
         ctx.lineTo(endPos[0]+0.5, invertYAxis - endPos[1]*factor + 0.5); // Draw a line to (150, 100)
@@ -880,8 +874,6 @@ function loadBodyWeight() {
       // pass the max and min values of the weight measured and the data!
       UICanvas.zoomInCanvas(maxValue, minValue, data);
 
-
-
     }
     const zoomOutBtn = function() {
       console.log("zoom out clicked");
@@ -1098,23 +1090,23 @@ function loadBodyWeight() {
   // Initialize App
   AppCtrl.init();
 
-  // //The lines below was used only to check the graphic position for debugging
-  let canvas = document.getElementById("canvasWeight");
-  let ctx = canvas.getContext("2d");
-  // Mouse event click in canvas
-  document.querySelector("#canvasWeight").addEventListener("click", function(e) {
-
-    const rect = canvas.getBoundingClientRect();
-    // const x = event.pageX - rect.left;
-    // const y = event.pageY - rect.top;
-    // let scaleX = canvas[0].width / rect.width;
-    // let scaleY = canvas[0].height / rect.height;
-
-    const x = (event.pageX - rect.left);
-    const y = (event.pageY - rect.top);
-    console.log(`X position: ${x}, Y position: ${y}`);
-    console.log(e);
-  });
+  // // //The lines below was used only to check the graphic position for debugging
+  // let canvas = document.getElementById("canvasWeight");
+  // let ctx = canvas.getContext("2d");
+  // // Mouse event click in canvas
+  // document.querySelector("#canvasWeight").addEventListener("click", function(e) {
+  //
+  //   const rect = canvas.getBoundingClientRect();
+  //   // const x = event.pageX - rect.left;
+  //   // const y = event.pageY - rect.top;
+  //   // let scaleX = canvas[0].width / rect.width;
+  //   // let scaleY = canvas[0].height / rect.height;
+  //
+  //   const x = (event.pageX - rect.left);
+  //   const y = (event.pageY - rect.top);
+  //   console.log(`X position: ${x}, Y position: ${y}`);
+  //   console.log(e);
+  // });
 
   // check if the window has been resize
   document.getElementsByTagName("body")[0].onresize = function () {
