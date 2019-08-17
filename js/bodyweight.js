@@ -411,7 +411,7 @@ function loadBodyWeight() {
     // deltaY: used to see the factor zoom
     let deltaY;
     // To plot the graph lines!
-    let StartYlines = [[0.5, 190.5],[0.5, 150.5],[0.5, 110.5],[0.5, 70.5],[0.5, 30.5]];
+    let StartYlines = [[0.5, 190],[0.5, 150],[0.5, 110],[0.5, 70],[0.5, 30]];
     let EndYlines = [
       [canvasWidth+0.5, 190.5],
       [canvasWidth+0.5, 150.5],
@@ -420,7 +420,7 @@ function loadBodyWeight() {
       [canvasWidth+0.5, 30.5]
     ];
     // Text to write
-    let TextYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
+    let TextYlines = [[0, 190],[0, 150],[0.5, 110],[0, 70],[0, 30]];
     // Offset to correct
     let OffsetYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
     // flag to show that we have done the zoom
@@ -472,6 +472,7 @@ function loadBodyWeight() {
       },
       // zoom canvas
       zoomInCanvas: function(maxValue, minValue, data) {
+        debugger
         let startPos, endPos;
 
         let stopOrGo = true;

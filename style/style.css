@@ -58,6 +58,10 @@ body {
   font-weight: 750;
 }
 
+button {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1400px) {
   #canvasWeight {
     max-width: 100%;
@@ -71,10 +75,6 @@ body {
   .btn-secondary,
   footer {
     font-size: 12px;
-  }
-
-  button {
-    cursor: pointer;
   }
 
   .btn-secondary {
