@@ -17,7 +17,7 @@ submit {
   cursor: pointer;
 }
 #canvasWeight {
-  /* At100% the canvas will have 900px */
+  /* At100% the canvas will have 1880px */
   max-width: 100%;
   /* And here 200 px */
   height: 400px;
@@ -49,6 +49,8 @@ body {
   background: #343a40;
   border: none;
   font-size: 1rem;
+  color:  #17a2b8;
+  color: #ffc107;
 }
 .dropdown div a:hover {
   background: #007bff;

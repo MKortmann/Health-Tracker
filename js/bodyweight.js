@@ -287,8 +287,8 @@ function loadBodyWeight() {
         // if updateOnlyOneLine of table is false it means that we will call it
         // many times populating the table!
         const link = ItemCtrl.BMIResultLink(item.BMI);
-        // TO BE IMPROVED! NOT HARDCODE HERE!
-        let select = document.querySelector("#dropdownMenuButton").innerHTML;
+
+        let select = document.querySelector(UISelectors.dropdownMenuButton).innerHTML;
         let linkColumn;
 
         // Control what to display in accord to the text
@@ -390,13 +390,13 @@ function loadBodyWeight() {
     // deltaY: used to see the factor zoom
     let deltaY;
     // To plot the graph lines!
-    let StartYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
+    let StartYlines = [[0.5, 190.5],[0.5, 150.5],[0.5, 110.5],[0.5, 70.5],[0.5, 30.5]];
     let EndYlines = [
-      [canvasWidth, 190],
-      [canvasWidth, 150],
-      [canvasWidth, 110],
-      [canvasWidth, 70],
-      [canvasWidth, 30]
+      [canvasWidth+0.5, 190.5],
+      [canvasWidth+0.5, 150.5],
+      [canvasWidth+0.5, 110.5],
+      [canvasWidth+0.5, 70.5],
+      [canvasWidth+0.5, 30.5]
     ];
     // Text to write
     let TextYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
@@ -630,11 +630,12 @@ function loadBodyWeight() {
         })
       },
       drawStraightLine: function(startPos, endPos, color) {
+        // Add 0.5 factor to see if it the image will be sharper!
         // we need to invert the y-axis
         ctx.beginPath(); // Start a new path
-        ctx.moveTo(startPos[0], invertYAxis - startPos[1]*factor); // Move the pen to (30, 50)
+        ctx.moveTo(startPos[0]+0.5, invertYAxis - startPos[1]*factor +0.5); // Move the pen to (30, 50)
         ctx.strokeStyle = color;
-        ctx.lineTo(endPos[0], invertYAxis - endPos[1]*factor); // Draw a line to (150, 100)
+        ctx.lineTo(endPos[0]+0.5, invertYAxis - endPos[1]*factor + 0.5); // Draw a line to (150, 100)
         ctx.stroke(); // Render the path
       },
       drawCircle: function(startPos) {

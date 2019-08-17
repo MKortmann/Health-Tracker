@@ -133,8 +133,8 @@ const bodyWeight = function() {
 
   <section class="sectionCCanvas">
     <div class="d-flex justify-content-center">
-    <!-- As soon as defined the height and width the image become sharp -->
-      <canvas id="canvasWeight" height="400px" width="1880px"></canvas>
+    <!-- As soon as defined the height and width the image become sharp width="1880px"-->
+      <canvas id="canvasWeight" height="400px" width="1880px"></canvas> 
     </div>
     <span id="containerToAddAlertMsg"></span>
   </section>
