@@ -13,8 +13,8 @@ tbody tr:nth-child(odd) {
   height: 500px;
   overflow-y: scroll;
 }
-submit {
-  cursor: pointer;
+#submit {
+  min-height: 54px;
 }
 #canvasWeight {
   /* At100% the canvas will have 1880px */
@@ -63,6 +63,9 @@ button {
 }
 
 @media screen and (max-width: 1400px) {
+  #loadJSONBtn {
+    display: none;
+  }
   #canvasWeight {
     max-width: 100%;
     margin: 0;

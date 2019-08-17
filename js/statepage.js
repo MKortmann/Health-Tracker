@@ -186,7 +186,9 @@ const bodyWeight = function() {
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
       <h5 class="text-white h4">Extra functions</h5>
-      <span class="text-light lead">You can delete all files or export the saved data (download) and also to inform more about BMI.</span>
+      <span class="text-light lead">You can delete all files or export the saved data (download) and also to inform more about BMI.
+      If you have issues to print your data in your phone, please, try to switch the browser to desktop mode!
+      </span>
         <!-- Button trigger modal: BMI -->
       <button type="button" id="bmiInfoBtn" class="btn btn-primary btn-block btn-lg my-2" data-toggle="modal" data-target="#locModal2">
       About BMI </button>
@@ -195,7 +197,7 @@ const bodyWeight = function() {
       </button>
       <button type="button" id="saveBtn" class="btn btn-info btn-block my-2 btn-lg">Save </btn>
       <button type="button" id="loadJSONBtn" class="btn btn-warning btn-block my-2 btn-lg">Load File </button>
-      <button type="button" id="printBtn" class="btn btn-primary btn-block my-2 btn-lg">Print</button>
+      <button type="button" id="printBtn" class="btn btn-warning btn-block my-2 btn-lg">Print</button>
     </div>
   </div>
 
