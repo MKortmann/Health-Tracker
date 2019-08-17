@@ -216,9 +216,24 @@ const bodyWeight = function() {
         <thead>
           <tr>
             <th scope="col" class="align-middle">#</th>
-            <th scope="col" class="align-middle d-none d-sm-table-cell">Data</th>
+            <th scope="col" class="align-middle">
+            <!-- DROPDOWN MENU  -->
+              <div class="dropdown d-sm-none">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Date
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <!-- <a id="dropDownTime" class="dropdown-item" href="#">Time</a> -->
+                  <a id="dropDownDate" class="dropdown-item" href="#">Date</a>
+                  <a id="dropDownBMI"class="dropdown-item d-sm-none " href="#">BMI</a>
+                </div>
+              </div>
+            <!-- span -->
+            <span class="d-none d-sm-block">Date</span>
+
+            </th>
             <th scope="col" class="align-middle">Weight</th>
-            <th scope="col" class="align-middle">BMI</th>
+            <th scope="col" class="align-middle d-none d-sm-table-cell">BMI</th>
           </tr>
         </thead>
         <tbody>
@@ -237,7 +252,7 @@ const bodyWeight = function() {
 <!-- HERE ARE THE MODALS AND FUNCTIONS USED IN THIS PAGE: THEY ARE PLACED AT THE END BECAUSE THEY DO NOT BELONGS TO THE DOCUMENT FLOW READING! -->
 <!-- Modal Dialog: TO CONFIRM DELETE -->
   <div class="modal fade" id="locModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Delete All Items</h5>

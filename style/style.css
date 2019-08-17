@@ -45,6 +45,17 @@ body {
   /* background: url("../imgs/background2.jpg") top center / cover no-repeat; */
 }
 
+#dropdownMenuButton {
+  background: #343a40;
+  border: none;
+  font-size: 1rem;
+}
+.dropdown div a:hover {
+  background: #007bff;
+  color: #fff;
+  font-weight: 750;
+}
+
 @media screen and (max-width: 1400px) {
   #canvasWeight {
     max-width: 100%;
@@ -58,6 +69,10 @@ body {
   .btn-secondary,
   footer {
     font-size: 12px;
+  }
+
+  .btn-secondary {
+    font-weight: 750;
   }
   /* resize images */
   img {

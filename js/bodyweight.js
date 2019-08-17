@@ -199,7 +199,10 @@ function loadBodyWeight() {
       deleteAllBtn: "#deleteAllBtn",
       deleteAllAskBtn: "#deleteAllAskBtn",
       saveBtn: "#saveBtn",
-      loadJSONBtn: "#loadJSONBtn"
+      loadJSONBtn: "#loadJSONBtn",
+      dropdownMenuButton: "#dropdownMenuButton",
+      dropDownBMI: "#dropDownBMI",
+      dropDownDate: "#dropDownDate"
     }
 
     return {
@@ -284,6 +287,21 @@ function loadBodyWeight() {
         // if updateOnlyOneLine of table is false it means that we will call it
         // many times populating the table!
         const link = ItemCtrl.BMIResultLink(item.BMI);
+        // TO BE IMPROVED! NOT HARDCODE HERE!
+        let select = document.querySelector("#dropdownMenuButton").innerHTML;
+        let linkColumn;
+
+        // Control what to display in accord to the text
+        switch (select) {
+          case "Time":
+            // code here
+            break;
+          case "BMI":
+            linkColumn = item.BMI;
+            break;
+          default:
+            linkColumn = item.date;
+        }
 
         if (!updateOnlyOneLine) {
           const table = document.querySelector(UISelectors.tableBody);
@@ -292,9 +310,9 @@ function loadBodyWeight() {
           row.innerHTML = `
               <tr>
                 <td scope="row" class="align-middle">${item.ID}</td>
-                <td class="align-middle d-none d-sm-table-cell">${item.date}</td>
+                <td class="align-middle">${linkColumn}</td>
                 <td class="align-middle">${item.weight}  kg</td>
-                <td class="align-middle">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
+                <td class="align-middle d-none d-sm-table-cell">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
                 <a href="#" id="${item.ID}">
                 <img src=${link} class="float-left img-fluid edit d-none d-md-block align-middle"></img>
                 <img src="./icons/edit.svg" class="float-right img-fluid edit" data-toggle="modal" data-target="#locModal3"></img>
@@ -309,9 +327,9 @@ function loadBodyWeight() {
           rowToBeReplaced.innerHTML = `
               <tr>
                 <td scope="row" class="align-middle">${item.ID}</td>
-                <td class="align-middle d-none d-sm-table-cell">${item.date}</td>
+                <td class="align-middle">${linkColumn}</td>
                 <td class="align-middle">${item.weight}  kg</td>
-                <td class="align-middle">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
+                <td class="align-middle d-none d-sm-table-cell">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
                 <a href="#" id="${item.ID}">
                 <img src=${link} class="float-left img-fluid edit d-none d-md-block align-middle"></img>
                 <img src="./icons/edit.svg" class="float-right img-fluid edit" data-toggle="modal" data-target="#locModal3"></img>
@@ -788,6 +806,11 @@ function loadBodyWeight() {
           return false;
         }
       });
+      // Dropdown button table event listeners
+      // For BMI
+      document.querySelector(UISelectors.dropDownBMI).addEventListener("click", reloadBMIColumnTable);
+      // For Date
+      document.querySelector(UISelectors.dropDownDate).addEventListener("click", reloadDateColumnTable);
       // EventListeners for Canvas buttons
       document.querySelector(".buttonGroup").addEventListener("click", function(e) {
         // const btnClicked = e.path[0].id;
@@ -873,6 +896,26 @@ function loadBodyWeight() {
       // pass the max and min values of the weight measured and the data!
       UICanvas.zoomOutCanvas(data);
 
+    }
+    // DROPDOWN MENU: For WebResponsive
+    // dropdown menu table reload Date
+    const reloadDateColumnTable = function(event) {
+      event.preventDefault();
+      // Update The Display Text
+      document.querySelector("#dropdownMenuButton").innerHTML = "Date";
+      // Before populate, let's delete the tableBody
+      UICtrl.deleteTable();
+      // Populate the table
+      UICtrl.populateTable(StorageCtrl.data);
+    }
+    const reloadBMIColumnTable = function(event) {
+      event.preventDefault();
+      // Update The Display Text
+      document.querySelector("#dropdownMenuButton").innerHTML = "BMI";
+      // Before populate, let's delete the tableBody
+      UICtrl.deleteTable();
+      // Populate the table
+      UICtrl.populateTable(StorageCtrl.data);
     }
     // delete All
     const btnDeleteAll = function() {
