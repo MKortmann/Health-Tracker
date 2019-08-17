@@ -365,11 +365,13 @@ function loadBodyWeight() {
       zoomInBtn: "#zoomInBtn",
       btnFlagZoomIn: "#btnFlagZoomIn",
       zoomOutBtn: "#zoomOutBtn",
-      btnFlagZoomOut: "#btnFlagZoomOut"
+      btnFlagZoomOut: "#btnFlagZoomOut",
+      canvasWeight: "#canvasWeight",
+      printBtn: "#printBtn"
 
     }
     // Initialize Canvas
-    let canvas = document.getElementById("canvasWeight");
+    let canvas = document.querySelector(UICanvasSelectors.canvasWeight);
     // /*We need to specific write the kind of environment we are
     // working: is it 2D or 3D!*/
     let ctx = canvas.getContext("2d");
@@ -423,6 +425,29 @@ function loadBodyWeight() {
     // And we will plot x between (5 and 295);
 
     return {
+      // printing
+      print: function() {
+        const dataUrl = document.querySelector("#canvasWeight").toDataURL();
+        let windowContent = '<!DOCTYPE html>';
+        windowContent += '<html>'
+        windowContent += `<head><title>Health Tracker</title></head>`;
+        windowContent += '<body>'
+        windowContent += '<img src="' + dataUrl + '">';
+        windowContent += '</body>';
+        windowContent += '</html>';
+        let printWin = window.open('', '', `width=${canvas.width},height=${canvas.height}`);
+        printWin.document.open();
+        printWin.document.write(windowContent);
+
+        //I am using ES6 here instead of jQuery. Do not work with on!
+        printWin.document.addEventListener('load', function() {
+            printWin.focus();
+            printWin.print();
+            printWin.document.close();
+            printWin.close();
+        }, true);
+      },
+      // zoom canvas
       zoomInCanvas: function(maxValue, minValue, data) {
         let startPos, endPos;
 
@@ -765,7 +790,7 @@ function loadBodyWeight() {
         // we check that the weight shoudl be between 30 and 199.9
         const weightCheck1 = /^[3-9]{1}[0-9]{1}(.[0-9]{1})?$/;
         const weightCheck2 = /^[1]{1}[0-9]{1}[0-9]{1}(.[0-9]{1})?$/;
-        
+
         if(!weightCheck1.test(weight) && !weightCheck2.test(weight)) {
           return ([false, "The weight should be between 30 and 199 kg!"]);
         }
@@ -825,6 +850,8 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.saveBtn).addEventListener("click", StorageCtrl.downloadVideosToJSON);
       // Add Event Listener To Load JSON file
       document.querySelector(UISelectors.loadJSONBtn).addEventListener("click", loadDataAndPopulateUI);
+      // Add Event Listener To printBtn: print table/canvas
+      document.querySelector(UICanvasSelectors.printBtn).addEventListener("click", printData);
       // Disable submit on enter
       document.addEventListener("keypress", function(e) {
         if (e.keyCode === 13 || e.which === 13) {
@@ -888,6 +915,9 @@ function loadBodyWeight() {
       // Submit button
       document.querySelector(UISelectors.submitBtn).addEventListener("click", itemToSubmit);
 
+    }
+    const printData = function() {
+      UICanvas.print();
     }
     // zoomInBtn
     const zoomInBtn = function() {

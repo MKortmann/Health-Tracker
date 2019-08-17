@@ -195,6 +195,7 @@ const bodyWeight = function() {
       </button>
       <button type="button" id="saveBtn" class="btn btn-info btn-block my-2 btn-lg">Save </btn>
       <button type="button" id="loadJSONBtn" class="btn btn-warning btn-block my-2 btn-lg">Load File </button>
+      <button type="button" id="printBtn" class="btn btn-primary btn-block my-2 btn-lg">Print</button>
     </div>
   </div>
 
