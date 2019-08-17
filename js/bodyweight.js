@@ -64,6 +64,8 @@ function loadBodyWeight() {
     let currentItem = null;
     // Start as a standard value
     let data = [];
+    // // JSON file name
+    // let jsonFileName = "";
 
     return {
       // Declare public var and functions
@@ -139,11 +141,28 @@ function loadBodyWeight() {
         linkElement.click();
         linkElement.remove();
       },
+      // // Open a file selection to select the json file
+      // selectFile: function() {
+      //   // open a file selection dialog
+      //   const input = document.createElement('input');
+      //   input.type = 'file';
+      //   // handle the selected file
+      //   input.onchange = e => {
+      //     const file = e.target.files[0];
+      //     return file.name;
+      //   }
+      //   input.click();
+      // },
       // The method XMLhttpRequest works only if you have a server installed.
       // easier way: go to your project file throught prompt command and type:
       // npm install -g live-server
       // run it typing: live-server
       loadJSONFile: function() {
+        // get the json file name
+
+        // let fileName = StorageCtrl.selectFile();
+        // console.log(`Output filename: ${fileName}`);
+
         var xhttp = new XMLHttpRequest();
         // we will use now onload instead of onreadystatechange. So we do not need
         // to check for this.readyState
@@ -161,7 +180,7 @@ function loadBodyWeight() {
             localStorage.setItem("items", JSON.stringify(items));
           }
         };
-        xhttp.open("GET", "./storage/table.json", true);
+        xhttp.open("GET", `./storage/table.json`, true);
         xhttp.onerror = function() {
           console.log("Request error in XMLHttpRequest...");
           return false;
@@ -951,15 +970,6 @@ function loadBodyWeight() {
       });
 
       dataToPrint += "</tbody></table></div>";
-      // data.forEach(function(item, index) {
-      //   dataToPrint += "<div style='text-align:center;'><br>"
-      //   dataToPrint += data.length-index + " --- ";
-      //   dataToPrint += item.date + "  ";
-      //   dataToPrint += '<span style="color:red;">' + item.weight + "kg" + "</span>" + "  ";
-      //   dataToPrint += item.height + "cm" + "  " + "<br>";
-      //   dataToPrint += "</div><br>";
-      // });
-      // UICanvas.print(JSON.stringify(date, weight, height));
       UICanvas.print(dataToPrint);
     }
     // zoomInBtn
@@ -1050,9 +1060,15 @@ function loadBodyWeight() {
     const loadDataAndPopulateUI = function() {
       // if true, means that we will get the JSON file and write in LS
       // we will deactived here for now because it does not work in github
+      debugger
       if (StorageCtrl.loadJSONFile()) {
         // Clear table
         UICtrl.deleteTable();
+        // Sending a message to the user!
+        UICtrl.showAlert("File Loaded!", "success alert-success");
+      } else {
+        // Sending a message to the user!
+        UICtrl.showAlert("To Load Data From A File, you have to rename the download file to: table.json. Then copy this file to the folder storage! Then try it again!", "danger alert-danger");
       }
       // Hide the Edit and back buttons
       // UICtrl.hideButtons();
@@ -1069,6 +1085,7 @@ function loadBodyWeight() {
       }
       // Update input: display actual weight
       UICtrl.populateInputs();
+
 
     }
 
