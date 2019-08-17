@@ -760,12 +760,12 @@ function loadBodyWeight() {
         });
       },
       // check input values
-      validateInputs({weight, height}) {
+      validateInputs({weight, height, date}) {
         // CHECKING THE WEIGHT:
         // we check that the weight shoudl be between 30 and 199.9
         const weightCheck1 = /^[3-9]{1}[0-9]{1}(.[0-9]{1})?$/;
         const weightCheck2 = /^[1]{1}[0-9]{1}[0-9]{1}(.[0-9]{1})?$/;
-
+        
         if(!weightCheck1.test(weight) && !weightCheck2.test(weight)) {
           return ([false, "The weight should be between 30 and 199 kg!"]);
         }
@@ -773,10 +773,18 @@ function loadBodyWeight() {
         // CHECKING THE WEIGHT:
         // we check that the weight shoudl be between 30 and 259 cm
         const heightCheck1 = /^[3-9]{1}[0-9]{1}$/;
-        const heightCheck2 = /^[1-2]{1}[0-5]{1}[0-9]{1}$/;
+        const heightCheck2 = /^[1-2]{1}[0-9]{1}[0-9]{1}$/;
 
         if(!heightCheck1.test(height) && !heightCheck2.test(height)) {
           return ([false, "The height should be between 30 and 259 cm!"]);
+        }
+
+        // CHECKING THE DATE:
+        // we check that the date should be between something like: 2019-08-17
+        const dateCheck = /^[0-9]{1,4}-[0-9]{2}-[0-9]{2}$/;
+
+        if(!dateCheck.test(date)) {
+          return ([false, "Please, correct the date!"]);
         } else {
           return ([true, ""]);
         }
@@ -1003,7 +1011,6 @@ function loadBodyWeight() {
       //START: GET AND PREPARE THE DATA
       // Get the data from UI
       const dataToSubmit = UICtrl.getWeightDateHeight();
-      debugger
       // Validate inputs
       const message = ItemCtrl.validateInputs(dataToSubmit);
       if(message[0]) {
@@ -1055,20 +1062,29 @@ function loadBodyWeight() {
     const btnEdit = function() {
       // Get the new Date and new Weight
       const dataToBeUpdated = UICtrl.getWeightDateHeight();
-      // Update the current Item that updates direct the data!
-      // The currentItem is kind of a pointer to the data array!
-      StorageCtrl.currentItem.weight = dataToBeUpdated.weightEdit;
-      StorageCtrl.currentItem.date = dataToBeUpdated.dateEdit;
-      // Load Current Data Array to the localStorage
-      StorageCtrl.uploadDataToLS();
-      // Update the specific line on the table
-      UICtrl.updateTable(StorageCtrl.currentItem, true);
-      // Update input: actual weight
-      UICtrl.populateInputs();
-      // Update graphic
-      plotGraph();
-      // Sending a message to the user!
-      UICtrl.showAlert("Item Edited!", "alert alert-info");
+      // destructuring assignment changing names
+      let {heightEdit: height, weightEdit: weight, dateEdit: date} = dataToBeUpdated;
+      // Validate inputs
+      const message = ItemCtrl.validateInputs({height, weight, date});
+      if(message[0]) {
+        // Update the current Item that updates direct the data!
+        // The currentItem is kind of a pointer to the data array!
+        StorageCtrl.currentItem.weight = dataToBeUpdated.weightEdit;
+        StorageCtrl.currentItem.date = dataToBeUpdated.dateEdit;
+        // Load Current Data Array to the localStorage
+        StorageCtrl.uploadDataToLS();
+        // Update the specific line on the table
+        UICtrl.updateTable(StorageCtrl.currentItem, true);
+        // Update input: actual weight
+        UICtrl.populateInputs();
+        // Update graphic
+        plotGraph();
+        // Sending a message to the user!
+        UICtrl.showAlert("Item Edited!", "alert alert-info");
+      } else {
+        // Sending a message to the user!
+        UICtrl.showAlert(message[1], "alert alert-danger");
+      }
     }
 
     const btnBack = function() {
