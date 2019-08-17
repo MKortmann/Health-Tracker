@@ -134,7 +134,7 @@ const bodyWeight = function() {
   <section class="sectionCCanvas">
     <div class="d-flex justify-content-center">
     <!-- As soon as defined the height and width the image become sharp width="1880px"-->
-      <canvas id="canvasWeight" height="400px" width="1880px"></canvas> 
+      <canvas id="canvasWeight" height="400px" width="1880px"></canvas>
     </div>
     <span id="containerToAddAlertMsg"></span>
   </section>
@@ -308,11 +308,11 @@ const bodyWeight = function() {
             <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
               <div class="col-sm-3">
                 <label for="height">Height</label>
-                <input id="heightEdit" type="number" value="178" class="form-control" placeholder="height (cm)">
+                <input id="heightEdit" type="number" value="178" min="30" max="250" class="form-control">
               </div>
               <div class="col-sm-3">
                 <label for="weight">Weight</label>
-                <input id="weightEdit" type="number" value="80" min="30" max="190" step="0.1" class="form-control" placeholder="Weight - kg">
+                <input id="weightEdit" type="number" value="80" min="30" max="199" step="0.1" class="form-control" >
               </div>
               <div class="col-sm-6">
                 <label for="date">Date</label>

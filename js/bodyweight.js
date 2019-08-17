@@ -758,6 +758,29 @@ function loadBodyWeight() {
         StorageCtrl.data.forEach(function(item, id) {
           item.ID = id + 1;
         });
+      },
+      // check input values
+      validateInputs({weight, height}) {
+        // CHECKING THE WEIGHT:
+        // we check that the weight shoudl be between 30 and 199.9
+        const weightCheck1 = /^[3-9]{1}[0-9]{1}(.[0-9]{1})?$/;
+        const weightCheck2 = /^[1]{1}[0-9]{1}[0-9]{1}(.[0-9]{1})?$/;
+
+        if(!weightCheck1.test(weight) && !weightCheck2.test(weight)) {
+          return ([false, "The weight should be between 30 and 199 kg!"]);
+        }
+
+        // CHECKING THE WEIGHT:
+        // we check that the weight shoudl be between 30 and 259 cm
+        const heightCheck1 = /^[3-9]{1}[0-9]{1}$/;
+        const heightCheck2 = /^[1-2]{1}[0-5]{1}[0-9]{1}$/;
+
+        if(!heightCheck1.test(height) && !heightCheck2.test(height)) {
+          return ([false, "The height should be between 30 and 259 cm!"]);
+        } else {
+          return ([true, ""]);
+        }
+
       }
     }
   })();
@@ -980,27 +1003,35 @@ function loadBodyWeight() {
       //START: GET AND PREPARE THE DATA
       // Get the data from UI
       const dataToSubmit = UICtrl.getWeightDateHeight();
-      // Generate IDs
-      const ID = ItemCtrl.genIDs().next().value;
-      // Add ID to the data
-      dataToSubmit.ID = ID;
-      // Calculate BMI
-      const bmi = ItemCtrl.getBMI(dataToSubmit.weight, dataToSubmit.height);
-      // Add BMI to the data
-      dataToSubmit.BMI = bmi;
-      // FINISHED: THE DATA IS FORMATED AND PREPARED TO BE SAVED!
-      // Save data to local Storage
-      StorageCtrl.saveData(dataToSubmit);
-      // START: UPDATE UI
-      // UpdateUI
-      UICtrl.updateTable(dataToSubmit);
-      // Update input: actual weight
-      UICtrl.populateInputs();
-      // Update graphic
-      plotGraph();
-      // Sending a message to the user!
-      UICtrl.showAlert("item added!", "alert alert-primary");
-      // FINESHED: UI is updated!
+      debugger
+      // Validate inputs
+      const message = ItemCtrl.validateInputs(dataToSubmit);
+      if(message[0]) {
+        // Generate IDs
+        const ID = ItemCtrl.genIDs().next().value;
+        // Add ID to the data
+        dataToSubmit.ID = ID;
+        // Calculate BMI
+        const bmi = ItemCtrl.getBMI(dataToSubmit.weight, dataToSubmit.height);
+        // Add BMI to the data
+        dataToSubmit.BMI = bmi;
+        // FINISHED: THE DATA IS FORMATED AND PREPARED TO BE SAVED!
+        // Save data to local Storage
+        StorageCtrl.saveData(dataToSubmit);
+        // START: UPDATE UI
+        // UpdateUI
+        UICtrl.updateTable(dataToSubmit);
+        // Update input: actual weight
+        UICtrl.populateInputs();
+        // Update graphic
+        plotGraph();
+        // Sending a message to the user!
+        UICtrl.showAlert("item added!", "alert alert-primary");
+        // FINESHED: UI is updated!
+      } else {
+        // Sending a message to the user!
+        UICtrl.showAlert(message[1], "alert alert-danger");
+      }
     }
 
     // Edit the actual item
