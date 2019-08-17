@@ -426,16 +426,20 @@ function loadBodyWeight() {
 
     return {
       // printing
-      print: function() {
+      print: function(exportTable) {
         const dataUrl = document.querySelector("#canvasWeight").toDataURL();
+        const tableToPrint = document.getElementById("tableContainer");
         let windowContent = '<!DOCTYPE html>';
         windowContent += '<html>'
         windowContent += `<head><title>Health Tracker</title></head>`;
         windowContent += '<body>'
+        windowContent += '<h1>Health Tracker</h1><br>'
+        windowContent += '<h1>Canvas</h1><br>'
         windowContent += '<img src="' + dataUrl + '">';
+        windowContent += `${exportTable}`;
         windowContent += '</body>';
         windowContent += '</html>';
-        let printWin = window.open('', '', `width=${canvas.width},height=${canvas.height}`);
+        let printWin = window.open('', '', `width=1880px,height=400px`);
         printWin.document.open();
         printWin.document.write(windowContent);
 
@@ -917,7 +921,46 @@ function loadBodyWeight() {
 
     }
     const printData = function() {
-      UICanvas.print();
+      // get data to print
+      let data = StorageCtrl.getLSData();
+      let dataToPrint = "<h1>Table</h1><br>";
+
+      dataToPrint += `
+      <div style="color:black;text-align:center;font-size:160%;">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Weight</th>
+            <th>BMI</th>
+          </tr>
+        </thead>
+        <tbody>
+      `;
+
+      data.forEach(function(item, index) {
+        dataToPrint += `
+          <tr>
+            <td>${data.length-index}</td>
+            <td>${item.date}</td>
+            <td>${item.weight}</td>
+            <td>${item.BMI}</td>
+          </tr>
+        `;
+      });
+
+      dataToPrint += "</tbody></table></div>";
+      // data.forEach(function(item, index) {
+      //   dataToPrint += "<div style='text-align:center;'><br>"
+      //   dataToPrint += data.length-index + " --- ";
+      //   dataToPrint += item.date + "  ";
+      //   dataToPrint += '<span style="color:red;">' + item.weight + "kg" + "</span>" + "  ";
+      //   dataToPrint += item.height + "cm" + "  " + "<br>";
+      //   dataToPrint += "</div><br>";
+      // });
+      // UICanvas.print(JSON.stringify(date, weight, height));
+      UICanvas.print(dataToPrint);
     }
     // zoomInBtn
     const zoomInBtn = function() {
