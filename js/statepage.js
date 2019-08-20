@@ -1,6 +1,10 @@
 "use strict"
 // IMPORT COMPONENTS
-import bodyWeightImport from "../js/statepagebodyweight.js";
+import bodyWeightImport from "../js/statepages/bodyweight.js";
+import bloodPressureImport from "../js/statepages/bloodpressure.js";
+import bloodSugarImport from "../js/statepages/bloodsugar.js";
+import myDataImport from "../js/statepages/mydata.js";
+
 // STATE PATTERN DESIGN IS BEEN USED TO CHANGE THE STATE OF THE PAGE!
 // State Pattern is another behaviour type pattern. It reminder as Redux works.
 // We have a state that we can change trough our script. So we do not have to
@@ -66,41 +70,25 @@ const homeState = function() {
 ///////////////////////////////////////////////////////////////////////////////
 // myData
 ///////////////////////////////////////////////////////////////////////////////
-const myData = function() {
-  document.querySelector("#container").innerHTML = `
-    <!-- sectionA: first section -->
-    <section class="sectionA">
-      <div class="container text-center mt-5">
-        <h2 class="display-1">In development!</h2>
-      </div>
-    </section>
-  `;
-}
+const myData = myDataImport;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Body Weight
 ///////////////////////////////////////////////////////////////////////////////
 const bodyWeight = bodyWeightImport;
 ///////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////////////////
 // Blood Pressure
 ///////////////////////////////////////////////////////////////////////////////
-const bloodPressure = function() {
-  document.querySelector("#container").innerHTML = `
-  <div class="container text-center mt-5">
-    <h2 class="display-1">In development!</h2>
-  </div>
-  `;
-}
+const bloodPressure = bloodPressureImport;
+///////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////////////////
 // Blood Sugar
 ///////////////////////////////////////////////////////////////////////////////
-const bloodSugar = function() {
-  document.querySelector("#container").innerHTML = `
-  <div class="container text-center mt-5">
-    <h2 class="display-1">In development!</h2>
-  </div>
-  `;
-}
+const bloodSugar = bloodSugarImport;
+
 // Instantiate PageState
 const page = new PageState();
 

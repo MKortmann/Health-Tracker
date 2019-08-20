@@ -1,3 +1,4 @@
+"use strict";
 ///////////////////////////////////////////////////////////////////////////////
 // Body Weight
 ///////////////////////////////////////////////////////////////////////////////
@@ -5,9 +6,9 @@ const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
     <!-- SectionA: first display input data as start weight, actual weight... -->
     <section class="sectionA" >
-      <div class="container-fluid my-4 mx-0 px-0">
+      <div class="container-fluid my-3 mx-0 px-0">
         <form id="formOutput">
-        <h2 class="display-5 text-center text-info">Board Infos</h2>
+        <h2 class="display-5 text-center text-info">Highlights</h2>
           <div class="form-row justify-content-center" id="formInputs2">
             <!-- Start Weight -->
             <div class="col-md-3">
@@ -50,7 +51,7 @@ const bodyWeight = function() {
 
   <!-- Section B: Canvas buttons! -->
   <section class="sectionBCanvasButtons">
-    <div class="container containerGroup mt-2 text-center">
+    <div class="container containerGroup mt-0 text-center">
       <div class="btn-group mb-1 buttonGroup" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-info" id="oneWeekBtn">1 Week</button>
         <button type="button" class="btn btn-info d-none d-md-block" id="twoWeeksBtn">2 Weeks</button>
@@ -61,10 +62,10 @@ const bodyWeight = function() {
         <button type="button" class="btn btn-info d-none d-lg-block" id="oneYearBtn">1 Year</button>
         <button type="button" class="btn btn-info" id="AllMeasureBtn">All</button>
         <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomIn">
-          <img src="./icons/zoomIn.svg" class="img-fluid" id="zoomInBtn"  ></img>
+          <img src="./icons/zoom-in.svg" class="img-fluid" id="zoomInBtn"  ></img>
         </button>
         <button type="button" class="btn btn-secondary p-0" id="btnFlagZoomOut" disabled>
-          <img src="./icons/zoomOut.svg" class="img-fluid" id="zoomOutBtn" ></img>
+          <img src="./icons/zoom-out.svg" class="img-fluid" id="zoomOutBtn" ></img>
         </button>
       </div>
     </div>
@@ -82,7 +83,7 @@ const bodyWeight = function() {
 <section class="sectionDInputFormButtons mt-3">
   <div class="container-fluid p-0" >
     <form id="formInput" >
-      <h2 class="display-5 text-center text-info">Input Field</h2>
+      <h2 class="display-5 text-center text-primary">Input Field</h2>
       <!-- first row -->
       <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
         <div class="col-sm-3">
