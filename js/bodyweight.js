@@ -180,7 +180,7 @@ function loadBodyWeight() {
             localStorage.setItem("items", JSON.stringify(items));
           }
         };
-        xhttp.open("GET", `./storage/table.json`, true);
+        xhttp.open("GET", "./storage/table.json", true);
         xhttp.onerror = function() {
           console.log("Request error in XMLHttpRequest...");
           return false;
@@ -221,7 +221,9 @@ function loadBodyWeight() {
       loadJSONBtn: "#loadJSONBtn",
       dropdownMenuButton: "#dropdownMenuButton",
       dropDownBMI: "#dropDownBMI",
-      dropDownDate: "#dropDownDate"
+      dropDownDate: "#dropDownDate",
+      avgWeight: "#avgWeight",
+      avgBMI: "#avgBMI"
     }
 
     return {
@@ -273,7 +275,7 @@ function loadBodyWeight() {
         // diffW = startWeight - actualWeight
         const diffW = document.querySelector(UISelectors.startWeight).value -
           document.querySelector(UISelectors.actualWeight).value;
-        document.querySelector(UISelectors.diffWeight).value = diffW;
+          document.querySelector(UISelectors.diffWeight).value = diffW;
         // if diffW > 0 green color if diffW < 0 red!
         if (diffW > 0) {
           document.querySelector(UISelectors.diffWeight).classList.add("text-info");
@@ -282,6 +284,7 @@ function loadBodyWeight() {
           document.querySelector(UISelectors.diffWeight).classList.add("text-danger");
           document.querySelector(UISelectors.diffWeight).classList.remove("text-info");
         }
+
         // bmi = ( bodyweightIn: (Kg) ) / (height (m))^2
         const bmi = ItemCtrl.getBMI(document.querySelector(UISelectors.actualWeight).value, document.querySelector(UISelectors.height).value);
         document.querySelector(UISelectors.actualBMI).value = bmi;
@@ -292,6 +295,31 @@ function loadBodyWeight() {
         if (StorageCtrl.data !== null) {
           document.querySelector(UISelectors.weight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
         }
+
+        let averageArray = UICtrl.calcAverageWeightBMI();
+        // display the average WEIGHT
+        document.querySelector(UISelectors.avgWeight).value = averageArray[0];
+        // display the average BMI
+        document.querySelector(UISelectors.avgBMI).value = averageArray[1];
+      },
+      calcAverageWeightBMI: function () {
+        // e.preventDefault();
+
+        const localData = StorageCtrl.getLSData();
+
+        let avgWeight = 0;
+        let avgBMI = 0;
+
+        localData.forEach(function(item, index) {
+          avgWeight += parseInt(item.weight);
+          avgBMI += parseInt(item.BMI);
+        });
+
+        avgWeight = avgWeight/localData.length;
+        avgBMI = avgBMI/localData.length;
+
+        return [avgWeight, avgBMI];
+
       },
       // We will fill the complete table from the data of LocalStorage
       populateTable: function(items) {
@@ -516,6 +544,7 @@ function loadBodyWeight() {
         TextYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
         // We can also use the spread operator. The spread operator create a new object! Spread the proprieties, it will pull out from the object. HOWEVER IT DID NOT WORK IN THIS CASE!
         // OffsetYlines = {...TextYlines};
+        // Or use the slice() operator. However, it did not worked because it lost the reference! It is not coping, it is passing the reference.
         OffsetYlines = [[0, 190],[0, 150],[0, 110],[0, 70],[0, 30]];
         UICanvas.plotGraph(data);
       },
@@ -1061,7 +1090,6 @@ function loadBodyWeight() {
     const loadDataAndPopulateUI = function() {
       // if true, means that we will get the JSON file and write in LS
       // we will deactived here for now because it does not work in github
-      debugger
       if (StorageCtrl.loadJSONFile()) {
         // Clear table
         UICtrl.deleteTable();

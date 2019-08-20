@@ -45,6 +45,23 @@ body {
   /* background: url("../imgs/background2.jpg") top center / cover no-repeat; */
 }
 
+/* Align the navbar in html to the right when uncollapsed */
+#navbarSupportedContent .navbar-nav {
+  align-items: flex-end;
+}
+
+/* Styling the bodyweight site input form*/
+#formInputs1 {
+  border: 1px solid black;
+  padding: 10px;
+  background-color: white;
+  margin: 0;
+}
+
+#formInputs1 h1 {
+  font-weight: 100;
+}
+
 /* Changing the hamburger menu */
 .navbar-toggler {
 width: 47px;

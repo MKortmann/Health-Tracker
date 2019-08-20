@@ -80,9 +80,10 @@ const myData = function() {
 const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
     <!-- SectionA: first display input data as start weight, actual weight... -->
-    <section class="sectionA">
-      <div class="container-fluid my-4">
+    <section class="sectionA" >
+      <div class="container-fluid my-4 mx-0 px-0">
         <form id="formInputs1">
+        <h1 class="display-5 text-center text-info">Board Infos</h1>
           <div class="form-row justify-content-center" id="formInputs2">
             <!-- Start Weight -->
             <div class="col-md-3">
@@ -101,9 +102,23 @@ const bodyWeight = function() {
             </div>
             <!-- Actual BMI -->
             <div class="col-md-3">
-              <label for="actualBMI" class="text-primary">Actual BMI</label>
+              <label for="actualBMI" class="text-info">Actual BMI</label>
               <input type="number" disabled class="form-control" id="actualBMI" placeholder="Actual BMI">
             </div>
+          </div>
+          <!-- AVERAGES -->
+          <div class="form-row justify-content-center" id="formInputs2">
+            <!-- Diff Weight -->
+            <div class="col-md-3">
+              <label for="avgWeight" class="text-primary">Average Weight</label>
+              <input type="number" disabled class="form-control" id="avgWeight" placeholder="Average Weight (kg)">
+            </div>
+            <!-- Actual BMI -->
+            <div class="col-md-3">
+              <label for="avgBMI" class="text-primary">Average BMI</label>
+              <input type="number" disabled class="form-control" id="avgBMI" placeholder="Average BMI">
+            </div>
+        </div>
           </div>
         </form>
       </div>
@@ -186,8 +201,11 @@ const bodyWeight = function() {
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
       <h5 class="text-white h4">Extra functions</h5>
-      <span class="text-light lead">You can delete all files or export the saved data (download) and also to inform more about BMI.
-      If you have issues to print your data in your phone, please, try to switch the browser to desktop mode!
+      <span class="text-light lead"><p><strong>Save:</strong> it will download a JSON (kind of table) file with your information that you can open it in any text editor.</p>
+      <p>If you have issues to print your data in your phone, please, try to switch the browser to <strong>desktop mode</strong>!</p>
+      <strong>Load:</strong> this function is available in PC, MAC or Linux not in smartphones or tablets. It will load your json file (that should be named: table.json) and placed at Health-Tracker storage folder. For
+      that you have to download the program to your computer and follow the instructions in my gitHub page!
+      <a class="text-info" href="https://github.com/MKortmann/Health-Tracker"><strong>Health Tracker</strong></a>!
       </span>
         <!-- Button trigger modal: BMI -->
       <button type="button" id="bmiInfoBtn" class="btn btn-primary btn-block btn-lg my-2" data-toggle="modal" data-target="#locModal2">
