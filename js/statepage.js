@@ -82,8 +82,8 @@ const bodyWeight = function() {
     <!-- SectionA: first display input data as start weight, actual weight... -->
     <section class="sectionA" >
       <div class="container-fluid my-4 mx-0 px-0">
-        <form id="formInputs1">
-        <h1 class="display-5 text-center text-info">Board Infos</h1>
+        <form id="formOutput">
+        <h2 class="display-5 text-center text-info">Board Infos</h2>
           <div class="form-row justify-content-center" id="formInputs2">
             <!-- Start Weight -->
             <div class="col-md-3">
@@ -155,9 +155,10 @@ const bodyWeight = function() {
   </section>
 
 <!-- SECTION D encloses the input and button forms -->
-<section class="sectionDInputFormButtons">
+<section class="sectionDInputFormButtons mt-3">
   <div class="container-fluid p-0" >
-    <form>
+    <form id="formInput" >
+      <h2 class="display-5 text-center text-info">Input Field</h2>
       <!-- first row -->
       <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
         <div class="col-sm-3">

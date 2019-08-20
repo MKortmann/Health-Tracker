@@ -51,15 +51,17 @@ body {
 }
 
 /* Styling the bodyweight site input form*/
-#formInputs1 {
+#formOutput,
+#formInput {
   border: 1px solid black;
   padding: 10px;
   background-color: white;
   margin: 0;
 }
 
-#formInputs1 h1 {
-  font-weight: 100;
+#formOutput h2,
+#formInput h2 {
+  font-weight: 400;
 }
 
 /* Changing the hamburger menu */
