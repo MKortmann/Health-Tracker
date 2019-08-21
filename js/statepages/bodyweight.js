@@ -6,7 +6,7 @@ const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
     <!-- SectionA: first display input data as start weight, actual weight... -->
     <section class="sectionA" >
-      <div class="container-fluid my-3 mx-0 px-0">
+      <div class="container-fluid mt-3 mb-0 mx-0 px-0">
         <form id="formOutput">
         <h2 class="display-5 text-center text-info">Highlights</h2>
           <div class="form-row justify-content-center" id="formInputs2">
@@ -74,7 +74,7 @@ const bodyWeight = function() {
   <section class="sectionCCanvas">
     <div class="d-flex justify-content-center">
     <!-- As soon as defined the height and width the image become sharp width="1880px"-->
-      <canvas id="canvasWeight" height="400px" width="1880px"></canvas>
+      <canvas id="canvasWeight" height="400px" width="1920px"></canvas>
     </div>
     <span id="containerToAddAlertMsg"></span>
   </section>

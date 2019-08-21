@@ -424,6 +424,7 @@ function loadBodyWeight() {
     let ctx = canvas.getContext("2d");
     // very important to make the app responsive! It fits all the draws in accord to the screen width size.
     // the y size is not necessary. For that, we use the variable factor declared below.
+    debugger
     ctx.scale(canvas.width/window.innerWidth,1);
     ctx.lineWidth = 2;
 

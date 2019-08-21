@@ -21,7 +21,8 @@ tbody tr:nth-child(odd) {
   max-width: 100%;
   /* And here 200 px */
   height: 400px;
-  border: 1px solid black;
+  border: 1px solid #17a2b8;
+  border-top: 0;
   background-color: white;
   /* box-shadow: 1px 2px 2px 2px gray;  */
 }
@@ -53,10 +54,27 @@ body {
 /* Styling the bodyweight site input form*/
 #formOutput,
 #formInput {
-  border: 1px solid black;
+  border: 1px solid #17a2b8;
+  border-bottom: 0;
   padding: 10px;
   background-color: white;
   margin: 0;
+}
+
+
+.sectionBCanvasButtons {
+  border: 1px solid #17a2b8;
+  border-top: 0;
+  border-bottom: 0;
+  padding: 10px;
+  background-color: white;
+  margin: 0;
+}
+
+#formInput {
+  border: 1px solid #007bff;
+  border: 1px solid black;
+  border: 1px solid #6c757d;
 }
 
 #formOutput h2,
