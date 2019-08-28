@@ -272,6 +272,10 @@ function loadBodyWeight() {
         // In case that we do not have any data!
         if (StorageCtrl.data === null) {
           document.querySelector(UISelectors.actualWeight).value = 80;
+          // plot a text in the graphic
+          UICanvas.plotWelcome();
+        } else if (StorageCtrl.data === 1) {
+          UICanvas.plotWelcome();
         } else {
           document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
         }
@@ -482,6 +486,11 @@ function loadBodyWeight() {
     // And we will plot x between (5 and 295);
 
     return {
+      // plot welcome text
+      plotWelcome: function() {
+        UICanvas.drawText("Welcome to Health Track!", [canvasWidth/3,canvasHeight/2], colorText, invertYAxis);
+        UICanvas.drawText("After two measures, the graphic will be ploted!", [canvasWidth/3,canvasHeight/2-30], colorText, invertYAxis);
+      },
       // printing
       print: function(exportTable) {
         const dataUrl = document.querySelector("#canvasWeight").toDataURL();
@@ -825,16 +834,13 @@ function loadBodyWeight() {
       /**Calculate and display the time*/
       getTime: function() {
         const today = new Date();
-        let hours = today.getHours();
-        let min = today.getMinutes();
+        const hours = today.getHours();
+        const min = today.getMinutes();
 
-        hours <= 9 ? ("0" + hours) : hours
-        min <= 9 ? ("0" + min) : min
+        const newHours = (hours < 10) ? "0" + hours : hours
+        const newMin = (min < 10) ? "0" + min : min
 
-
-        return (
-           hours + ":" + min
-        );
+        return ( newHours + ":" + newMin );
       },
       getWeight: function(index) {
         if (StorageCtrl.data !== null) {
