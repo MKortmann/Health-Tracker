@@ -11,35 +11,34 @@ const bodyWeight = function() {
         <h2 class="display-5 text-center text-info">Highlights</h2>
           <div class="form-row justify-content-center" id="formInputs2">
             <!-- Start Weight -->
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label for="startWeight" class="text-info">Start Weight (kg)</label>
               <input type="number" disabled value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
             </div>
             <!-- Actual Weight -->
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label for="actualweight" class="text-info">Actual Weight</label>
               <input type="number" disabled value="76" class="form-control" id="actualWeight" placeholder="Actual (kg)">
             </div>
             <!-- Diff Weight -->
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label for="diffWeight" class="text-info">Diff. Weight</label>
               <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (kg)">
             </div>
             <!-- Actual BMI -->
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label for="actualBMI" class="text-info">Actual BMI</label>
               <input type="number" disabled class="form-control" id="actualBMI" placeholder="Actual BMI">
             </div>
-          </div>
+
           <!-- AVERAGES -->
-          <div class="form-row justify-content-center" id="formInputs2">
             <!-- Diff Weight -->
-            <div class="col-md-3">
+            <div class="col-md-1.9">
               <label for="avgWeight" class="text-primary">Average Weight</label>
               <input type="number" disabled class="form-control" id="avgWeight" placeholder="Average Weight (kg)">
             </div>
             <!-- Actual BMI -->
-            <div class="col-md-3">
+            <div class="col-md-1.9">
               <label for="avgBMI" class="text-primary">Average BMI</label>
               <input type="number" disabled class="form-control" id="avgBMI" placeholder="Average BMI">
             </div>

@@ -1,3 +1,18 @@
+#startWeight,
+#actualWeight,
+#diffWeight,
+#actualBMI,
+#avgWeight,
+#avgBMI {
+  border: 0;
+  background-color: white;
+}
+
+#formInputs2 div {
+  border: 1px solid #17a2b8;
+  margin-left: 2px;
+}
+
 label,
 input {
   font-size: 14px;
