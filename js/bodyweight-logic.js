@@ -230,6 +230,12 @@ function loadBodyWeight() {
     }
 
     return {
+      // Hide hide Highlights
+      hideHighlights:  function() {
+        document.querySelector(".sectionA").style.display = "none"
+        document.querySelector("#canvasWeight").style.display = "none";
+        document.querySelector(".sectionBCanvasButtons").style.display = "none";
+      },
       // Declare public var and functions
       showAlert: function(message, className) {
         //create div
@@ -270,14 +276,20 @@ function loadBodyWeight() {
       populateInputs: function() {
         // Update actual weight
         // In case that we do not have any data!
-        if (StorageCtrl.data === null) {
+        debugger
+        if (StorageCtrl.data === null || StorageCtrl.data.length === 0) {
           document.querySelector(UISelectors.actualWeight).value = 80;
           // plot a text in the graphic
-          UICanvas.plotWelcome();
-        } else if (StorageCtrl.data === 1) {
-          UICanvas.plotWelcome();
+          // UICanvas.plotWelcome();
+          // HIDE HIGHLIGHTS
+          UICtrl.hideHighlights();
+        } else if (StorageCtrl.data.length === 1) {
+          // UICanvas.plotWelcome();
+          document.querySelector(".sectionA").style.display = "inline";
         } else {
           document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
+          document.querySelector("#canvasWeight").style.display = "inline";
+          document.querySelector(".sectionBCanvasButtons").style.display = "inline";
         }
         // Filling the time input with the actual time
         document.querySelector(UISelectors.time).value = ItemCtrl.getTime();
@@ -321,15 +333,21 @@ function loadBodyWeight() {
         let avgWeight = 0;
         let avgBMI = 0;
 
-        localData.forEach(function(item, index) {
-          avgWeight += parseInt(item.weight);
-          avgBMI += parseInt(item.BMI);
-        });
+        if(localData !== null)
+        {
+          localData.forEach(function(item, index) {
+            avgWeight += parseInt(item.weight);
+            avgBMI += parseInt(item.BMI);
+          });
 
-        avgWeight = avgWeight/localData.length;
-        avgBMI = avgBMI/localData.length;
+          avgWeight = avgWeight/localData.length;
+          avgBMI = avgBMI/localData.length;
 
-        return [avgWeight, avgBMI];
+          return [avgWeight, avgBMI];
+      } else  {
+
+        return [0,0];
+      }
 
       },
       // We will fill the complete table from the data of LocalStorage
@@ -1106,6 +1124,8 @@ function loadBodyWeight() {
       UICanvas.eraseCanvas();
       // Clear table
       UICtrl.deleteTable();
+      // Hide Highlights, buttons and canvas
+      UICtrl.hideHighlights();
       // Sending a message to the user!
       UICtrl.showAlert("All Items deleted!", "alert alert-danger");
     }
