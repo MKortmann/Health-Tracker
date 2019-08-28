@@ -210,6 +210,7 @@ function loadBodyWeight() {
       weight: "#weight",
       weightEdit: "#weightEdit",
       date: "#date",
+      time: "#time",
       dateEdit: "#dateEdit",
       tableBody: "tbody",
       editBtn: "#editBtn",
@@ -251,12 +252,13 @@ function loadBodyWeight() {
         return UISelectors;
       },
       // return the weight and date from the inputs
-      getWeightDateHeight: function() {
+      getWeightDateHeightTime: function() {
         // return an object with the weight and date
         return {
           weight: document.querySelector(UISelectors.weight).value,
           date: document.querySelector(UISelectors.date).value,
           height: document.querySelector(UISelectors.height).value,
+          time: document.querySelector(UISelectors.time).value,
           weightEdit: document.querySelector(UISelectors.weightEdit).value,
           dateEdit: document.querySelector(UISelectors.dateEdit).value,
           heightEdit: document.querySelector(UISelectors.heightEdit).value,
@@ -271,6 +273,8 @@ function loadBodyWeight() {
         } else {
           document.querySelector(UISelectors.actualWeight).value = ItemCtrl.getWeight(StorageCtrl.data.length - 1);
         }
+        // Filling the time input with the actual time
+        document.querySelector(UISelectors.time).value = ItemCtrl.getTime();
         // Get the first start weight getFirstWeight
         document.querySelector(UISelectors.startWeight).value = ItemCtrl.getWeight(0);
         // diffW = startWeight - actualWeight
@@ -427,7 +431,6 @@ function loadBodyWeight() {
     let ctx = canvas.getContext("2d");
     // very important to make the app responsive! It fits all the draws in accord to the screen width size.
     // the y size is not necessary. For that, we use the variable factor declared below.
-    debugger
     ctx.scale(canvas.width/window.innerWidth,1);
     ctx.lineWidth = 2;
 
@@ -504,7 +507,6 @@ function loadBodyWeight() {
       },
       // zoom canvas
       zoomInCanvas: function(maxValue, minValue, data) {
-        debugger
         let startPos, endPos;
 
         let stopOrGo = true;
@@ -1148,12 +1150,11 @@ function loadBodyWeight() {
 
     // Data submit
     const itemToSubmit = function(event) {
-      debugger
       // to prevent to send the form (reload)
       event.preventDefault();
       //START: GET AND PREPARE THE DATA
       // Get the data from UI
-      const dataToSubmit = UICtrl.getWeightDateHeight();
+      const dataToSubmit = UICtrl.getWeightDateHeightTime();
       // Validate inputs
       const message = ItemCtrl.validateInputs(dataToSubmit);
       if(message[0]) {
@@ -1163,12 +1164,9 @@ function loadBodyWeight() {
         dataToSubmit.ID = ID;
         // Calculate BMI
         const bmi = ItemCtrl.getBMI(dataToSubmit.weight, dataToSubmit.height);
-        // Get the time
-        const time = ItemCtrl.getTime();
-        // Add the time to the dataToSubmit
-        dataToSubmit.time = time;
         // Add BMI to the dataToSubmit
         dataToSubmit.BMI = bmi;
+        debugger
         // FINISHED: THE DATA IS FORMATED AND PREPARED TO BE SAVED!
         // Save data to local Storage
         StorageCtrl.saveData(dataToSubmit);
@@ -1208,7 +1206,7 @@ function loadBodyWeight() {
 
     const btnEdit = function() {
       // Get the new Date and new Weight
-      const dataToBeUpdated = UICtrl.getWeightDateHeight();
+      const dataToBeUpdated = UICtrl.getWeightDateHeightTime();
       // destructuring assignment changing names
       let {heightEdit: height, weightEdit: weight, dateEdit: date} = dataToBeUpdated;
       // Validate inputs
