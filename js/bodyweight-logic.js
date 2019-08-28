@@ -209,8 +209,9 @@ function loadBodyWeight() {
       submitBtn: "#submit",
       weight: "#weight",
       weightEdit: "#weightEdit",
-      date: "#date",
       time: "#time",
+      timeEdit: "#timeEdit",
+      date: "#date",
       dateEdit: "#dateEdit",
       tableBody: "tbody",
       editBtn: "#editBtn",
@@ -259,6 +260,7 @@ function loadBodyWeight() {
           date: document.querySelector(UISelectors.date).value,
           height: document.querySelector(UISelectors.height).value,
           time: document.querySelector(UISelectors.time).value,
+          timeEdit: document.querySelector(UISelectors.timeEdit).value,
           weightEdit: document.querySelector(UISelectors.weightEdit).value,
           dateEdit: document.querySelector(UISelectors.dateEdit).value,
           heightEdit: document.querySelector(UISelectors.heightEdit).value,
@@ -399,6 +401,7 @@ function loadBodyWeight() {
         // Reload the Date and Weight Input
         document.querySelector(UISelectors.weightEdit).value = item.weight;
         document.querySelector(UISelectors.dateEdit).value = item.date;
+        document.querySelector(UISelectors.timeEdit).value = item.time;
       }
 
     }
@@ -822,8 +825,16 @@ function loadBodyWeight() {
       /**Calculate and display the time*/
       getTime: function() {
         const today = new Date();
-        const  time = today.getHours() + ":" + today.getMinutes();
-        return time;
+        let hours = today.getHours();
+        let min = today.getMinutes();
+
+        hours <= 9 ? ("0" + hours) : hours
+        min <= 9 ? ("0" + min) : min
+
+
+        return (
+           hours + ":" + min
+        );
       },
       getWeight: function(index) {
         if (StorageCtrl.data !== null) {
@@ -1166,7 +1177,6 @@ function loadBodyWeight() {
         const bmi = ItemCtrl.getBMI(dataToSubmit.weight, dataToSubmit.height);
         // Add BMI to the dataToSubmit
         dataToSubmit.BMI = bmi;
-        debugger
         // FINISHED: THE DATA IS FORMATED AND PREPARED TO BE SAVED!
         // Save data to local Storage
         StorageCtrl.saveData(dataToSubmit);
@@ -1207,8 +1217,9 @@ function loadBodyWeight() {
     const btnEdit = function() {
       // Get the new Date and new Weight
       const dataToBeUpdated = UICtrl.getWeightDateHeightTime();
+      debugger
       // destructuring assignment changing names
-      let {heightEdit: height, weightEdit: weight, dateEdit: date} = dataToBeUpdated;
+      let {heightEdit: height, weightEdit: weight, dateEdit: date, timeEdit: time} = dataToBeUpdated;
       // Validate inputs
       const message = ItemCtrl.validateInputs({height, weight, date});
       if(message[0]) {
@@ -1216,6 +1227,7 @@ function loadBodyWeight() {
         // The currentItem is kind of a pointer to the data array!
         StorageCtrl.currentItem.weight = dataToBeUpdated.weightEdit;
         StorageCtrl.currentItem.date = dataToBeUpdated.dateEdit;
+        StorageCtrl.currentItem.time = dataToBeUpdated.timeEdit;
         // Load Current Data Array to the localStorage
         StorageCtrl.uploadDataToLS();
         // Update the specific line on the table

@@ -270,7 +270,11 @@ const bodyWeight = function() {
                 <label for="weightEdit">Weight</label>
                 <input id="weightEdit" type="number" value="80" min="30" max="199" step="0.1" class="form-control" >
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-3">
+                <label for="timeEdit">Time</label>
+                <input type="time" class="form-control" placeholder="data" id="timeEdit">
+              </div>
+              <div class="col-sm-3">
                 <label for="dateEdit">Date</label>
                 <input type="date" class="form-control" placeholder="data" id="dateEdit">
               </div>
