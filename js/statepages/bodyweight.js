@@ -174,12 +174,15 @@ const bodyWeight = function() {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <!-- <a id="dropDownTime" class="dropdown-item" href="#">Time</a> -->
                   <a id="dropDownDate" class="dropdown-item" href="#">Date</a>
+                  <a id="dropDownTime" class="dropdown-item" href="#">Time</a>
                   <a id="dropDownBMI"class="dropdown-item d-sm-none " href="#">BMI</a>
                 </div>
               </div>
             <!-- span -->
-            <span class="d-none d-sm-block">Date</span>
-
+              <span class="d-none d-sm-block">Date</span>
+            </th>
+            <th scope="col" class="align-middle d-none d-sm-block">
+              Time
             </th>
             <th scope="col" class="align-middle">Weight</th>
             <th scope="col" class="align-middle d-none d-sm-table-cell">BMI</th>

@@ -222,6 +222,7 @@ function loadBodyWeight() {
       dropdownMenuButton: "#dropdownMenuButton",
       dropDownBMI: "#dropDownBMI",
       dropDownDate: "#dropDownDate",
+      dropDownTime: "#dropDownTime",
       avgWeight: "#avgWeight",
       avgBMI: "#avgBMI"
     }
@@ -341,7 +342,7 @@ function loadBodyWeight() {
         // Control what to display in accord to the text
         switch (select) {
           case "Time":
-            // code here
+            linkColumn = item.time;
             break;
           case "BMI":
             linkColumn = item.BMI;
@@ -358,6 +359,7 @@ function loadBodyWeight() {
               <tr>
                 <td scope="row" class="align-middle">${item.ID}</td>
                 <td class="align-middle">${linkColumn}</td>
+                <td class="align-middle d-none d-sm-table-cell">${item.time}</td>
                 <td class="align-middle">${item.weight}  kg</td>
                 <td class="align-middle d-none d-sm-table-cell">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
                 <a href="#" id="${item.ID}">
@@ -375,6 +377,7 @@ function loadBodyWeight() {
               <tr>
                 <td scope="row" class="align-middle">${item.ID}</td>
                 <td class="align-middle">${linkColumn}</td>
+                <td class="align-middle d-none d-sm-table-cell">${item.time}</td>
                 <td class="align-middle">${item.weight}  kg</td>
                 <td class="align-middle d-none d-sm-table-cell">${item.BMI} <span class="d-none d-md-inline-block"> kg/m&sup2;</span></td>
                 <a href="#" id="${item.ID}">
@@ -814,6 +817,12 @@ function loadBodyWeight() {
         day = (day < 10) ? `0${day}` : day;
         return `${today.getFullYear()}-${month}-${day}`;
       },
+      /**Calculate and display the time*/
+      getTime: function() {
+        const today = new Date();
+        const  time = today.getHours() + ":" + today.getMinutes();
+        return time;
+      },
       getWeight: function(index) {
         if (StorageCtrl.data !== null) {
           return StorageCtrl.data[index].weight;
@@ -918,6 +927,8 @@ function loadBodyWeight() {
       document.querySelector(UISelectors.dropDownBMI).addEventListener("click", reloadBMIColumnTable);
       // For Date
       document.querySelector(UISelectors.dropDownDate).addEventListener("click", reloadDateColumnTable);
+      // For Time
+      document.querySelector(UISelectors.dropDownTime).addEventListener("click", reloadTimeColumnTable);
       // EventListeners for Canvas buttons
       document.querySelector(".buttonGroup").addEventListener("click", function(e) {
         // const btnClicked = e.path[0].id;
@@ -1046,10 +1057,21 @@ function loadBodyWeight() {
       // Populate the table
       UICtrl.populateTable(StorageCtrl.data);
     }
+    // reload table BMI
     const reloadBMIColumnTable = function(event) {
       event.preventDefault();
       // Update The Display Text
       document.querySelector("#dropdownMenuButton").innerHTML = "BMI";
+      // Before populate, let's delete the tableBody
+      UICtrl.deleteTable();
+      // Populate the table
+      UICtrl.populateTable(StorageCtrl.data);
+    }
+    // reload table Time
+    const reloadTimeColumnTable = function(event) {
+      event.preventDefault();
+      // Update The Display Text
+      document.querySelector("#dropdownMenuButton").innerHTML = "Time";
       // Before populate, let's delete the tableBody
       UICtrl.deleteTable();
       // Populate the table
@@ -1126,6 +1148,7 @@ function loadBodyWeight() {
 
     // Data submit
     const itemToSubmit = function(event) {
+      debugger
       // to prevent to send the form (reload)
       event.preventDefault();
       //START: GET AND PREPARE THE DATA
@@ -1140,7 +1163,11 @@ function loadBodyWeight() {
         dataToSubmit.ID = ID;
         // Calculate BMI
         const bmi = ItemCtrl.getBMI(dataToSubmit.weight, dataToSubmit.height);
-        // Add BMI to the data
+        // Get the time
+        const time = ItemCtrl.getTime();
+        // Add the time to the dataToSubmit
+        dataToSubmit.time = time;
+        // Add BMI to the dataToSubmit
         dataToSubmit.BMI = bmi;
         // FINISHED: THE DATA IS FORMATED AND PREPARED TO BE SAVED!
         // Save data to local Storage
