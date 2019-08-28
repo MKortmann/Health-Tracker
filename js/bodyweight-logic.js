@@ -298,7 +298,7 @@ function loadBodyWeight() {
         // diffW = startWeight - actualWeight
         const diffW = document.querySelector(UISelectors.startWeight).value -
           document.querySelector(UISelectors.actualWeight).value;
-          document.querySelector(UISelectors.diffWeight).value = diffW;
+          document.querySelector(UISelectors.diffWeight).value = diffW.toFixed(2);
         // if diffW > 0 green color if diffW < 0 red!
         if (diffW > 0) {
           document.querySelector(UISelectors.diffWeight).classList.add("text-info");
@@ -491,7 +491,7 @@ function loadBodyWeight() {
     const colorText = "#007bff";
     const colorCircle = "#dc3545";
     const colorBackgroundText = "black";
-    const textFont = "22px serif";
+    const textFont = "30px serif";
     // const colorDashedLine = "#17a2b8";
     const colorDashedLine = "#007bff";
     // const colorDashedLine = "#dc3545";

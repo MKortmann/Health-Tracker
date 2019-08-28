@@ -1,3 +1,24 @@
+#submit {
+  font-size: 36px;
+}
+
+#submit:hover,
+#hamburgerDown:hover  {
+  background-color: #dc3545;
+  font-size: 38px;
+  color: white;
+}
+
+#hamburgerDown {
+  height: 64px;
+  width: 64px;
+}
+
+#hamburgerDown:hover {
+  height: 68px;
+  width: 68px;
+}
+
 #startWeight,
 #actualWeight,
 #diffWeight,
@@ -16,8 +37,21 @@
 #height,
 #weight,
 #time,
-#date {
+#date
+{
   font-size: 36px;
+}
+
+th {
+  font-size: 32px;
+}
+
+tr {
+  font-size: 26px;
+}
+
+#dropdownMenuButton {
+  font-size: 32px;
 }
 
 #formInputs2 label,

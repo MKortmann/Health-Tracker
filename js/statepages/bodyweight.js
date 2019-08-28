@@ -152,7 +152,7 @@ const bodyWeight = function() {
 
   <!-- HAMBURGER TO OPEN THE NAVBAR DOWN (COLLAPSED STATE) -->
   <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="hamburgerDown" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="line"></span>
     <span class="line"></span>
     <span class="line" style="margin-bottom: 0;"></span>
@@ -177,7 +177,6 @@ const bodyWeight = function() {
                   Date
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <!-- <a id="dropDownTime" class="dropdown-item" href="#">Time</a> -->
                   <a id="dropDownDate" class="dropdown-item" href="#">Date</a>
                   <a id="dropDownTime" class="dropdown-item" href="#">Time</a>
                   <a id="dropDownBMI"class="dropdown-item d-sm-none " href="#">BMI</a>
