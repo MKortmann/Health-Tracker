@@ -5,51 +5,53 @@
 const bodyWeight = function() {
   document.querySelector("#container").innerHTML = `
     <!-- SectionA: first display input data as start weight, actual weight... -->
-    <section class="sectionA" >
+  <div class="d-flex flex-column">
+    <section class="sectionA order-1" >
       <div class="container-fluid mt-3 mb-0 mx-0 px-0">
         <form id="formOutput">
-        <h2 class="display-5 text-center text-info">Highlights</h2>
+        <h2 class="display-4 text-center text-info">Highlights</h2>
           <div class="form-row justify-content-center" id="formInputs2">
             <!-- Start Weight -->
-            <div class="col-md-2">
+            <div class="col-md m-1">
               <label for="startWeight" class="text-info">Start Weight (kg)</label>
               <input type="number" disabled value="90" class="form-control" id="startWeight" placeholder="Start (kg)">
             </div>
             <!-- Actual Weight -->
-            <div class="col-md-2">
+            <div class="col-md m-1">
               <label for="actualweight" class="text-info">Actual Weight</label>
               <input type="number" disabled value="76" class="form-control" id="actualWeight" placeholder="Actual (kg)">
             </div>
             <!-- Diff Weight -->
-            <div class="col-md-2">
+            <div class="col-md m-1">
               <label for="diffWeight" class="text-info">Diff. Weight</label>
               <input type="number" disabled class="form-control" id="diffWeight" placeholder="Diff (kg)">
             </div>
             <!-- Actual BMI -->
-            <div class="col-md-2">
+            <div class="col-md m-1">
               <label for="actualBMI" class="text-info">Actual BMI</label>
               <input type="number" disabled class="form-control" id="actualBMI" placeholder="Actual BMI">
             </div>
-
+          </div>
           <!-- AVERAGES -->
+          <div class="form-row justify-content-center" id="formInputs2">
             <!-- Diff Weight -->
-            <div class="col-md-1.9">
+            <div class="col-md m-1">
               <label for="avgWeight" class="text-primary">Average Weight</label>
               <input type="number" disabled class="form-control" id="avgWeight" placeholder="Average Weight (kg)">
             </div>
             <!-- Actual BMI -->
-            <div class="col-md-1.9">
+            <div class="col-md m-1">
               <label for="avgBMI" class="text-primary">Average BMI</label>
               <input type="number" disabled class="form-control" id="avgBMI" placeholder="Average BMI">
             </div>
         </div>
-          </div>
+
         </form>
       </div>
     </section>
 
   <!-- Section B: Canvas buttons! -->
-  <section class="sectionBCanvasButtons">
+  <section class="sectionBCanvasButtons order-2">
     <div class="container containerGroup mt-0 text-center">
       <div class="btn-group mb-1 buttonGroup" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-info" id="oneWeekBtn">1 Week</button>
@@ -70,7 +72,7 @@ const bodyWeight = function() {
     </div>
   </section>
 
-  <section class="sectionCCanvas">
+  <section class="sectionCCanvas order-3">
     <div class="d-flex justify-content-center">
     <!-- As soon as defined the height and width the image become sharp width="1880px"-->
       <canvas id="canvasWeight" height="400px" width="1920px"></canvas>
@@ -79,10 +81,10 @@ const bodyWeight = function() {
   </section>
 
 <!-- SECTION D encloses the input and button forms -->
-<section class="sectionDInputFormButtons mt-3">
+<section class="sectionDInputFormButtons mt-3 order-0">
   <div class="container-fluid p-0" >
     <form id="formInput" >
-      <h2 class="display-5 text-center text-primary">Input Field</h2>
+      <h2 class="display-4 text-center text-primary">Input Field</h2>
       <!-- first row -->
       <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
         <div class="col-sm-3">
@@ -123,7 +125,7 @@ const bodyWeight = function() {
 </section>
 
 <!-- It encloses the drawer below submit and above the table -->
-<section class="sectionEDrawer">
+<section class="sectionEDrawer order-4">
   <!-- CONTENT OF THE HAMBURGER: this content will be pop-up DOWN -->
   <!-- Delete All - Download/Save JSON -->
   <!-- UNCOLLAPSED STATE ENCLOSES BUTTONS AS DELETE ALL; ABOUT BMI; SAVE; LOAD -->
@@ -160,7 +162,7 @@ const bodyWeight = function() {
 </section>
 
 <!-- Section F represents the table! -->
-  <section class="sectionFTable">
+  <section class="sectionFTable order-5">
     <!-- TABLE -->
     <!-- style="overflow-y: scroll; height: 200px" -->
     <div class="container-fluid p-0" id="tableContainer" style="overflow-y: scroll; height: 500px">
@@ -293,7 +295,7 @@ const bodyWeight = function() {
         </div>
       </div>
     </div>
-
+  </div> <!--FINISH FLEX CONTAINER-->
 
 
   <!-- Add the js files -->

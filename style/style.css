@@ -6,16 +6,28 @@
 #avgBMI {
   border: 0;
   background-color: white;
+  font-size: 36px;
 }
 
 #formInputs2 div {
   border: 1px solid #17a2b8;
-  margin-left: 2px;
+}
+
+#height,
+#weight,
+#time,
+#date {
+  font-size: 36px;
+}
+
+#formInputs2 label,
+#formInput label {
+  font-size: 20px;
 }
 
 label,
 input {
-  font-size: 14px;
+  font-size: 20px;
 }
 tbody tr:nth-child(odd) {
 	background-color: rgba(255,255,255,0.8);
