@@ -489,6 +489,7 @@ function loadBodyWeight() {
     const colorBackgroundLine = "black";
     const colorLine = "#17a2b8";
     const colorText = "#007bff";
+    const colorText2 = "#343a40";
     const colorCircle = "#dc3545";
     const colorBackgroundText = "black";
     const textFont = "26px serif";
@@ -716,21 +717,37 @@ function loadBodyWeight() {
 
         weightArray.forEach(function(item, index) {
           startPos = [posX, weightArray[index]];
-          if ((index + 1) !== weightArray.length) {
+          if (index !== weightArray.length) {
             endPos = [posX + deltaX, weightArray[index + 1]];
-            UICanvas.drawStraightLine(startPos, endPos, colorLine);
-            UICanvas.drawCircle(startPos);
-            if (!hideText) {
-              UICanvas.drawText(weightArrayOriginal[index], startPos, colorText, invertYAxisText);
+            // drawing differents colors
+            if(index % 2 === 0) {
+              UICanvas.drawCircle(startPos, colorText2);
+            } else {
+              UICanvas.drawCircle(startPos, colorText);
             }
-            // we plot here the last point!
-            if ((index + 2) === weightArray.length) {
-              UICanvas.drawCircle(endPos);
-              if (!hideText) {
-                // UICanvas.drawText(endPos[1], endPos, colorText, invertYAxisText);
+
+            UICanvas.drawStraightLine(startPos, endPos, colorLine);
+
+            if (!hideText) {
+              // UICanvas.drawText(weightArrayOriginal[index], startPos, colorText, invertYAxisText);
+              // This we will write the text sometimes one time above the line and next time below the line!
+              if(index % 2 === 0) {
                 UICanvas.drawText(weightArrayOriginal[index+1], endPos, colorText, invertYAxisText);
+              } else {
+                endPos[1] = endPos[1] - 18;
+                UICanvas.drawText(weightArrayOriginal[index+1], endPos, colorText2, invertYAxisText);
               }
             }
+            // we plot here the last point!
+            // if ((index + 2) === weightArray.length) {
+            //   endPos[1] = endPos[1] + 18;
+            //   UICanvas.drawCircle(endPos, colorText2);
+            //   // if (!hideText) {
+            //   //   // UICanvas.drawText(endPos[1], endPos, colorText, invertYAxisText);
+            //   //   // This we will write the text sometimes one time above the line and next time below the line!
+            //   //   UICanvas.drawText(weightArrayOriginal[index+1], endPos, colorText2, invertYAxisText);
+            //   // }
+            // }
             // deltaX
             posX = posX + deltaX;
           }
@@ -746,9 +763,9 @@ function loadBodyWeight() {
         ctx.lineTo(endPos[0]+0.5, invertYAxis - endPos[1]*factor + 0.5); // Draw a line to (150, 100)
         ctx.stroke(); // Render the path
       },
-      drawCircle: function(startPos) {
+      drawCircle: function(startPos, color) {
         ctx.beginPath();
-        ctx.strokeStyle = colorCircle;
+        ctx.strokeStyle = color;
         ctx.arc(startPos[0], invertYAxis - startPos[1]*factor, 3*factor, Math.PI * 2, false);
         ctx.stroke();
       },
