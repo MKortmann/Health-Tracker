@@ -276,7 +276,6 @@ function loadBodyWeight() {
       populateInputs: function() {
         // Update actual weight
         // In case that we do not have any data!
-        debugger
         if (StorageCtrl.data === null || StorageCtrl.data.length === 0) {
           document.querySelector(UISelectors.actualWeight).value = 80;
           // plot a text in the graphic
@@ -659,15 +658,25 @@ function loadBodyWeight() {
         // the x-values positions respective to the y-measurements (weight)
         for (let i = 0; i < data.length; i++) {
           // get the start and middle position: necessary to ajust the text on canvsa
-          if ((posX === 30) || (posX === 30 + deltaX * middlePos)) {
+          if ( ( (posX === 30) && (data.length < 70) ) || ( (posX === 30 + deltaX * middlePos) && (window.innerWidth >= 375) && (data.length < 70) ) ) {
             // if(posX === 15 || mesurements === 195|| posX === 395 ||
             //    posX === 595|| posX === 795 ) {
-
             UICanvas.drawText(data[i].date, [posX - 10, 12], colorBackgroundText, invertYAxisText);
             if(posX !== 30) {
               UICanvas.drawStraightLine([posX, 35],[posX, 390], colorDashedLine, setDash);
             }
             // for the last position!
+          } else if ( (posX === 30)  || (posX === 30 + deltaX * middlePos) ) {
+            // get the end position: necessary to ajust the text on canvas
+            // the last data to plot we remove the year!
+            let newData = data[i].date;
+            newData = newData.split("-");
+            newData = newData[1] + "-" + newData[2];
+
+            UICanvas.drawText(newData, [posX - 10, 12], colorBackgroundText, invertYAxisText);
+            UICanvas.drawStraightLine([posX, 35],[posX, 390], colorDashedLine, setDash);
+
+
           } else if ((posX === 30 + deltaX * measurements)) {
             // get the end position: necessary to ajust the text on canvas
             // the last data to plot we remove the year!
@@ -763,9 +772,10 @@ function loadBodyWeight() {
         ctx.lineTo(endPos[0]+0.5, invertYAxis - endPos[1]*factor + 0.5); // Draw a line to (150, 100)
         ctx.stroke(); // Render the path
       },
-      drawCircle: function(startPos, color) {
+      drawCircle: function(startPos, color, dashed = []) {
         ctx.beginPath();
         ctx.strokeStyle = color;
+        ctx.setLineDash(dashed);
         ctx.arc(startPos[0], invertYAxis - startPos[1]*factor, 3*factor, Math.PI * 2, false);
         ctx.stroke();
       },
@@ -785,13 +795,13 @@ function loadBodyWeight() {
       // calculate the gap in the x-axis! The distance between two measures in the x-axis.
       // To make it dynamically, it get the width of the window!
       returnStepXDelta: function(data) {
-        const reduce = 20;
+        const reduce = 25;
         switch (data.length) {
           case 7:
             return Math.floor( (window.innerWidth - reduce) / 7);
             break;
           case 14:
-            return Math.floor(window.innerWidth - reduce / 14);
+            return Math.floor( (window.innerWidth - reduce) / 14);
             break;
           case 30:
             return Math.floor( (window.innerWidth - reduce) / 30);
@@ -1262,7 +1272,6 @@ function loadBodyWeight() {
     const btnEdit = function() {
       // Get the new Date and new Weight
       const dataToBeUpdated = UICtrl.getWeightDateHeightTime();
-      debugger
       // destructuring assignment changing names
       let {heightEdit: height, weightEdit: weight, dateEdit: date, timeEdit: time} = dataToBeUpdated;
       // Validate inputs

@@ -178,6 +178,7 @@ button {
 }
 
 @media screen and (max-width: 1400px) {
+
   #hamburgerDown {
     height: 36px;
     width: 48px;
@@ -213,6 +214,13 @@ button {
     max-width: 32px;
   }
 
+  th, tr, label, #dropdownMenuButton {
+    font-size: 18px;
+  }
+  #date {
+    font-size: 32px;
+  }
+
   /* trying to let it visible in smartphones! */
   /* button {
     min-height: 42px;
@@ -221,4 +229,16 @@ button {
   .nav-link:hover {
   border-bottom: none;
   }
+}
+
+@media screen and (max-width: 374px) {
+
+  th, tr, label, input, #dropdownMenuButton {
+    font-size: 14px;
+  }
+
+#date {
+  font-size: 24px;
+}
+
 }
