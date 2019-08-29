@@ -665,8 +665,8 @@ function loadBodyWeight() {
             if(posX !== 30) {
               UICanvas.drawStraightLine([posX, 35],[posX, 390], colorDashedLine, setDash);
             }
-            // for the last position!
-          } else if ( (posX === 30)  || (posX === 30 + deltaX * middlePos) ) {
+            // for the first and middle position!
+          } else if ( (posX === 30)  || ((posX === 30 + deltaX * middlePos) && data.length < 100) ) {
             // get the end position: necessary to ajust the text on canvas
             // the last data to plot we remove the year!
             let newData = data[i].date;
@@ -795,7 +795,7 @@ function loadBodyWeight() {
       // calculate the gap in the x-axis! The distance between two measures in the x-axis.
       // To make it dynamically, it get the width of the window!
       returnStepXDelta: function(data) {
-        const reduce = 25;
+        const reduce = 20;
         switch (data.length) {
           case 7:
             return Math.floor( (window.innerWidth - reduce) / 7);
