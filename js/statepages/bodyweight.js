@@ -151,7 +151,7 @@ const bodyWeight = function() {
   </div>
 
   <!-- HAMBURGER TO OPEN THE NAVBAR DOWN (COLLAPSED STATE) -->
-  <nav class="navbar navbar-dark bg-dark">
+  <nav class="navbar navbar-dark bg-dark mt-3">
     <button id="hamburgerDown" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="line"></span>
     <span class="line"></span>

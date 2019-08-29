@@ -658,7 +658,7 @@ function loadBodyWeight() {
         // the x-values positions respective to the y-measurements (weight)
         for (let i = 0; i < data.length; i++) {
           // get the start and middle position: necessary to ajust the text on canvsa
-          if ( ( (posX === 30) && (data.length < 70) ) || ( (posX === 30 + deltaX * middlePos) && (window.innerWidth >= 375) && (data.length < 70) ) ) {
+          if ( ( (posX === 30) && (data.length < 70) && (window.innerWidth >= 400) ) || ( (posX === 30 + deltaX * middlePos) && (window.innerWidth >= 400) && (data.length < 70) ) ) {
             // if(posX === 15 || mesurements === 195|| posX === 395 ||
             //    posX === 595|| posX === 795 ) {
             UICanvas.drawText(data[i].date, [posX - 10, 12], colorBackgroundText, invertYAxisText);
@@ -667,6 +667,7 @@ function loadBodyWeight() {
             }
             // for the first and middle position!
           } else if ( (posX === 30)  || ((posX === 30 + deltaX * middlePos) && data.length < 100) ) {
+
             // get the end position: necessary to ajust the text on canvas
             // the last data to plot we remove the year!
             let newData = data[i].date;
@@ -678,6 +679,7 @@ function loadBodyWeight() {
 
 
           } else if ((posX === 30 + deltaX * measurements)) {
+
             // get the end position: necessary to ajust the text on canvas
             // the last data to plot we remove the year!
             let newData = data[i].date;
@@ -781,7 +783,15 @@ function loadBodyWeight() {
       },
       // drawText inputs: data = data, startPos = the x,y position
       drawText: function(data, startPos, color, invertYAxisText) {
-        ctx.font = textFont;
+
+        if(window.innerWidth <= 320) {
+          ctx.font = "20px serif";
+        } else if (window.innerWidth <= 1700) {
+          ctx.font = textFont;
+        } else {
+          ctx.font = "32px serif";
+        }
+
         ctx.fillStyle = color;
         ctx.fillText(data, startPos[0], invertYAxisText - startPos[1]*factor);
       },

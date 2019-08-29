@@ -234,7 +234,7 @@ button {
 @media screen and (max-width: 374px) {
 
   th, tr, label, input, #dropdownMenuButton {
-    font-size: 14px;
+    font-size: 16px;
   }
 
 #date {
