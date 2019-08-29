@@ -7,7 +7,7 @@ const myData = function() {
     <!-- sectionA: first section -->
     <section class="sectionA">
       <div class="container text-center mt-5">
-        <h2 class="display-1">In development!</h2>
+        <h2 class="display-4">myData</h2>
       </div>
     </section>
   `;

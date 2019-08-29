@@ -119,7 +119,6 @@ const bodyWeight = function() {
             <btn type="button" id="deleteBtn" class="btn btn-outline-danger btn-lg col-sm">Delete
             </btn>
           </div> -->
-        </div>
     </form>
   </div>
 </section>
@@ -295,10 +294,6 @@ const bodyWeight = function() {
       </div>
     </div>
   </div> <!--FINISH FLEX CONTAINER-->
-
-
-  <!-- Add the js files -->
-  <script src="./js/bodyweight.js"></script>
   `;
 }
 

@@ -4,6 +4,7 @@ import bodyWeightImport from "../js/statepages/bodyweight.js";
 import bloodPressureImport from "../js/statepages/bloodpressure.js";
 import bloodSugarImport from "../js/statepages/bloodsugar.js";
 import myDataImport from "../js/statepages/mydata.js";
+import mySettingsImport from "../js/statepages/settings.js";
 
 // STATE PATTERN DESIGN IS BEEN USED TO CHANGE THE STATE OF THE PAGE!
 // State Pattern is another behaviour type pattern. It reminder as Redux works.
@@ -89,6 +90,11 @@ const bloodPressure = bloodPressureImport;
 ///////////////////////////////////////////////////////////////////////////////
 const bloodSugar = bloodSugarImport;
 
+///////////////////////////////////////////////////////////////////////////////
+// Settings
+///////////////////////////////////////////////////////////////////////////////
+const mySettings = mySettingsImport;
+
 // Instantiate PageState
 const page = new PageState();
 
@@ -97,7 +103,8 @@ const overviewUI = document.getElementById("homeState"),
   myDataUI = document.getElementById("myData"),
   bodyWeightUI = document.getElementById("bodyWeight"),
   bloodPressureUI = document.getElementById("bloodPressure"),
-  bloodSugarUI = document.getElementById("bloodSugar");
+  bloodSugarUI = document.getElementById("bloodSugar"),
+  settingsUI = document.getElementById("settings");
 
 // EventListeners
 overviewUI.addEventListener("click", (e) => {
@@ -109,6 +116,7 @@ myDataUI.addEventListener("click", (e) => {
   e.preventDefault();
 });
 bodyWeightUI.addEventListener("click", (e) => {
+  debugger
   page.change(new bodyWeight);
   // load the bodyWeight.js! The file will be load dinamically!!!
   loadBodyWeight();
@@ -120,5 +128,10 @@ bloodPressureUI.addEventListener("click", (e) => {
 });
 bloodSugarUI.addEventListener("click", (e) => {
   page.change(new bloodSugar);
+  e.preventDefault();
+});
+settingsUI.addEventListener("click", (e) => {    
+  page.change(new mySettings);
+  settings();
   e.preventDefault();
 });
