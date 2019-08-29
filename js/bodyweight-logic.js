@@ -321,9 +321,9 @@ function loadBodyWeight() {
 
         let averageArray = UICtrl.calcAverageWeightBMI();
         // display the average WEIGHT
-        document.querySelector(UISelectors.avgWeight).value = averageArray[0];
+        document.querySelector(UISelectors.avgWeight).value = averageArray[0].toFixed(2);
         // display the average BMI
-        document.querySelector(UISelectors.avgBMI).value = averageArray[1];
+        document.querySelector(UISelectors.avgBMI).value = averageArray[1].toFixed(2);
       },
       calcAverageWeightBMI: function () {
         // e.preventDefault();
