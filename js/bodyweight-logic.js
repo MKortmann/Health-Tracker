@@ -491,7 +491,7 @@ function loadBodyWeight() {
     const colorText = "#007bff";
     const colorCircle = "#dc3545";
     const colorBackgroundText = "black";
-    const textFont = "30px serif";
+    const textFont = "26px serif";
     // const colorDashedLine = "#17a2b8";
     const colorDashedLine = "#007bff";
     // const colorDashedLine = "#dc3545";
@@ -768,30 +768,32 @@ function loadBodyWeight() {
       // calculate the gap in the x-axis! The distance between two measures in the x-axis.
       // To make it dynamically, it get the width of the window!
       returnStepXDelta: function(data) {
+        const reduce = 20;
         switch (data.length) {
           case 7:
-            return Math.floor(window.innerWidth / 7);
+            return Math.floor( (window.innerWidth - reduce) / 7);
             break;
           case 14:
-            return Math.floor(window.innerWidth / 14);
+            return Math.floor(window.innerWidth - reduce / 14);
             break;
           case 30:
-            return Math.floor(window.innerWidth / 30);
+            return Math.floor( (window.innerWidth - reduce) / 30);
             break;
           case 60:
-            return Math.floor(window.innerWidth / 60);
+            return Math.floor( (window.innerWidth - reduce) / 60);
             break;
           case 90:
-            return Math.floor(window.innerWidth / 90);
+            return Math.floor( (window.innerWidth - reduce) / 90);
             break;
           case 180:
-            return Math.floor(window.innerWidth / 180);
+            return Math.floor( (window.innerWidth - reduce) / 180);
             break;
           case 360:
-            return Math.floor(window.innerWidth / 180);
+            return Math.floor( (window.innerWidth - reduce) / 180);
             break;
           default:
-            return Math.floor(window.innerWidth / data.length);
+            // return Math.floor(window.innerWidth / data.length);
+            return Math.floor( (window.innerWidth - reduce) / data.length);
         }
       }
     }
