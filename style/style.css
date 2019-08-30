@@ -246,10 +246,9 @@ button {
     font-size: 32px;
   }
 
-  /* trying to let it visible in smartphones! */
-  /* button {
-    min-height: 42px;
-  } */
+  #dropdownMenuButton {
+    padding: 0;
+  }
 
   .nav-link:hover {
   border-bottom: none;

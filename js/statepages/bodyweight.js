@@ -7,7 +7,7 @@ const bodyWeight = function() {
     <!-- SectionA: first display input data as start weight, actual weight... -->
   <div class="d-flex flex-column">
     <section class="sectionA order-1" >
-      <div class="container-fluid mt-3 mb-0 mx-0 px-0">
+      <div class="container-fluid mt-0 mb-0 mx-0 px-0">
         <form id="formOutput">
         <h2 class="display-4 text-center text-info">Highlights</h2>
           <div class="form-row justify-content-center" id="formInputs2">
@@ -81,7 +81,7 @@ const bodyWeight = function() {
   </section>
 
 <!-- SECTION D encloses the input and button forms -->
-<section class="sectionDInputFormButtons mt-3 order-0">
+<section class="sectionDInputFormButtons mt-4 order-0">
   <div class="container-fluid p-0" >
     <form id="formInput" >
       <h2 class="display-4 text-center text-primary">Input Field</h2>
@@ -124,7 +124,7 @@ const bodyWeight = function() {
 </section>
 
 <!-- It encloses the drawer below submit and above the table -->
-<section class="sectionEDrawer order-4">
+<section class="sectionEDrawer order-4 mt-2">
   <!-- CONTENT OF THE HAMBURGER: this content will be pop-up DOWN -->
   <!-- Delete All - Download/Save JSON -->
   <!-- UNCOLLAPSED STATE ENCLOSES BUTTONS AS DELETE ALL; ABOUT BMI; SAVE; LOAD -->
@@ -171,11 +171,11 @@ const bodyWeight = function() {
             <th scope="col" class="align-middle">#</th>
             <th scope="col" class="align-middle">
             <!-- DROPDOWN MENU  -->
-              <div class="dropdown d-sm-none">
+              <div class="dropdown d-sm-none p-0 ml-0">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Date
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
                   <a id="dropDownDate" class="dropdown-item" href="#">Date</a>
                   <a id="dropDownTime" class="dropdown-item" href="#">Time</a>
                   <a id="dropDownBMI"class="dropdown-item d-sm-none " href="#">BMI</a>
