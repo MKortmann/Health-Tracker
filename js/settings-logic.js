@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /*
  * We are using here the MVO: Model View Octopus or MVC, MVVM, MVP and so on.
  * Additionally: we build it using the JavaScript Pattern: Module Revealing Pattern!
@@ -26,11 +26,139 @@
 
 function settings() {
 
-  (function() {
-    document.querySelector("#bigView").addEventListener("click", () => {
-    alert("Hello World!");
-    });
+  /*
+   * MODEL DATA: StorageCtrl
+   */
+  const StorageCtrl = (function() {
+    // Declare private vars and functions
+    let links = {
+      small: "./style/styleSmall.css",
+      normal: "./style/style.css",
+      big: "./style/styleBig.css"
+    };
 
+    return {
+      // Declare public var and functions
+      // return the links of styles
+      getLinks: function() {
+        return links;
+      },
+      // load the CSS Style stored in Local Storage
+      loadData: function(link) {
+        // Check local storage
+        if (localStorage.getItem("link") === null) {
+          // add to localStorage
+          // localStorage.setItem("links", JSON.stringify(currentLink));
+          localStorage.setItem("link", links.normal);
+          return links.normal;
+        } else {
+          // get and return the saved information from localStorage
+          // return  JSON.parse(localStorage.getItem("links"));
+          return  localStorage.getItem("link");
+        }
+      },
+      // Save the style in local storage
+      saveData: function(link) {
+        // localStorage.setItem("links", JSON.stringify(currentLink));
+        localStorage.setItem("link", link);
+      }
+    }
   })();
 
+
+  /*
+ * VIEW MODEL: UICtrl
+ */
+  // UICtrl
+  const UICtrl = (function() {
+    // Declare private vars and functions
+    const UISelectors = {
+      bigView: "#bigView",
+      normalView: "#normalView",
+      smallView: "#smallView"
+    }
+    return {
+      getSelectors: function() {
+        return UISelectors;
+      },
+      updateView: function(link) {
+        document.querySelector("#pagestyle").setAttribute("href", link);
+      }
+    }
+  })();
+
+    /*
+   * OCTOPUS MODEL: AppCrl
+   */
+  // Adding the event listeners for buttons
+  const AppCtrl = (function(StorageCtrl, UICtrl) {
+
+    // Variables
+    // Get UI selectors
+    const UISelectors = UICtrl.getSelectors();
+    // Get the styles saved in StorageCtrl
+    const links = StorageCtrl.getLinks();
+
+    // load event listeners
+    const loadEventListeners = function() {
+    // Add EventListeners for buttons
+    // small view button
+    document.querySelector(UISelectors.smallView).addEventListener("click", smallView);
+    // normal view button
+    document.querySelector(UISelectors.normalView).addEventListener("click", normalView);
+    // big view button
+    document.querySelector(UISelectors.bigView).addEventListener("click", bigView);
+
+    };
+    // for small button
+    const smallView = function () {
+      // Update View
+      UICtrl.updateView(links.small);
+      // Save Data
+      StorageCtrl.saveData(links.small);
+    };
+    // for small button
+    const normalView = function () {
+      // Update View
+      UICtrl.updateView(links.normal);
+      // Save Data
+      StorageCtrl.saveData(links.normal);
+    };
+    // for small button
+    const bigView = function () {
+      // Update View
+      UICtrl.updateView(links.big);
+      // Save Data
+      StorageCtrl.saveData(links.big);
+    };
+
+    const initialize = function() {
+      const link = StorageCtrl.loadData();
+      // Update View
+      UICtrl.updateView(link);
+    }
+
+    return {
+      // Initialize the UI
+      init: function() {
+        // get and load link
+        initialize();
+      },
+      loadEventListeners: function() {
+        // load Event Listeners
+        loadEventListeners();
+      }
+    }
+
+  })(StorageCtrl, UICtrl);
+
+
+  AppCtrl.init();
+
+  if( document.querySelector("#smallView") !== null) {
+    AppCtrl.loadEventListeners();
+  }
+
 }
+
+settings();

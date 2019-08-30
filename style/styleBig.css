@@ -1,0 +1,272 @@
+/* BIG LAYOUT INCREASE FACTOR: 6 */
+
+#submit {
+  font-size: 42px;
+}
+
+#submit:hover,
+#hamburgerDown:hover  {
+  background-color: #dc3545;
+  font-size: 44px;
+  color: white;
+}
+
+#hamburgerDown {
+  height: 42px;
+  width: 54px;
+}
+
+#hamburgerDown:hover {
+  height: 44px;
+  width: 58px;
+}
+
+#startWeight,
+#actualWeight,
+#diffWeight,
+#actualBMI,
+#avgWeight,
+#avgBMI {
+  border: 0;
+  background-color: white;
+  font-size: 42px;
+}
+
+#formInputs2 div {
+  border: 1px solid #17a2b8;
+}
+
+#height,
+#weight,
+#time,
+#date
+{
+  font-size: 42px;
+}
+
+th {
+  font-size: 38px;
+}
+
+tr {
+  font-size: 32px;
+}
+
+#dropdownMenuButton {
+  font-size: 38px;
+}
+
+#formInputs2 label,
+#formInput label {
+  font-size: 26px;
+}
+
+label,
+input {
+  font-size: 26px;
+}
+tbody tr:nth-child(odd) {
+	background-color: rgba(255,255,255,0.8);
+  color: black;
+}
+#backgroundOverview {
+  max-height: 740px;
+}
+#tableContainer {
+  height: 500px;
+  overflow-y: scroll;
+}
+#submit {
+  min-height: 60px;
+}
+#canvasWeight {
+  /* At100% the canvas will have 1880px */
+  max-width: 100%;
+  /* And here 200 px */
+  height: 400px;
+  border: 1px solid #17a2b8;
+  border-top: 0;
+  background-color: white;
+  /* box-shadow: 1px 2px 2px 2px gray;  */
+}
+.jumbotron {
+   background: rgb(255, 255, 255); /* This is for ie8 and below */
+   background: rgba(255, 255, 255, 0.8);
+   text-shadow: white 0px 0px 10px;
+}
+/* nice border transition below */
+.nav-link:hover {
+    transition: border 0.2s;
+    border-bottom: 1px solid white;
+}
+.nav-item {
+  font-size: 1.3rem;
+}
+
+body {
+  /* adding a little of overlay */
+  background: "rgba(0,0,0,0.05)";
+  /* background: url("../imgs/background2.jpg") top center / cover no-repeat; */
+}
+
+/* Align the navbar in html to the right when uncollapsed */
+#navbarSupportedContent .navbar-nav {
+  align-items: flex-end;
+}
+
+/* Styling the bodyweight site input form*/
+#formOutput,
+#formInput {
+  border: 1px solid #17a2b8;
+  border-bottom: 0;
+  padding: 10px;
+  background-color: white;
+  margin: 0;
+}
+
+
+.sectionBCanvasButtons {
+  border: 1px solid #17a2b8;
+  border-top: 0;
+  border-bottom: 0;
+  padding: 10px;
+  background-color: white;
+  margin: 0;
+}
+
+#formInput {
+  border: 1px solid #007bff;
+  border: 1px solid black;
+  border: 1px solid #6c757d;
+}
+
+#formOutput h2,
+#formInput h2 {
+  font-weight: 400;
+}
+
+/* Changing the hamburger menu */
+.navbar-toggler {
+height: 36px;
+width: 48px;
+background-color: #fff;
+border: 0;
+margin: 0;
+}
+
+.navbar-toggler .line{
+width: 100%;
+float: left;
+height: 2px;
+background-color: black;
+margin-bottom: 5px;
+}
+
+#dropdownMenuButton {
+  background: #343a40;
+  border: none;
+  font-size: 2rem;
+  color:  #17a2b8;
+  color: #ffc107;
+}
+.dropdown div a:hover {
+  background: #007bff;
+  color: #fff;
+  font-weight: 750;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* BIG LAYOUT INCREASE FACTOR: 4 */
+@media screen and (max-width: 1400px) {
+
+  #formInput h2,
+  #formOutput h2 {
+    font-size: 52px;
+  }
+
+
+  #startWeight,
+  #actualWeight,
+  #diffWeight,
+  #actualBMI,
+  #avgWeight,
+  #avgBMI {
+    border: 0;
+    background-color: white;
+    font-size: 34px;
+  }
+
+  #height,
+  #weight,
+  #time,
+  #date
+  {
+    font-size: 34px;
+  }
+
+  #hamburgerDown {
+    height: 40px;
+    width: 52px;
+  }
+
+  #hamburgerDown:hover {
+    height: 40px;
+    width: 52px;
+  }
+
+  #loadJSONBtn {
+    display: none;
+  }
+  #canvasWeight {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .btn {
+    font-size: 18px;
+  }
+  /* buttons group canvas */
+  .btn-secondary,
+  footer {
+    font-size: 16px;
+  }
+
+  .btn-secondary {
+    font-weight: 750;
+  }
+  /* resize images */
+  img {
+    max-width: 36px;
+    min-width: 32px;
+  }
+
+  th, tr, label, #dropdownMenuButton {
+    font-size: 22px;
+  }
+  #date {
+    font-size: 36px;
+  }
+
+  #dropdownMenuButton {
+    padding: 0;
+  }
+
+  .nav-link:hover {
+  border-bottom: none;
+  }
+}
+/* BIG LAYOUT INCREASE FACTOR: 2 */
+@media screen and (max-width: 374px) {
+
+  th, tr, label, input, #dropdownMenuButton {
+    font-size: 18px;
+  }
+
+  #date {
+    font-size: 24px;
+  }
+
+}
