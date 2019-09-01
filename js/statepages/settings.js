@@ -23,6 +23,7 @@ const settings = function() {
         </div>
       </section>
     </div>
+    <br><br>
   `;
 }
 

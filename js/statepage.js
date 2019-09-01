@@ -116,7 +116,6 @@ myDataUI.addEventListener("click", (e) => {
   e.preventDefault();
 });
 bodyWeightUI.addEventListener("click", (e) => {
-  debugger
   page.change(new bodyWeight);
   // load the bodyWeight.js! The file will be load dinamically!!!
   loadBodyWeight();

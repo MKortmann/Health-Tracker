@@ -41,7 +41,7 @@ function loadBodyWeight() {
       let script2 = document.createElement("SCRIPT");
       script.src = "./lib/jquery/jquery-3.3.1.js";
       script2.src = "./lib/bootstrap/bootstrap.js";
-    
+
       script.onload = function() {
       	let $ = window.jQuery;
         $(function() {
