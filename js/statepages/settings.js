@@ -7,7 +7,7 @@ const settings = function() {
     <!-- sectionA: first section -->
     <div class="d-flex flex-column">
       <section class="sectionA">
-        <div class="jumbotron jumbotron-fluid bg-info mt-2 text-light text-center">
+        <div class="jumbotron jumbotron-fluid bg-info mt-2 text-light text-center" id="backgroundJumbotron">
         <h2 class="display-4 text-center mt-5">View Settings</h2>
         <br>
         <p class="lead">Change the text size</p>

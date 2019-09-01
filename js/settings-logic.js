@@ -76,20 +76,37 @@ function settings() {
       bigView: "#bigView",
       normalView: "#normalView",
       smallView: "#smallView",
-      actualView: "#actualView"
+      actualView: "#actualView",
+      pagestyle: "#pagestyle",
+      backgroundJumbotron: "#backgroundJumbotron"
     }
     return {
       getSelectors: function() {
         return UISelectors;
       },
-      updateView: function(link, actualView = "Normal View") {
-        document.querySelector("#pagestyle").setAttribute("href", link);
+      updateView: function(link, actualView = "Normal View", style="bg-info") {
+        document.querySelector(UISelectors.pagestyle).setAttribute("href", link);
 
-        if(document.querySelector("#actualView") !== null) {
+        if(document.querySelector(UISelectors.actualView) !== null) {
           // important to reload the page
-          document.querySelector("#actualView").textContent = actualView;
+          document.querySelector(UISelectors.actualView).textContent = actualView;
+          // remove the list color
+          UICtrl.removeColorClassList();
+          // add the actual color class list
+          document.querySelector(UISelectors.backgroundJumbotron).classList.add(style);
         }
 
+      },
+      removeColorClassList: function() {
+        if(document.querySelector(UISelectors.backgroundJumbotron).classList.contains("bg-primary")) {
+          document.querySelector(UISelectors.backgroundJumbotron).classList.remove("bg-primary")
+        }
+        if(document.querySelector(UISelectors.backgroundJumbotron).classList.contains("bg-info")) {
+          document.querySelector("#backgroundJumbotron").classList.remove("bg-info")
+        }
+        if(document.querySelector(UISelectors.backgroundJumbotron).classList.contains("bg-danger")) {
+          document.querySelector("#backgroundJumbotron").classList.remove("bg-danger")
+        }
       }
     }
   })();
@@ -147,22 +164,27 @@ function settings() {
 
     const initialize = function() {
       const link = StorageCtrl.loadData();
-      let view = "normal"
+      let view = "normal";
+      let style = "bg-info";
       switch (link) {
         case "./style/styleBig.css":
         view = "Big View";
+        style = "bg-primary"
         break;
         case "./style/style.css":
         view = "Normal View";
+        style="bg-info";
         break;
         case "./style/styleSmall.css":
         view = "Small View";
+        style="bg-danger";
         break;
         default:
         view = "Normal View";
+        style="bg-info";
       }
       // Update View
-      UICtrl.updateView(link, view);
+      UICtrl.updateView(link, view, style);
     }
 
     return {
