@@ -105,7 +105,7 @@ tbody tr:nth-child(odd) {
 
 body {
   /* adding a little of overlay */
-  background: "rgba(0,0,0,0.05)";
+  background: rgba(0,0,0,0.05);
   /* background: url("../imgs/background2.jpg") top center / cover no-repeat; */
 }
 

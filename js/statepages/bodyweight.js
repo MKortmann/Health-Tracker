@@ -132,9 +132,11 @@ const bodyWeight = function() {
     <div class="bg-dark p-4">
       <h5 class="text-white h4">Extra functions</h5>
       <span class="text-light lead"><p><strong>Save:</strong> it will download a JSON (kind of table) file with your information that you can open it in any text editor.</p>
-      <p>If you have issues to print your data in your phone, please, try to switch the browser to <strong>desktop mode</strong>!</p>
-      <strong>Load:</strong> this function is available in PC, MAC or Linux not in smartphones or tablets. It will load your json file (that should be named: table.json) and placed at Health-Tracker storage folder. For
-      that you have to download the program to your computer and follow the instructions in my gitHub page!
+      <p>If you have any issues to print your data in your phone, please, switch your browser to <strong>desktop mode</strong>!</p>
+      <div class="d-none d-md-block">
+        <strong>Load:</strong> this function is available in PC, MAC or Linux not in smartphones or tablets. It will load your json file (that should be named: table.json) and placed at Health-Tracker storage folder. For
+        that you have to download the program to your computer and follow the instructions in my gitHub page!
+      </div>
       <a class="text-info" href="https://github.com/MKortmann/Health-Tracker"><strong>Health Tracker</strong></a>!
       </span>
         <!-- Button trigger modal: BMI -->
@@ -295,6 +297,8 @@ const bodyWeight = function() {
     </div>
   </div> <!--FINISH FLEX CONTAINER-->
   `;
+
+
 }
 
 export default bodyWeight;

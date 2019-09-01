@@ -75,14 +75,21 @@ function settings() {
     const UISelectors = {
       bigView: "#bigView",
       normalView: "#normalView",
-      smallView: "#smallView"
+      smallView: "#smallView",
+      actualView: "#actualView"
     }
     return {
       getSelectors: function() {
         return UISelectors;
       },
-      updateView: function(link) {
+      updateView: function(link, actualView = "Normal View") {
         document.querySelector("#pagestyle").setAttribute("href", link);
+
+        if(document.querySelector("#actualView") !== null) {
+          // important to reload the page
+          document.querySelector("#actualView").textContent = actualView;
+        }
+
       }
     }
   })();
@@ -113,29 +120,49 @@ function settings() {
     // for small button
     const smallView = function () {
       // Update View
-      UICtrl.updateView(links.small);
+      UICtrl.updateView(links.small, "Small View");
       // Save Data
       StorageCtrl.saveData(links.small);
+      // reload the page
+      location.reload();
     };
     // for small button
     const normalView = function () {
       // Update View
-      UICtrl.updateView(links.normal);
+      UICtrl.updateView(links.normal, "Normal View");
       // Save Data
       StorageCtrl.saveData(links.normal);
+      // reload the page
+      location.reload();
     };
     // for small button
     const bigView = function () {
       // Update View
-      UICtrl.updateView(links.big);
+      UICtrl.updateView(links.big, "Big View");
       // Save Data
       StorageCtrl.saveData(links.big);
+      // reload the page
+      location.reload();
     };
 
     const initialize = function() {
       const link = StorageCtrl.loadData();
+      let view = "normal"
+      switch (link) {
+        case "./style/styleBig.css":
+        view = "Big View";
+        break;
+        case "./style/style.css":
+        view = "Normal View";
+        break;
+        case "./style/styleSmall.css":
+        view = "Small View";
+        break;
+        default:
+        view = "Normal View";
+      }
       // Update View
-      UICtrl.updateView(link);
+      UICtrl.updateView(link, view);
     }
 
     return {

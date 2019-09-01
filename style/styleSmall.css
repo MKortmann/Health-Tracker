@@ -11,8 +11,8 @@
 }
 
 #hamburgerDown {
-  height: 24px;
-  width: 36px;
+  height: 36px;
+  width: 42px;
 }
 
 #hamburgerDown:hover {
@@ -146,8 +146,8 @@ body {
 
 /* Changing the hamburger menu */
 .navbar-toggler {
-height: 24px;
-width: 36px;
+height: 36px;
+width: 48px;
 background-color: #fff;
 border: 0;
 margin: 0;
@@ -206,13 +206,13 @@ button {
   }
 
   #hamburgerDown {
-    height: 24px;
-    width: 36px;
+    height: 36px;
+    width: 42px;
   }
 
   #hamburgerDown:hover {
-    height: 24px;
-    width: 36px;
+    height: 36px;
+    width: 42px;
   }
 
   #loadJSONBtn {
