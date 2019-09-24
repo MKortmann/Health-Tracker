@@ -141,7 +141,7 @@ function settings() {
       // Save Data
       StorageCtrl.saveData(links.small);
       // reload the page
-      location.reload();
+      // location.reload();
     };
     // for small button
     const normalView = function () {
@@ -150,7 +150,7 @@ function settings() {
       // Save Data
       StorageCtrl.saveData(links.normal);
       // reload the page
-      location.reload();
+      // location.reload();
     };
     // for small button
     const bigView = function () {
@@ -159,7 +159,7 @@ function settings() {
       // Save Data
       StorageCtrl.saveData(links.big);
       // reload the page
-      location.reload();
+      // location.reload();
     };
 
     const initialize = function() {

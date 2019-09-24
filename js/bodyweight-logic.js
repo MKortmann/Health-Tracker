@@ -34,26 +34,26 @@
 
 function loadBodyWeight() {
   // trying to fix jquery problems
-  (function() {
-      let startingTime = new Date().getTime();
-      // Load the script
-      let script = document.createElement("SCRIPT");
-      let script2 = document.createElement("SCRIPT");
-      script.src = "./lib/jquery/jquery-3.3.1.js";
-      script2.src = "./lib/bootstrap/bootstrap.js";
-
-      script.onload = function() {
-      	let $ = window.jQuery;
-        $(function() {
-              let endingTime = new Date().getTime();
-              let tookTime = endingTime - startingTime;
-              console.log("jQuery & Bootstrap is loaded dinamically, after " + tookTime + " milliseconds!" + "Test function only to try to solve github load problem.");
-          });
-      };
-      document.getElementsByTagName("head")[0].appendChild(script2);
-      document.getElementsByTagName("head")[0].appendChild(script);
-
-  })();
+  // (function() {
+  //     let startingTime = new Date().getTime();
+  //     // Load the script
+  //     let script = document.createElement("SCRIPT");
+  //     let script2 = document.createElement("SCRIPT");
+  //     script.src = "./lib/jquery/jquery-3.3.1.js";
+  //     script2.src = "./lib/bootstrap/bootstrap.js";
+  //
+  //     script.onload = function() {
+  //     	let $ = window.jQuery;
+  //       $(function() {
+  //             let endingTime = new Date().getTime();
+  //             let tookTime = endingTime - startingTime;
+  //             console.log("jQuery & Bootstrap is loaded dinamically, after " + tookTime + " milliseconds!" + "Test function only to try to solve github load problem.");
+  //         });
+  //     };
+  //     document.getElementsByTagName("head")[0].appendChild(script2);
+  //     document.getElementsByTagName("head")[0].appendChild(script);
+  //
+  // })();
 
   /*
    * MODEL DATA: StorageCtrl
