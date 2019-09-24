@@ -64,6 +64,11 @@ label,
 input {
   font-size: 26px;
 }
+
+input:focus {
+  background-color: #ccc;
+}
+
 tbody tr:nth-child(odd) {
 	background-color: rgba(255,255,255,0.8);
   color: black;
