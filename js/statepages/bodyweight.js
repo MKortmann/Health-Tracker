@@ -128,37 +128,45 @@ const bodyWeight = function() {
   <!-- CONTENT OF THE HAMBURGER: this content will be pop-up DOWN -->
   <!-- Delete All - Download/Save JSON -->
   <!-- UNCOLLAPSED STATE ENCLOSES BUTTONS AS DELETE ALL; ABOUT BMI; SAVE; LOAD -->
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-      <h5 class="text-white h4">Extra functions</h5>
-      <span class="text-light lead"><p><strong>Save:</strong> it will download a JSON (kind of table) file with your information that you can open it in any text editor.</p>
-      <p>If you have any issues to print your data in your phone, please, switch your browser to <strong>desktop mode</strong>!</p>
-      <div class="d-none d-md-block">
-        <strong>Load:</strong> this function is available in PC, MAC or Linux not in smartphones or tablets. It will load your json file (that should be named: table.json) and placed at Health-Tracker storage folder. For
-        that you have to download the program to your computer and follow the instructions in my gitHub page!
+  <div class="bg-dark p-4 modal fade" id="modalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="h4">Extra functions</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span class="lead"><p><strong>Save:</strong> it will download a JSON (kind of table) file with your information that you can open it in any text editor.</p>
+          <p>If you have any issues to print your data in your phone, please, switch your browser to <strong>desktop mode</strong>!</p>
+          <div class="d-none d-md-block">
+            <strong>Load:</strong> this function is available in PC, MAC or Linux not in smartphones or tablets. It will load your json file (that should be named: table.json) and placed at Health-Tracker storage folder. For
+            that you have to download the program to your computer and follow the instructions in my gitHub page!
+          </div>
+          <a class="text-info" href="https://github.com/MKortmann/Health-Tracker"><strong>Health Tracker</strong></a>!
+          </span>
+        <div class="modal-footer d-flex flex-column mt-1 pb-0">
+            <!-- Button trigger modal: BMI -->
+          <button type="button" id="bmiInfoBtn" class="btn btn-primary btn-block btn-lg my-2" data-toggle="modal" data-target="#locModal2">
+          About BMI </button>
+          <button type="button" id="deleteAllAskBtn" class="btn btn-danger btn-block my-2 btn-lg " data-toggle="modal" data-target="#locModal">
+          Delete All Items
+          </button>
+          <button type="button" id="saveBtn" class="btn btn-info btn-block my-2 btn-lg">Save </btn>
+          <button type="button" id="loadJSONBtn" class="btn btn-warning btn-block my-2 btn-lg">Load File </button>
+          <button type="button" id="printBtn" class="btn btn-warning btn-block my-2 btn-lg">Print</button>
+          <button type="button" class="btn btn-secondary mt-2" data-dismiss="modal">Close</button>
+        </div>
+        </div>
       </div>
-      <a class="text-info" href="https://github.com/MKortmann/Health-Tracker"><strong>Health Tracker</strong></a>!
-      </span>
-        <!-- Button trigger modal: BMI -->
-      <button type="button" id="bmiInfoBtn" class="btn btn-primary btn-block btn-lg my-2" data-toggle="modal" data-target="#locModal2">
-      About BMI </button>
-      <button type="button" id="deleteAllAskBtn" class="btn btn-danger btn-block my-2 btn-lg " data-toggle="modal" data-target="#locModal">
-      Delete All Items
-      </button>
-      <button type="button" id="saveBtn" class="btn btn-info btn-block my-2 btn-lg">Save </btn>
-      <button type="button" id="loadJSONBtn" class="btn btn-warning btn-block my-2 btn-lg">Load File </button>
-      <button type="button" id="printBtn" class="btn btn-warning btn-block my-2 btn-lg">Print</button>
     </div>
   </div>
 
   <!-- HAMBURGER TO OPEN THE NAVBAR DOWN (COLLAPSED STATE) -->
-  <nav class="navbar navbar-dark bg-dark mt-3">
-    <button id="hamburgerDown" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="line"></span>
-    <span class="line"></span>
-    <span class="line" style="margin-bottom: 0;"></span>
-    </button>
-  </nav>
+  <button type="button" class="btn btn-block btn-lg btn-info my-3" data-toggle="modal" data-target="#modalLong">
+    Extra Functions
+  </button>
 <!-- CLOSE THE DRAWER -->
 </section>
 
