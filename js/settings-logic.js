@@ -137,7 +137,7 @@ function settings() {
     // for small button
     const smallView = function () {
       // Update View
-      UICtrl.updateView(links.small, "Small View");
+      UICtrl.updateView(links.small, "Small View", "bg-danger");
       // Save Data
       StorageCtrl.saveData(links.small);
       // reload the page
@@ -146,7 +146,7 @@ function settings() {
     // for small button
     const normalView = function () {
       // Update View
-      UICtrl.updateView(links.normal, "Normal View");
+      UICtrl.updateView(links.normal, "Normal View", "bg-info");
       // Save Data
       StorageCtrl.saveData(links.normal);
       // reload the page
@@ -155,7 +155,7 @@ function settings() {
     // for small button
     const bigView = function () {
       // Update View
-      UICtrl.updateView(links.big, "Big View");
+      UICtrl.updateView(links.big, "Big View", "bg-primary");
       // Save Data
       StorageCtrl.saveData(links.big);
       // reload the page
