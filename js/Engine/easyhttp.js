@@ -72,7 +72,7 @@ class EasyHTTP {
 }
 // const data
 const dataToSubmit = {
-  BMI: "45.25",
+  BMI: "50.25",
   ID: 10,
   date: "2019-08-20",
   dateEdit: "",
@@ -95,11 +95,11 @@ const http = new EasyHTTP();
 
 
 // posting data
-// http.put("baseURL" + "dfsdfsdfs", dataToSubmit)
-//   .then(data => console.log(data))
-//   .catch(err => console.log(err));
-
-// deleting data
-http.delete(baseURL)
+http.put(baseURL, dataToSubmit)
   .then(data => console.log(data))
   .catch(err => console.log(err));
+
+// deleting data
+// http.delete("https://health-tracker-841f9.firebaseio.com/0.json")
+//   .then(data => console.log(data))
+//   .catch(err => console.log(err));
