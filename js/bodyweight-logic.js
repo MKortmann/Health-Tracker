@@ -73,15 +73,65 @@ function loadBodyWeight() {
         let items;
         // // Check local storage
         // if (localStorage.getItem("items") === null) {
-
           const http = new EasyHTTP();
-          // getting the data
+          // // getting the data
+          // http.get(baseURL + ".json")
+          //   .then(data => {
+          //     console.log(data);
+          //     items = [];
+          //     // add the new item
+          //     items.push(item);
+          //     // add to localStorage
+          //     localStorage.setItem("items", JSON.stringify(items));
+          //   })
+          //   .catch(err => console.log(err));
+          http.post(baseURL + ".json", dataToSubmit)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+
+        //   items = [];
+        //   // add the new item
+        //   items.push(item);
+        //   // add to localStorage
+        //   localStorage.setItem("items", JSON.stringify(items));
+        // } else {
+        //   // get the saved information from localStorage
+        //   items = JSON.parse(localStorage.getItem("items"));
+        //   // add the new item
+        //   items.push(item);
+        //   // add to localStorage
+        //   localStorage.setItem("items", JSON.stringify(items));
+        // }
+        // // update LocalData
+        // StorageCtrl.data = items;
+      },
+      loadData: function(item) {
+        let items;
+        // // Check local storage
+        // if (localStorage.getItem("items") === null) {
+          const http = new EasyHTTP();
+          // // getting the data
           http.get(baseURL + ".json")
             .then(data => {
               console.log(data);
-              return(data);
+              items = Object.values(data);
+              // add the new item
+              // items.push(data);
+              // add to localStorage
+              localStorage.setItem("items", JSON.stringify(items));
+              if (items !== null) {
+                // Populate the inputs
+                UICtrl.populateInputs();
+                // Populate the table
+                UICtrl.populateTable(items);
+                // Plot graphics
+                plotGraph();
+              }
+              // Update input: display actual weight
+              UICtrl.populateInputs();
             })
             .catch(err => console.log(err));
+
 
         //   items = [];
         //   // add the new item
@@ -1356,8 +1406,12 @@ function loadBodyWeight() {
       // Get the data from LocalStorage
       const items = StorageCtrl.getLSData();
       // Get the data from the server
-      const items2 = StorageServerCtrl.saveData();
+      // const item2 = StorageServerCtrl.saveData();
       debugger
+      StorageServerCtrl.saveData();
+      StorageServerCtrl.loadData();
+
+      // alert(item2);
       // We populate the table and input only if there is a data!
       if (items !== null) {
         // Populate the inputs

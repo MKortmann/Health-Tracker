@@ -78,6 +78,8 @@ const dataToSubmit = {
   dateEdit: "",
   height: "178",
   heightEdit: "178",
+  time: "11:36",
+  timeEdit: "",
   weight: "80",
   weightEdit: "80"
 };
