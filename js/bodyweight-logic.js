@@ -192,11 +192,15 @@ function loadBodyWeight() {
         const items = StorageCtrl.data;
         // add to localStorage
         localStorage.setItem("items", JSON.stringify(items));
-        // add all data to the server
-        debugger
-        items.forEach((item) => {
-          StorageServerCtrl.uploadData(item);
-        });
+        // add all data to the server!!!
+        // we should replace the setTimeout for something more reliable, because
+        // we make: async -> delete all and the wee made another async upload all.
+        setTimeout((item)=> {
+          items.forEach((item) => {
+            StorageServerCtrl.uploadData(item);
+          });
+        }, 5000)
+
       },
       getLocalData: function() {
         return StorageCtrl.data;
