@@ -68,8 +68,7 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
-      saveData: function(item) {
-        let items;
+      uploadData: function(dataToSubmit) {
         const http = new EasyHTTP();
         // // posting the data
         http.post(baseURL + ".json", dataToSubmit)
@@ -127,10 +126,9 @@ function loadBodyWeight() {
       // Declare public var and functions
 
       saveData: function(item) {
-        let items;
+        let items = [];
         // Check local storage
         if (localStorage.getItem("items") === null) {
-          items = [];
           // add the new item
           items.push(item);
           // add to localStorage
@@ -143,6 +141,10 @@ function loadBodyWeight() {
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
         }
+        // add Data to server
+        items.forEach((item) => {
+          StorageServerCtrl.uploadData(item);
+        });
         // update LocalData
         StorageCtrl.data = items;
       },
@@ -1266,12 +1268,8 @@ function loadBodyWeight() {
       // // Get the data from LocalStorage
       const items = StorageCtrl.getLSData();
       // Get the data from the server
-      // const item2 = StorageServerCtrl.saveData();
-      debugger
-      // StorageServerCtrl.saveData();
       StorageServerCtrl.loadData();
-
-      // // We populate the table and input only if there is a data!
+      // We populate the table and input only if there is a data!
       if (items !== null) {
         // Populate the inputs
         UICtrl.populateInputs();

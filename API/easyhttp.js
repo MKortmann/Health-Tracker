@@ -11,9 +11,6 @@
 const baseURL = "https://health-tracker-841f9.firebaseio.com/"
 
 class EasyHTTP {
-
-// const baseURL = "https://react-my-burger-2-6c057.firebaseio.com/ingredients.json"
-
   // Make AN HTTP REQUEST!!!: getting data from a server
   //get information
   async get(url) {
@@ -71,18 +68,18 @@ class EasyHTTP {
 
 }
 // const data
-const dataToSubmit = {
-  BMI: "50.25",
-  ID: 10,
-  date: "2019-08-20",
-  dateEdit: "",
-  height: "178",
-  heightEdit: "178",
-  time: "11:36",
-  timeEdit: "",
-  weight: "80",
-  weightEdit: "80"
-};
+// const dataToSubmit = {
+//   BMI: "50.25",
+//   ID: 10,
+//   date: "2019-08-20",
+//   dateEdit: "",
+//   height: "178",
+//   heightEdit: "178",
+//   time: "11:36",
+//   timeEdit: "",
+//   weight: "80",
+//   weightEdit: "80"
+// };
 
 //Example of how to call it in your program!
 // const http = new EasyHTTP();
