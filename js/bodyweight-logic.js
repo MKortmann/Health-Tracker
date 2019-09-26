@@ -68,186 +68,46 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
-
       saveData: function(item) {
         let items;
-        // // Check local storage
-        // if (localStorage.getItem("items") === null) {
-          const http = new EasyHTTP();
-          // // getting the data
-          // http.get(baseURL + ".json")
-          //   .then(data => {
-          //     console.log(data);
-          //     items = [];
-          //     // add the new item
-          //     items.push(item);
-          //     // add to localStorage
-          //     localStorage.setItem("items", JSON.stringify(items));
-          //   })
-          //   .catch(err => console.log(err));
-          http.post(baseURL + ".json", dataToSubmit)
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
-
-        //   items = [];
-        //   // add the new item
-        //   items.push(item);
-        //   // add to localStorage
-        //   localStorage.setItem("items", JSON.stringify(items));
-        // } else {
-        //   // get the saved information from localStorage
-        //   items = JSON.parse(localStorage.getItem("items"));
-        //   // add the new item
-        //   items.push(item);
-        //   // add to localStorage
-        //   localStorage.setItem("items", JSON.stringify(items));
-        // }
-        // // update LocalData
-        // StorageCtrl.data = items;
+        const http = new EasyHTTP();
+        // // posting the data
+        http.post(baseURL + ".json", dataToSubmit)
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
       },
+      // Principle of offline first!!!
       loadData: function(item) {
         let items;
-        // // Check local storage
-        // if (localStorage.getItem("items") === null) {
-          const http = new EasyHTTP();
-          // // getting the data
-          http.get(baseURL + ".json")
-            .then(data => {
-              console.log(data);
-              items = Object.values(data);
-              // add the new item
-              // items.push(data);
+        const http = new EasyHTTP();
+        // // getting the data
+        http.get(baseURL + ".json")
+          .then(data => {
+            // transforming an object with objects in an array with objects!!!
+            items = Object.values(data);
+            // Get the data from LocalStorage to see if we need to update
+            let LSItems = [];
+            LSItems = StorageCtrl.getLSData();
+            // if is null, should be an empty array to avoid errors
+            LSItems === null ? LSItems = [] : LSItems;
+            // compare LS data with Server Data: if true, let's populate with
+            // new data!
+            if ( ( items.length  > LSItems.length ) && (items !== null) ) {
               // add to localStorage
               localStorage.setItem("items", JSON.stringify(items));
-              if (items !== null) {
-                // Populate the inputs
-                UICtrl.populateInputs();
-                // Populate the table
-                UICtrl.populateTable(items);
-                // Plot graphics
-                plotGraph();
-              }
+              // Populate the inputs
+              UICtrl.populateInputs();
+              // Populate the table
+              UICtrl.populateTable(items);
+              // Plot graphics
+              plotGraph();
               // Update input: display actual weight
               UICtrl.populateInputs();
-            })
-            .catch(err => console.log(err));
-
-
-        //   items = [];
-        //   // add the new item
-        //   items.push(item);
-        //   // add to localStorage
-        //   localStorage.setItem("items", JSON.stringify(items));
-        // } else {
-        //   // get the saved information from localStorage
-        //   items = JSON.parse(localStorage.getItem("items"));
-        //   // add the new item
-        //   items.push(item);
-        //   // add to localStorage
-        //   localStorage.setItem("items", JSON.stringify(items));
-        // }
-        // // update LocalData
-        // StorageCtrl.data = items;
-      },
-      // It returns the start value of the id!
-      getNextID: function() {
-        if (localStorage.getItem("items") === null) {
-          return 0;
-        } else {
-          const items = JSON.parse(localStorage.getItem("items"));
-          return items.length;
-        }
-      },
-      getLastWeight: function() {
-        if (localStorage.getItem("items") !== null) {
-          const items = JSON.parse(localStorage.getItem("items"));
-          const weight = items[items.length - 1].weight;
-          return weight;
-        } else {
-          return 0;
-        }
-      },
-      getLSData: function() {
-        StorageCtrl.data = JSON.parse(localStorage.getItem("items"))
-        return StorageCtrl.data;
-      },
-      uploadDataToLS: function() {
-        // add to localStorage
-        localStorage.setItem("items", JSON.stringify(StorageCtrl.data));
-      },
-      getLocalData: function() {
-        return StorageCtrl.data;
-      },
-      clearAllItems: function() {
-        data = [];
-      },
-      clearItemsFromStorage: function() {
-        localStorage.removeItem("items");
-      },
-      downloadVideosToJSON: function() {
-        // Save as JSON file
-        const weightData = StorageCtrl.getLSData();
-        const fileJSON = JSON.stringify(weightData);
-
-        // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
-        let dataUri = 'data:storage/json;charset=utf-8,' + encodeURIComponent(fileJSON);
-
-        let exportFileDefaultName = 'table.json';
-
-        let linkElement = document.createElement('a');
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportFileDefaultName);
-        linkElement.click();
-        linkElement.remove();
-      },
-      // // Open a file selection to select the json file
-      // selectFile: function() {
-      //   // open a file selection dialog
-      //   const input = document.createElement('input');
-      //   input.type = 'file';
-      //   // handle the selected file
-      //   input.onchange = e => {
-      //     const file = e.target.files[0];
-      //     return file.name;
-      //   }
-      //   input.click();
-      // },
-      // The method XMLhttpRequest works only if you have a server installed.
-      // easier way: go to your project file throught prompt command and type:
-      // npm install -g live-server
-      // run it typing: live-server
-      loadJSONFile: function() {
-        // get the json file name
-
-        // let fileName = StorageCtrl.selectFile();
-        // console.log(`Output filename: ${fileName}`);
-
-        var xhttp = new XMLHttpRequest();
-        // we will use now onload instead of onreadystatechange. So we do not need
-        // to check for this.readyState
-        xhttp.onload = function() {
-          // xhttp.onreadystatechange = function() {
-          // readyState 4: the response has been capture and can be used
-          // status: http status of 200 means that everything is ok
-          var itemList = "";
-          // if (this.readyState == 4 && this.status == 200) {
-          if (this.status == 200) {
-            // Convert the json to and object
-            let items = JSON.parse(xhttp.responseText);
-
-            // Storing the table in the Local Storage
-            localStorage.setItem("items", JSON.stringify(items));
-          }
-        };
-        xhttp.open("GET", "./storage/table.json", true);
-        xhttp.onerror = function() {
-          console.log("Request error in XMLHttpRequest...");
-          return false;
-        }
-        xhttp.send();
-        // if works, returns true. The true flag, tells that we are reloading
-        // data, and the table should be cleared!
-        return true;
+            }
+          })
+          .catch(err => {
+            console.log("Network Error:" + err);
+          });
       }
     }
   })();
@@ -1403,16 +1263,15 @@ function loadBodyWeight() {
         // Sending a message to the user!
         UICtrl.showAlert("To Load Data From A File, you have to rename the download file to: table.json. Then copy this file to the folder storage! Then try it again!", "danger alert-danger");
       }
-      // Get the data from LocalStorage
+      // // Get the data from LocalStorage
       const items = StorageCtrl.getLSData();
       // Get the data from the server
       // const item2 = StorageServerCtrl.saveData();
       debugger
-      StorageServerCtrl.saveData();
+      // StorageServerCtrl.saveData();
       StorageServerCtrl.loadData();
 
-      // alert(item2);
-      // We populate the table and input only if there is a data!
+      // // We populate the table and input only if there is a data!
       if (items !== null) {
         // Populate the inputs
         UICtrl.populateInputs();
@@ -1423,8 +1282,6 @@ function loadBodyWeight() {
       }
       // Update input: display actual weight
       UICtrl.populateInputs();
-
-
     }
 
     const plotGraph = function() {
