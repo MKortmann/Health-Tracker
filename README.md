@@ -17,9 +17,13 @@ I used only one famous library: bootstrap.
  
 ## In Development/TODO: 
  
-  - Blood Pressure
-  - Blood Sugar
-  - Responsive Design + Design Improvements
+  - Working: Firebase (back server) integration!!!
+  
+  ~~~~
+  Next steps:
+   Blood Pressure
+   Blood Sugar
+  ~~~~
 
 ## How to start the App?
 
