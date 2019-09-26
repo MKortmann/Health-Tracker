@@ -68,11 +68,16 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
-      deleteAllData: function() {
+      deleteAllData: function(callback) {
         const http = new EasyHTTP();
         // // posting the data
         http.delete(baseURL + ".json")
-          .then(data => console.log(data))
+          .then(
+            data => {
+              console.log(data);
+              callback();
+            }
+          )
           .catch(err => console.log(err));
       },
       uploadData: function(dataToSubmit) {
@@ -84,12 +89,15 @@ function loadBodyWeight() {
       },
       // Principle of offline first!!!
       loadData: function(item) {
+        debugger
         let items;
         const http = new EasyHTTP();
         // // getting the data
         http.get(baseURL + ".json")
           .then(data => {
             // transforming an object with objects in an array with objects!!!
+            // if is null, should be an empty array to avoid errors
+            data === null ? data = {} : data;
             items = Object.values(data);
             // Get the data from LocalStorage to see if we need to update
             let LSItems = [];
@@ -140,8 +148,7 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
-          // add single data to server
-          StorageServerCtrl.uploadData(item[0]);
+          // StorageServerCtrl.uploadData(item);
         } else {
           // get the saved information from localStorage
           items = JSON.parse(localStorage.getItem("items"));
@@ -150,10 +157,12 @@ function loadBodyWeight() {
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
           // add Data to server
-          items.forEach((item) => {
-            StorageServerCtrl.uploadData(item);
-          });
+          // items.forEach((item) => {
+          //   StorageServerCtrl.uploadData(item);
+          // });
         }
+        debugger
+        StorageServerCtrl.deleteAllData(StorageServerCtrl.uploadData(items));
         // update LocalData
         StorageCtrl.data = items;
       },
