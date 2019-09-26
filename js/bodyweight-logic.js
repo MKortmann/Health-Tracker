@@ -68,14 +68,13 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
-      deleteAllData: function(callback) {
+      deleteAllData: function() {
         const http = new EasyHTTP();
         // // posting the data
         http.delete(baseURL + ".json")
           .then(
             data => {
               console.log(data);
-              callback();
             }
           )
           .catch(err => console.log(err));
@@ -89,7 +88,6 @@ function loadBodyWeight() {
       },
       // Principle of offline first!!!
       loadData: function(item) {
-        debugger
         let items;
         const http = new EasyHTTP();
         // // getting the data
@@ -148,7 +146,7 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
-          // StorageServerCtrl.uploadData(item);
+          StorageServerCtrl.uploadData(item);
         } else {
           // get the saved information from localStorage
           items = JSON.parse(localStorage.getItem("items"));
@@ -156,13 +154,12 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
-          // add Data to server
+          // add Data to server: we add always only the added!
+          // One data per time!
           // items.forEach((item) => {
-          //   StorageServerCtrl.uploadData(item);
+            StorageServerCtrl.uploadData(item);
           // });
         }
-        debugger
-        StorageServerCtrl.deleteAllData(StorageServerCtrl.uploadData(items));
         // update LocalData
         StorageCtrl.data = items;
       },
@@ -1242,6 +1239,8 @@ function loadBodyWeight() {
       StorageCtrl.clearAllItems();
       // Clear LocalStorage
       StorageCtrl.clearItemsFromStorage();
+      // Delete All items in the server!
+      StorageServerCtrl.deleteAllData();
       // Clear graphic
       UICanvas.eraseCanvas();
       // Clear table
