@@ -56,7 +56,8 @@ function loadBodyWeight() {
   // })();
 
   /*
-   * MODEL DATA: StorageCtrl
+   * MODEL DATA: Storage Server Ctrl: used to delete, upload, and get data from
+   * server. In this case is the firebase!
    */
   const StorageServerCtrl = (function() {
     // Declare private vars and functions
@@ -109,6 +110,8 @@ function loadBodyWeight() {
               localStorage.setItem("items", JSON.stringify(items));
               // Populate the inputs
               UICtrl.populateInputs();
+              // Clear table
+              UICtrl.deleteTable();
               // Populate the table
               UICtrl.populateTable(items);
               // Plot graphics
@@ -186,8 +189,14 @@ function loadBodyWeight() {
         return StorageCtrl.data;
       },
       uploadDataToLS: function() {
+        const items = StorageCtrl.data;
         // add to localStorage
-        localStorage.setItem("items", JSON.stringify(StorageCtrl.data));
+        localStorage.setItem("items", JSON.stringify(items));
+        // add all data to the server
+        debugger
+        items.forEach((item) => {
+          StorageServerCtrl.uploadData(item);
+        });
       },
       getLocalData: function() {
         return StorageCtrl.data;
@@ -1396,6 +1405,8 @@ function loadBodyWeight() {
     }
 
     const btnDelete = function() {
+      // Delete All items in the server!
+      StorageServerCtrl.deleteData(".json");
       // Delete the item from the StorageCtrl.data
       StorageCtrl.data.splice(StorageCtrl.currentItem.ID - 1, 1);
       // Update the items IDs from StorageCtrl
