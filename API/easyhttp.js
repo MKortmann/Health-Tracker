@@ -8,7 +8,7 @@
 */
 
 // URL addresse to database
-const baseURL = "https://health-tracker-841f9.firebaseio.com/1.json"
+const baseURL = "https://health-tracker-841f9.firebaseio.com/"
 
 class EasyHTTP {
 
@@ -82,22 +82,23 @@ const dataToSubmit = {
   weightEdit: "80"
 };
 
-const http = new EasyHTTP();
+//Example of how to call it in your program!
+// const http = new EasyHTTP();
 // getting the data
-// http.get(baseURL)
+// http.get(baseURL + ".json")
 //   .then(data => console.log(data))
 //   .catch(err => console.log(err));
 
 // posting data
-// http.post(baseURL, dataToSubmit)
+// http.post(baseURL + ".json", dataToSubmit)
 //   .then(data => console.log(data))
 //   .catch(err => console.log(err));
 
 
 // posting data
-http.put(baseURL, dataToSubmit)
-  .then(data => console.log(data))
-  .catch(err => console.log(err));
+// http.put(baseURL, dataToSubmit)
+//   .then(data => console.log(data))
+//   .catch(err => console.log(err));
 
 // deleting data
 // http.delete("https://health-tracker-841f9.firebaseio.com/0.json")

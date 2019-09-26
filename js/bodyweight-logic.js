@@ -58,6 +58,153 @@ function loadBodyWeight() {
   /*
    * MODEL DATA: StorageCtrl
    */
+  const StorageServerCtrl = (function() {
+    // Declare private vars and functions
+    let currentItem = null;
+    // Start as a standard value
+    let data = [];
+    // // JSON file name
+    // let jsonFileName = "";
+
+    return {
+      // Declare public var and functions
+
+      saveData: function(item) {
+        let items;
+        // // Check local storage
+        // if (localStorage.getItem("items") === null) {
+
+          const http = new EasyHTTP();
+          // getting the data
+          http.get(baseURL + ".json")
+            .then(data => {
+              console.log(data);
+              return(data);
+            })
+            .catch(err => console.log(err));
+
+        //   items = [];
+        //   // add the new item
+        //   items.push(item);
+        //   // add to localStorage
+        //   localStorage.setItem("items", JSON.stringify(items));
+        // } else {
+        //   // get the saved information from localStorage
+        //   items = JSON.parse(localStorage.getItem("items"));
+        //   // add the new item
+        //   items.push(item);
+        //   // add to localStorage
+        //   localStorage.setItem("items", JSON.stringify(items));
+        // }
+        // // update LocalData
+        // StorageCtrl.data = items;
+      },
+      // It returns the start value of the id!
+      getNextID: function() {
+        if (localStorage.getItem("items") === null) {
+          return 0;
+        } else {
+          const items = JSON.parse(localStorage.getItem("items"));
+          return items.length;
+        }
+      },
+      getLastWeight: function() {
+        if (localStorage.getItem("items") !== null) {
+          const items = JSON.parse(localStorage.getItem("items"));
+          const weight = items[items.length - 1].weight;
+          return weight;
+        } else {
+          return 0;
+        }
+      },
+      getLSData: function() {
+        StorageCtrl.data = JSON.parse(localStorage.getItem("items"))
+        return StorageCtrl.data;
+      },
+      uploadDataToLS: function() {
+        // add to localStorage
+        localStorage.setItem("items", JSON.stringify(StorageCtrl.data));
+      },
+      getLocalData: function() {
+        return StorageCtrl.data;
+      },
+      clearAllItems: function() {
+        data = [];
+      },
+      clearItemsFromStorage: function() {
+        localStorage.removeItem("items");
+      },
+      downloadVideosToJSON: function() {
+        // Save as JSON file
+        const weightData = StorageCtrl.getLSData();
+        const fileJSON = JSON.stringify(weightData);
+
+        // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
+        let dataUri = 'data:storage/json;charset=utf-8,' + encodeURIComponent(fileJSON);
+
+        let exportFileDefaultName = 'table.json';
+
+        let linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+        linkElement.remove();
+      },
+      // // Open a file selection to select the json file
+      // selectFile: function() {
+      //   // open a file selection dialog
+      //   const input = document.createElement('input');
+      //   input.type = 'file';
+      //   // handle the selected file
+      //   input.onchange = e => {
+      //     const file = e.target.files[0];
+      //     return file.name;
+      //   }
+      //   input.click();
+      // },
+      // The method XMLhttpRequest works only if you have a server installed.
+      // easier way: go to your project file throught prompt command and type:
+      // npm install -g live-server
+      // run it typing: live-server
+      loadJSONFile: function() {
+        // get the json file name
+
+        // let fileName = StorageCtrl.selectFile();
+        // console.log(`Output filename: ${fileName}`);
+
+        var xhttp = new XMLHttpRequest();
+        // we will use now onload instead of onreadystatechange. So we do not need
+        // to check for this.readyState
+        xhttp.onload = function() {
+          // xhttp.onreadystatechange = function() {
+          // readyState 4: the response has been capture and can be used
+          // status: http status of 200 means that everything is ok
+          var itemList = "";
+          // if (this.readyState == 4 && this.status == 200) {
+          if (this.status == 200) {
+            // Convert the json to and object
+            let items = JSON.parse(xhttp.responseText);
+
+            // Storing the table in the Local Storage
+            localStorage.setItem("items", JSON.stringify(items));
+          }
+        };
+        xhttp.open("GET", "./storage/table.json", true);
+        xhttp.onerror = function() {
+          console.log("Request error in XMLHttpRequest...");
+          return false;
+        }
+        xhttp.send();
+        // if works, returns true. The true flag, tells that we are reloading
+        // data, and the table should be cleared!
+        return true;
+      }
+    }
+  })();
+
+  /*
+   * MODEL DATA: StorageCtrl
+   */
   const StorageCtrl = (function() {
     // Declare private vars and functions
     let currentItem = null;
@@ -1206,10 +1353,11 @@ function loadBodyWeight() {
         // Sending a message to the user!
         UICtrl.showAlert("To Load Data From A File, you have to rename the download file to: table.json. Then copy this file to the folder storage! Then try it again!", "danger alert-danger");
       }
-      // Hide the Edit and back buttons
-      // UICtrl.hideButtons();
       // Get the data from LocalStorage
       const items = StorageCtrl.getLSData();
+      // Get the data from the server
+      const items2 = StorageServerCtrl.saveData();
+      debugger
       // We populate the table and input only if there is a data!
       if (items !== null) {
         // Populate the inputs
