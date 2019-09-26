@@ -68,10 +68,10 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
-      deleteAllData: function() {
+      deleteData: function(extension) {
         const http = new EasyHTTP();
         // // posting the data
-        http.delete(baseURL + ".json")
+        http.delete(baseURL + extension)
           .then(
             data => {
               console.log(data);
@@ -1240,7 +1240,7 @@ function loadBodyWeight() {
       // Clear LocalStorage
       StorageCtrl.clearItemsFromStorage();
       // Delete All items in the server!
-      StorageServerCtrl.deleteAllData();
+      StorageServerCtrl.deleteData(".json");
       // Clear graphic
       UICanvas.eraseCanvas();
       // Clear table

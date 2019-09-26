@@ -52,7 +52,7 @@ class EasyHTTP {
     return resData;
   }
 
-  // MAKE AN HTTP DELETE REQUEST: removeing data
+  // MAKE AN HTTP DELETE REQUEST: removing data
   async delete(url) {
     const response = await fetch(url, {
       method: "DELETE",
