@@ -68,6 +68,13 @@ function loadBodyWeight() {
 
     return {
       // Declare public var and functions
+      deleteAllData: function() {
+        const http = new EasyHTTP();
+        // // posting the data
+        http.delete(baseURL + ".json")
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
+      },
       uploadData: function(dataToSubmit) {
         const http = new EasyHTTP();
         // // posting the data
@@ -133,6 +140,8 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
+          // add single data to server
+          StorageServerCtrl.uploadData(item[0]);
         } else {
           // get the saved information from localStorage
           items = JSON.parse(localStorage.getItem("items"));
@@ -140,11 +149,11 @@ function loadBodyWeight() {
           items.push(item);
           // add to localStorage
           localStorage.setItem("items", JSON.stringify(items));
+          // add Data to server
+          items.forEach((item) => {
+            StorageServerCtrl.uploadData(item);
+          });
         }
-        // add Data to server
-        items.forEach((item) => {
-          StorageServerCtrl.uploadData(item);
-        });
         // update LocalData
         StorageCtrl.data = items;
       },
