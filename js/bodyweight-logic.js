@@ -68,6 +68,34 @@ function loadBodyWeight() {
     // let jsonFileName = "";
 
     return {
+      // Get Item ID from Firebase
+      getIDFromServer: function(id) {
+          let idServer = 0;
+          const http = new EasyHTTP();
+          // // getting the data
+          http.getWithCallback(baseURL + ".json", function(response) {
+            let items = Object.entries(response);
+            items.forEach((item, index) => {
+                if(item[index, 1].ID === id) {
+                  console.log(item[0]);
+                  idServer = item[1];
+                  idServer.BMI = "0";
+                  StorageServerCtrl.updateData(idServer, `${item[0]}.json`);
+                }
+            })
+          })
+      },
+      // Principle of offline first!!!
+      loadData2: function(callback) {
+        const http = new EasyHTTP();
+        // // getting the data
+        http.get(baseURL + ".json")
+          .then(data => {
+            // transforming an object with objects in an array with objects!!!
+            // if is null, should be an empty array to avoid errors
+            callback(data);
+          });
+      },
       // Declare public var and functions
       deleteData: function(extension) {
         const http = new EasyHTTP();
@@ -80,15 +108,23 @@ function loadBodyWeight() {
           )
           .catch(err => console.log(err));
       },
-      uploadData: function(dataToSubmit) {
+      updateData: function(dataToSubmit, extension = ".json") {
+        debugger
         const http = new EasyHTTP();
         // // posting the data
-        http.post(baseURL + ".json", dataToSubmit)
+        http.post(baseURL + extension, dataToSubmit)
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
+      },
+      uploadData: function(dataToSubmit, extension = ".json") {
+        const http = new EasyHTTP();
+        // // posting the data
+        http.post(baseURL + extension, dataToSubmit)
           .then(data => console.log(data))
           .catch(err => console.log(err));
       },
       // Principle of offline first!!!
-      loadData: function(item) {
+      loadData: function() {
         let items;
         const http = new EasyHTTP();
         // // getting the data
@@ -1327,6 +1363,8 @@ function loadBodyWeight() {
       // Validate inputs
       const message = ItemCtrl.validateInputs(dataToSubmit);
       if(message[0]) {
+        // used here only to test
+        StorageServerCtrl.getIDFromServer(10);
         // Generate IDs
         const ID = ItemCtrl.genIDs().next().value;
         // Add ID to the data
@@ -1385,6 +1423,8 @@ function loadBodyWeight() {
         StorageCtrl.currentItem.weight = dataToBeUpdated.weightEdit;
         StorageCtrl.currentItem.date = dataToBeUpdated.dateEdit;
         StorageCtrl.currentItem.time = dataToBeUpdated.timeEdit;
+        // Delete All items in the server!
+        StorageServerCtrl.deleteData(".json");
         // Load Current Data Array to the localStorage
         StorageCtrl.uploadDataToLS();
         // Update the specific line on the table

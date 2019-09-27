@@ -13,6 +13,16 @@ const baseURL = "https://health-tracker-841f9.firebaseio.com/"
 class EasyHTTP {
   // Make AN HTTP REQUEST!!!: getting data from a server
   //get information
+  async getWithCallback(url, callback) {
+    // await response of the fetch call
+    const response = await fetch(url);
+    // Only proceed once it's resolved
+    const resData = await response.json();
+    // Only proceed once second promise is resolved
+    callback(resData);
+  }
+
+  //get information
   async get(url) {
     // await response of the fetch call
     const response = await fetch(url);
@@ -40,7 +50,7 @@ class EasyHTTP {
   // MAKE AN HTTP PUT REQUEST: send data to server to create or update resource
   async put(url, data) {
     const response = await fetch(url, {
-      method: "PUT",
+      method: "UPDATE",
       headers: {
         "Content-type": "application/json"
       },
