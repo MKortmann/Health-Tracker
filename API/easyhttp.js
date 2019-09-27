@@ -50,7 +50,7 @@ class EasyHTTP {
   // MAKE AN HTTP PUT REQUEST: send data to server to create or update resource
   async put(url, data) {
     const response = await fetch(url, {
-      method: "UPDATE",
+      method: "PUT",
       headers: {
         "Content-type": "application/json"
       },
