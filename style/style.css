@@ -236,9 +236,9 @@ button {
     font-weight: 750;
   }
   /* resize images */
-  img {
+  /* img {
     max-width: 32px;
-  }
+  } */
 
   th, tr, label, #dropdownMenuButton {
     font-size: 18px;
