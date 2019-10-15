@@ -87,12 +87,7 @@ const homeState = function() {
               <div class="carousel-item">
                 <div class="jumbotron  w-100">
                   <h2 class="text-primary text-center mb-2">Body Weight</h2 >
-                  <img src="imgs/bodyweight.jpg" class="mx-auto d-block w-50" alt="bodyWeight">
-                  <!-- <div class="carousel-caption d-none d-md-block">
-                    <h4 mt-5>First slide label</h4>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                  </div> -->
-
+                  <img src="imgs/bodyweight.jpg" class="mx-auto d-block w-50 bodyWeightImg" alt="bodyWeight">
                   <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-lg-block"> easy way to track, analize and view your weight </h3>
                   <div class="text-center">
                     <button href="#" class="mt-3 btn btn-primary bodyWeight">Start Now</button>
@@ -102,7 +97,7 @@ const homeState = function() {
               <div class="carousel-item">
                 <div class="jumbotron w-100">
                   <h2 class="text-primary text-center mb-2">Blood Pressure</h2 >
-                  <img src="imgs/bloodpressure.jpg" class="mx-auto d-block w-50" alt="...">
+                  <img src="imgs/bloodpressure.jpg" class="mx-auto d-block w-50 bodyPressureImg" alt="...">
                       <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-lg-block"> be smart and check your blood pressure </h3>
                   <div class="text-center">
                     <a href="#" class="mt-3 btn btn-primary bloodPressure">Start Now</a>
@@ -112,7 +107,7 @@ const homeState = function() {
               <div class="carousel-item">
                 <div class="jumbotron w-100">
                   <h2 class="text-primary text-center mb-2">Blood Sugar</h2 >
-                  <img src="imgs/bloodsugar.jpg" class="mx-auto d-block w-50" alt="sugarImg">
+                  <img src="imgs/bloodsugar.jpg" class="mx-auto d-block w-50 bloodySugarImg" alt="sugarImg">
                   <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-lg-block"> be the boss and register your blood sugar  </h3>
                   <div class="text-center">
                     <a href="#" class="mt-3 btn btn-primary bloodSugar">Start Now</a>

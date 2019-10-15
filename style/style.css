@@ -253,6 +253,22 @@ margin-bottom: 5px;
   }
 }
 
+@media screen and (max-width: 600px) {
+
+.bodyWeightImg {
+  min-width: 100%;
+}
+
+.bodyPressureImg {
+  min-width: 100%;
+}
+
+.bloodySugarImg {
+  min-width: 100%;
+}
+
+}
+
 @media screen and (max-width: 374px) {
 
   th, tr, label, input, #dropdownMenuButton {
