@@ -360,20 +360,31 @@ function loadBodyWeight() {
       },
       // Declare public var and functions
       showAlert: function(message, className) {
-        //create div
-        const div = document.createElement("div");
+        //create 2 div's to display at same time message below canvas and in Input Field
+        const divInInput = document.createElement("div");
+        const divBelowCanvas = document.createElement("div");
         //add classes: the class alert is used to be able to remove it afterwards!
-        div.className = `alert ${className} text-center  p-2 m-0`;
+        divInInput.className = `alert ${className} text-center  p-2 m-0`;
+        divBelowCanvas.className = `alert ${className} text-center  p-2 m-0`;
         // Add text
-        div.appendChild(document.createTextNode(message));
-        // Get the element to be insert it
-        const element = document.querySelector("#containerToAddAlertMsg");
-        // insert alert
-        element.appendChild(div);
+        divInInput.appendChild(document.createTextNode(message));
+        divBelowCanvas.appendChild(document.createTextNode(message));
+        // Get the elements to be insert it (we insert it in two places:
+        // Place 1: Inside Input Field, Place 2: Below the Canvas )
+        document.querySelectorAll(".containerToAddAlertMsg").forEach((item, index) => {
+          index === 0 ? item.appendChild(divInInput) : item.appendChild(divBelowCanvas)
+        })
+        // const element = document.querySelector(".containerToAddAlertMsg");
+        // // insert alert
+        // element.appendChild(div);
         //the message should disappear after 3 seconds
         setTimeout(function() {
-          document.querySelector(".alert").remove();
-          document.querySelector("#containerInputToHighlight").style.backgroundColor = "";
+          document.querySelectorAll(".alert").forEach((item) => {
+            item.remove();
+          })
+          // document.querySelectorAll("#containerInputToHighlight").forEach((item) => {
+          //   item..style.backgroundColor = "";
+          // })
         }, 4000);
       },
       // return the UI Selectors

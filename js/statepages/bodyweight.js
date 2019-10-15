@@ -10,6 +10,9 @@ const bodyWeight = function() {
       <div class="container-fluid mt-0 mb-0 mx-0 px-0">
         <form id="formOutput">
         <h2 class="display-4 text-center text-info">Highlights</h2>
+          <p class="lead text-center inputHighlightMessage">
+            Here, is where you <strong>view</strong> your data!
+          </p>
           <div class="form-row justify-content-center" id="formInputs2">
             <!-- Start Weight -->
             <div class="col-md m-1">
@@ -77,7 +80,7 @@ const bodyWeight = function() {
     <!-- As soon as defined the height and width the image become sharp width="1880px"-->
       <canvas id="canvasWeight" height="400px" width="1920px"></canvas>
     </div>
-    <span id="containerToAddAlertMsg"></span>
+    <span class="containerToAddAlertMsg"></span>
   </section>
 
 <!-- SECTION D encloses the input and button forms -->
@@ -85,6 +88,11 @@ const bodyWeight = function() {
   <div class="container-fluid p-0" >
     <form id="formInput" >
       <h2 class="display-4 text-center text-primary">Input Field</h2>
+      <p class="lead text-center inputDataMessage">
+        Please, <strong>insert</strong> your data!
+      </p>
+      <!-- FEEDBACK -->
+      <span class="containerToAddAlertMsg"></span>
       <!-- first row -->
       <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
         <div class="col-sm-3">
