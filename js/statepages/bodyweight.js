@@ -91,8 +91,6 @@ const bodyWeight = function() {
       <p class="lead text-center inputDataMessage">
         Please, <strong>insert</strong> your data!
       </p>
-      <!-- FEEDBACK -->
-      <span class="containerToAddAlertMsg"></span>
       <!-- first row -->
       <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
         <div class="col-sm-3">
@@ -116,6 +114,8 @@ const bodyWeight = function() {
       <div class="form-row">
         <div class="col">
           <!-- <label for="submit">Submit</label> -->
+          <!-- FEEDBACK -->
+          <span class="containerToAddAlertMsg"></span>
           <button id="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
         </div>
       </div>
