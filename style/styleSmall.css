@@ -262,6 +262,15 @@ button {
   }
 }
 
+@media screen and (max-width: 600px) {
+  .bodyWeightImg,
+  .bodyPressureImg,
+  .bloodySugarImg {
+    min-width: 100%;
+  }
+}
+
+
 @media screen and (max-width: 374px) {
 
   th, tr, label, input, #dropdownMenuButton {

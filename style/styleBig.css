@@ -262,6 +262,16 @@ button {
   border-bottom: none;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .bodyWeightImg,
+  .bodyPressureImg,
+  .bloodySugarImg {
+    min-width: 100%;
+  }
+}
+
+
 /* BIG LAYOUT INCREASE FACTOR: 2 */
 @media screen and (max-width: 374px) {
 

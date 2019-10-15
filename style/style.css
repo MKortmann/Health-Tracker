@@ -175,6 +175,13 @@ margin-bottom: 5px;
 }
 
 
+.bodyWeightImg,
+.bodyPressureImg,
+.bloodySugarImg {
+  border-radius: 2%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 @media screen and (max-width: 1400px) {
 
   #formInput h2,
@@ -254,19 +261,11 @@ margin-bottom: 5px;
 }
 
 @media screen and (max-width: 600px) {
-
-.bodyWeightImg {
-  min-width: 100%;
-}
-
-.bodyPressureImg {
-  min-width: 100%;
-}
-
-.bloodySugarImg {
-  min-width: 100%;
-}
-
+  .bodyWeightImg,
+  .bodyPressureImg,
+  .bloodySugarImg {
+    min-width: 100%;
+  }
 }
 
 @media screen and (max-width: 374px) {
