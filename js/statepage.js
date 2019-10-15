@@ -67,12 +67,12 @@ const homeState = function() {
           <div class="card-img-overlay">
 
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <!-- <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-            </ol> -->
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleControls" data-slide-to="1"></li>
+              <li data-target="#carouselExampleControls" data-slide-to="2"></li>
+              <li data-target="#carouselExampleControls" data-slide-to="3"></li>
+            </ol>
             <div class="carousel-inner">
               <div class="carousel-item  active">
                 <div class="jumbotron w-100">
@@ -93,7 +93,7 @@ const homeState = function() {
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                   </div> -->
 
-                  <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-md-block"> easy way to track, analize and view your weight </h3>
+                  <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-lg-block"> easy way to track, analize and view your weight </h3>
                   <div class="text-center">
                     <button href="#" class="mt-3 btn btn-primary bodyWeight">Start Now</button>
                   </div>
@@ -103,9 +103,9 @@ const homeState = function() {
                 <div class="jumbotron w-100">
                   <h2 class="text-primary text-center mb-2">Blood Pressure</h2 >
                   <img src="../imgs/pressure.jpg" class="mx-auto d-block w-50" alt="...">
-                      <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-md-block"> be smart and check your blood pressure </h3>
+                      <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-lg-block"> be smart and check your blood pressure </h3>
                   <div class="text-center">
-                    <a href="#" class="mt-2 btn btn-primary bloodPressure">Start Now</a>
+                    <a href="#" class="mt-3 btn btn-primary bloodPressure">Start Now</a>
                   </div>
                 </div>
               </div>
@@ -113,9 +113,9 @@ const homeState = function() {
                 <div class="jumbotron w-100">
                   <h2 class="text-primary text-center mb-2">Blood Sugar</h2 >
                   <img src="../imgs/onlysugar.jpg" class="mx-auto d-block w-50" alt="sugarImg">
-                  <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-md-block"> be the boss and register your blood sugar  </h3>
+                  <h3 class="text-center mt-2 carousel-caption text-secondary d-none d-lg-block"> be the boss and register your blood sugar  </h3>
                   <div class="text-center">
-                    <a href="#" class="mt-2 btn btn-primary bloodSugar">Start Now</a>
+                    <a href="#" class="mt-3 btn btn-primary bloodSugar">Start Now</a>
                   </div>
                 </div>
               </div>
