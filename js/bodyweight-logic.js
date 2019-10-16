@@ -109,7 +109,6 @@ function loadBodyWeight() {
           .catch(err => console.log(err));
       },
       updateData: function(dataToSubmit, extension = ".json") {
-        debugger
         const http = new EasyHTTP();
         // // posting the data
         http.post(baseURL + extension, dataToSubmit)
