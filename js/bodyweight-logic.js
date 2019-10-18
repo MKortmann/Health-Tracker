@@ -583,6 +583,8 @@ function loadBodyWeight() {
           // document.querySelectorAll("#containerInputToHighlight").forEach((item) => {
           //   item..style.backgroundColor = "";
           // })
+          // Hiding the input fields
+          document.getElementById("containerInputToHighlight").classList.remove("d-none");
           UICtrl.showAlert(message, className);
         }, 750);
       }
@@ -1425,6 +1427,8 @@ function loadBodyWeight() {
         plotGraph();
         // show spinner! When the spinner finished, it will call the
         // UICtr.showAlert with the respectives arguments!
+        // Hiding the input fields: important because of mobile + better UX Experience!
+        document.getElementById("containerInputToHighlight").classList.add("d-none");
         UICtrl.spinner("item added!", "alert alert-primary");
         // Sending a message to the user!
         // UICtrl.showAlert("item added!", "alert alert-primary");
@@ -1476,6 +1480,8 @@ function loadBodyWeight() {
         UICtrl.populateInputs();
         // Update graphic
         plotGraph();
+        // Hiding the input fields
+        document.getElementById("containerInputToHighlight").classList.add("d-none");
         // Sending a message to the user!
         UICtrl.spinner("Item Edited!", "alert alert-info")
         // UICtrl.showAlert("Item Edited!", "alert alert-info");
