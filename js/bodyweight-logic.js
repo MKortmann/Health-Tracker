@@ -555,6 +555,36 @@ function loadBodyWeight() {
         document.querySelector(UISelectors.weightEdit).value = item.weight;
         document.querySelector(UISelectors.dateEdit).value = item.date;
         document.querySelector(UISelectors.timeEdit).value = item.time;
+      },
+      spinner: function(message, className) {
+
+        const divSpinnerInput = document.createElement("div");
+        const divSpinnerBelowCanvas = document.createElement("div");
+        //add classes: the class alert is used to be able to remove it afterwards!
+        divSpinnerInput.className = `loader`;
+        divSpinnerBelowCanvas.className = `loader`;
+        // // Add text
+        // divInInput.appendChild(document.createTextNode(message));
+        // divBelowCanvas.appendChild(document.createTextNode(message));
+        // Get the elements to be insert it (we insert it in two places:
+        // Place 1: Inside Input Field, Place 2: Below the Canvas )
+        document.querySelectorAll(".containerToAddAlertMsg").forEach((item, index) => {
+          index === 0 ? item.appendChild(divSpinnerInput) : item.appendChild(divSpinnerBelowCanvas)
+        })
+
+        // const element = document.querySelector(".containerToAddAlertMsg");
+        // // insert alert
+        // element.appendChild(div);
+        //the message should disappear after 3 seconds
+        setTimeout( () => {
+          document.querySelectorAll(".loader").forEach((item) => {
+            item.remove();
+          })
+          // document.querySelectorAll("#containerInputToHighlight").forEach((item) => {
+          //   item..style.backgroundColor = "";
+          // })
+          UICtrl.showAlert(message, className);
+        }, 750);
       }
 
     }
@@ -1393,8 +1423,11 @@ function loadBodyWeight() {
         UICtrl.populateInputs();
         // Update graphic
         plotGraph();
+        // show spinner! When the spinner finished, it will call the
+        // UICtr.showAlert with the respectives arguments!
+        UICtrl.spinner("item added!", "alert alert-primary");
         // Sending a message to the user!
-        UICtrl.showAlert("item added!", "alert alert-primary");
+        // UICtrl.showAlert("item added!", "alert alert-primary");
         // FINESHED: UI is updated!
       } else {
         // Sending a message to the user!
@@ -1444,7 +1477,8 @@ function loadBodyWeight() {
         // Update graphic
         plotGraph();
         // Sending a message to the user!
-        UICtrl.showAlert("Item Edited!", "alert alert-info");
+        UICtrl.spinner("Item Edited!", "alert alert-info")
+        // UICtrl.showAlert("Item Edited!", "alert alert-info");
       } else {
         // Sending a message to the user!
         UICtrl.showAlert(message[1], "alert alert-danger");
