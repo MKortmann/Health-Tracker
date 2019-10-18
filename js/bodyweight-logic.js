@@ -1524,8 +1524,11 @@ function loadBodyWeight() {
       UICtrl.populateInputs();
       // Update graphic
       plotGraph();
-      // Sending a message to the user!
-      UICtrl.showAlert("Item deleted!", "alert alert-danger");
+      // Hiding the input fields
+      document.getElementById("containerInputToHighlight").classList.add("d-none");
+      // Sending a message to the user! However, first spinner then the message!
+      UICtrl.spinner("Item deleted!", "alert alert-danger");
+      // UICtrl.showAlert("Item deleted!", "alert alert-danger");
 
     }
 
