@@ -93,19 +93,19 @@ const bodyWeight = function() {
       </p>
       <!-- first row -->
       <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
-        <div class="col-sm-3">
+        <div class="col-sm-3 order-2">
           <label for="height">Height</label>
           <input id="height" type="number" value="178" min="30" max="259" class="form-control" placeholder="height (cm)">
         </div>
-        <div class="col-sm-3">
-          <label for="weight">Weight</label>
+        <div class="col-sm-3 order-3">
+          <label for="weight ">Weight</label>
           <input id="weight" type="number" value="80" min="30" max="199" step="0.1" class="form-control" placeholder="Weight - kg">
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 order-1">
           <label for="time">Time</label>
           <input id="time" type="time" class="form-control"  placeholder="time">
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 order-0">
           <label for="date">Date</label>
           <input id="date" type="date" class="form-control"  placeholder="data">
         </div>
