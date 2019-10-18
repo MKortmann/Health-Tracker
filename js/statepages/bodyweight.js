@@ -271,19 +271,19 @@ const bodyWeight = function() {
             <p class="lead">You can edit, delete or return!</p>
             <!-- first row -->
             <div class="form-row p-4 m-0 justify-content-center" id="containerInputToHighlight">
-              <div class="col-sm-6">
+              <div class="col-sm-6 order-2 mt-1">
                 <label for="heightEdit">Height</label>
                 <input id="heightEdit" type="number" value="178" min="30" max="259" class="form-control">
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-6 order-3 mt-1">
                 <label for="weightEdit">Weight</label>
                 <input id="weightEdit" type="number" value="80" min="30" max="199" step="0.1" class="form-control" >
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-6 order-1 mt-1">
                 <label for="timeEdit">Time</label>
                 <input type="time" class="form-control" placeholder="data" id="timeEdit">
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-6 order-0 mt-1">
                 <label for="dateEdit">Date</label>
                 <input type="date" class="form-control" placeholder="data" id="dateEdit">
               </div>
