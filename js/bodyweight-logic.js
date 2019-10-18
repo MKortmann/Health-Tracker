@@ -1428,7 +1428,10 @@ function loadBodyWeight() {
         // show spinner! When the spinner finished, it will call the
         // UICtr.showAlert with the respectives arguments!
         // Hiding the input fields: important because of mobile + better UX Experience!
-        document.getElementById("containerInputToHighlight").classList.add("d-none");
+        // However, by smartphone we should not hide here! We have to keep the visibility!
+        window.innerWidth > 1000
+        ? document.getElementById("containerInputToHighlight").classList.add("d-none")
+        : null
         UICtrl.spinner("item added!", "alert alert-primary");
         // Sending a message to the user!
         // UICtrl.showAlert("item added!", "alert alert-primary");
