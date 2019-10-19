@@ -32,9 +32,9 @@ function settings() {
   const StorageCtrl = (function() {
     // Declare private vars and functions
     let links = {
-      small: "./style/styleSmall.css",
-      normal: "./style/style.css",
-      big: "./style/styleBig.css"
+      small: "./style/small.css",
+      normal: "./style/normal.css",
+      big: "./style/big.css"
     };
 
     return {
@@ -167,15 +167,15 @@ function settings() {
       let view = "normal";
       let style = "bg-info";
       switch (link) {
-        case "./style/styleBig.css":
+        case "./style/big.css":
         view = "Big View";
         style = "bg-primary"
         break;
-        case "./style/style.css":
+        case "./style/normal.css":
         view = "Normal View";
         style="bg-info";
         break;
-        case "./style/styleSmall.css":
+        case "./style/small.css":
         view = "Small View";
         style="bg-danger";
         break;
