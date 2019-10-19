@@ -13,7 +13,7 @@ import mySettingsImport from "../js/statepages/settings.js";
 // fill the page with a lot of html files or code. We do all using javaScript
 
 // We will create 01 function called PageState to track the state of the Page.
-// Then for each state as (Overview, BodyWeight, Blood Pressure, Blood Sugar, MyData)
+// Then for each state as (Overview, SignUp, BodyWeight, Blood Pressure, Blood Sugar, MyData)
 // we create one state for it.
 ///////////////////////////////////////////////////////////////////////////////
 // Main Function PageState: track the page state
@@ -44,7 +44,6 @@ const PageState = function() {
     currentState = state;
     // We need to reload the state as soon as the page reload!
     EventListeners_Reload();
-
   }
   // return current state to be called outside
   this.returnState = function() {
@@ -222,6 +221,7 @@ function EventListeners_Reload () {
 
   signUpUI.addEventListener("click", (e) => {
     page.change(new signUp);
+    // call the function signUp at the file signup.js inside the folder statepages
     signUp();
     e.preventDefault();
   })
