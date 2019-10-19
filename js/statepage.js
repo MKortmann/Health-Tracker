@@ -1,5 +1,6 @@
 "use strict"
 // IMPORT COMPONENTS
+import signUpImport from "../js/statepages/signup.js";
 import bodyWeightImport from "../js/statepages/bodyweight.js";
 import bloodPressureImport from "../js/statepages/bloodpressure.js";
 import bloodSugarImport from "../js/statepages/bloodsugar.js";
@@ -137,6 +138,10 @@ const homeState = function() {
   `;
 }
 ///////////////////////////////////////////////////////////////////////////////
+// signUp
+///////////////////////////////////////////////////////////////////////////////
+const signUp = signUpImport;
+///////////////////////////////////////////////////////////////////////////////
 // myData
 ///////////////////////////////////////////////////////////////////////////////
 const myData = myDataImport;
@@ -173,7 +178,8 @@ function EventListeners_Reload () {
     bodyWeightUI = document.querySelectorAll(".bodyWeight"),
     bloodPressureUI = document.querySelectorAll(".bloodPressure"),
     bloodSugarUI = document.querySelectorAll(".bloodSugar"),
-    settingsUI = document.querySelector(".settings");
+    settingsUI = document.querySelector(".settings"),
+    signUpUI = document.querySelector(".signUp");
 
   // EventListeners
   overviewUI.addEventListener("click", (e) => {
@@ -213,5 +219,11 @@ function EventListeners_Reload () {
     settings();
     e.preventDefault();
   });
+
+  signUpUI.addEventListener("click", (e) => {
+    page.change(new signUp);
+    signUp();
+    e.preventDefault();
+  })
 };
 EventListeners_Reload();

@@ -1,0 +1,13 @@
+"use strict";
+///////////////////////////////////////////////////////////////////////////////
+// Sign Up
+///////////////////////////////////////////////////////////////////////////////
+const signUp = function() {
+  document.querySelector("#container").innerHTML = `
+  <div class="container text-center mt-5">
+    <h2 class="display-4">SignUp</h2>
+  </div>
+  `;
+}
+
+export default signUp;
