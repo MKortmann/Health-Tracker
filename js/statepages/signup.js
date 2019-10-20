@@ -21,7 +21,7 @@ const signUp = function() {
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div> -->
-      <button type="submit" class="btn btn-block btn-lg btn-info">Sign Up</button>
+      <button type="submit" class="btn btn-block btn-lg btn-info signUpBtn">Sign Up</button>
     </form>
   </div>
   `;

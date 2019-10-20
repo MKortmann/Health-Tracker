@@ -215,14 +215,14 @@ function EventListeners_Reload () {
 
   settingsUI.addEventListener("click", (e) => {
     page.change(new mySettings);
-    settings();
+    loadSettings();
     e.preventDefault();
   });
 
   signUpUI.addEventListener("click", (e) => {
     page.change(new signUp);
     // call the function signUp at the file signup.js inside the folder statepages
-    signUp();
+    loadSignUpLogic();
     e.preventDefault();
   })
 };

@@ -32,9 +32,73 @@
 // Anonymous "self-invoking" function
 
 
-(function signUp() {
-  return {
-    
-  }
+function loadSignUpLogic() {
 
-})()
+  // document.querySelector(".signUp").addEventListener("click", (e) => {
+  //   debugger
+  //   e.preventDefault();
+  //   alert("clicked!");
+  // });
+  const StorageServerCtrl = (function() {
+    // Declare private vars and functions
+    let currentItem = null;
+
+    return {
+      // Get Item ID from Firebase
+      getIDFromServer: function() {
+
+      },
+    }
+  })();
+
+  /*
+ * VIEW MODEL: UICtrl and UICanvas
+ */
+  // UICtrl
+  const UICtrl = (function() {
+    // Declare private vars and functions
+    let currentItem = null;
+
+    const UISelectors = {
+      signUpBtn: ".signUpBtn"
+    }
+
+    return {
+      // Declare public var and functions
+// return the UI Selectors
+      getSelectors: function() {
+        return UISelectors;
+      },
+    }
+  })();
+
+  const AppCtrl = (function(StorageServerCtrl, UICtrl) {
+    // Declare private vars and functions
+    let currentItem = null;
+
+    // Variables
+    // Get UI selectors
+    const UISelectors = UICtrl.getSelectors();
+
+    // load event listeners
+    const loadEventListeners = function() {
+    // Add EventListeners for buttons
+    document.querySelector(UISelectors.signUpBtn).addEventListener("click", signUp);
+    };
+
+    const signUp = function(e) {
+      e.preventDefault();
+      alert("clicked here! Worked!");
+    };
+
+    return {
+      // Get Item ID from Firebase
+      init: () => {
+        loadEventListeners();
+      }
+    }
+  })(StorageServerCtrl, UICtrl);
+
+  AppCtrl.init();
+
+}

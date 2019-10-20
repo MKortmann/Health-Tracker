@@ -24,7 +24,7 @@
 //
 // })();
 
-function settings() {
+function loadSettings() {
 
   /*
    * MODEL DATA: StorageCtrl
@@ -209,5 +209,3 @@ function settings() {
   }
 
 }
-
-settings();
