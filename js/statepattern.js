@@ -1,6 +1,6 @@
 "use strict"
 // IMPORT COMPONENTS
-import signUpImport from "../js/statepages/signup.js";
+import authImport from "../js/statepages/auth.js";
 import bodyWeightImport from "../js/statepages/bodyweight.js";
 import bloodPressureImport from "../js/statepages/bloodpressure.js";
 import bloodSugarImport from "../js/statepages/bloodsugar.js";
@@ -137,9 +137,9 @@ const homeState = function() {
   `;
 }
 ///////////////////////////////////////////////////////////////////////////////
-// signUp
+// Authenthicate
 ///////////////////////////////////////////////////////////////////////////////
-const signUp = signUpImport;
+const auth = authImport;
 ///////////////////////////////////////////////////////////////////////////////
 // myData
 ///////////////////////////////////////////////////////////////////////////////
@@ -178,7 +178,7 @@ function EventListeners_Reload () {
     bloodPressureUI = document.querySelectorAll(".bloodPressure"),
     bloodSugarUI = document.querySelectorAll(".bloodSugar"),
     settingsUI = document.querySelector(".settings"),
-    signUpUI = document.querySelector(".signUp");
+    authUI = document.querySelector(".auth");
 
   // EventListeners
   overviewUI.addEventListener("click", (e) => {
@@ -219,10 +219,10 @@ function EventListeners_Reload () {
     e.preventDefault();
   });
 
-  signUpUI.addEventListener("click", (e) => {
-    page.change(new signUp);
+  authUI.addEventListener("click", (e) => {
+    page.change(new auth);
     // call the function signUp at the file signup.js inside the folder statepages
-    loadSignUpLogic();
+    loadAuthLogic();
     e.preventDefault();
   })
 };

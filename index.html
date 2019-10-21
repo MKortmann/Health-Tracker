@@ -32,7 +32,7 @@
         <a class="nav-link nav-item active homeState" data-toggle="collapse" data-target=".navbar-collapse.show" href="#">Overview</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link nav-item signUp" data-toggle="collapse" data-target=".navbar-collapse.show" href="#">Sign Up</a>
+        <a class="nav-link nav-item auth" data-toggle="collapse" data-target=".navbar-collapse.show" href="#">Sign <span style="font-style: italic; font-size: 16px">Up/In/Out</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link nav-item bodyWeight" data-toggle="collapse" data-target=".navbar-collapse.show" href="#" >Body Weight</a>
@@ -95,15 +95,12 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // update firestore seetings: to avoid errors on console
-    db.settings({ timestampsInSnapshots: true })
-
   </script>
   <!-- JQUERY version 3.3.1 -->
   <script src="./lib/jquery/jquerymin.js"></script>
   <script src="./js/statelogical/bodyweight-logic.js"></script>
   <script src="./js/statelogical/settings-logic.js"></script>
-  <script src="./js/statelogical/signup-logic.js"></script>
+  <script src="./js/statelogical/auth-logic.js"></script>
 
   <!-- <script src="./js/statePageBodyWeight.js"></script> -->
   <script type="module" src="./js/statepattern.js"></script>
@@ -113,7 +110,7 @@
   <script nomodule src="../js/statepages/bodyweight.js"></script>
   <script nomodule src="../js/statepages/mydata.js"></script>
   <script nomodule src="../js/statepages/settings.js"></script>
-  <script nomodule src="../js/statepages/signup.js"></script>
+  <script nomodule src="../js/statepages/auth.js"></script>
   <!-- Firebase -->
   <script src="./API/easyhttp.js"></script>
   <!-- the bootstrap bundle incloses not only bootstrap but also the popper.js -->
