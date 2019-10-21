@@ -60,7 +60,17 @@ function loadSignUpLogic() {
     let currentItem = null;
 
     const UISelectors = {
-      signUpBtn: ".signUpBtn"
+      signUpBtn: ".signUpBtn",
+      firstNameInput: ".firstNameInput",
+      firstNameLabel: ".firstNameLabel",
+      lastNameInput: ".lastNameInput",
+      lastNameLabel: ".lastNameLabel",
+      emailInput: ".emailInput",
+      emailLabel: ".emailLabel",
+      passwordInput: ".passwordInput",
+      passwordLabel: ".passwordLabel",
+      passwordConfirmInput: ".passwordConfirmInput",
+      passwordConfirmLabel: ".passwordConfirmLabel"
     }
 
     return {
@@ -84,11 +94,55 @@ function loadSignUpLogic() {
     const loadEventListeners = function() {
     // Add EventListeners for buttons
     document.querySelector(UISelectors.signUpBtn).addEventListener("click", signUp);
+    document.querySelector(UISelectors.firstNameInput).addEventListener("focus", firstName);
+    document.querySelector(UISelectors.lastNameInput).addEventListener("focus", lastName);
+    document.querySelector(UISelectors.emailInput).addEventListener("focus", emailInput);
+    document.querySelector(UISelectors.emailInput).addEventListener("focus", emailInput);
+    document.querySelector(UISelectors.passwordInput).addEventListener("focus", passwordInput);
+    document.querySelector(UISelectors.passwordConfirmInput).addEventListener("focus", passwordConfirmInput);
     };
+
+    const firstName = function() {
+      document.querySelector(UISelectors.firstNameLabel).style.color = "red";
+      document.querySelector(UISelectors.lastNameLabel).style.color = "black";
+      document.querySelector(UISelectors.emailLabel).style.color = "black";
+      document.querySelector(UISelectors.passwordLabel).style.color = "black";
+      document.querySelector(UISelectors.passwordConfirmLabel).style.color = "black";
+    }
+    const lastName = function() {
+      document.querySelector(UISelectors.firstNameLabel).style.color = "black";
+      document.querySelector(UISelectors.lastNameLabel).style.color = "red";
+      document.querySelector(UISelectors.emailLabel).style.color = "black";
+      document.querySelector(UISelectors.passwordLabel).style.color = "black";
+      document.querySelector(UISelectors.passwordConfirmLabel).style.color = "black";
+    }
+    const emailInput = function() {
+      document.querySelector(UISelectors.firstNameLabel).style.color = "black";
+      document.querySelector(UISelectors.lastNameLabel).style.color = "black";
+      document.querySelector(UISelectors.emailLabel).style.color = "red";
+      document.querySelector(UISelectors.passwordLabel).style.color = "black";
+      document.querySelector(UISelectors.passwordConfirmLabel).style.color = "black";
+    }
+    const passwordInput = function() {
+      document.querySelector(UISelectors.firstNameLabel).style.color = "black";
+      document.querySelector(UISelectors.lastNameLabel).style.color = "black";
+      document.querySelector(UISelectors.emailLabel).style.color = "black";
+      document.querySelector(UISelectors.passwordLabel).style.color = "red";
+      document.querySelector(UISelectors.passwordConfirmLabel).style.color = "black";
+    }
+    const passwordConfirmInput = function() {
+      document.querySelector(UISelectors.firstNameLabel).style.color = "black";
+      document.querySelector(UISelectors.lastNameLabel).style.color = "black";
+      document.querySelector(UISelectors.emailLabel).style.color = "black";
+      document.querySelector(UISelectors.passwordLabel).style.color = "black";
+      document.querySelector(UISelectors.passwordConfirmLabel).style.color = "red";
+    }
 
     const signUp = function(e) {
       e.preventDefault();
-      alert("clicked here! Worked!");
+      const email = document.querySelector(UISelectors.emailInput).value;
+      const password = document.querySelector(UISelectors.passwordInput).value;
+      alert(`The email is: ${email} and the password is: ${password}`);
     };
 
     return {

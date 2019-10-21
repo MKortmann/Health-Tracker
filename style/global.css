@@ -57,3 +57,9 @@
     box-shadow: 0 2.5em 0 0;
   }
 }
+
+/* signup.js */
+/* Input Border Radius */
+.inputSignUp input {
+  border-radius: 1.0rem;
+}

@@ -66,6 +66,39 @@
       Health Tracker - Developed by Marcelo Kortmann - 2019
     </footer>
   </section>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script> -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyB-jAau2lEP-7EovlGfroff8UmDSKZTuPQ",
+      authDomain: "health-tracker-841f9.firebaseapp.com",
+      databaseURL: "https://health-tracker-841f9.firebaseio.com",
+      projectId: "health-tracker-841f9",
+      // storageBucket: "health-tracker-841f9.appspot.com",
+      // messagingSenderId: "921324775981",
+      // appId: "1:921324775981:web:521e469066b26d7671e6a4",
+      // measurementId: "G-D91FHRE4JD"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+    // make auth and firestore references
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // update firestore seetings: to avoid errors on console
+    db.settings({ timestampsInSnapshots: true })
+
+  </script>
   <!-- JQUERY version 3.3.1 -->
   <script src="./lib/jquery/jquerymin.js"></script>
   <script src="./js/statelogical/bodyweight-logic.js"></script>
@@ -85,6 +118,7 @@
   <script src="./API/easyhttp.js"></script>
   <!-- the bootstrap bundle incloses not only bootstrap but also the popper.js -->
   <script src="./lib/bootstrap/bootstrap.bundle.js"></script>
+
 
 </body>
 </html>
