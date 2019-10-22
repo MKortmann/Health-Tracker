@@ -40,14 +40,14 @@ auth.onAuthStateChanged(user => {
     document.querySelector(".bloodPressure").classList.remove("d-none");
     document.querySelector(".bloodSugar").classList.remove("d-none");
     document.querySelector(".myData").classList.remove("d-none");
-    document.querySelector(".settings").classList.remove("d-none");
+    // document.querySelector(".settings").classList.remove("d-none");
   } else {
     console.log("user logged out");
     // document.querySelector(".bodyWeight").classList.add("d-none");
     document.querySelector(".bloodPressure").classList.add("d-none");
     document.querySelector(".bloodSugar").classList.add("d-none");
     document.querySelector(".myData").classList.add("d-none");
-    document.querySelector(".settings").classList.add("d-none");
+    // document.querySelector(".settings").classList.add("d-none");
   }
 });
 
