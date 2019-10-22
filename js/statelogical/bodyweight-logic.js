@@ -123,16 +123,69 @@ function loadBodyWeight() {
           .catch(err => console.log(err));
       },
       // Principle of offline first!!!
+      // loadDataRealTimeDatabase: function() {
       loadData: function() {
         let items;
         const http = new EasyHTTP();
-        // // getting the data
+        // // getting the data in real database
         http.get(baseURL + ".json")
           .then(data => {
             // transforming an object with objects in an array with objects!!!
             // if is null, should be an empty array to avoid errors
             data === null ? data = {} : data;
             items = Object.values(data);
+            // Get the data from LocalStorage to see if we need to update
+            let LSItems = [];
+            LSItems = StorageCtrl.getLSData();
+            // if is null, should be an empty array to avoid errors
+            LSItems === null ? LSItems = [] : LSItems;
+            // compare LS data with Server Data: if true, let's populate with
+            // new data!
+            if ( ( items.length  > LSItems.length ) && (items !== null) ) {
+              // add to localStorage
+              localStorage.setItem("items", JSON.stringify(items));
+              // Populate the inputs
+              UICtrl.populateInputs();
+              // Clear table
+              UICtrl.deleteTable();
+              // Populate the table
+              UICtrl.populateTable(items);
+              // Plot graphics
+              plotGraph();
+              // Update input: display actual weight
+              UICtrl.populateInputs();
+            }
+          })
+          .catch(err => {
+            console.log("Network Error:" + err);
+          });
+      },
+      // here we are using Cloud Firestore
+      loadDataCloudFirestore: function() {
+        let items;
+        const http = new EasyHTTP();
+        // // getting the data in real database
+        // http.get(baseURL + ".json")
+        //   .then(data => {
+          // get data
+          db.collection("bodyWeight").get().then(snapshot => {
+            // transforming an object with objects in an array with objects!!!
+            // if is null, should be an empty array to avoid errors
+            // debugger
+            // snapshot === null ? data = {} : data.docs;
+            let data = {};
+            let length = 0;
+            debugger
+            if(snapshot !== null) {
+              snapshot.docs.forEach((doc, index) => {
+                data[index] = doc.data();
+                length += index;
+              })
+            }
+            data.length = length+1;
+            debugger
+            // items = Object.values(data);
+            items = data;
             // Get the data from LocalStorage to see if we need to update
             let LSItems = [];
             LSItems = StorageCtrl.getLSData();

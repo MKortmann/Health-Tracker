@@ -32,6 +32,23 @@
 // Anonymous "self-invoking" function
 
 
+// listen for auth status changes
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log("user logged in: ", user);
+  } else {
+    console.log("user logged out");
+  }
+});
+
+// get data
+db.collection("bodyWeight").get().then(snapshot => {
+  console.log(snapshot.docs);
+  snapshot.docs.forEach(doc => {
+    console.log(doc.data());
+  })
+})
+
 function loadAuthLogic() {
 
   // document.querySelector(".signUp").addEventListener("click", (e) => {
@@ -83,6 +100,7 @@ function loadAuthLogic() {
       getSelectors: function() {
         return UISelectors;
       },
+
     }
   })();
 
@@ -117,6 +135,13 @@ function loadAuthLogic() {
     document.querySelector(UISelectors.passwordConfirmInput).addEventListener("focus", passwordConfirmInput);
     document.querySelector(UISelectors.passwordConfirmInput).addEventListener("focusout", focusOut);
     };
+
+
+    // LISTEN FOR AUTH STATUS CHANGES
+    // const trackStatusUser = () => {
+    //   alert("function loaded");
+    //
+    // };
 
     const firstName = function() {
       activateDeactivateLabel("firstNameLabel");
@@ -175,7 +200,7 @@ function loadAuthLogic() {
         // document.querySelector(UISelectors.formSignUp).classList.add("d-none");
         // document.querySelector(UISelectors.formSignOut).classList.remove("d-none");
         // document.querySelector(".auth").textContent = "Sign Out";
-        alert("You are Signed Up");
+        // alert("You are Signed Up");
       });
     };
 
@@ -195,7 +220,7 @@ function loadAuthLogic() {
 
       auth.signInWithEmailAndPassword(email, password).then(cred => {
         console.log(cred.user);
-        alert("You Clicked at Sign In");
+        // alert("You Clicked at Sign In");
         clearAllInputs();
       });
     }
@@ -207,7 +232,7 @@ function loadAuthLogic() {
         // document.querySelector(UISelectors.formSignUp).classList.remove("d-none");
         // document.querySelector(UISelectors.formSignOut).classList.add("d-none");
         // document.querySelector(".auth").textContent = "Sign Up";
-        alert("You are Signed Out");
+        // alert("You are Signed Out");
       })
     }
 
