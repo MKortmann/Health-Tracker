@@ -36,8 +36,18 @@
 auth.onAuthStateChanged(user => {
   if (user) {
     console.log("user logged in: ", user);
+    // document.querySelector(".bodyWeight").classList.remove("d-none");
+    document.querySelector(".bloodPressure").classList.remove("d-none");
+    document.querySelector(".bloodSugar").classList.remove("d-none");
+    document.querySelector(".myData").classList.remove("d-none");
+    document.querySelector(".settings").classList.remove("d-none");
   } else {
     console.log("user logged out");
+    // document.querySelector(".bodyWeight").classList.add("d-none");
+    document.querySelector(".bloodPressure").classList.add("d-none");
+    document.querySelector(".bloodSugar").classList.add("d-none");
+    document.querySelector(".myData").classList.add("d-none");
+    document.querySelector(".settings").classList.add("d-none");
   }
 });
 
@@ -46,6 +56,7 @@ db.collection("bodyWeight").get().then(snapshot => {
   console.log(snapshot.docs);
   snapshot.docs.forEach(doc => {
     console.log(doc.data());
+
   })
 })
 
