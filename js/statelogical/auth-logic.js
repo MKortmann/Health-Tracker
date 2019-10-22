@@ -98,27 +98,30 @@ function loadAuthLogic() {
     const loadEventListeners = function() {
     // Add EventListeners for buttons
     document.querySelector(UISelectors.signUpBtn).addEventListener("click", signUpBtn);
-    document.querySelector(UISelectors.signUpBtn).addEventListener("click", signInBtn);
+    document.querySelector(UISelectors.signInBtn).addEventListener("click", signInBtn);
     document.querySelector(UISelectors.signOutBtn).addEventListener("click", signOutBtn);
     document.querySelector(UISelectors.firstNameInput).addEventListener("focus", firstName);
-    document.querySelector(UISelectors.firstNameInput).addEventListener("focusout", firstNameFocosOut);
+    document.querySelector(UISelectors.firstNameInput).addEventListener("focusout", focusOut);
     document.querySelector(UISelectors.lastNameInput).addEventListener("focus", lastName);
-    document.querySelector(UISelectors.emailInput).addEventListener("focus", emailInput);
-    // document.querySelectorAll(UISelectors.emailInput).forEach( (item) => {
-    //   item.addEventListener("focus", emailInput);
-    // })
-    document.querySelector(UISelectors.passwordInput).addEventListener("focus", passwordInput);
-    // document.querySelector(UISelectors.passwordInput).forEach( (item) => {
-    //   item.addEventListener("focus", passwordInput);
-    // });
+    document.querySelector(UISelectors.lastNameInput).addEventListener("focusout", focusOut);
+    // document.querySelector(UISelectors.emailInput).addEventListener("focus", emailInput);
+    document.querySelectorAll(UISelectors.emailInput).forEach( (item) => {
+      item.addEventListener("focus", emailInput);
+      item.addEventListener("focusout", focusOut);
+    });
+    // document.querySelector(UISelectors.passwordInput).addEventListener("focus", passwordInput);
+    document.querySelectorAll(UISelectors.passwordInput).forEach( (item) => {
+      item.addEventListener("focus", passwordInput);
+      item.addEventListener("focusout", focusOut);
+    });
     document.querySelector(UISelectors.passwordConfirmInput).addEventListener("focus", passwordConfirmInput);
-    document.querySelector(UISelectors.passwordConfirmInput).addEventListener("focusout", passwordConfirmInputFocosOut);
+    document.querySelector(UISelectors.passwordConfirmInput).addEventListener("focusout", focusOut);
     };
 
     const firstName = function() {
       activateDeactivateLabel("firstNameLabel");
     }
-    const firstNameFocosOut = function() {
+    const focusOut = function() {
       activateDeactivateLabel("all black");
     }
     const lastName = function() {
@@ -133,23 +136,28 @@ function loadAuthLogic() {
     const passwordConfirmInput = function() {
       activateDeactivateLabel("passwordConfirmLabel");
     }
-    const passwordConfirmInputFocosOut = function() {
-      activateDeactivateLabel("all black");
-    }
 
     const activateDeactivateLabel = (label) => {
       document.querySelector(UISelectors.firstNameLabel).style.color = (label === "firstNameLabel" ? "red" : "black");
       document.querySelector(UISelectors.lastNameLabel).style.color = (label === "lastNameLabel" ? "red" : "black");
-      document.querySelector(UISelectors.emailLabel).style.color = (label === "emailLabel" ? "red" : "black");
-      document.querySelector(UISelectors.passwordLabel).style.color = (label === "passwordLabel" ? "red" : "black");
+      document.querySelectorAll(UISelectors.emailLabel).forEach((item) => {
+        item.style.color = (label === "emailLabel" ? "red" : "black");
+      });
+      document.querySelectorAll(UISelectors.passwordLabel).forEach((item) => {
+        item.style.color = (label === "passwordLabel" ? "red" : "black");
+      });
       document.querySelector(UISelectors.passwordConfirmLabel).style.color = (label === "passwordConfirmLabel" ? "red" : "black");
     }
 
     const clearAllInputs = () => {
       document.querySelector(UISelectors.firstNameInput).value = "";
       document.querySelector(UISelectors.lastNameInput).value = "";
-      document.querySelector(UISelectors.emailInput).value = "";
-      document.querySelector(UISelectors.passwordInput).value = "";
+      document.querySelectorAll(UISelectors.emailInput).forEach((item) => {
+        item.value = "";
+      });
+      document.querySelectorAll(UISelectors.passwordInput).forEach((item) => {
+        item.value = "";
+      });
       document.querySelector(UISelectors.passwordConfirmInput).value = "";
     }
 
@@ -174,7 +182,22 @@ function loadAuthLogic() {
     const signInBtn = function(e) {
       e.preventDefault();
 
-      alert("You Clicked at Sign In");
+      let email = null;
+      // get the user information
+      document.querySelectorAll(UISelectors.emailInput).forEach((item, index) => {
+        index === 1 ? email = item.value : email = null
+      });
+      let password = null;
+      document.querySelectorAll(UISelectors.passwordInput).forEach((item, index) => {
+        index === 1 ? password = item.value : password = null
+      });
+      console.log(email, password);
+
+      auth.signInWithEmailAndPassword(email, password).then(cred => {
+        console.log(cred.user);
+        alert("You Clicked at Sign In");
+        clearAllInputs();
+      });
     }
 
     const signOutBtn = function(e)  {
@@ -197,10 +220,5 @@ function loadAuthLogic() {
   })(StorageServerCtrl, UICtrl);
 
   AppCtrl.init();
-
-
-  document.querySelector("#signInTab").addEventListener("click", () => {
-    alert("clicked in sign in tab");
-  });
 
 }
