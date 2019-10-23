@@ -211,7 +211,7 @@ function loadAuthLogic() {
         // document.querySelector(UISelectors.formSignUp).classList.add("d-none");
         // document.querySelector(UISelectors.formSignOut).classList.remove("d-none");
         // document.querySelector(".auth").textContent = "Sign Out";
-        // alert("You are Signed Up");
+        alert("You are Signed Up");
       });
     };
 
@@ -231,7 +231,7 @@ function loadAuthLogic() {
 
       auth.signInWithEmailAndPassword(email, password).then(cred => {
         console.log(cred.user);
-        // alert("You Clicked at Sign In");
+        alert("You Clicked at Sign In");
         clearAllInputs();
       });
     }
@@ -243,7 +243,7 @@ function loadAuthLogic() {
         // document.querySelector(UISelectors.formSignUp).classList.remove("d-none");
         // document.querySelector(UISelectors.formSignOut).classList.add("d-none");
         // document.querySelector(".auth").textContent = "Sign Up";
-        // alert("You are Signed Out");
+        alert("User Signed Out");
       })
     }
 
