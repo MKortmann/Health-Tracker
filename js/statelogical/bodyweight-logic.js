@@ -639,7 +639,7 @@ function loadBodyWeight() {
           // Hiding the input fields
           document.getElementById("containerInputToHighlight").classList.remove("d-none");
           UICtrl.showAlert(message, className);
-        }, 750);
+        }, 500);
       }
 
     }
