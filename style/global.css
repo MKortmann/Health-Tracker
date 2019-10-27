@@ -63,3 +63,52 @@
 .inputSignUp input {
   border-radius: 1.0rem;
 }
+
+/* Changing the hamburger menu */
+.navbar-toggler {
+height: 36px;
+width: 48px;
+background-color: #fff;
+border: 0;
+margin: 0;
+}
+
+.navbar-toggler .line{
+width: 100%;
+float: left;
+height: 2px;
+background-color: black;
+margin-bottom: 5px;
+}
+
+.navbar-toggler .lineDown{
+width: 100%;
+float: left;
+height: 2px;
+background-color: black;
+margin-bottom: 5px;
+}
+
+.navbar-toggler .line.crossPos{
+width: 100%;
+float: center;
+height: 3px;
+content: "\274c";
+background-color: black;
+margin-bottom: 0px;
+transition: transform 0.5s ;
+transform: rotate(45deg);
+
+}
+.navbar-toggler .line.crossNeg{
+width: 100%;
+float: center;
+height: 3px;
+content: "\274c";
+background-color: black;
+margin-bottom: 0px;
+margin-top: -3px;
+transform: rotate(-45deg);
+transition: transform 0.5s ;
+
+}

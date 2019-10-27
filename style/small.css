@@ -149,23 +149,6 @@ body {
   font-weight: 200;
 }
 
-/* Changing the hamburger menu */
-.navbar-toggler {
-height: 36px;
-width: 48px;
-background-color: #fff;
-border: 0;
-margin: 0;
-}
-
-.navbar-toggler .line{
-width: 100%;
-float: left;
-height: 2px;
-background-color: black;
-margin-bottom: 5px;
-}
-
 #dropdownMenuButton {
   background: #343a40;
   border: none;

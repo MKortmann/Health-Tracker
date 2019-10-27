@@ -43,7 +43,8 @@ const PageState = function() {
     // update state
     currentState = state;
     // We need to reload the state as soon as the page reload!
-    EventListeners_Reload();
+    // EventListeners_Reload();
+    animation();
   }
   // return current state to be called outside
   this.returnState = function() {
@@ -170,7 +171,7 @@ const mySettings = mySettingsImport;
 // Instantiate PageState
 const page = new PageState();
 
-function EventListeners_Reload () {
+// function EventListeners_Reload () {
   // UI vars
   const overviewUI = document.querySelector(".homeState"),
     myDataUI = document.querySelector(".myData"),
@@ -178,7 +179,8 @@ function EventListeners_Reload () {
     bloodPressureUI = document.querySelectorAll(".bloodPressure"),
     bloodSugarUI = document.querySelectorAll(".bloodSugar"),
     settingsUI = document.querySelector(".settings"),
-    authUI = document.querySelector(".auth");
+    authUI = document.querySelector(".auth"),
+    hamburgerMenu = document.querySelector(".hamburgerMenu");
 
   // EventListeners
   overviewUI.addEventListener("click", (e) => {
@@ -225,5 +227,21 @@ function EventListeners_Reload () {
     loadAuthLogic();
     e.preventDefault();
   })
-};
-EventListeners_Reload();
+
+  // // // Script for hamburger  -->
+  function hamburgerMenuEventListener () {
+    hamburgerMenu.addEventListener("click", () => {
+      animation();
+    })
+  }
+  function animation () {
+    console.log(`[FUNCTION CALLED HERE!]`)
+    document.querySelectorAll('.line').forEach( (item) => {
+      item.classList.toggle("d-none");
+    })
+  }
+  hamburgerMenuEventListener();
+
+
+// };
+// EventListeners_Reload();
