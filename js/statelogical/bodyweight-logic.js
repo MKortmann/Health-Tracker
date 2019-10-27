@@ -1280,6 +1280,9 @@ function loadBodyWeight() {
 
     const toggleMenu = function() {
       // document.querySelector("#navbarToggleExternalContent").classList.toggle("show");
+      document.querySelectorAll(".lineDown").forEach( (item) => {
+        item.classList.toggle("d-none");
+      })
     }
     const printData = function() {
       // get data to print

@@ -163,6 +163,8 @@ const bodyWeight = function() {
   <nav class="navbar navbar-dark bg-dark mt-3">
     <button id="hamburgerDown" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="lineDown"></span>
+    <span class="lineDown crossPos d-none"></span>
+    <span class="lineDown crossNeg d-none"></span>
     <span class="lineDown"></span>
     <span class="lineDown" style="margin-bottom: 0;"></span>
     </button>
