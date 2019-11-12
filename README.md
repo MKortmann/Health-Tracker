@@ -21,8 +21,14 @@ I used only one famous library: bootstrap.
   
   ~~~~
   Next steps:
-   Blood Pressure
-   Blood Sugar
+   1-Blood Pressure
+   2-Blood Sugar
+   3-Design Improvement
+   4-Code Refactor to React?
+   5-Integration with microcontroler (Automation!): 
+    option number 1: Espruino 
+    option number 2: Raspberry 
+    option number 3: Arduino
   ~~~~
 
 ## How to start the App?
@@ -36,11 +42,14 @@ I used only one famous library: bootstrap.
 0. download and install Node.js (https://nodejs.org/en/)
 1. open your Git Bash editor
 2. create a directory in the desire location
-3. go inside to the folder of your desire location and type: 
-4. type: **git clone <address from git hub>** , then press enter
+3. go inside to the folder of your desire location 
+Type now this commands here:
+4. git clone <git-hub-address>
 5. npm install
 6. npm start
 7. have fun! :)
+
+<git-hub-address> = is the repository address/link
 
 
 #### Note about ES6 
