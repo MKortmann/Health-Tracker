@@ -31,13 +31,16 @@ I used only one famous library: bootstrap.
  https://mkortmann.github.io/Health-Tracker/
  
  
-## Installation
+## Installation 
 
+0. download and install Node.js (https://nodejs.org/en/)
 1. open your Git Bash editor
 2. create a directory in the desire location
 3. go inside to the folder of your desire location and type: 
-4. type: **git init** , then press enter 
-5. type: **git clone <address from git hub>** , then press enter
+4. type: **git clone <address from git hub>** , then press enter
+5. npm install
+6. npm start
+7. have fun! :)
 
 
 #### Note about ES6 
